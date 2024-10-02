@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb; // player rigid body
+    private Animator animator;
 
     [Header("Horizontal Movement Settings")]
     [SerializeField] private float walkSpeed;
@@ -81,6 +82,8 @@ public class PlayerController : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
 
+        animator = GetComponent<Animator>();
+
         gravity = rb.gravityScale;
     }
 
@@ -96,6 +99,13 @@ public class PlayerController : MonoBehaviour
         Attack();
         Recoil();
         StartDash();
+        if (Input.GetButtonDown("Jump"))
+        {
+            Debug.Log(pState.jumping);
+        }
+        // animation update
+        animator.SetBool("isGrounded", Grounded());
+        animator.SetFloat("yVel", rb.velocity.y);
     }
 
     void GetInput()
@@ -295,6 +305,7 @@ public class PlayerController : MonoBehaviour
             || Physics2D.Raycast(groundCheckPoint.position + new Vector3(groundCheckX, 0, 0), Vector2.down, groundCheckY, groundLayer)
             || Physics2D.Raycast(groundCheckPoint.position + new Vector3(-groundCheckX, 0, 0), Vector2.down, groundCheckY, groundLayer)) 
         {
+            //Debug.Log("Grounded");
             return true;
         }
         else
