@@ -11,8 +11,15 @@ public class PlayerController : MonoBehaviour
     private float xAxis;
     [Space(5)]
 
-    [Header("Ground Check Settings")]
+    [Header("Jump Settings")]
     [SerializeField] private float jumpForce;
+    private float jumpBufferCounter;
+    [SerializeField] private float jumpBuffer;
+    private float coyoteTimeCounter;
+    [SerializeField] private float coyoteTime;
+    [Space(5)]
+
+    [Header("Ground Check Settings")]
     [SerializeField] private Transform groundCheckPoint;
     [SerializeField] private float groundCheckX;
     [SerializeField] private float groundCheckY;
@@ -137,12 +144,16 @@ public class PlayerController : MonoBehaviour
             pState.jumping = false;
         }
 
-
-        if (Input.GetButtonDown("Jump") && Grounded()) // jump button is spacebar
+        if (!pState.jumping)
         {
-            rb.velocity = new Vector3(rb.velocity.x, jumpForce);
+            // player pressed jump button less than JumpBufferCounter frames ago and is on the ground
+            // (coyote time is the time after the player has left the ground that they can still jump)
+            if (jumpBufferCounter > 0 && coyoteTimeCounter > 0)
+            {
+                rb.velocity = new Vector3(rb.velocity.x, jumpForce);
 
-            pState.jumping = true;
+                pState.jumping = true;
+            }
         }
     }
     void UpdateJumpVariables()
@@ -150,6 +161,21 @@ public class PlayerController : MonoBehaviour
         if(Grounded())
         {
             pState.jumping = false;
+            coyoteTimeCounter = coyoteTime;
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+
+        // buffer for the jump button
+        if (Input.GetButtonDown("Jump")) // jump button is spacebar
+        {
+            jumpBufferCounter = jumpBuffer;
+        }
+        else
+        {
+            jumpBufferCounter -= Time.deltaTime;
         }
     }
 }
