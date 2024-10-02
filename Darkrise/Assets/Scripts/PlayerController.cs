@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [Header("Horizontal Movement Settings")]
     [SerializeField] private float walkSpeed;
     private float xAxis;
+    private float yAxis;
     [Space(5)]
 
     [Header("Ground Check Settings")]
@@ -26,6 +27,26 @@ public class PlayerController : MonoBehaviour
     private bool canDash = true;
     private bool dashed;
     private float gravity;
+    [Space(5)]
+
+    [Header("Attack Settings")]
+    [SerializeField] private float timeBetweenAttacks;
+    [SerializeField] private float damage;
+    [SerializeField] private Transform sideAttackTransform;
+    [SerializeField] private Transform airAttackTransform;
+    [SerializeField] private Vector2 sideAttackArea;
+    [SerializeField] private Vector2 airAttackArea;
+    [SerializeField] private LayerMask attackableLayer;
+    private bool attack = false;
+    private float timeSinceAttack;
+
+    [Header("Recoil Settings")]
+    [SerializeField] private int recoilStepsX = 5;
+    [SerializeField] private int recoilStepsY = 5;
+    [SerializeField] private float recoilSpeedX = 100;
+    [SerializeField] private float recoilSpeedY = 100;
+    private int stepsRecoiledX;
+    private int stepsRecoiledY;
 
     PlayerStateList pState; // this will be expanded a lot more after the MVI
 
@@ -48,6 +69,8 @@ public class PlayerController : MonoBehaviour
         Flip();
         Move();
         Jump();
+        Attack();
+        Recoil();
         StartDash();
 
         // debugging code for collision detection stuff
@@ -56,19 +79,30 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(groundCheckPoint.position + new Vector3(-groundCheckX, 0, 0), Vector2.down * groundCheckY, Color.blue);
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(sideAttackTransform.position, sideAttackArea);
+        Gizmos.DrawWireCube(airAttackTransform.position, airAttackArea);
+    }
+
     void GetInput()
     {
         xAxis = Input.GetAxisRaw("Horizontal"); //default left/right keys are the arrow keys or A and D
+        yAxis = Input.GetAxisRaw("Vertical");
+        attack = Input.GetMouseButtonDown(0); // default attack button is mouse left click
     }
     void Flip() // this will be useful for animation stuff later
     {
         if (xAxis < 0)
         {
             transform.localScale = new Vector2(-(Mathf.Abs(transform.localScale.x)), transform.localScale.y);
+            pState.lookingRight = false;
         }
         else if(xAxis > 0)
         {
             transform.localScale = new Vector2((Mathf.Abs(transform.localScale.x)), transform.localScale.y);
+            pState.lookingRight = true;
         }
     }
 
@@ -104,6 +138,123 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void Attack()
+    {
+        timeSinceAttack += Time.deltaTime;
+
+        if(attack && timeSinceAttack >= timeBetweenAttacks)
+        {
+            timeSinceAttack = 0;
+            //trigger attack animation
+            //Debug.Log("Can attack again");
+
+            if(Grounded())
+            {
+                if(pState.lookingRight) // lowkey a hotfix if statement lol. gotta look at this again after MVI
+                {
+                    Hit(sideAttackTransform, sideAttackArea, ref pState.recoilingX, recoilSpeedX);
+                }
+                else
+                {
+                    Hit(sideAttackTransform, sideAttackArea, ref pState.recoilingX, -recoilSpeedX);
+                }
+                
+            }
+            else if(!Grounded())
+            {
+                Hit(airAttackTransform, airAttackArea, ref pState.recoilingY, recoilSpeedY);
+            }
+        }
+    }
+    void Hit(Transform _attackTransform, Vector2 _attackArea, ref bool _recoilDir, float _recoilStrength)
+    {
+        // The way this function works is it grabs every object within the area and then sorts out what is and isnt hittable. this could maybe optimized after MVI.
+
+        Collider2D[] ObjectsToHit = Physics2D.OverlapBoxAll(_attackTransform.position, _attackArea, 0, attackableLayer);
+
+        if(ObjectsToHit.Length > 0)
+        {
+            _recoilDir = true;
+        }
+
+        for(int i = 0;  i < ObjectsToHit.Length; i++)
+        {
+            if (ObjectsToHit[i].GetComponent<enemyBase>() != null)
+            {
+                ObjectsToHit[i].GetComponent<enemyBase>().EnemyHit(damage, (transform.position - ObjectsToHit[i].transform.position.normalized), _recoilStrength);
+            }
+        }
+
+    }
+
+    void Recoil()
+    {
+        if(pState.recoilingX)
+        {
+            if(pState.lookingRight)
+            {
+                rb.velocity = new Vector2(-recoilSpeedX, 0);
+            }
+            else
+            {
+                rb.velocity = new Vector2(recoilSpeedX, 0);
+            }
+        }
+        if(pState.recoilingY)
+        {
+            if(!Grounded())
+            {
+                rb.gravityScale = 0;
+                rb.velocity = new Vector2(rb.velocity.x, recoilSpeedY);
+            }
+            else
+            {
+                rb.velocity = new Vector2(rb.velocity.x, -recoilSpeedY);
+            }
+        }
+        else
+        {
+            rb.gravityScale = gravity;
+        }
+        
+        //stop recoil
+        if(pState.recoilingX && stepsRecoiledX < recoilStepsX)
+        {
+            stepsRecoiledX++;
+
+        }
+        else
+        {
+            StopRecoilX();
+        }
+
+        if (pState.recoilingY && stepsRecoiledY < recoilStepsY)
+        {
+            stepsRecoiledY++;
+
+        }
+        else
+        {
+            StopRecoilY();
+        }
+        if(Grounded())
+        {
+            StopRecoilY();
+        }
+    }
+
+    void StopRecoilX()
+    {
+        stepsRecoiledX = 0;
+        pState.recoilingX = false;
+    }
+
+    void StopRecoilY()
+    {
+        stepsRecoiledY = 0;
+        pState.recoilingY = false;
+    }
+
     public bool Grounded()
     {
         /*
@@ -111,7 +262,7 @@ public class PlayerController : MonoBehaviour
          * 1) origin of the raycast
          * 2) the direction the raycast is going
          * 3) how far the ray will travel
-         * 4) and the layer that the raycast is trying to detect
+         * 4) the layer that the raycast is trying to detect
          * 
          * the other two checks add and subtract the groundCheckX variable to make sure that this works when the player is on the edge of a platform as well.
          */
