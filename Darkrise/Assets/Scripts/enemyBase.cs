@@ -9,22 +9,27 @@ public class enemyBase : MonoBehaviour
     [SerializeField] protected float recoilFactor;
     [SerializeField] protected bool isRecoiling;
 
+    [SerializeField] protected PlayerController player;
+    [SerializeField] protected float speed;
+
     float recoilTimer;
 
-    Rigidbody2D rb;
+    protected Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    protected void Awake()
+    protected virtual void Awake()
     {
+        Debug.Log("Enemy awake called");
         rb = GetComponent<Rigidbody2D>();
+        //player = PlayerController.Instance;
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         if(health <= 0)
         {
@@ -50,7 +55,6 @@ public class enemyBase : MonoBehaviour
 
         if(!isRecoiling)
         {
-            Vector2 test = -_hitForce * recoilFactor * _hitDirection;
             rb.AddForce(-_hitForce * recoilFactor * _hitDirection);
             isRecoiling = true;
         }

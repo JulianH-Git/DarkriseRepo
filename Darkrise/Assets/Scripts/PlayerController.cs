@@ -50,7 +50,22 @@ public class PlayerController : MonoBehaviour
 
     PlayerStateList pState; // this will be expanded a lot more after the MVI
 
-    // Start is called before the first frame update
+    public static PlayerController Instance;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+        Debug.Log("Instance created");
+    }
+
+        // Start is called before the first frame update
     void Start()
     {
         pState = GetComponent<PlayerStateList>();
@@ -72,18 +87,6 @@ public class PlayerController : MonoBehaviour
         Attack();
         Recoil();
         StartDash();
-
-        // debugging code for collision detection stuff
-        Debug.DrawRay(groundCheckPoint.position, Vector2.down * groundCheckY, Color.red);
-        Debug.DrawRay(groundCheckPoint.position + new Vector3(groundCheckX, 0, 0), Vector2.down * groundCheckY, Color.green);
-        Debug.DrawRay(groundCheckPoint.position + new Vector3(-groundCheckX, 0, 0), Vector2.down * groundCheckY, Color.blue);
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(sideAttackTransform.position, sideAttackArea);
-        Gizmos.DrawWireCube(airAttackTransform.position, airAttackArea);
     }
 
     void GetInput()
@@ -91,6 +94,18 @@ public class PlayerController : MonoBehaviour
         xAxis = Input.GetAxisRaw("Horizontal"); //default left/right keys are the arrow keys or A and D
         yAxis = Input.GetAxisRaw("Vertical");
         attack = Input.GetMouseButtonDown(0); // default attack button is mouse left click
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        if (attack && Grounded())
+        {
+            Gizmos.DrawWireCube(sideAttackTransform.position, sideAttackArea);
+        }
+        else if (attack && !Grounded())
+        {
+            Gizmos.DrawWireCube(airAttackTransform.position, airAttackArea);
+        }
     }
     void Flip() // this will be useful for animation stuff later
     {
