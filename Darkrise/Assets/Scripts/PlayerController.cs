@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpBuffer;
     private float coyoteTimeCounter;
     [SerializeField] private float coyoteTime;
+    private int airJumpCounter;
+    [SerializeField] private int airJumps = 0; // keep this at 0 for now
     [Space(5)]
 
     [Header("Ground Check Settings")]
@@ -320,6 +322,13 @@ public class PlayerController : MonoBehaviour
 
                 pState.jumping = true;
             }
+            else if (!Grounded() && airJumpCounter < airJumps && Input.GetButtonDown("Jump")) // air jump
+            {
+                rb.velocity = new Vector3(rb.velocity.x, jumpForce);
+
+                pState.jumping = true;
+                airJumpCounter++;
+            }
         }
     }
     void UpdateJumpVariables()
@@ -328,10 +337,11 @@ public class PlayerController : MonoBehaviour
         {
             pState.jumping = false;
             coyoteTimeCounter = coyoteTime;
+            airJumpCounter = 0;
         }
         else
         {
-            coyoteTimeCounter -= Time.deltaTime;
+            coyoteTimeCounter = Mathf.Max(0, coyoteTimeCounter - Time.deltaTime);
         }
 
         // buffer for the jump button
@@ -341,7 +351,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            jumpBufferCounter -= Time.deltaTime;
+            jumpBufferCounter = Mathf.Max(0, jumpBufferCounter - Time.deltaTime);
         }
     }
 }
