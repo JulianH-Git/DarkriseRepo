@@ -29,4 +29,19 @@ public class GroundSentry : enemyBase
     {
         base.EnemyHit(_damageDone, _hitDirection, _hitForce);
     }
+    void OnDrawGizmos()
+    {
+        float healthRatio = health / maxHealth;
+
+        // Adjust position so the health bar decreases from the left
+        Vector3 barPosition = new Vector3(rb.position.x - (0.5f * (1f - healthRatio)), rb.position.y + 1f, 1);
+
+        // Draw the filled part of the health bar
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawCube(barPosition, new Vector3(1f * healthRatio, 0.3f, 1f));
+
+        // Draw the outline of the health bar
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireCube(new Vector3(rb.position.x, rb.position.y + 1f, 1), new Vector3(1f, 0.3f, 1f));
+    }
 }

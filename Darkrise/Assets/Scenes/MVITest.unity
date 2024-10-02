@@ -732,6 +732,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
+  maxHealth: 10
   recoilLength: 1
   recoilFactor: 10
   isRecoiling: 0
@@ -900,6 +901,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
+  maxHealth: 10
   recoilLength: 1
   recoilFactor: 10
   isRecoiling: 0
@@ -1207,6 +1209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
+  maxHealth: 10
   recoilLength: 1
   recoilFactor: 10
   isRecoiling: 0

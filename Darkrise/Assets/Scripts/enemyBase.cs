@@ -5,6 +5,7 @@ using UnityEngine;
 public class enemyBase : MonoBehaviour
 {
     [SerializeField] protected float health;
+    [SerializeField] protected float maxHealth;
     [SerializeField] protected float recoilLength;
     [SerializeField] protected float recoilFactor;
     [SerializeField] protected bool isRecoiling;
