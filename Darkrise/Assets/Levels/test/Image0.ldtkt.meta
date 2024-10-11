@@ -24,7 +24,12 @@ ScriptedImporter:
       width: 60
       height: 60
     spriteID: fa9acc23f905cf84abecdc7767a20226
-    spriteOutline: []
+    spriteOutline:
+    - shape:
+      - {x: -30, y: 30}
+      - {x: -30, y: -30}
+      - {x: 30, y: -30}
+      - {x: 30, y: 30}
     tessellationDetail: 0
   - name: Image0_1
     originalName: 
@@ -1368,7 +1373,12 @@ ScriptedImporter:
       width: 60
       height: 60
     spriteID: 7096e5a039ffe0e45b9600ab4a8edcf4
-    spriteOutline: []
+    spriteOutline:
+    - shape:
+      - {x: -30, y: 30}
+      - {x: -30, y: -30}
+      - {x: 30, y: -30}
+      - {x: 30, y: 30}
     tessellationDetail: 0
   - name: Image0_97
     originalName: 
@@ -72589,4 +72599,4 @@ ScriptedImporter:
     spriteOutline: []
     tessellationDetail: 0
   _secondaryTextures: []
-  _artifacts: {instanceID: 0}
+  _artifacts: {fileID: -2988177865379244337, guid: 3d85587fb461dcb4685262db183c4bfe, type: 3}
