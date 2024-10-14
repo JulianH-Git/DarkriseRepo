@@ -1,3 +1,4 @@
+using Rewired;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,7 +21,7 @@ public class PlayerController : MonoBehaviour
     private float coyoteTimeCounter;
     [SerializeField] private float coyoteTime;
     private int airJumpCounter;
-    [SerializeField] private int airJumps = 0; // keep this at 0 for now
+    [SerializeField] private int airJumps;
     [Space(5)]
 
     [Header("Ground Check Settings")]
@@ -60,10 +61,17 @@ public class PlayerController : MonoBehaviour
 
     PlayerStateList pState; // this will be expanded a lot more after the MVI
 
+    private Player player; // The Rewired Player
+    public int playerId = 0; // The Rewired player id of this character
+                             // Single player game so this is always 0, but good practice not to hardcode it
+
     public static PlayerController Instance;
 
     private void Awake()
     {
+        // Get the Rewired Player object for this player and keep it for the duration of the character's lifetime
+        player = ReInput.players.GetPlayer(playerId);
+        
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -99,7 +107,7 @@ public class PlayerController : MonoBehaviour
         Attack();
         Recoil();
         StartDash();
-        if (Input.GetButtonDown("Jump"))
+        if (player.GetButtonDown("Jump"))
         {
             Debug.Log(pState.jumping);
         }
@@ -110,10 +118,11 @@ public class PlayerController : MonoBehaviour
 
     void GetInput()
     {
-        xAxis = Input.GetAxisRaw("Horizontal"); //default left/right keys are the arrow keys or A and D
-        yAxis = Input.GetAxisRaw("Vertical");
-        attack = Input.GetMouseButtonDown(0); // default attack button is mouse left click
+        xAxis = player.GetAxis("Move Horizontal");
+        yAxis = player.GetAxis("Move Vertical");
+        attack = player.GetButtonDown("Attack");
     }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -126,6 +135,7 @@ public class PlayerController : MonoBehaviour
             Gizmos.DrawWireCube(airAttackTransform.position, airAttackArea);
         }
     }
+
     void Flip() // this will be useful for animation stuff later
     {
         if (xAxis < 0)
@@ -161,7 +171,7 @@ public class PlayerController : MonoBehaviour
 
     void StartDash()
     {
-        if(Input.GetButtonDown("Dash") && canDash && !dashed) // dash key right now is left shift
+        if(player.GetButtonDown("Dash") && canDash && !dashed)
         {
             StartCoroutine(Dash());
             dashed = true;
@@ -316,7 +326,7 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0) // jump button is spacebar
+        if (player.GetButtonUp("Jump") && rb.velocity.y > 0)
         {
             rb.velocity = new Vector3(rb.velocity.x, 0);
 
@@ -333,7 +343,7 @@ public class PlayerController : MonoBehaviour
 
                 pState.jumping = true;
             }
-            else if (!Grounded() && airJumpCounter < airJumps && Input.GetButtonDown("Jump")) // air jump
+            else if (!Grounded() && airJumpCounter < airJumps && player.GetButtonDown("Jump")) // air jump
             {
                 rb.velocity = new Vector3(rb.velocity.x, jumpForce);
 
@@ -356,7 +366,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // buffer for the jump button
-        if (Input.GetButtonDown("Jump")) // jump button is spacebar
+        if (player.GetButtonDown("Jump"))
         {
             jumpBufferCounter = jumpBuffer;
         }
