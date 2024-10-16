@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector2 sideAttackArea;
     [SerializeField] private Vector2 airAttackArea;
     [SerializeField] private LayerMask attackableLayer;
+    [SerializeField] private GameObject slashEffect;
     private bool attack = false;
     private float timeSinceAttack;
 
@@ -195,11 +196,13 @@ public class PlayerController : MonoBehaviour
             if(Grounded())
             {
                 Hit(sideAttackTransform, sideAttackArea, ref pState.recoilingX, recoilSpeedX);
-                
+                Instantiate(slashEffect, sideAttackTransform);
+
             }
             else if(!Grounded())
             {
                 Hit(airAttackTransform, airAttackArea, ref pState.recoilingY, recoilSpeedY);
+                SlashEffectAtAngle(slashEffect, 0, airAttackTransform);
             }
         }
     }
@@ -347,7 +350,7 @@ public class PlayerController : MonoBehaviour
     }
     void UpdateJumpVariables()
     {
-        if(Grounded())
+        if (Grounded())
         {
             pState.jumping = false;
             coyoteTimeCounter = coyoteTime;
@@ -368,4 +371,12 @@ public class PlayerController : MonoBehaviour
             jumpBufferCounter = Mathf.Max(0, jumpBufferCounter - Time.deltaTime);
         }
     }
+
+    void SlashEffectAtAngle(GameObject _slashEffect, int _effectAngle, Transform _attackTransform)
+    {
+        _slashEffect = Instantiate(_slashEffect, _attackTransform);
+        _slashEffect.transform.eulerAngles = new Vector3(0, 0, _effectAngle);
+        _slashEffect.transform.localScale = new Vector2(transform.localScale.x, transform.localScale.y);
+    }
+
 }

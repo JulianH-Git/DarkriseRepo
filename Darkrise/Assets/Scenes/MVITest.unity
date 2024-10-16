@@ -1691,6 +1691,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 931077289769193537, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
+      propertyPath: slashEffect
+      value: 
+      objectReference: {fileID: 350902719028988263, guid: 1627bd57317e43343b96d88bbca4e25a, type: 3}
+    - target: {fileID: 931077289769193537, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
       propertyPath: recoilSpeedX
       value: 30
       objectReference: {fileID: 0}
