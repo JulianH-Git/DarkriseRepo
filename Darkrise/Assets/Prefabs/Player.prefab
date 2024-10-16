@@ -242,7 +242,7 @@ MonoBehaviour:
   jumpForce: 25
   jumpBuffer: 0.1
   coyoteTime: 0.1
-  airJumps: 0
+  airJumps: 1
   groundCheckPoint: {fileID: 576971996884389209}
   groundCheckX: 0.5
   groundCheckY: 0.5
@@ -261,10 +261,12 @@ MonoBehaviour:
   attackableLayer:
     serializedVersion: 2
     m_Bits: 64
+  slashEffect: {fileID: 350902719028988263, guid: 1627bd57317e43343b96d88bbca4e25a, type: 3}
   recoilStepsX: 5
   recoilStepsY: 5
-  recoilSpeedX: 20
+  recoilSpeedX: 30
   recoilSpeedY: 20
+  playerId: 0
 --- !u!114 &7749656390994445964
 MonoBehaviour:
   m_ObjectHideFlags: 0

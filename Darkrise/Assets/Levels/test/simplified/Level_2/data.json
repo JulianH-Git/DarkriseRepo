@@ -1,19 +1,19 @@
 {
-	"identifier": "Level_1",
-	"uniqueIdentifer": "10fea5c0-73f0-11ef-a10b-fd3ed7802979",
+	"identifier": "Level_2",
+	"uniqueIdentifer": "cc800b90-73f0-11ef-b5e6-4f47aaaef1e2",
 	"x": 1920,
-	"y": 0,
+	"y": -1080,
 	"width": 1920,
 	"height": 1080,
-	"bgColor": "#AAACD4",
+	"bgColor": "#5B5E82",
 	"neighbourLevels": [
 		{
 			"levelIid": "9f7a96c1-73f0-11ef-a10b-f5dfaa0a4539",
-			"dir": "w"
+			"dir": "sw"
 		},
 		{
-			"levelIid": "cc800b90-73f0-11ef-b5e6-4f47aaaef1e2",
-			"dir": "n"
+			"levelIid": "10fea5c0-73f0-11ef-a10b-fd3ed7802979",
+			"dir": "s"
 		},
 		{
 			"levelIid": "7076e100-73f0-11ef-9560-75a791283bf4",
