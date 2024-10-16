@@ -194,14 +194,7 @@ public class PlayerController : MonoBehaviour
 
             if(Grounded())
             {
-                if(pState.lookingRight) // lowkey a hotfix if statement lol. gotta look at this again after MVI
-                {
-                    Hit(sideAttackTransform, sideAttackArea, ref pState.recoilingX, recoilSpeedX);
-                }
-                else
-                {
-                    Hit(sideAttackTransform, sideAttackArea, ref pState.recoilingX, -recoilSpeedX);
-                }
+                Hit(sideAttackTransform, sideAttackArea, ref pState.recoilingX, recoilSpeedX);
                 
             }
             else if(!Grounded())
@@ -225,7 +218,7 @@ public class PlayerController : MonoBehaviour
         {
             if (ObjectsToHit[i].GetComponent<enemyBase>() != null)
             {
-                ObjectsToHit[i].GetComponent<enemyBase>().EnemyHit(damage, (transform.position - ObjectsToHit[i].transform.position.normalized), _recoilStrength);
+                ObjectsToHit[i].GetComponent<enemyBase>().EnemyHit(damage, (transform.position - ObjectsToHit[i].transform.position).normalized, _recoilStrength);
             }
         }
 
