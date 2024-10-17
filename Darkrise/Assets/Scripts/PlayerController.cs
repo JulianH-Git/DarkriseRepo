@@ -108,10 +108,6 @@ public class PlayerController : MonoBehaviour
         Attack();
         Recoil();
         StartDash();
-        if (player.GetButtonDown("Jump"))
-        {
-            Debug.Log(pState.jumping);
-        }
         // animation update
         animator.SetBool("isGrounded", Grounded());
         animator.SetFloat("yVel", rb.velocity.y);
