@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd57977e8170aa24287221a9b617e240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newCamPos: {x: 0, y: 9, z: 0}
+  newCamPos: {x: 0, y: 10, z: 0}
   newPlayerPos: {x: 0, y: 1.5, z: 0}
 --- !u!1 &1179959768975264871
 GameObject:
@@ -123,7 +123,7 @@ Transform:
   - {fileID: 1503062187061825853}
   - {fileID: 5301960776734914461}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &5837795573279147918
 GameObject:
