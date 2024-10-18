@@ -111,6 +111,14 @@ public class PlayerController : MonoBehaviour
         // animation update
         animator.SetBool("isGrounded", Grounded());
         animator.SetFloat("yVel", rb.velocity.y);
+        if(rb.velocity.x > 0.1 || rb.velocity.x < -0.1)
+        {
+            animator.SetBool("isWalking", true);
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
+        }
     }
 
     void GetInput()
@@ -185,6 +193,7 @@ public class PlayerController : MonoBehaviour
 
         if(attack && timeSinceAttack >= timeBetweenAttacks)
         {
+            animator.SetTrigger("attack");
             timeSinceAttack = 0;
             //trigger attack animation
             //Debug.Log("Can attack again");
