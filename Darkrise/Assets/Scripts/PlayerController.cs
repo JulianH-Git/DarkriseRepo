@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float coyoteTime;
     private int airJumpCounter;
     [SerializeField] private int airJumps;
+    [SerializeField] private float maxVelocity;
     [Space(5)]
 
     [Header("Ground Check Settings")]
@@ -68,6 +69,14 @@ public class PlayerController : MonoBehaviour
 
     public static PlayerController Instance;
 
+
+    private bool dashPressed;
+    private bool jumpPressed;
+    private bool doubleJumpPressed;
+
+    
+
+
     private void Awake()
     {
         // Get the Rewired Player object for this player and keep it for the duration of the character's lifetime
@@ -96,11 +105,14 @@ public class PlayerController : MonoBehaviour
         gravity = rb.gravityScale;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         GetInput();
         UpdateJumpVariables();
+    }
+
+    void FixedUpdate()
+    {
         if (pState.dashing) return; // if the player is dashing, don't get more movements
         Flip();
         Move();
@@ -119,25 +131,34 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("isWalking", false);
         }
+
+        rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxVelocity);
+
     }
 
     void GetInput()
     {
         xAxis = player.GetAxis("Move Horizontal");
         yAxis = player.GetAxis("Move Vertical");
-        attack = player.GetButtonDown("Attack");
-    }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        if (attack && Grounded())
+        if(!attack)
         {
-            Gizmos.DrawWireCube(sideAttackTransform.position, sideAttackArea);
+            attack = player.GetButtonDown("Attack");
         }
-        else if (attack && !Grounded())
+
+        if(!dashPressed)
         {
-            Gizmos.DrawWireCube(airAttackTransform.position, airAttackArea);
+            dashPressed = player.GetButtonDown("Dash");
+        }
+
+        if(!jumpPressed)
+        {
+            jumpPressed = player.GetButtonDown("Jump");
+        }
+
+        if(jumpPressed && !doubleJumpPressed)
+        {
+            doubleJumpPressed = player.GetButtonDown("Jump");
         }
     }
 
@@ -172,11 +193,12 @@ public class PlayerController : MonoBehaviour
         pState.dashing = false;
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
+        dashPressed = false;
     }
 
     void StartDash()
     {
-        if(player.GetButtonDown("Dash") && canDash && !dashed)
+        if(dashPressed && canDash && !dashed)
         {
             StartCoroutine(Dash());
             dashed = true;
@@ -209,6 +231,8 @@ public class PlayerController : MonoBehaviour
                 Hit(airAttackTransform, airAttackArea, ref pState.recoilingY, recoilSpeedY);
                 SlashEffectAtAngle(slashEffect, 0, airAttackTransform);
             }
+
+            attack = false;
         }
     }
     void Hit(Transform _attackTransform, Vector2 _attackArea, ref bool _recoilDir, float _recoilStrength)
@@ -327,11 +351,13 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        if (player.GetButtonUp("Jump") && rb.velocity.y > 0)
+        if (jumpPressed && rb.velocity.y > 0)
         {
             rb.velocity = new Vector3(rb.velocity.x, 0);
 
             pState.jumping = false;
+
+            jumpPressed = false;
         }
 
         if (!pState.jumping)
@@ -344,12 +370,14 @@ public class PlayerController : MonoBehaviour
 
                 pState.jumping = true;
             }
-            else if (!Grounded() && airJumpCounter < airJumps && player.GetButtonDown("Jump")) // air jump
+            else if (!Grounded() && airJumpCounter < airJumps && doubleJumpPressed) // air jump
             {
                 rb.velocity = new Vector3(rb.velocity.x, jumpForce);
 
                 pState.jumping = true;
                 airJumpCounter++;
+                jumpPressed = false;
+                doubleJumpPressed = false;
             }
         }
     }
