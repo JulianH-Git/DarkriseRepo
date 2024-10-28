@@ -69,6 +69,8 @@ public class PlayerController : MonoBehaviour
 
     public static PlayerController Instance;
 
+    public GhostEffect ghost;
+
 
     private bool dashPressed;
     private bool jumpPressed;
@@ -113,7 +115,15 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (pState.dashing) return; // if the player is dashing, don't get more movements
+        if (pState.dashing){
+            ghost.makeGhost = true;
+            animator.SetBool("isDashing", true);
+            return; // if the player is dashing, don't get more movements
+        } 
+        else{
+            ghost.makeGhost = false;
+             animator.SetBool("isDashing", false);
+        }
         Flip();
         Move();
         Jump();

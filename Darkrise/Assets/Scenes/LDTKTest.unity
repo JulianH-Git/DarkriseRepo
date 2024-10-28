@@ -2454,42 +2454,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 343512142328514488, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
-      propertyPath: m_Sprite
+    - target: {fileID: 931077289769193537, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
+      propertyPath: ghost
       value: 
-      objectReference: {fileID: 1997494811, guid: e65c3857e0a5497419ef633be3a7f59f, type: 3}
-    - target: {fileID: 655217805396827511, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
-      propertyPath: m_Size.y
-      value: 1.6683798
-      objectReference: {fileID: 0}
-    - target: {fileID: 655217805396827511, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
-      propertyPath: m_Offset.y
-      value: 0.076319695
-      objectReference: {fileID: 0}
-    - target: {fileID: 655217805396827511, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 1.0820312
-      objectReference: {fileID: 0}
-    - target: {fileID: 655217805396827511, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 1.5898438
-      objectReference: {fileID: 0}
-    - target: {fileID: 931077289769193537, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
-      propertyPath: maxVelocity
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 931077289769193537, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
-      propertyPath: slashEffect
-      value: 
-      objectReference: {fileID: 350902719028988263, guid: 1627bd57317e43343b96d88bbca4e25a, type: 3}
-    - target: {fileID: 931077289769193537, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
-      propertyPath: dashCooldown
-      value: 0.35
-      objectReference: {fileID: 0}
-    - target: {fileID: 931077289769193537, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
-      propertyPath: groundCheckY
-      value: 0.6
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 758849630}
     - target: {fileID: 2308073590197729602, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -2538,9 +2506,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 6587370032795239093, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
-      propertyPath: m_GravityScale
-      value: 8.5
+    - target: {fileID: 8978005622312566279, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
+      propertyPath: delay
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978005622312566279, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
+      propertyPath: ghostLife
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2552,6 +2524,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2308073590197729602, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
   m_PrefabInstance: {fileID: 758849628}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &758849630 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8978005622312566279, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
+  m_PrefabInstance: {fileID: 758849628}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8abb3e4580891844ba2bd500a6c8d30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1131300039
 GameObject:
   m_ObjectHideFlags: 0

@@ -77,6 +77,7 @@ GameObject:
   - component: {fileID: 931077289769193537}
   - component: {fileID: 7749656390994445964}
   - component: {fileID: 6587045674963513639}
+  - component: {fileID: 8978005622312566279}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -143,7 +144,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 788a4e6ab46887d49a9b295479728c73, type: 3}
+  m_Sprite: {fileID: 1997494811, guid: e65c3857e0a5497419ef633be3a7f59f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -186,18 +187,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.052506924}
+  m_Offset: {x: 0, y: 0.076319695}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.1679688, y: 1.7539062}
+    oldSize: {x: 1.0820312, y: 1.5898438}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.7160053}
+  m_Size: {x: 1, y: 1.6683798}
   m_EdgeRadius: 0
 --- !u!50 &6587370032795239093
 Rigidbody2D:
@@ -243,9 +244,10 @@ MonoBehaviour:
   jumpBuffer: 0.1
   coyoteTime: 0.1
   airJumps: 1
+  maxVelocity: 25
   groundCheckPoint: {fileID: 576971996884389209}
   groundCheckX: 0.5
-  groundCheckY: 0.5
+  groundCheckY: 0.6
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -267,6 +269,7 @@ MonoBehaviour:
   recoilSpeedX: 30
   recoilSpeedY: 20
   playerId: 0
+  ghost: {fileID: 0}
 --- !u!114 &7749656390994445964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,6 +308,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8978005622312566279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4075216929972785089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8abb3e4580891844ba2bd500a6c8d30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 5
+  ghostSprite: {fileID: 8335350007342634801, guid: a385a293bf6da4d4cbef90dacf535abd, type: 3}
+  makeGhost: 0
+  ghostLife: 0
 --- !u!1 &4485061638940355240
 GameObject:
   m_ObjectHideFlags: 0
