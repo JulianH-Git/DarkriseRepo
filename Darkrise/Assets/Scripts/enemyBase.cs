@@ -26,7 +26,7 @@ public class enemyBase : MonoBehaviour
     {
         Debug.Log("Enemy awake called");
         rb = GetComponent<Rigidbody2D>();
-        //player = PlayerController.Instance;
+        player = PlayerController.Instance;
     }
 
     // Update is called once per frame

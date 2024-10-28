@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9070425499961838016}
   - component: {fileID: 4768809251426841772}
   m_Layer: 6
-  m_Name: Enemy
+  m_Name: Sentry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -172,8 +172,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
+  maxHealth: 0
   recoilLength: 1
   recoilFactor: 10
   isRecoiling: 0
   player: {fileID: 0}
-  speed: 5
+  speed: 2
+  patrolDistance: 3
