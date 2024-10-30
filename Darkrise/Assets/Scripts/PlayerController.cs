@@ -61,7 +61,26 @@ public class PlayerController : MonoBehaviour
     private int stepsRecoiledX;
     private int stepsRecoiledY;
 
-    PlayerStateList pState; // this will be expanded a lot more after the MVI
+    [Space(5)]
+    [Header("Health Settings")]
+    public int health;
+
+    public int Health
+    {
+        get { return health; }
+        set 
+        { 
+            if (health != value)
+            {
+                health = Mathf.Clamp(value, 0, maxHealth);
+            }
+        }
+    }
+
+    [SerializeField] public int maxHealth;
+
+
+    public PlayerStateList pState; // this will be expanded a lot more after the MVI
 
     private Player player; // The Rewired Player
     public int playerId = 0; // The Rewired player id of this character
@@ -92,7 +111,7 @@ public class PlayerController : MonoBehaviour
         {
             Instance = this;
         }
-        Debug.Log("Instance created");
+        Health = maxHealth;
     }
 
         // Start is called before the first frame update
@@ -420,6 +439,20 @@ public class PlayerController : MonoBehaviour
         _slashEffect = Instantiate(_slashEffect, _attackTransform);
         _slashEffect.transform.eulerAngles = new Vector3(0, 0, _effectAngle);
         _slashEffect.transform.localScale = new Vector2(transform.localScale.x, transform.localScale.y);
+    }
+
+    public void TakeDamage(float _damage)
+    {
+        Health -= Mathf.RoundToInt(_damage);
+        StartCoroutine(StopTakingDamage());
+    }
+
+    IEnumerator StopTakingDamage()
+    {
+        pState.invincible = true;
+        animator.SetTrigger("TakeDamage");
+        yield return new WaitForSeconds(1f);
+        pState.invincible = false;
     }
 
 }

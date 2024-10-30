@@ -9,5 +9,6 @@ public class PlayerStateList : MonoBehaviour
     public bool recoilingX = false;
     public bool recoilingY = false;
     public bool lookingRight;
+    public bool invincible;
 
 }
