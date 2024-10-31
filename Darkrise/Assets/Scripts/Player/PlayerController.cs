@@ -64,7 +64,9 @@ public class PlayerController : MonoBehaviour
     [Space(5)]
     [Header("Health Settings")]
     public int health;
-
+    [SerializeField] public int maxHealth;
+    public delegate void OnHealthChangedDelegate();
+    [HideInInspector] public OnHealthChangedDelegate onHealthChangedCallback;
     public int Health
     {
         get { return health; }
@@ -73,11 +75,17 @@ public class PlayerController : MonoBehaviour
             if (health != value)
             {
                 health = Mathf.Clamp(value, 0, maxHealth);
+
+                if(onHealthChangedCallback != null)
+                {
+                    onHealthChangedCallback.Invoke();
+                }
+
             }
         }
     }
 
-    [SerializeField] public int maxHealth;
+   
 
 
     public PlayerStateList pState; // this will be expanded a lot more after the MVI
@@ -451,6 +459,7 @@ public class PlayerController : MonoBehaviour
     {
         pState.invincible = true;
         animator.SetTrigger("TakeDamage");
+        pState.recoilingX = true;
         yield return new WaitForSeconds(1f);
         pState.invincible = false;
     }
