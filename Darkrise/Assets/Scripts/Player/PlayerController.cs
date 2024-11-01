@@ -451,6 +451,7 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(float _damage)
     {
+        CamShake.Instance.Shake();
         Health -= Mathf.RoundToInt(_damage);
         StartCoroutine(StopTakingDamage());
     }

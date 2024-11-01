@@ -2256,6 +2256,7 @@ GameObject:
   - component: {fileID: 506621106}
   - component: {fileID: 506621108}
   - component: {fileID: 506621107}
+  - component: {fileID: 506621109}
   m_Layer: 0
   m_Name: Virtual Camera 2
   m_TagString: Untagged
@@ -2335,6 +2336,20 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 1603719783}
+--- !u!114 &506621109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506621105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16aa2861955fc7b4093441ec15063aaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeIntensity: 1
+  shakeTime: 0.2
 --- !u!1001 &519678795
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2407,6 +2422,7 @@ GameObject:
   - component: {fileID: 568936217}
   - component: {fileID: 568936219}
   - component: {fileID: 568936218}
+  - component: {fileID: 568936220}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -2484,6 +2500,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &568936220
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568936216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 1
+  m_FrequencyGain: 1
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1001 &739065698
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3065,6 +3098,7 @@ GameObject:
   - component: {fileID: 1445128422}
   - component: {fileID: 1445128424}
   - component: {fileID: 1445128423}
+  - component: {fileID: 1445128425}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -3142,6 +3176,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1445128425
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445128421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 1
+  m_FrequencyGain: 1
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &1603719782
 GameObject:
   m_ObjectHideFlags: 3
@@ -3153,6 +3204,7 @@ GameObject:
   - component: {fileID: 1603719783}
   - component: {fileID: 1603719785}
   - component: {fileID: 1603719784}
+  - component: {fileID: 1603719786}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -3230,6 +3282,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1603719786
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603719782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 1
+  m_FrequencyGain: 1
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &1691477218
 GameObject:
   m_ObjectHideFlags: 0
@@ -3293,7 +3362,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.5
+  orthographic size: 5.8170204
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3317,7 +3386,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1691477218}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.05096817, y: -0.2561245, z: -10}
+  m_LocalPosition: {x: -2.4088454, y: -0.5168687, z: -11.641136}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3385,6 +3454,7 @@ GameObject:
   - component: {fileID: 1740817986}
   - component: {fileID: 1740817988}
   - component: {fileID: 1740817987}
+  - component: {fileID: 1740817989}
   m_Layer: 0
   m_Name: Virtual Camera 1
   m_TagString: Untagged
@@ -3464,6 +3534,20 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 568936217}
+--- !u!114 &1740817989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1740817985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16aa2861955fc7b4093441ec15063aaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeIntensity: 1
+  shakeTime: 0.2
 --- !u!1 &1836496439
 GameObject:
   m_ObjectHideFlags: 0
@@ -3811,6 +3895,7 @@ GameObject:
   - component: {fileID: 2089741905}
   - component: {fileID: 2089741907}
   - component: {fileID: 2089741906}
+  - component: {fileID: 2089741908}
   m_Layer: 0
   m_Name: Virtual Camera 3
   m_TagString: Untagged
@@ -3890,6 +3975,20 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 1445128422}
+--- !u!114 &2089741908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2089741904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16aa2861955fc7b4093441ec15063aaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeIntensity: 1
+  shakeTime: 0.2
 --- !u!19719996 &2098293244 stripped
 TilemapCollider2D:
   m_CorrespondingSourceObject: {fileID: 8266566413724507962, guid: e74093efce0000143983859ecad0b736, type: 3}
