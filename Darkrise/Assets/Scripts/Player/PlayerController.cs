@@ -1,7 +1,9 @@
 using Rewired;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -104,7 +106,7 @@ public class PlayerController : MonoBehaviour
     private bool jumpPressed;
     private bool doubleJumpPressed;
 
-
+    private bool restartPressed;
 
 
     private void Awake()
@@ -160,6 +162,7 @@ public class PlayerController : MonoBehaviour
         Attack();
         Recoil();
         StartDash();
+        Restart();
         // animation update
         animator.SetBool("isGrounded", Grounded());
         animator.SetFloat("yVel", rb.velocity.y);
@@ -200,6 +203,13 @@ public class PlayerController : MonoBehaviour
         {
             doubleJumpPressed = player.GetButtonDown("Jump");
         }
+
+        if (!restartPressed) 
+        {
+            restartPressed = player.GetButtonDown("Restart");
+        }
+
+        
     }
 
     void Flip() // this will be useful for animation stuff later
@@ -461,6 +471,14 @@ public class PlayerController : MonoBehaviour
         CamShake.Instance.Shake();
         Health -= Mathf.RoundToInt(_damage);
         StartCoroutine(StopTakingDamage());
+    }
+
+    void Restart()
+    {
+        if (restartPressed)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
     IEnumerator StopTakingDamage()
