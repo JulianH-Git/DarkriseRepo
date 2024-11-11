@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private int airJumpCounter;
     [SerializeField] private int airJumps;
     [SerializeField] private float maxVelocity;
+    private float fallMultiplier = 0.9f;
     [Space(5)]
 
     [Header("Ground Check Settings")]
@@ -70,13 +71,13 @@ public class PlayerController : MonoBehaviour
     public int Health
     {
         get { return health; }
-        set 
-        { 
+        set
+        {
             if (health != value)
             {
                 health = Mathf.Clamp(value, 0, maxHealth);
 
-                if(onHealthChangedCallback != null)
+                if (onHealthChangedCallback != null)
                 {
                     onHealthChangedCallback.Invoke();
                 }
@@ -85,7 +86,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-   
+
 
 
     public PlayerStateList pState; // this will be expanded a lot more after the MVI
@@ -103,14 +104,14 @@ public class PlayerController : MonoBehaviour
     private bool jumpPressed;
     private bool doubleJumpPressed;
 
-    
+
 
 
     private void Awake()
     {
         // Get the Rewired Player object for this player and keep it for the duration of the character's lifetime
         player = ReInput.players.GetPlayer(playerId);
-        
+
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -122,7 +123,7 @@ public class PlayerController : MonoBehaviour
         Health = maxHealth;
     }
 
-        // Start is called before the first frame update
+    // Start is called before the first frame update
     void Start()
     {
         pState = GetComponent<PlayerStateList>();
@@ -142,14 +143,16 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (pState.dashing){
+        if (pState.dashing)
+        {
             ghost.makeGhost = true;
             animator.SetBool("isDashing", true);
             return; // if the player is dashing, don't get more movements
-        } 
-        else{
+        }
+        else
+        {
             ghost.makeGhost = false;
-             animator.SetBool("isDashing", false);
+            animator.SetBool("isDashing", false);
         }
         Flip();
         Move();
@@ -160,7 +163,7 @@ public class PlayerController : MonoBehaviour
         // animation update
         animator.SetBool("isGrounded", Grounded());
         animator.SetFloat("yVel", rb.velocity.y);
-        if(rb.velocity.x > 0.1 || rb.velocity.x < -0.1)
+        if (rb.velocity.x > 0.1 || rb.velocity.x < -0.1)
         {
             animator.SetBool("isWalking", true);
         }
@@ -178,22 +181,22 @@ public class PlayerController : MonoBehaviour
         xAxis = player.GetAxis("Move Horizontal");
         yAxis = player.GetAxis("Move Vertical");
 
-        if(!attack)
+        if (!attack)
         {
             attack = player.GetButtonDown("Attack");
         }
 
-        if(!dashPressed)
+        if (!dashPressed)
         {
             dashPressed = player.GetButtonDown("Dash");
         }
 
-        if(!jumpPressed)
+        if (!jumpPressed)
         {
             jumpPressed = player.GetButtonDown("Jump");
         }
 
-        if(jumpPressed && !doubleJumpPressed)
+        if (jumpPressed && !doubleJumpPressed)
         {
             doubleJumpPressed = player.GetButtonDown("Jump");
         }
@@ -206,7 +209,7 @@ public class PlayerController : MonoBehaviour
             transform.localScale = new Vector2(-(Mathf.Abs(transform.localScale.x)), transform.localScale.y);
             pState.lookingRight = false;
         }
-        else if(xAxis > 0)
+        else if (xAxis > 0)
         {
             transform.localScale = new Vector2((Mathf.Abs(transform.localScale.x)), transform.localScale.y);
             pState.lookingRight = true;
@@ -235,7 +238,7 @@ public class PlayerController : MonoBehaviour
 
     void StartDash()
     {
-        if(dashPressed && canDash && !dashed)
+        if (dashPressed && canDash && !dashed)
         {
             StartCoroutine(Dash());
             dashed = true;
@@ -250,20 +253,20 @@ public class PlayerController : MonoBehaviour
     {
         timeSinceAttack += Time.deltaTime;
 
-        if(attack && timeSinceAttack >= timeBetweenAttacks)
+        if (attack && timeSinceAttack >= timeBetweenAttacks)
         {
             animator.SetTrigger("attack");
             timeSinceAttack = 0;
             //trigger attack animation
             //Debug.Log("Can attack again");
 
-            if(Grounded())
+            if (Grounded())
             {
                 Hit(sideAttackTransform, sideAttackArea, ref pState.recoilingX, recoilSpeedX);
                 Instantiate(slashEffect, sideAttackTransform);
 
             }
-            else if(!Grounded())
+            else if (!Grounded())
             {
                 Hit(airAttackTransform, airAttackArea, ref pState.recoilingY, recoilSpeedY);
                 SlashEffectAtAngle(slashEffect, 0, airAttackTransform);
@@ -278,12 +281,12 @@ public class PlayerController : MonoBehaviour
 
         Collider2D[] ObjectsToHit = Physics2D.OverlapBoxAll(_attackTransform.position, _attackArea, 0, attackableLayer);
 
-        if(ObjectsToHit.Length > 0)
+        if (ObjectsToHit.Length > 0)
         {
             _recoilDir = true;
         }
 
-        for(int i = 0;  i < ObjectsToHit.Length; i++)
+        for (int i = 0; i < ObjectsToHit.Length; i++)
         {
             if (ObjectsToHit[i].GetComponent<enemyBase>() != null)
             {
@@ -295,9 +298,9 @@ public class PlayerController : MonoBehaviour
 
     void Recoil()
     {
-        if(pState.recoilingX)
+        if (pState.recoilingX)
         {
-            if(pState.lookingRight)
+            if (pState.lookingRight)
             {
                 rb.velocity = new Vector2(-recoilSpeedX, 0);
             }
@@ -306,9 +309,9 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = new Vector2(recoilSpeedX, 0);
             }
         }
-        if(pState.recoilingY)
+        if (pState.recoilingY)
         {
-            if(!Grounded())
+            if (!Grounded())
             {
                 rb.gravityScale = 0;
                 rb.velocity = new Vector2(rb.velocity.x, recoilSpeedY);
@@ -322,9 +325,9 @@ public class PlayerController : MonoBehaviour
         {
             rb.gravityScale = gravity;
         }
-        
+
         //stop recoil
-        if(pState.recoilingX && stepsRecoiledX < recoilStepsX)
+        if (pState.recoilingX && stepsRecoiledX < recoilStepsX)
         {
             stepsRecoiledX++;
 
@@ -343,7 +346,7 @@ public class PlayerController : MonoBehaviour
         {
             StopRecoilY();
         }
-        if(Grounded())
+        if (Grounded())
         {
             StopRecoilY();
         }
@@ -375,7 +378,7 @@ public class PlayerController : MonoBehaviour
 
         if (Physics2D.Raycast(groundCheckPoint.position, Vector2.down, groundCheckY, groundLayer)
             || Physics2D.Raycast(groundCheckPoint.position + new Vector3(groundCheckX, 0, 0), Vector2.down, groundCheckY, groundLayer)
-            || Physics2D.Raycast(groundCheckPoint.position + new Vector3(-groundCheckX, 0, 0), Vector2.down, groundCheckY, groundLayer)) 
+            || Physics2D.Raycast(groundCheckPoint.position + new Vector3(-groundCheckX, 0, 0), Vector2.down, groundCheckY, groundLayer))
         {
             //Debug.Log("Grounded");
             return true;
@@ -416,6 +419,10 @@ public class PlayerController : MonoBehaviour
                 jumpPressed = false;
                 doubleJumpPressed = false;
             }
+        }
+        if (rb.velocity.y < 0)
+        {
+            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y * fallMultiplier, 0);
         }
     }
     void UpdateJumpVariables()
