@@ -21,7 +21,9 @@ ScriptedImporter:
   _intGridValues:
   - _key: IntGrid_1
     _asset: {instanceID: 0}
-  _entities: []
+  _entities:
+  - _key: Sentry
+    _asset: {fileID: 8663774423330188259, guid: a1eca8f004294a34ea5f648ce37b3c2f, type: 3}
   _enumGenerate: 0
   _enumPath: 
   _enumNamespace: 

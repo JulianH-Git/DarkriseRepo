@@ -631,6 +631,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: test
       objectReference: {fileID: 0}
+    - target: {fileID: -386433389554846991, guid: e74093efce0000143983859ecad0b736, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -386433389554846991, guid: e74093efce0000143983859ecad0b736, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 591071163743403147, guid: e74093efce0000143983859ecad0b736, type: 3}
       propertyPath: m_ColliderPaths.Array.size
       value: 1
