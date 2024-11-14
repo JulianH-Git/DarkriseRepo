@@ -133,7 +133,7 @@ MonoBehaviour:
   isRecoiling: 0
   player: {fileID: 0}
   speed: 2
-  damage: 2
+  damage: 1
   patrolDistance: 3
 --- !u!61 &6365863313047211341
 BoxCollider2D:

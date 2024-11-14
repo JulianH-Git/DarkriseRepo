@@ -269,7 +269,7 @@ MonoBehaviour:
   recoilSpeedX: 30
   recoilSpeedY: 20
   health: 0
-  maxHealth: 10
+  maxHealth: 8
   pState: {fileID: 0}
   playerId: 0
   ghost: {fileID: 0}

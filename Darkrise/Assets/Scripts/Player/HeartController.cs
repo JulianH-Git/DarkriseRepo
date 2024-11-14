@@ -17,8 +17,9 @@ public class HeartController : MonoBehaviour
     void Start()
     {
         player = PlayerController.Instance;
-        heartContainers = new GameObject[PlayerController.Instance.maxHealth];
-        heartFills = new Image[PlayerController.Instance.maxHealth];
+        int heartCount = PlayerController.Instance.maxHealth / 4;
+        heartContainers = new GameObject[heartCount];
+        heartFills = new Image[heartCount];
         InstantiateHeartContainers();
         UpdateHeartsHUD();
         PlayerController.Instance.onHealthChangedCallback += UpdateHeartsHUD;
@@ -27,14 +28,14 @@ public class HeartController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void SetHeartContainers()
     {
-        for(int i = 0;  i < heartContainers.Length; i++)
+        for (int i = 0; i < heartContainers.Length; i++)
         {
-            if(i < PlayerController.Instance.maxHealth)
+            if (i < PlayerController.Instance.maxHealth / 4)
             {
                 heartContainers[i].SetActive(true);
             }
@@ -47,22 +48,25 @@ public class HeartController : MonoBehaviour
 
     void SetFilledHearts()
     {
+        int health = PlayerController.Instance.Health;
         for (int i = 0; i < heartFills.Length; i++)
         {
-            if (i < PlayerController.Instance.Health)
+            if (health >= 4)
             {
                 heartFills[i].fillAmount = 1;
+                health -= 4;
             }
             else
             {
-                heartFills[i].fillAmount = 0;
+                heartFills[i].fillAmount = health / 4f;
+                health = 0;
             }
         }
     }
 
     void InstantiateHeartContainers()
     {
-        for (int i = 0; i < PlayerController.Instance.maxHealth; i++)
+        for (int i = 0; i < PlayerController.Instance.maxHealth / 4; i++)
         {
             GameObject temp = Instantiate(heartContainerPrefab);
             temp.transform.SetParent(heartsParent, false);
