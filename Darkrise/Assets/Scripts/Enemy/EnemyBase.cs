@@ -13,6 +13,7 @@ public class enemyBase : MonoBehaviour
     [SerializeField] protected PlayerController player;
     [SerializeField] protected float speed;
     [SerializeField] protected float damage;
+    [SerializeField] protected float respawnTimer;
 
     float recoilTimer;
 
@@ -20,7 +21,7 @@ public class enemyBase : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     protected virtual void Awake()
@@ -35,7 +36,8 @@ public class enemyBase : MonoBehaviour
     {
         if(health <= 0)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+            Invoke("Respawn", respawnTimer);
         }
         if(isRecoiling)
         {
@@ -73,5 +75,10 @@ public class enemyBase : MonoBehaviour
     protected virtual void Attack()
     {
         PlayerController.Instance.TakeDamage(damage);
+    }
+    protected virtual void Respawn()
+    {
+        health = maxHealth;
+        gameObject.SetActive(true);
     }
 }

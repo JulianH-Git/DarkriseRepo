@@ -18,7 +18,7 @@ public class GroundSentry : enemyBase
     void Start()
     {
         rb.gravityScale = 12f;
-        anchorPos = rb.position; 
+        anchorPos = rb.position;
     }
 
     // Update is called once per frame
@@ -56,5 +56,12 @@ public class GroundSentry : enemyBase
             rb.velocity = new Vector2(speed * Mathf.Sign(transform.localScale.x), rb.velocity.y);
         }
 
+    }
+
+    protected override void Respawn()
+    {
+        health = maxHealth;
+        transform.position = anchorPos;
+        gameObject.SetActive(true);
     }
 }

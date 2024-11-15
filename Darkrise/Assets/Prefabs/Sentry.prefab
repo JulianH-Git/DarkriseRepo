@@ -134,6 +134,8 @@ MonoBehaviour:
   player: {fileID: 0}
   speed: 2
   damage: 1
+  respawnTimer: 5
+  enemyRef: {fileID: 8663774423330188259}
   patrolDistance: 3
 --- !u!61 &6365863313047211341
 BoxCollider2D:

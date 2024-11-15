@@ -3717,6 +3717,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4768809251426841772, guid: f9eff9cc8cbff9346b97ba483735f33d, type: 3}
+      propertyPath: maxHealth
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4768809251426841772, guid: f9eff9cc8cbff9346b97ba483735f33d, type: 3}
       propertyPath: patrolDistance
       value: 1
       objectReference: {fileID: 0}
