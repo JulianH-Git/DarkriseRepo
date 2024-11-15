@@ -199,13 +199,13 @@ public class PlayerController : MonoBehaviour
             jumpPressed = player.GetButtonDown("Jump");
         }
 
-        if(Input.GetButtonDown("Jump")){
-            if(Grounded() || doubleJumpPressed){
+        if(jumpPressed){
+            if(Grounded() || !doubleJumpPressed){
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-                doubleJumpPressed = !doubleJumpPressed;
+                doubleJumpPressed = !Grounded();
             }
         }
-        if(Grounded() && !jumpPressed){
+        if(Grounded()){
             doubleJumpPressed = false;
         }
 
