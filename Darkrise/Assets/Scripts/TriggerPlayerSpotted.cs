@@ -8,6 +8,8 @@ public class TriggerPlayerSpotted : MonoBehaviour
     // player state
     [SerializeField]
     private PlayerStateList playerState;
+    [SerializeField]
+    private PlayerController controller;
 
     // player spotted
     private bool playerSpotted = false;
@@ -26,6 +28,7 @@ public class TriggerPlayerSpotted : MonoBehaviour
             {
                 playerSpotted = true;
                 cooldownTimer = cooldown;
+                controller.TakeDamage(1);
             }
         }
     }
