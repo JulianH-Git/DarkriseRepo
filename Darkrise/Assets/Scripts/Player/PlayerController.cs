@@ -1,4 +1,5 @@
 using Rewired;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -198,9 +199,14 @@ public class PlayerController : MonoBehaviour
             jumpPressed = player.GetButtonDown("Jump");
         }
 
-        if (jumpPressed && !doubleJumpPressed)
-        {
-            doubleJumpPressed = player.GetButtonDown("Jump");
+        if(Input.GetButtonDown("Jump")){
+            if(Grounded() || doubleJumpPressed){
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                doubleJumpPressed = !doubleJumpPressed;
+            }
+        }
+        if(Grounded() && !jumpPressed){
+            doubleJumpPressed = false;
         }
 
         if (!restartPressed) 
@@ -402,7 +408,7 @@ public class PlayerController : MonoBehaviour
     {
         if (jumpPressed && rb.velocity.y > 0)
         {
-            rb.velocity = new Vector3(rb.velocity.x, 0);
+            //rb.velocity = new Vector3(rb.velocity.x, 0);
 
             pState.jumping = false;
 
@@ -418,15 +424,6 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = new Vector3(rb.velocity.x, jumpForce);
 
                 pState.jumping = true;
-            }
-            else if (!Grounded() && airJumpCounter < airJumps && doubleJumpPressed) // air jump
-            {
-                rb.velocity = new Vector3(rb.velocity.x, jumpForce);
-
-                pState.jumping = true;
-                airJumpCounter++;
-                jumpPressed = false;
-                doubleJumpPressed = false;
             }
         }
         if (rb.velocity.y < 0)
