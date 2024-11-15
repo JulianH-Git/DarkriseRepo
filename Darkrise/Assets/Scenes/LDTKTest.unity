@@ -3391,6 +3391,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 758849630}
     - target: {fileID: 931077289769193537, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
+      propertyPath: dashTime
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 931077289769193537, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
       propertyPath: recoilStepsX
       value: 1
       objectReference: {fileID: 0}
