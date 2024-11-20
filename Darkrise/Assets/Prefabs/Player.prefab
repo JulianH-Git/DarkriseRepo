@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 6
-  jumpForce: 25
+  jumpForce: 20
   jumpBuffer: 0.1
   coyoteTime: 0.1
   airJumps: 1
@@ -266,7 +266,7 @@ MonoBehaviour:
   slashEffect: {fileID: 350902719028988263, guid: 1627bd57317e43343b96d88bbca4e25a, type: 3}
   recoilStepsX: 5
   recoilStepsY: 5
-  recoilSpeedX: 30
+  recoilSpeedX: 20
   recoilSpeedY: 20
   health: 0
   maxHealth: 8
