@@ -9,14 +9,9 @@ public class TitleControls : MonoBehaviour
     private bool hasPressed = false;
 
     [SerializeField]
-    GameObject fade;
+    SpriteRenderer fade;
 
-    Color fadeColor;
-
-    private void Start()
-    {
-        fadeColor = fade.GetComponent<Renderer>().material.color;
-    }
+    float alpha = 0.0f;
 
     // Update is called once per frame
     void Update()
@@ -28,10 +23,11 @@ public class TitleControls : MonoBehaviour
 
         if (hasPressed) 
         {
-            fadeColor.a += 0.1f;
+            fade.color = new Color(fade.color.r, fade.color.g, fade.color.b, alpha);
+            alpha += 0.05f;
         }
 
-        if (fadeColor.a >= 1) 
+        if (alpha >= 2) 
         {
             SceneManager.LoadScene("LDTKTest");
         }
