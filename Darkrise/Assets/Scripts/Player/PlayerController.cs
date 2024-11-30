@@ -70,6 +70,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public int maxHealth;
     public delegate void OnHealthChangedDelegate();
     [HideInInspector] public OnHealthChangedDelegate onHealthChangedCallback;
+
+    [Space(5)]
+    [Header("Audio Settings")]
+    public AudioSource audio;
+    [SerializeField]
+    List<AudioClip> sfx = new List<AudioClip>();
+
+    [Space(5)]
+    [Header("Other Objects")]
+    [SerializeField] SpriteRenderer fade;
+    float alpha = 1.0f;
     public int Health
     {
         get { return health; }
@@ -90,7 +101,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-
+    [Space(5)]
     public PlayerStateList pState; // this will be expanded a lot more after the MVI
 
     private Player player; // The Rewired Player
@@ -139,6 +150,12 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if(alpha >= 0.0f) 
+        {
+            fade.color = new Color(fade.color.r, fade.color.g, fade.color.b, alpha);
+            alpha -= 0.05f;
+        }
+
         GetInput();
         UpdateJumpVariables();
     }
@@ -255,6 +272,7 @@ public class PlayerController : MonoBehaviour
     {
         if (dashPressed && canDash && !dashed)
         {
+            audio.PlayOneShot(sfx[2]);
             StartCoroutine(Dash());
             dashed = true;
         }
@@ -274,6 +292,8 @@ public class PlayerController : MonoBehaviour
             timeSinceAttack = 0;
             //trigger attack animation
             //Debug.Log("Can attack again");
+
+            audio.PlayOneShot(sfx[1]);
 
             if (Grounded())
             {
@@ -305,6 +325,7 @@ public class PlayerController : MonoBehaviour
         {
             if (ObjectsToHit[i].GetComponent<enemyBase>() != null)
             {
+                audio.PlayOneShot(sfx[3]);
                 ObjectsToHit[i].GetComponent<enemyBase>().EnemyHit(damage, (transform.position - ObjectsToHit[i].transform.position).normalized, _recoilStrength);
             }
         }
@@ -408,6 +429,7 @@ public class PlayerController : MonoBehaviour
     {
         if (jumpPressed && rb.velocity.y > 0)
         {
+            audio.PlayOneShot(sfx[0]);
             //rb.velocity = new Vector3(rb.velocity.x, 0);
 
             pState.jumping = false;

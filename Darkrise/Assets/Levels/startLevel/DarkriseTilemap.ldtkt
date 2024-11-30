@@ -1,0 +1,33 @@
+{
+  "Rects": null,
+  "Def": {
+    "__cHei": 3,
+    "__cWid": 5,
+    "cachedPixelData": {
+      "opaqueTiles": "101000000010100",
+      "averageColors": "f5670000f7790000844600000000000000000000f2230000f33400008112"
+    },
+    "customData": [
+
+    ],
+    "embedAtlas": null,
+    "enumTags": [
+
+    ],
+    "identifier": "DarkriseTilemap",
+    "padding": 0,
+    "pxHei": 180,
+    "pxWid": 300,
+    "relPath": "Images/DarkriseTilemap.png",
+    "savedSelections": [
+
+    ],
+    "spacing": 0,
+    "tags": [
+
+    ],
+    "tagsSourceEnumUid": null,
+    "tileGridSize": 60,
+    "uid": 1
+  }
+}
