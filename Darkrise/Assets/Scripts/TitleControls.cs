@@ -29,7 +29,7 @@ public class TitleControls : MonoBehaviour
 
         if (alpha >= 2) 
         {
-            SceneManager.LoadScene("LDTKTest");
+            SceneManager.LoadScene("StartLevel");
         }
     }
 }

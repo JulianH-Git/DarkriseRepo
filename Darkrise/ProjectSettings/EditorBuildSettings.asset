@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LDTKTest.unity
     guid: dc4795e9969b75a4b90551850adfbc5f
+  - enabled: 1
+    path: Assets/Scenes/TitleScreen.unity
+    guid: f85e9216338af4c4f845c19dd10d7065
+  - enabled: 1
+    path: Assets/Scenes/StartLevel.unity
+    guid: 7e6d832a743bcc94bb8881b7c89e8f19
   m_configObjects: {}
