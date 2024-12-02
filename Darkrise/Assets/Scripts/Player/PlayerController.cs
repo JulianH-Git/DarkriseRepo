@@ -156,8 +156,15 @@ public class PlayerController : MonoBehaviour
             alpha -= 0.05f;
         }
 
-        GetInput();
-        UpdateJumpVariables();
+        if(health > 0) 
+        {
+            GetInput();
+            UpdateJumpVariables();
+        }
+        else 
+        {
+
+        }
     }
 
     void FixedUpdate()
