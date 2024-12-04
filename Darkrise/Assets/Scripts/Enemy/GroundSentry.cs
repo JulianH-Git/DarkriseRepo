@@ -58,7 +58,7 @@ public class GroundSentry : enemyBase
 
     }
 
-    protected override void Respawn()
+    public override void Respawn()
     {
         health = maxHealth;
         transform.position = anchorPos;

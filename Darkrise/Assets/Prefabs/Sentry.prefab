@@ -127,16 +127,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  maxHealth: 0
+  maxHealth: 10
   recoilLength: 0.5
   recoilFactor: 10
   isRecoiling: 0
   player: {fileID: 0}
   speed: 2
   damage: 1
-  respawnTimer: 5
-  enemyRef: {fileID: 8663774423330188259}
-  patrolDistance: 3
+  patrolDistance: 2
 --- !u!61 &6365863313047211341
 BoxCollider2D:
   m_ObjectHideFlags: 0

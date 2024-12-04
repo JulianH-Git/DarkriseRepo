@@ -13,7 +13,6 @@ public class enemyBase : MonoBehaviour
     [SerializeField] protected PlayerController player;
     [SerializeField] protected float speed;
     [SerializeField] protected float damage;
-    [SerializeField] protected float respawnTimer;
 
     float recoilTimer;
 
@@ -37,7 +36,6 @@ public class enemyBase : MonoBehaviour
         if(health <= 0)
         {
             gameObject.SetActive(false);
-            Invoke("Respawn", respawnTimer);
         }
         if(isRecoiling)
         {
@@ -76,7 +74,7 @@ public class enemyBase : MonoBehaviour
     {
         PlayerController.Instance.TakeDamage(damage);
     }
-    protected virtual void Respawn()
+    public virtual void Respawn()
     {
         health = maxHealth;
         gameObject.SetActive(true);
