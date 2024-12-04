@@ -513,6 +513,10 @@ public class PlayerController : MonoBehaviour
         pState.recoilingX = true;
         yield return new WaitForSeconds(1f);
         pState.invincible = false;
+        if(health <= 0) 
+        {
+            maxVelocity = 0.0f;
+        }
     }
 
 }
