@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashSpeed;
     [SerializeField] private float dashTime;
     [SerializeField] private float dashCooldown;
-    private bool canDash = true;
+    public bool canDash = false;
     private bool dashed;
     private float gravity;
     [Space(5)]
@@ -99,8 +99,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
-
     [Space(5)]
     public PlayerStateList pState; // this will be expanded a lot more after the MVI
 
@@ -119,6 +117,7 @@ public class PlayerController : MonoBehaviour
 
     private bool restartPressed;
 
+    private bool stopFading = false;
 
     private void Awake()
     {
@@ -150,10 +149,12 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if(alpha >= 0.0f) 
+        if(alpha >= 0.0f && !stopFading) 
         {
             fade.color = new Color(fade.color.r, fade.color.g, fade.color.b, alpha);
             alpha -= 0.05f;
+
+            if(alpha < 0.0f) { stopFading = true; }
         }
 
         if(health > 0) 
@@ -163,8 +164,19 @@ public class PlayerController : MonoBehaviour
         }
         else 
         {
+            while (alpha < 1.1f)
+            {
+                fade.color = new Color(fade.color.r, fade.color.g, fade.color.b, alpha);
+                alpha += 0.05f;
+            }
+            StartCoroutine(WaitTillEnd());
+        } 
+    }
 
-        }
+    private IEnumerator WaitTillEnd() 
+    {
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene("GameOverScreen");
     }
 
     void FixedUpdate()
@@ -518,5 +530,4 @@ public class PlayerController : MonoBehaviour
             maxVelocity = 0.0f;
         }
     }
-
 }
