@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class enemyBase : MonoBehaviour
 {
+    [Header("Health Settings")]
     [SerializeField] protected float health;
     [SerializeField] protected float maxHealth;
+    [Space(5)]
+
+    [Header("Recoil Settings")]
     [SerializeField] protected float recoilLength;
     [SerializeField] protected float recoilFactor;
     [SerializeField] protected bool isRecoiling;
+    [Space(5)]
 
+    [Header("Attack Settings")]
     [SerializeField] protected PlayerController player;
     [SerializeField] protected float speed;
     [SerializeField] protected float damage;
 
-    float recoilTimer;
+    protected float recoilTimer;
+    protected Animator anim;
 
     protected Rigidbody2D rb;
     // Start is called before the first frame update
@@ -28,6 +35,7 @@ public class enemyBase : MonoBehaviour
         Debug.Log("Enemy awake called");
         rb = GetComponent<Rigidbody2D>();
         player = PlayerController.Instance;
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame

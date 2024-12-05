@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class GroundSentry : enemyBase
 {
+    [Header("Patrol Settings")]
     [SerializeField] private float patrolDistance;
 
     private Vector2 anchorPos;
