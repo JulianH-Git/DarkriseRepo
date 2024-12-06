@@ -18,6 +18,8 @@ public class FootSolider : enemyBase
     [SerializeField] float timeBetweenAttacks;
     [SerializeField] float aggressionTimer;
 
+    Vector2 direction = new Vector2(0, 0);
+
     float timeSinceAttack;
     bool aggressive;
     float currentAggroTimer;
@@ -51,11 +53,11 @@ public class FootSolider : enemyBase
 
     protected void FixedUpdate()
     {
-        if (!isRecoiling)
+        if (!isRecoiling && aggressive == false)
         {
             Patrol();
         }
-        if(aggressive)
+        if(!isRecoiling && aggressive)
         {
             Chase();
         }
@@ -87,7 +89,7 @@ public class FootSolider : enemyBase
         if (playerInRange != null && playerInRange.CompareTag("Player"))
         {
             aggressive = true;
-            anim.SetBool("aggressive", true);
+            anim.SetBool("aggresive", true);
         }
 
     }
@@ -104,7 +106,20 @@ public class FootSolider : enemyBase
         currentAggroTimer -= Time.deltaTime;
 
         Collider2D playerInRange = Physics2D.OverlapBox(detectionRangeTransform.position, detectionRangeArea, 0, layer);
-        Vector2 direction = (playerInRange.transform.position - transform.position).normalized;
+
+        if(playerInRange != null)
+        {
+            direction = (playerInRange.transform.position - transform.position).normalized;
+            if (direction.x < 0)
+            {
+                transform.localScale = new Vector2(-(Mathf.Abs(transform.localScale.x)), transform.localScale.y);
+            }
+            else
+            {
+                transform.localScale = new Vector2((Mathf.Abs(transform.localScale.x)), transform.localScale.y);
+            }
+        }
+
         rb.velocity = new Vector2(direction.x * (speed * 1.1f), rb.velocity.y);
 
         if(Physics2D.Raycast(attackRangeTransform.position, direction, attackRange, layer))
@@ -115,6 +130,7 @@ public class FootSolider : enemyBase
         {
             aggressive = false;
             currentAggroTimer = aggressionTimer;
+            anim.SetBool("aggresive", false);
         }
 
     }
@@ -123,7 +139,7 @@ public class FootSolider : enemyBase
     {
         if (timeSinceAttack >= timeBetweenAttacks)
         {
-            //animator.SetTrigger("attack");
+            anim.ResetTrigger("attack");
             timeSinceAttack = 0;
 
             Collider2D[] ObjectsToHit = Physics2D.OverlapBoxAll(footSoldierAttackTransform.position, footSoliderAttackArea, 0, layer);
@@ -132,6 +148,7 @@ public class FootSolider : enemyBase
             {
                 if (obj.CompareTag("Player") && !PlayerController.Instance.pState.invincible)
                 {
+                    anim.SetTrigger("attack");
                     PlayerController.Instance.TakeDamage(damage);
                 }
             }

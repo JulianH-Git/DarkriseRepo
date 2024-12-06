@@ -43,6 +43,7 @@ public class enemyBase : MonoBehaviour
     {
         if(health <= 0)
         {
+            anim.SetTrigger("death");
             gameObject.SetActive(false);
         }
         if(isRecoiling)
@@ -55,6 +56,7 @@ public class enemyBase : MonoBehaviour
             {
                 isRecoiling = false;
                 recoilTimer = 0;
+                anim.SetBool("isRecoiling", false);
             }
         }
     }
@@ -65,6 +67,7 @@ public class enemyBase : MonoBehaviour
 
         if(!isRecoiling)
         {
+            anim.SetBool("isRecoiling", true);
             rb.AddForce(-_hitForce * recoilFactor * _hitDirection);
             isRecoiling = true;
         }
@@ -86,5 +89,6 @@ public class enemyBase : MonoBehaviour
     {
         health = maxHealth;
         gameObject.SetActive(true);
+        anim.ResetTrigger("death");
     }
 }
