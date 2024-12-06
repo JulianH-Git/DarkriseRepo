@@ -91,10 +91,15 @@ public class enemyBase : MonoBehaviour
         health = maxHealth;
         gameObject.SetActive(true);
         anim.ResetTrigger("death");
+        anim.Play("idle");
     }
     public void OnDeathComplete()
     {
         Debug.Log("enemy dead");
         gameObject.SetActive(false);
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        Color color = sr.color;
+        color.a = 255;
+        sr.color = color;
     }
 }
