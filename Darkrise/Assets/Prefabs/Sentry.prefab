@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9070425499961838016}
   - component: {fileID: 4768809251426841772}
   - component: {fileID: 6365863313047211341}
+  - component: {fileID: 5640051603027664989}
   m_Layer: 6
   m_Name: Sentry
   m_TagString: Untagged
@@ -33,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4275184383192025666
 SpriteRenderer:
@@ -180,3 +181,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.12, y: 1.16}
   m_EdgeRadius: 0
+--- !u!95 &5640051603027664989
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8663774423330188259}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6f7ca9d4f089aa6429b8ad10a3964907, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
