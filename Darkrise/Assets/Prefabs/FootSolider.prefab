@@ -141,7 +141,7 @@ MonoBehaviour:
   isRecoiling: 0
   player: {fileID: 0}
   speed: 3
-  damage: 4
+  damage: 2
   patrolDistance: 3
   footSoldierAttackTransform: {fileID: 208688081813466140}
   footSoliderAttackArea: {x: 1, y: 2}

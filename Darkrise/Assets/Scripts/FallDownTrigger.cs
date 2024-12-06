@@ -27,7 +27,9 @@ public class FallDownTrigger : MonoBehaviour
     {
         if (collision.CompareTag("Player") && !collision.isTrigger)
         {
-            player.transform.localPosition = teleportPoint.transform.localPosition;
+            Vector2 point = new Vector2(teleportPoint.transform.position.x, teleportPoint.transform.position.y);
+
+            player.transform.localPosition = point;
 
             if (isGap) 
             {
