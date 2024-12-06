@@ -65,4 +65,5 @@ public class GroundSentry : enemyBase
         transform.position = anchorPos;
         gameObject.SetActive(true);
     }
+
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,14 +42,14 @@ public class enemyBase : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        if(health <= 0)
+        if (health <= 0)
         {
             anim.SetTrigger("death");
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
         }
-        if(isRecoiling)
+        if (isRecoiling)
         {
-            if(recoilTimer < recoilLength)
+            if (recoilTimer < recoilLength)
             {
                 recoilTimer += Time.deltaTime;
             }
@@ -65,7 +66,7 @@ public class enemyBase : MonoBehaviour
     {
         health -= _damageDone;
 
-        if(!isRecoiling)
+        if (!isRecoiling)
         {
             anim.SetBool("isRecoiling", true);
             rb.AddForce(-_hitForce * recoilFactor * _hitDirection);
@@ -75,7 +76,7 @@ public class enemyBase : MonoBehaviour
 
     protected void OnCollisionStay2D(Collision2D other)
     {
-        if(other.gameObject.CompareTag("Player") && !PlayerController.Instance.pState.invincible)
+        if (other.gameObject.CompareTag("Player") && !PlayerController.Instance.pState.invincible)
         {
             Attack();
         }
@@ -90,5 +91,10 @@ public class enemyBase : MonoBehaviour
         health = maxHealth;
         gameObject.SetActive(true);
         anim.ResetTrigger("death");
+    }
+    public void OnDeathComplete()
+    {
+        Debug.Log("enemy dead");
+        gameObject.SetActive(false);
     }
 }

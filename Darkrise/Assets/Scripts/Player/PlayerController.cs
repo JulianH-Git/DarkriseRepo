@@ -164,6 +164,7 @@ public class PlayerController : MonoBehaviour
         }
         else 
         {
+            animator.SetTrigger("isDead");
             while (alpha < 1.1f)
             {
                 fade.color = new Color(fade.color.r, fade.color.g, fade.color.b, alpha);
