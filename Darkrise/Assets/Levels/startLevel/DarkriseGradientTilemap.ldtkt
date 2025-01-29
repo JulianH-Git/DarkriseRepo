@@ -1,0 +1,33 @@
+{
+  "Rects": null,
+  "Def": {
+    "__cHei": 3,
+    "__cWid": 5,
+    "cachedPixelData": {
+      "opaqueTiles": "001000000010100",
+      "averageColors": "f4450000f5560000844500000000000000000000f1220000f22300008112"
+    },
+    "customData": [
+
+    ],
+    "embedAtlas": null,
+    "enumTags": [
+
+    ],
+    "identifier": "DarkriseGradientTilemap",
+    "padding": 0,
+    "pxHei": 180,
+    "pxWid": 300,
+    "relPath": "Images/Darkrise-Gradient-Tilemap.png",
+    "savedSelections": [
+
+    ],
+    "spacing": 0,
+    "tags": [
+
+    ],
+    "tagsSourceEnumUid": null,
+    "tileGridSize": 60,
+    "uid": 13
+  }
+}
