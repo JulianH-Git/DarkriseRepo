@@ -1,0 +1,226 @@
+fileFormatVersion: 2
+guid: b6dc75a693105c8458f9d0f56d78caf9
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: f3268c876daf4890b6af6cd462063137, type: 3}
+  _reimportOnDependencyChange: 1
+  _pixelsPerUnit: 16
+  _overrideTexture: {instanceID: 0}
+  _sprites:
+  - name: DarkriseGradientTilemap_0
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 120
+      width: 60
+      height: 60
+    spriteID: a69eb3b88e3af3344b92f477159bb5b1
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: DarkriseGradientTilemap_1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 60
+      y: 120
+      width: 60
+      height: 60
+    spriteID: 4dac6d9145d0f7e47b9b35f2aa08708e
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: DarkriseGradientTilemap_2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 120
+      y: 120
+      width: 60
+      height: 60
+    spriteID: a5126a818682cbe4d9b161d5ab1bf6ed
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: DarkriseGradientTilemap_3
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 180
+      y: 120
+      width: 60
+      height: 60
+    spriteID: 69c8667a7c0548749b57f847e4dbc8ce
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: DarkriseGradientTilemap_4
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 240
+      y: 120
+      width: 60
+      height: 60
+    spriteID: 4c81369b331251d478bbe0e074224cdd
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: DarkriseGradientTilemap_5
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 60
+      width: 60
+      height: 60
+    spriteID: 3a0f364916e49d445b41c83b35512c20
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: DarkriseGradientTilemap_6
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 60
+      y: 60
+      width: 60
+      height: 60
+    spriteID: 5b5103849232d554e9b4e339fe657b17
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: DarkriseGradientTilemap_7
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 120
+      y: 60
+      width: 60
+      height: 60
+    spriteID: b630039ab1cfc3d4c993e5d51a2b1ad2
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: DarkriseGradientTilemap_8
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 180
+      y: 60
+      width: 60
+      height: 60
+    spriteID: 0f88134c28d01b340ae08244f29fcf6a
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: DarkriseGradientTilemap_9
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 240
+      y: 60
+      width: 60
+      height: 60
+    spriteID: ad1ce5107eb20f6498411e617c263f45
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: DarkriseGradientTilemap_10
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 60
+      height: 60
+    spriteID: 28bdc7c60e6bdd4409919da66f4e8a93
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: DarkriseGradientTilemap_11
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 60
+      y: 0
+      width: 60
+      height: 60
+    spriteID: 5ebcb99d94854b7449d2f4d4961addd1
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: DarkriseGradientTilemap_12
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 120
+      y: 0
+      width: 60
+      height: 60
+    spriteID: 0c1249d9af7ee7b47b29ff35bad971bb
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: DarkriseGradientTilemap_13
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 180
+      y: 0
+      width: 60
+      height: 60
+    spriteID: ec65718c746f8e9428fb1da024efa0a3
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: DarkriseGradientTilemap_14
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 240
+      y: 0
+      width: 60
+      height: 60
+    spriteID: e1b4af876ad1037408c0886999c352ed
+    spriteOutline: []
+    tessellationDetail: 0
+  _secondaryTextures: []
+  _artifacts: {instanceID: 0}
