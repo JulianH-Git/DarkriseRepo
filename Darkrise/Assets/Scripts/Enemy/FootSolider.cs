@@ -120,7 +120,7 @@ public class FootSolider : enemyBase
             }
         }
 
-        rb.velocity = new Vector2(direction.x * (speed * 1.1f), rb.velocity.y);
+        rb.velocity = new Vector2(direction.x * (speed * 1.3f), rb.velocity.y);
 
         if(Physics2D.Raycast(attackRangeTransform.position, direction, attackRange, layer))
         {
