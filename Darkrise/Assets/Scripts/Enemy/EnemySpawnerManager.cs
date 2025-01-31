@@ -35,6 +35,7 @@ void Update()
         if (respawnTimer <= 0)
         {
             spawnedEnemyRefMethods.Respawn();
+            spawnedEnemyRefMethods.SetPosition(roomTransform.position);
             enemySpawned = true;
             timerReset = false;
         }

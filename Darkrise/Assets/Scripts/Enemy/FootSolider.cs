@@ -5,10 +5,6 @@ using UnityEngine;
 
 public class FootSolider : enemyBase
 {
-    [Header("Patrol Settings")]
-    [SerializeField] private float patrolDistance;
-    [Space(5)]
-
     [Header("Foot Solider Attack Settings")]
     [SerializeField] private Transform footSoldierAttackTransform;
     [SerializeField] private Vector2 footSoliderAttackArea;
@@ -18,8 +14,6 @@ public class FootSolider : enemyBase
     [SerializeField] float timeBetweenAttacks;
     [SerializeField] float aggressionTimer;
 
-    Vector2 direction = new Vector2(0, 0);
-
     float timeSinceAttack;
     bool aggressive;
     float currentAggroTimer;
@@ -28,9 +22,6 @@ public class FootSolider : enemyBase
     [Header("Foot Solider Detection Settings")]
     [SerializeField] private Transform detectionRangeTransform;
     [SerializeField] private Vector2 detectionRangeArea;
-
-
-    private Vector2 anchorPos;
 
     // Start is called before the first frame update
     protected override void Awake()
@@ -68,7 +59,7 @@ public class FootSolider : enemyBase
         base.EnemyHit(_damageDone, _hitDirection, _hitForce);
     }
 
-    protected void Patrol()
+    protected override void Patrol()
     {
         float distanceMoved = 0;
 
@@ -92,13 +83,6 @@ public class FootSolider : enemyBase
             anim.SetBool("aggresive", true);
         }
 
-    }
-
-    public override void Respawn()
-    {
-        health = maxHealth;
-        transform.position = anchorPos;
-        gameObject.SetActive(true);
     }
 
     protected virtual void Chase()
@@ -131,6 +115,7 @@ public class FootSolider : enemyBase
             aggressive = false;
             currentAggroTimer = aggressionTimer;
             anim.SetBool("aggresive", false);
+            Retreat();
         }
 
     }
@@ -156,15 +141,17 @@ public class FootSolider : enemyBase
         }
     }
 
+
+
     void OnDrawGizmos() // comment this out when we're done placing things to keep everything visible
     {
         Gizmos.color = Color.black;
-        Gizmos.DrawWireCube(attackRangeTransform.position, new Vector2(attackRange, 0.0f));
+        Gizmos.DrawWireCube(attackRangeTransform.position, new Vector2(attackRange, 0.0f)); // attack range
 
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(footSoldierAttackTransform.position, footSoliderAttackArea);
+        Gizmos.DrawWireCube(footSoldierAttackTransform.position, footSoliderAttackArea); // attack hitbox
 
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(detectionRangeTransform.position, detectionRangeArea);
+        Gizmos.DrawWireCube(detectionRangeTransform.position, detectionRangeArea); // detection range for aggro mode
     }
 }
