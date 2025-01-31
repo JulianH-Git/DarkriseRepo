@@ -1,0 +1,33 @@
+{
+  "Rects": null,
+  "Def": {
+    "__cHei": 11,
+    "__cWid": 5,
+    "cachedPixelData": {
+      "opaqueTiles": "1010000000101000000010100000001010000000101010000010100",
+      "averageColors": "f5670678f7790779844605560556056705560667f2230223f3340334811207790779077907780778f4451556f5560445844502230334033405560445f1121223f2230112811201110334033301120111f1111223f2221000f00014560556011201120000f7781667f22403240000"
+    },
+    "customData": [
+
+    ],
+    "embedAtlas": null,
+    "enumTags": [
+
+    ],
+    "identifier": "DarkriseTilemapV2",
+    "padding": 0,
+    "pxHei": 660,
+    "pxWid": 300,
+    "relPath": "Images/DarkriseTilemap 2.0.png",
+    "savedSelections": [
+
+    ],
+    "spacing": 0,
+    "tags": [
+
+    ],
+    "tagsSourceEnumUid": null,
+    "tileGridSize": 60,
+    "uid": 15
+  }
+}
