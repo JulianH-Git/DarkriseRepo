@@ -69,7 +69,7 @@ public class SpotlightPrefab : MonoBehaviour
                         StartCoroutine(MoveGates(gates[i], spottedSizes[i]));
                     }
                 }
-                else if(state == SpotlightStates.Yellow) 
+                else if(state == SpotlightStates.Yellow && !controller.pState.invincible) 
                 {
                     controller.TakeDamage(1);
                 }

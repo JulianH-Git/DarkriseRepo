@@ -24,6 +24,12 @@ public class enemyBase : MonoBehaviour
     protected float recoilTimer;
     protected Animator anim;
 
+    [Header("Patrol Settings")]
+    [SerializeField] protected float patrolDistance;
+    protected Vector2 anchorPos;
+    protected Vector2 direction;
+    [Space(5)]
+
     protected Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
@@ -37,6 +43,7 @@ public class enemyBase : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         player = PlayerController.Instance;
         anim = GetComponent<Animator>();
+        anchorPos = rb.position;
     }
 
     // Update is called once per frame
@@ -62,7 +69,7 @@ public class enemyBase : MonoBehaviour
         }
     }
 
-    public void EnemyHit(float _damageDone, Vector2 _hitDirection, float _hitForce)
+    public virtual void EnemyHit(float _damageDone, Vector2 _hitDirection, float _hitForce)
     {
         health -= _damageDone;
 
@@ -92,7 +99,14 @@ public class enemyBase : MonoBehaviour
         gameObject.SetActive(true);
         anim.ResetTrigger("death");
         anim.Play("idle");
+        SetPosition(anchorPos);
     }
+
+    public virtual void SetPosition(Vector2 pos)
+    {
+        rb.position = pos;
+    }
+
     public void OnDeathComplete()
     {
         Debug.Log("enemy dead");
@@ -101,5 +115,44 @@ public class enemyBase : MonoBehaviour
         Color color = sr.color;
         color.a = 255;
         sr.color = color;
+    }
+
+    protected virtual void Patrol()
+    {
+        float distanceMoved = 0;
+
+        distanceMoved = transform.position.x - anchorPos.x;
+
+        if (Mathf.Abs(distanceMoved) >= patrolDistance)
+        {
+            transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
+            anchorPos = transform.position;
+        }
+        else
+        {
+            rb.velocity = new Vector2(speed * Mathf.Sign(transform.localScale.x), rb.velocity.y);
+        }
+
+    }
+
+    public void Retreat()
+    {
+        direction = (anchorPos - new Vector2(transform.position.x, transform.position.y)).normalized; // which direction is the anchor?
+
+        if (direction.x < 0)
+        {
+            transform.localScale = new Vector2(-(Mathf.Abs(transform.localScale.x)), transform.localScale.y);
+        }
+        else
+        {
+            transform.localScale = new Vector2((Mathf.Abs(transform.localScale.x)), transform.localScale.y);
+        }
+
+        rb.velocity = new Vector2(direction.x * (speed * 1.3f), rb.velocity.y);
+
+        if (new Vector2(transform.position.x, transform.position.y) == anchorPos)
+        {
+            Patrol();
+        }
     }
 }

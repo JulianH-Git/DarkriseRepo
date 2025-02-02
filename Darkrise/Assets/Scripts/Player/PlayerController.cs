@@ -188,6 +188,10 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("isDashing", true);
             return; // if the player is dashing, don't get more movements
         }
+        else if(pState.dashing)
+        {
+            return; // if the player is dashing, don't get more movements
+        }
         else
         {
             ghost.makeGhost = false;
