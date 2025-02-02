@@ -827,7 +827,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 325448403}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -98.22, y: 31.8, z: 0}
+  m_LocalPosition: {x: -98.22, y: 31.8, z: 1}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1305,7 +1305,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -6924821996160431458, guid: 0dac8f0ef6d88a1479936bd27c92d0b0, type: 3}
       propertyPath: m_ColliderPaths.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -6924821996160431458, guid: 0dac8f0ef6d88a1479936bd27c92d0b0, type: 3}
       propertyPath: m_CompositePaths.m_Paths.Array.size
@@ -1314,7 +1314,11 @@ PrefabInstance:
     - target: {fileID: -6924821996160431458, guid: 0dac8f0ef6d88a1479936bd27c92d0b0, type: 3}
       propertyPath: m_ColliderPaths.Array.data[0].m_Collider
       value: 
-      objectReference: {fileID: 553113352}
+      objectReference: {fileID: 0}
+    - target: {fileID: -6924821996160431458, guid: 0dac8f0ef6d88a1479936bd27c92d0b0, type: 3}
+      propertyPath: m_ColliderPaths.Array.data[1].m_Collider
+      value: 
+      objectReference: {fileID: 1143160938}
     - target: {fileID: -6924821996160431458, guid: 0dac8f0ef6d88a1479936bd27c92d0b0, type: 3}
       propertyPath: m_CompositePaths.m_Paths.Array.data[0].Array.size
       value: 4
@@ -3321,7 +3325,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5059379175411161170, guid: 0dac8f0ef6d88a1479936bd27c92d0b0, type: 3}
       propertyPath: m_ColliderPaths.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5059379175411161170, guid: 0dac8f0ef6d88a1479936bd27c92d0b0, type: 3}
       propertyPath: m_CompositePaths.m_Paths.Array.size
@@ -3330,7 +3334,11 @@ PrefabInstance:
     - target: {fileID: 5059379175411161170, guid: 0dac8f0ef6d88a1479936bd27c92d0b0, type: 3}
       propertyPath: m_ColliderPaths.Array.data[0].m_Collider
       value: 
-      objectReference: {fileID: 1147386263}
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059379175411161170, guid: 0dac8f0ef6d88a1479936bd27c92d0b0, type: 3}
+      propertyPath: m_ColliderPaths.Array.data[1].m_Collider
+      value: 
+      objectReference: {fileID: 1362308303}
     - target: {fileID: 5059379175411161170, guid: 0dac8f0ef6d88a1479936bd27c92d0b0, type: 3}
       propertyPath: m_CompositePaths.m_Paths.Array.data[0].Array.size
       value: 24
@@ -4896,11 +4904,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: -5765183769023986340, guid: 0dac8f0ef6d88a1479936bd27c92d0b0, type: 3}
---- !u!19719996 &553113352 stripped
-TilemapCollider2D:
-  m_CorrespondingSourceObject: {fileID: -8904364308510637174, guid: 0dac8f0ef6d88a1479936bd27c92d0b0, type: 3}
-  m_PrefabInstance: {fileID: 553113351}
-  m_PrefabAsset: {fileID: 0}
 --- !u!19719996 &553113353 stripped
 TilemapCollider2D:
   m_CorrespondingSourceObject: {fileID: 5826072815896157958, guid: 0dac8f0ef6d88a1479936bd27c92d0b0, type: 3}
@@ -5425,7 +5428,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 670644900}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 17.33, y: 3.07, z: 0}
+  m_LocalPosition: {x: 17.33, y: 3.07, z: 1}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6696,9 +6699,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f6f91e55ed921b47b80f764ff3f5a7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!19719996 &1147386263 stripped
+--- !u!19719996 &1143160938 stripped
 TilemapCollider2D:
-  m_CorrespondingSourceObject: {fileID: 1859912456499706001, guid: 0dac8f0ef6d88a1479936bd27c92d0b0, type: 3}
+  m_CorrespondingSourceObject: {fileID: -8904364308510637174, guid: 0dac8f0ef6d88a1479936bd27c92d0b0, type: 3}
   m_PrefabInstance: {fileID: 553113351}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1147399399
@@ -7035,7 +7038,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1227091949}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13.02, y: 3.07, z: 0}
+  m_LocalPosition: {x: 13.02, y: 3.07, z: 1}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7119,7 +7122,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1286737033}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -108.729996, y: 30.349998, z: 0}
+  m_LocalPosition: {x: -108.729996, y: 30.349998, z: 1}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7251,6 +7254,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!19719996 &1362308303 stripped
+TilemapCollider2D:
+  m_CorrespondingSourceObject: {fileID: 1859912456499706001, guid: 0dac8f0ef6d88a1479936bd27c92d0b0, type: 3}
+  m_PrefabInstance: {fileID: 553113351}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1368154976
 GameObject:
   m_ObjectHideFlags: 0
@@ -7328,7 +7336,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1368154976}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -62.76, y: 30.72, z: 0}
+  m_LocalPosition: {x: -62.76, y: 30.72, z: 1}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8753,7 +8761,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1731172708}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.85, y: 0.63, z: 0}
+  m_LocalPosition: {x: 2.85, y: 0.63, z: 1}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
