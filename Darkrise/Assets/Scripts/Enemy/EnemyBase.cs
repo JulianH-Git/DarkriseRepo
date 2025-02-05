@@ -31,6 +31,10 @@ public class enemyBase : MonoBehaviour
     [Space(5)]
 
     protected Rigidbody2D rb;
+
+    protected float retreatTimer = 5.0f;
+    protected bool retreating;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,16 +60,17 @@ public class enemyBase : MonoBehaviour
         }
         if (isRecoiling)
         {
-            if (recoilTimer < recoilLength)
-            {
-                recoilTimer += Time.deltaTime;
-            }
-            else
+            recoilTimer += Time.deltaTime;
+            if (recoilTimer >= recoilLength)
             {
                 isRecoiling = false;
                 recoilTimer = 0;
                 anim.SetBool("isRecoiling", false);
             }
+        }
+        if (retreating)
+        {
+            retreatTimer -= Time.deltaTime;
         }
     }
 
@@ -119,40 +124,44 @@ public class enemyBase : MonoBehaviour
 
     protected virtual void Patrol()
     {
-        float distanceMoved = 0;
-
-        distanceMoved = transform.position.x - anchorPos.x;
+        float distanceMoved = transform.position.x - anchorPos.x;
 
         if (Mathf.Abs(distanceMoved) >= patrolDistance)
         {
             transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
-            anchorPos = transform.position;
+            rb.velocity = new Vector2(speed * Mathf.Sign(transform.localScale.x), rb.velocity.y); // Add movement after flipping
         }
         else
         {
             rb.velocity = new Vector2(speed * Mathf.Sign(transform.localScale.x), rb.velocity.y);
         }
 
+        rb.velocity = new Vector2(speed * Mathf.Sign(transform.localScale.x), rb.velocity.y);
+
     }
 
     public void Retreat()
     {
-        direction = (anchorPos - new Vector2(transform.position.x, transform.position.y)).normalized; // which direction is the anchor?
+        direction = (anchorPos - (Vector2)transform.position).normalized;
 
-        if (direction.x < 0)
+        if (direction.x != 0)
         {
-            transform.localScale = new Vector2(-(Mathf.Abs(transform.localScale.x)), transform.localScale.y);
-        }
-        else
-        {
-            transform.localScale = new Vector2((Mathf.Abs(transform.localScale.x)), transform.localScale.y);
+            transform.localScale = new Vector2(Mathf.Sign(direction.x) * Mathf.Abs(transform.localScale.x), transform.localScale.y);
         }
 
         rb.velocity = new Vector2(direction.x * (speed * 1.3f), rb.velocity.y);
 
-        if (new Vector2(transform.position.x, transform.position.y) == anchorPos)
+        float test = Vector2.Distance(transform.position, anchorPos);
+
+        if (test <= 0.34f | retreatTimer <= 0)
         {
+            retreating = false;
+            rb.velocity = Vector2.zero;
+            retreatTimer = 5.0f;
+            Debug.Log("Retreat finished");
             Patrol();
         }
     }
+
+
 }

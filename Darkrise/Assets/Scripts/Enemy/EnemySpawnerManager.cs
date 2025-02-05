@@ -77,4 +77,17 @@ void Update()
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(roomTransform.position, roomArea);
     }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        Collider2D[] CheckForEnemy = Physics2D.OverlapBoxAll(roomTransform.position, roomArea, 0, layer);
+
+        foreach (var obj in CheckForEnemy)
+        {
+            if (obj.CompareTag("Enemy"))
+            {
+                spawnedEnemyRefMethods.Retreat();
+            }
+        }
+    }
 }

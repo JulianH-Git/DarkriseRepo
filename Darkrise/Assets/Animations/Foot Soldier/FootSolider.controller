@@ -455,9 +455,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: isRecoiling
     m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: aggresive
-    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -5471223138413104745}
   m_Solo: 0
