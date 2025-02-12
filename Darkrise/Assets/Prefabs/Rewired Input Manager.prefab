@@ -303,6 +303,30 @@ MonoBehaviour:
       _behaviorId: 0
       _userAssignable: 1
       _categoryId: 0
+    - _id: 6
+      _name: Switch Attack Type L
+      _type: 1
+      _descriptiveName: Switches the attack type back one.
+      _positiveDescriptiveName: 
+      _negativeDescriptiveName: 
+      _key: 
+      _positiveKey: 
+      _negativeKey: 
+      _behaviorId: 0
+      _userAssignable: 1
+      _categoryId: 0
+    - _id: 7
+      _name: Switch Attack Type R
+      _type: 1
+      _descriptiveName: Switches the attack type forward one.
+      _positiveDescriptiveName: 
+      _negativeDescriptiveName: 
+      _key: 
+      _positiveKey: 
+      _negativeKey: 
+      _behaviorId: 0
+      _userAssignable: 1
+      _categoryId: 0
     actionCategories:
     - _name: Default
       _descriptiveName: Default
@@ -313,7 +337,7 @@ MonoBehaviour:
     actionCategoryMap:
       list:
       - categoryId: 0
-        actionIds: 000000000400000001000000030000000200000005000000
+        actionIds: 0000000004000000010000000300000002000000050000000600000007000000
     inputBehaviors:
     - _id: 0
       _name: Default
@@ -519,13 +543,35 @@ MonoBehaviour:
         _modifierKey1: 0
         _modifierKey2: 0
         _modifierKey3: 0
+      - _actionCategoryId: 0
+        _actionId: 6
+        _elementType: 1
+        _elementIdentifierId: -1
+        _axisRange: 0
+        _invert: 0
+        _axisContribution: 0
+        _keyboardKeyCode: 111
+        _modifierKey1: 0
+        _modifierKey2: 0
+        _modifierKey3: 0
+      - _actionCategoryId: 0
+        _actionId: 7
+        _elementType: 1
+        _elementIdentifierId: -1
+        _axisRange: 0
+        _invert: 0
+        _axisContribution: 0
+        _keyboardKeyCode: 112
+        _modifierKey1: 0
+        _modifierKey2: 0
+        _modifierKey3: 0
     mouseMaps: []
     customControllerMaps: []
     customControllers: []
     controllerMapLayoutManagerRuleSets: []
     controllerMapEnablerRuleSets: []
     playerIdCounter: 2
-    actionIdCounter: 6
+    actionIdCounter: 8
     actionCategoryIdCounter: 1
     inputBehaviorIdCounter: 2
     mapCategoryIdCounter: 1

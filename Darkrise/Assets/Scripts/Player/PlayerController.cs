@@ -78,6 +78,10 @@ public class PlayerController : MonoBehaviour
     List<AudioClip> sfx = new List<AudioClip>();
 
     [Space(5)]
+    [Header("Dark/Light Attack Settings")]
+    
+
+    [Space(5)]
     [Header("Other Objects")]
     [SerializeField] SpriteRenderer fade;
     float alpha = 1.0f;
@@ -114,10 +118,20 @@ public class PlayerController : MonoBehaviour
     private bool dashPressed;
     private bool jumpPressed;
     private bool doubleJumpPressed;
-
     private bool restartPressed;
+    private bool switchAttackTypeLeftPressed;
+    private bool switchAttackTypeRightPressed;
 
     private bool stopFading = false;
+
+    public enum AttackType
+    {
+        Neutral,
+        Light,
+        Dark
+    }
+
+    public AttackType currentAttackType = AttackType.Neutral;
 
     private void Awake()
     {
@@ -145,6 +159,8 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
 
         gravity = rb.gravityScale;
+
+        
     }
 
     private void Update()
@@ -196,6 +212,7 @@ public class PlayerController : MonoBehaviour
         Flip();
         Move();
         Jump();
+        SwitchAttackTypes();
         Attack();
         Recoil();
         StartDash();
@@ -236,7 +253,17 @@ public class PlayerController : MonoBehaviour
             jumpPressed = player.GetButtonDown("Jump");
         }
 
-        if(jumpPressed){
+        if(!switchAttackTypeLeftPressed)
+        {
+            switchAttackTypeLeftPressed = player.GetButtonDown("Switch Attack Type L");
+        }
+
+        if (!switchAttackTypeRightPressed)
+        {
+            switchAttackTypeRightPressed = player.GetButtonDown("Switch Attack Type R");
+        }
+
+        if (jumpPressed){
             if(Grounded() || !doubleJumpPressed){
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 doubleJumpPressed = !Grounded();
@@ -308,11 +335,8 @@ public class PlayerController : MonoBehaviour
 
         if (attack && timeSinceAttack >= timeBetweenAttacks)
         {
-            animator.SetTrigger("attack");
             timeSinceAttack = 0;
-            //trigger attack animation
-            //Debug.Log("Can attack again");
-
+            animator.SetTrigger("attack");
             audio.PlayOneShot(sfx[1]);
 
             if (Grounded())
@@ -518,6 +542,39 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
+    void SwitchAttackTypes()
+    {
+        //determine if swapping "left" or "right" (basically are we going forward or back on the wheel
+        //for testing, im just gonna set this to cycle through linearly
+
+        if(switchAttackTypeLeftPressed)
+        {
+            switchAttackTypeLeftPressed = false;
+
+            if (currentAttackType == AttackType.Neutral)
+            {
+                currentAttackType = AttackType.Dark;
+            }
+            else
+            {
+                currentAttackType--;
+            }
+        }
+
+        if(switchAttackTypeRightPressed)
+        {
+            switchAttackTypeRightPressed = false;
+
+            if (currentAttackType == AttackType.Dark)
+            {
+                currentAttackType = AttackType.Neutral;
+            }
+            else
+            {
+                currentAttackType++;
+            }
+        }
+    }
 
     IEnumerator StopTakingDamage()
     {
@@ -531,4 +588,6 @@ public class PlayerController : MonoBehaviour
             maxVelocity = 0.0f;
         }
     }
+
+
 }
