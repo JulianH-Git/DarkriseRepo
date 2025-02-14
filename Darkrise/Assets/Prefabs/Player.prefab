@@ -254,7 +254,10 @@ MonoBehaviour:
   dashSpeed: 12
   dashTime: 0.2
   dashCooldown: 0.35
-  timeBetweenAttacks: 0.2
+  canDash: 0
+  timeBetweenNeutralAttacks: 2
+  timeBetweenLightAttacks: 1
+  timeBetweenDarkAttacks: 3
   damage: 2
   sideAttackTransform: {fileID: 4376388305088086530}
   airAttackTransform: {fileID: 486753328594881398}
@@ -270,9 +273,13 @@ MonoBehaviour:
   recoilSpeedY: 20
   health: 0
   maxHealth: 8
+  audio: {fileID: 0}
+  sfx: []
+  fade: {fileID: 0}
   pState: {fileID: 0}
   playerId: 0
   ghost: {fileID: 0}
+  currentAttackType: 0
 --- !u!114 &7749656390994445964
 MonoBehaviour:
   m_ObjectHideFlags: 0

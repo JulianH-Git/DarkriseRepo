@@ -45,7 +45,9 @@ public class PlayerController : MonoBehaviour
     [Space(5)]
 
     [Header("Attack Settings")]
-    [SerializeField] private float timeBetweenAttacks;
+    [SerializeField] private float timeBetweenNeutralAttacks;
+    [SerializeField] private float timeBetweenLightAttacks;
+    [SerializeField] private float timeBetweenDarkAttacks;
     [SerializeField] private float damage;
     [SerializeField] private Transform sideAttackTransform;
     [SerializeField] private Transform airAttackTransform;
@@ -333,25 +335,49 @@ public class PlayerController : MonoBehaviour
     {
         timeSinceAttack += Time.deltaTime;
 
-        if (attack && timeSinceAttack >= timeBetweenAttacks)
+        switch(currentAttackType)
         {
-            timeSinceAttack = 0;
-            animator.SetTrigger("attack");
-            audio.PlayOneShot(sfx[1]);
+            case (AttackType.Neutral):
+                if (attack && timeSinceAttack >= timeBetweenNeutralAttacks)
+                {
+                    PrepareToHit();
+                    attack = false;
+                }
+                break;
 
-            if (Grounded())
-            {
-                Hit(sideAttackTransform, sideAttackArea, ref pState.recoilingX, recoilSpeedX);
-                Instantiate(slashEffect, sideAttackTransform);
+            case (AttackType.Dark):
+                if (attack && timeSinceAttack >= timeBetweenDarkAttacks)
+                {
+                    PrepareToHit();
+                    attack = false;
+                }
+                break;
+            case (AttackType.Light):
+                if (attack && timeSinceAttack >= timeBetweenLightAttacks)
+                {
+                    PrepareToHit();
+                    attack = false;
+                }
+                break;
+        }
+    }
 
-            }
-            else if (!Grounded())
-            {
-                Hit(airAttackTransform, airAttackArea, ref pState.recoilingY, recoilSpeedY);
-                SlashEffectAtAngle(slashEffect, 0, airAttackTransform);
-            }
+    void PrepareToHit()
+    {
+        timeSinceAttack = 0;
+        animator.SetTrigger("attack");
+        audio.PlayOneShot(sfx[1]);
 
-            attack = false;
+        if (Grounded())
+        {
+            Hit(sideAttackTransform, sideAttackArea, ref pState.recoilingX, recoilSpeedX);
+            Instantiate(slashEffect, sideAttackTransform);
+
+        }
+        else if (!Grounded())
+        {
+            Hit(airAttackTransform, airAttackArea, ref pState.recoilingY, recoilSpeedY);
+            SlashEffectAtAngle(slashEffect, 0, airAttackTransform);
         }
     }
     void Hit(Transform _attackTransform, Vector2 _attackArea, ref bool _recoilDir, float _recoilStrength)
@@ -370,7 +396,23 @@ public class PlayerController : MonoBehaviour
             if (ObjectsToHit[i].GetComponent<enemyBase>() != null)
             {
                 audio.PlayOneShot(sfx[3]);
-                ObjectsToHit[i].GetComponent<enemyBase>().EnemyHit(damage, (transform.position - ObjectsToHit[i].transform.position).normalized, _recoilStrength);
+                switch(currentAttackType)
+                {
+                    case (AttackType.Neutral):
+                        ObjectsToHit[i].GetComponent<enemyBase>().EnemyHit(damage, (transform.position - ObjectsToHit[i].transform.position).normalized, _recoilStrength);
+                        Debug.Log("Normal attack");
+                        break;
+                    case (AttackType.Light):
+                        ObjectsToHit[i].GetComponent<enemyBase>().EnemyHit(damage + (-damage /2.0f), (transform.position - ObjectsToHit[i].transform.position).normalized, _recoilStrength + (_recoilStrength));
+                        Debug.Log("Light attack");
+                        break;
+
+                    case (AttackType.Dark):
+                        ObjectsToHit[i].GetComponent<enemyBase>().EnemyHit(damage * 2.0f, (transform.position - ObjectsToHit[i].transform.position).normalized, _recoilStrength * 2);
+                        Debug.Log("Dark attack");
+                        break;
+                }
+                
             }
         }
 
@@ -544,8 +586,7 @@ public class PlayerController : MonoBehaviour
     }
     void SwitchAttackTypes()
     {
-        //determine if swapping "left" or "right" (basically are we going forward or back on the wheel
-        //for testing, im just gonna set this to cycle through linearly
+        //determine if swapping "left" or "right" (basically are we going forward or back on the wheel)
 
         if(switchAttackTypeLeftPressed)
         {

@@ -8108,6 +8108,18 @@ PrefabInstance:
       propertyPath: sfx.Array.data[3]
       value: 
       objectReference: {fileID: 8300000, guid: da4187f5a79018d40868a169d07f9797, type: 3}
+    - target: {fileID: 931077289769193537, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
+      propertyPath: timeBetweenDarkAttacks
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 931077289769193537, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
+      propertyPath: timeBetweenLightAttacks
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 931077289769193537, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
+      propertyPath: timeBetweenNeutralAttacks
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 2308073590197729602, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
       propertyPath: m_RootOrder
       value: 3
