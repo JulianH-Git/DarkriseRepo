@@ -81,7 +81,10 @@ public class PlayerController : MonoBehaviour
 
     [Space(5)]
     [Header("Dark/Light Attack Settings")]
-    
+    [SerializeField] private int maxLightEnergy;
+    public int currentLightEnergy;
+    [SerializeField] private int maxDarkEnergy;
+    public int currentDarkEnergy;
 
     [Space(5)]
     [Header("Other Objects")]
