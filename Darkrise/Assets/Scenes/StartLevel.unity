@@ -8089,8 +8089,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 931077289769193537, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
+      propertyPath: maxDarkEnergy
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 931077289769193537, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
+      propertyPath: maxLightEnergy
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 931077289769193537, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
       propertyPath: sfx.Array.size
-      value: 4
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 931077289769193537, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
+      propertyPath: currentDarkEnergy
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 931077289769193537, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
       propertyPath: sfx.Array.data[0]
@@ -8099,15 +8111,27 @@ PrefabInstance:
     - target: {fileID: 931077289769193537, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
       propertyPath: sfx.Array.data[1]
       value: 
-      objectReference: {fileID: 8300000, guid: 0bbe8e2b1c349b44ca5c14b30f938a58, type: 3}
+      objectReference: {fileID: 8300000, guid: 24ac10a5a50494246ad3f28abc0d4798, type: 3}
     - target: {fileID: 931077289769193537, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
       propertyPath: sfx.Array.data[2]
       value: 
-      objectReference: {fileID: 8300000, guid: bcbee12b2ddb1ac43a9152fbcea44a06, type: 3}
+      objectReference: {fileID: 8300000, guid: d0667b826e10b834599b7c6da7d519f5, type: 3}
     - target: {fileID: 931077289769193537, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
       propertyPath: sfx.Array.data[3]
       value: 
       objectReference: {fileID: 8300000, guid: da4187f5a79018d40868a169d07f9797, type: 3}
+    - target: {fileID: 931077289769193537, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
+      propertyPath: sfx.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 73ee188bf03eb794ca85307efd4e3882, type: 3}
+    - target: {fileID: 931077289769193537, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
+      propertyPath: sfx.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: e46ac1a5e8b01fc42b23cfe4a80728e9, type: 3}
+    - target: {fileID: 931077289769193537, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
+      propertyPath: currentLightEnergy
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 931077289769193537, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
       propertyPath: timeBetweenDarkAttacks
       value: 0.5
@@ -12105,9 +12129,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 03a590bdeae534c4982614d1f02ded17, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 6971c8e928ee41c4ea5952d3c384ebe4, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.24
+  m_Volume: 0.317
   m_Pitch: 1
   Loop: 1
   Mute: 0
