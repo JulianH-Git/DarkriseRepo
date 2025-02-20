@@ -369,7 +369,19 @@ public class PlayerController : MonoBehaviour
     {
         timeSinceAttack = 0;
         animator.SetTrigger("attack");
+        if (currentAttackType == AttackType.Neutral)
+        {
         audio.PlayOneShot(sfx[1]);
+        }
+        if (currentAttackType == AttackType.Dark)
+        {
+        audio.PlayOneShot(sfx[4]);
+        }
+        if (currentAttackType == AttackType.Light)
+        {
+        audio.PlayOneShot(sfx[5]);
+        }
+
 
         if (Grounded())
         {
