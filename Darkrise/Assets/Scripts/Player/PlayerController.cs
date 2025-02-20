@@ -192,7 +192,8 @@ public class PlayerController : MonoBehaviour
                 alpha += 0.05f;
             }
             StartCoroutine(WaitTillEnd());
-        } 
+        }
+        
     }
 
     private IEnumerator WaitTillEnd() 
@@ -228,10 +229,12 @@ public class PlayerController : MonoBehaviour
         if (rb.velocity.x > 0.1 || rb.velocity.x < -0.1)
         {
             animator.SetBool("isWalking", true);
+            
         }
         else
         {
             animator.SetBool("isWalking", false);
+            
         }
 
         rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxVelocity);
@@ -303,6 +306,7 @@ public class PlayerController : MonoBehaviour
     void Move()
     {
         rb.velocity = new Vector2(walkSpeed * xAxis, rb.velocity.y);
+        
     }
 
     IEnumerator Dash()
