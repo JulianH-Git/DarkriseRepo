@@ -141,9 +141,9 @@
 			"bgRelPath": "Images/BuildingBackground.png",
 			"bgPos": "Cover",
 			"bgPivotX": 0.5,
-			"bgPivotY": 0.75,
+			"bgPivotY": 1,
 			"__smartColor": "#ADADB5",
-			"__bgPos": { "topLeftPx": [0,0], "scale": [0.84375,0.84375], "cropRect": [0,1470,5760,1280] },
+			"__bgPos": { "topLeftPx": [0,0], "scale": [0.84375,0.84375], "cropRect": [0,1960,5760,1280] },
 			"externalRelPath": null,
 			"fieldInstances": [],
 			"layerInstances": [
