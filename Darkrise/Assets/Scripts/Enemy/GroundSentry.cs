@@ -6,6 +6,7 @@ using UnityEngine;
 public class GroundSentry : enemyBase
 {
     // Start is called before the first frame update
+
     protected override void Awake()
     {
         base.Awake();
@@ -28,6 +29,10 @@ public class GroundSentry : enemyBase
         if (!isRecoiling)
         {
             Patrol();
+        }
+        if (Mathf.Abs((transform.position.x - anchorPos.x) + 0.34f) >= patrolDistance)
+        {
+            Retreat();
         }
     }
 

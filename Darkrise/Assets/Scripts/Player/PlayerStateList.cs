@@ -10,4 +10,5 @@ public class PlayerStateList : MonoBehaviour
     public bool recoilingY = false;
     public bool lookingRight;
     public bool invincible;
+    public bool casting;
 }

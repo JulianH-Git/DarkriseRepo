@@ -126,14 +126,9 @@ public class enemyBase : MonoBehaviour
     {
         float distanceMoved = transform.position.x - anchorPos.x;
 
-        if (Mathf.Abs(distanceMoved) >= patrolDistance)
-        {
+        if (Mathf.Abs(distanceMoved) >= patrolDistance + 0.34f)
+            {
             transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
-            rb.velocity = new Vector2(speed * Mathf.Sign(transform.localScale.x), rb.velocity.y); // Add movement after flipping
-        }
-        else
-        {
-            rb.velocity = new Vector2(speed * Mathf.Sign(transform.localScale.x), rb.velocity.y);
         }
 
         rb.velocity = new Vector2(speed * Mathf.Sign(transform.localScale.x), rb.velocity.y);
@@ -153,7 +148,7 @@ public class enemyBase : MonoBehaviour
 
         float test = Vector2.Distance(transform.position, anchorPos);
 
-        if (test <= 0.34f | retreatTimer <= 0)
+        if (test <= 0.34f || retreatTimer <= 0)
         {
             retreating = false;
             rb.velocity = Vector2.zero;

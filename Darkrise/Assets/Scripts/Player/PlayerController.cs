@@ -2,6 +2,7 @@ using Rewired;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -56,6 +57,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask attackableLayer;
     [SerializeField] private GameObject slashEffect;
     private bool attack = false;
+    private bool castSpell;
     private float timeSinceAttack;
 
     [Header("Recoil Settings")]
@@ -85,6 +87,12 @@ public class PlayerController : MonoBehaviour
     public int currentLightEnergy;
     [SerializeField] private int maxDarkEnergy;
     public int currentDarkEnergy;
+    [SerializeField] int fireballCost;
+    [SerializeField] float timeToCast;
+    [SerializeField] private Transform fireballTransform;
+    [SerializeField] GameObject lightFireball;
+    [SerializeField] GameObject darkFireball;
+    float timeSinceCast;
 
     [Space(5)]
     [Header("Other Objects")]
@@ -165,25 +173,25 @@ public class PlayerController : MonoBehaviour
 
         gravity = rb.gravityScale;
 
-        
+
     }
 
     private void Update()
     {
-        if(alpha >= 0.0f && !stopFading) 
+        if (alpha >= 0.0f && !stopFading)
         {
             fade.color = new Color(fade.color.r, fade.color.g, fade.color.b, alpha);
             alpha -= 0.05f;
 
-            if(alpha < 0.0f) { stopFading = true; }
+            if (alpha < 0.0f) { stopFading = true; }
         }
 
-        if(health > 0) 
+        if (health > 0)
         {
             GetInput();
             UpdateJumpVariables();
         }
-        else 
+        else
         {
             animator.SetTrigger("isDead");
             while (alpha < 1.1f)
@@ -193,10 +201,10 @@ public class PlayerController : MonoBehaviour
             }
             StartCoroutine(WaitTillEnd());
         }
-        
+
     }
 
-    private IEnumerator WaitTillEnd() 
+    private IEnumerator WaitTillEnd()
     {
         yield return new WaitForSeconds(2);
         SceneManager.LoadScene("GameOverScreen");
@@ -220,6 +228,7 @@ public class PlayerController : MonoBehaviour
         Jump();
         SwitchAttackTypes();
         Attack();
+        CastSpell();
         Recoil();
         StartDash();
         Restart();
@@ -229,12 +238,12 @@ public class PlayerController : MonoBehaviour
         if (rb.velocity.x > 0.1 || rb.velocity.x < -0.1)
         {
             animator.SetBool("isWalking", true);
-            
+
         }
         else
         {
             animator.SetBool("isWalking", false);
-            
+
         }
 
         rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxVelocity);
@@ -251,6 +260,11 @@ public class PlayerController : MonoBehaviour
             attack = player.GetButtonDown("Attack");
         }
 
+        if(!castSpell)
+        {
+            castSpell = player.GetButtonDown("Cast Spell");
+        }
+
         if (!dashPressed)
         {
             dashPressed = player.GetButtonDown("Dash");
@@ -261,7 +275,7 @@ public class PlayerController : MonoBehaviour
             jumpPressed = player.GetButtonDown("Jump");
         }
 
-        if(!switchAttackTypeLeftPressed)
+        if (!switchAttackTypeLeftPressed)
         {
             switchAttackTypeLeftPressed = player.GetButtonDown("Switch Attack Type L");
         }
@@ -271,22 +285,25 @@ public class PlayerController : MonoBehaviour
             switchAttackTypeRightPressed = player.GetButtonDown("Switch Attack Type R");
         }
 
-        if (jumpPressed){
-            if(Grounded() || !doubleJumpPressed){
+        if (jumpPressed)
+        {
+            if (Grounded() || !doubleJumpPressed)
+            {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 doubleJumpPressed = !Grounded();
             }
         }
-        if(Grounded()){
+        if (Grounded())
+        {
             doubleJumpPressed = false;
         }
 
-        if (!restartPressed) 
+        if (!restartPressed)
         {
             restartPressed = player.GetButtonDown("Restart");
         }
 
-        
+
     }
 
     void Flip() // this will be useful for animation stuff later
@@ -306,7 +323,6 @@ public class PlayerController : MonoBehaviour
     void Move()
     {
         rb.velocity = new Vector2(walkSpeed * xAxis, rb.velocity.y);
-        
     }
 
     IEnumerator Dash()
@@ -342,7 +358,7 @@ public class PlayerController : MonoBehaviour
     {
         timeSinceAttack += Time.deltaTime;
 
-        switch(currentAttackType)
+        switch (currentAttackType)
         {
             case (AttackType.Neutral):
                 if (attack && timeSinceAttack >= timeBetweenNeutralAttacks)
@@ -353,17 +369,39 @@ public class PlayerController : MonoBehaviour
                 break;
 
             case (AttackType.Dark):
-                if (attack && timeSinceAttack >= timeBetweenDarkAttacks)
+                if (currentDarkEnergy > 0)
                 {
-                    PrepareToHit();
-                    attack = false;
+                    if (attack && timeSinceAttack >= timeBetweenDarkAttacks)
+                    {
+                        PrepareToHit();
+                        attack = false;
+                    }
+                }
+                else
+                {
+                    if (attack && timeSinceAttack >= timeBetweenNeutralAttacks)
+                    {
+                        PrepareToHit();
+                        attack = false;
+                    }
                 }
                 break;
             case (AttackType.Light):
-                if (attack && timeSinceAttack >= timeBetweenLightAttacks)
+                if (currentLightEnergy > 0)
                 {
-                    PrepareToHit();
-                    attack = false;
+                    if (attack && timeSinceAttack >= timeBetweenLightAttacks)
+                    {
+                        PrepareToHit();
+                        attack = false;
+                    }
+                }
+                else
+                {
+                    if (attack && timeSinceAttack >= timeBetweenNeutralAttacks)
+                    {
+                        PrepareToHit();
+                        attack = false;
+                    }
                 }
                 break;
         }
@@ -375,15 +413,15 @@ public class PlayerController : MonoBehaviour
         animator.SetTrigger("attack");
         if (currentAttackType == AttackType.Neutral)
         {
-        audio.PlayOneShot(sfx[1]);
+            audio.PlayOneShot(sfx[1]);
         }
         if (currentAttackType == AttackType.Dark)
         {
-        audio.PlayOneShot(sfx[4]);
+            audio.PlayOneShot(sfx[4]);
         }
         if (currentAttackType == AttackType.Light)
         {
-        audio.PlayOneShot(sfx[5]);
+            audio.PlayOneShot(sfx[5]);
         }
 
 
@@ -415,26 +453,100 @@ public class PlayerController : MonoBehaviour
             if (ObjectsToHit[i].GetComponent<enemyBase>() != null)
             {
                 audio.PlayOneShot(sfx[3]);
-                switch(currentAttackType)
+                switch (currentAttackType)
                 {
                     case (AttackType.Neutral):
                         ObjectsToHit[i].GetComponent<enemyBase>().EnemyHit(damage, (transform.position - ObjectsToHit[i].transform.position).normalized, _recoilStrength);
-                        Debug.Log("Normal attack");
                         break;
                     case (AttackType.Light):
-                        ObjectsToHit[i].GetComponent<enemyBase>().EnemyHit(damage + (-damage /2.0f), (transform.position - ObjectsToHit[i].transform.position).normalized, _recoilStrength + (_recoilStrength));
-                        Debug.Log("Light attack");
+                        if (currentLightEnergy > 0)
+                        {
+                            ObjectsToHit[i].GetComponent<enemyBase>().EnemyHit(damage + (-damage / 2.0f), (transform.position - ObjectsToHit[i].transform.position).normalized, _recoilStrength + (_recoilStrength));
+                            currentLightEnergy--;
+                        }
+                        else
+                        {
+                            ObjectsToHit[i].GetComponent<enemyBase>().EnemyHit(damage, (transform.position - ObjectsToHit[i].transform.position).normalized, _recoilStrength);
+                        }
                         break;
 
                     case (AttackType.Dark):
-                        ObjectsToHit[i].GetComponent<enemyBase>().EnemyHit(damage * 2.0f, (transform.position - ObjectsToHit[i].transform.position).normalized, _recoilStrength * 2);
-                        Debug.Log("Dark attack");
+                        if (currentDarkEnergy > 0)
+                        {
+                            ObjectsToHit[i].GetComponent<enemyBase>().EnemyHit(damage * 2.0f, (transform.position - ObjectsToHit[i].transform.position).normalized, _recoilStrength * 2);
+                        }
+                        else
+                        {
+                            ObjectsToHit[i].GetComponent<enemyBase>().EnemyHit(damage, (transform.position - ObjectsToHit[i].transform.position).normalized, _recoilStrength);
+                        }
                         break;
                 }
-                
+
             }
         }
 
+    }
+
+    void CastSpell()
+    {
+        if(castSpell && timeSinceCast >= timeToCast)
+        {
+            switch(currentAttackType)
+            {
+                case AttackType.Dark:
+                    if(currentDarkEnergy >= fireballCost)
+                    {
+                        currentDarkEnergy -= fireballCost;
+                        pState.casting = true;
+                        timeSinceCast = 0;
+                        CastFireball();
+                    }
+                break;
+
+                case AttackType.Light:
+                    if (currentLightEnergy >= fireballCost)
+                    {
+                        currentLightEnergy -= fireballCost;
+                        pState.casting = true;
+                        timeSinceCast = 0;
+                        CastFireball();
+                    }
+                    break;
+            }
+        }
+        else
+        {
+            timeSinceCast += Time.deltaTime;
+            castSpell = false;
+        }
+    }
+
+    void CastFireball() // this should become a coroutine later when we implement a casting animation.
+    {
+        //anim.SetBool("casting", true); - for if/when we get a fireball casting animation
+
+        if (yAxis == 0 || yAxis < 0 && Grounded())
+        {
+            GameObject fireball = null;
+
+            if (currentAttackType == AttackType.Light)
+            {
+                fireball = Instantiate(lightFireball, fireballTransform.position, Quaternion.identity);
+            }
+                
+            else if (currentAttackType == AttackType.Dark)
+            {
+                fireball = Instantiate(darkFireball, fireballTransform.position, Quaternion.identity);
+            }
+
+
+            fireball.GetComponent<Fireball>().SetDirection(pState.lookingRight);
+
+
+            pState.casting = false;
+            castSpell = false;
+
+        }
     }
 
     void Recoil()
@@ -607,7 +719,7 @@ public class PlayerController : MonoBehaviour
     {
         //determine if swapping "left" or "right" (basically are we going forward or back on the wheel)
 
-        if(switchAttackTypeLeftPressed)
+        if (switchAttackTypeLeftPressed)
         {
             switchAttackTypeLeftPressed = false;
 
@@ -621,7 +733,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if(switchAttackTypeRightPressed)
+        if (switchAttackTypeRightPressed)
         {
             switchAttackTypeRightPressed = false;
 
@@ -643,11 +755,9 @@ public class PlayerController : MonoBehaviour
         pState.recoilingX = true;
         yield return new WaitForSeconds(1f);
         pState.invincible = false;
-        if(health <= 0) 
+        if (health <= 0)
         {
             maxVelocity = 0.0f;
         }
     }
-
-
 }
