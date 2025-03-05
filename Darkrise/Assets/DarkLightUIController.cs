@@ -13,6 +13,11 @@ public class DarkLightUIController : MonoBehaviour
     [SerializeField] GameObject darkModePrefab;
     [SerializeField] GameObject lightModePrefab;
     private GameObject[] darkLightPrefabs;
+    PlayerController.AttackType currentAttackType;
+
+    DarkLightUIUpdater neutralDLUIScript;
+    DarkLightUIUpdater darkDLUIScript;
+    DarkLightUIUpdater lightDLUIScript;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +27,34 @@ public class DarkLightUIController : MonoBehaviour
         InstantiateDarkLightPrefabs(neutralModePrefab, 0); // 0 = neutral
         InstantiateDarkLightPrefabs(lightModePrefab, 1); // 1 = light
         InstantiateDarkLightPrefabs(darkModePrefab, 2); // 2 = dark
+
+        neutralDLUIScript = darkLightPrefabs[0].GetComponent<DarkLightUIUpdater>();
+        lightDLUIScript = darkLightPrefabs[1].GetComponent<DarkLightUIUpdater>();
+        darkDLUIScript = darkLightPrefabs[2].GetComponent<DarkLightUIUpdater>();
+
+        currentAttackType = player.currentAttackType;
+
+        switch (player.currentAttackType)
+        {
+
+            case (PlayerController.AttackType.Neutral):
+                neutralDLUIScript.TurnOn();
+                darkDLUIScript.TurnOff();
+                lightDLUIScript.TurnOff();
+                break;
+
+            case (PlayerController.AttackType.Light):
+                neutralDLUIScript.TurnOff();
+                darkDLUIScript.TurnOff();
+                lightDLUIScript.TurnOn();
+                break;
+
+            case (PlayerController.AttackType.Dark):
+                neutralDLUIScript.TurnOff();
+                darkDLUIScript.TurnOn();
+                lightDLUIScript.TurnOff();
+                break;
+        }
     }
 
     // Update is called once per frame
@@ -29,27 +62,32 @@ public class DarkLightUIController : MonoBehaviour
     {
         if (darkLightPrefabs != null)
         {
-            switch (player.currentAttackType)
+            if(currentAttackType != player.currentAttackType)
             {
-                case (PlayerController.AttackType.Neutral):
-                    darkLightPrefabs[0].SetActive(true);
-                    darkLightPrefabs[1].SetActive(false);
-                    darkLightPrefabs[2].SetActive(false);
-                    break;
+                switch (player.currentAttackType)
+                {
 
-                case (PlayerController.AttackType.Light):
-                    darkLightPrefabs[0].SetActive(false);
-                    darkLightPrefabs[1].SetActive(true);
-                    darkLightPrefabs[2].SetActive(false);
-                    break;
+                    case (PlayerController.AttackType.Neutral):
+                        neutralDLUIScript.TurnOn();
+                        darkDLUIScript.TurnOff();
+                        lightDLUIScript.TurnOff();
+                        break;
 
-                case (PlayerController.AttackType.Dark):
-                    darkLightPrefabs[0].SetActive(false);
-                    darkLightPrefabs[1].SetActive(false);
-                    darkLightPrefabs[2].SetActive(true);
-                    break;
+                    case (PlayerController.AttackType.Light):
+                        neutralDLUIScript.TurnOff();
+                        darkDLUIScript.TurnOff();
+                        lightDLUIScript.TurnOn();
+                        break;
+
+                    case (PlayerController.AttackType.Dark):
+                        neutralDLUIScript.TurnOff();
+                        darkDLUIScript.TurnOn();
+                        lightDLUIScript.TurnOff();
+                        break;
+                }
             }
         }
+        currentAttackType = player.currentAttackType;
     }
 
     void InstantiateDarkLightPrefabs(GameObject _UIPrefab, int index)

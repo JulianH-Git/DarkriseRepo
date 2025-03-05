@@ -9,15 +9,25 @@ public class DarkLightUIUpdater : MonoBehaviour
     PlayerController player;
     [SerializeField] GameObject darkEnergyTextObj;
     [SerializeField] GameObject lightEnergyTextObj;
-    TMP_Text darkEnergyText;
-    TMP_Text lightEnergyText;
-    
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] GameObject hintTextObj;
+    TextMeshProUGUI darkEnergyText;
+    TextMeshProUGUI lightEnergyText;
+    TextMeshProUGUI hintText;
+
+    float fadeTimer = 3f;
+    float fadeAwayPerSecond;
+    float alphaValue;
+
+
+    void Awake()
     {
         player = PlayerController.Instance;
-        darkEnergyText = darkEnergyTextObj.GetComponent<TMP_Text>();
-        lightEnergyText = lightEnergyTextObj.GetComponent<TMP_Text>();
+        darkEnergyText = darkEnergyTextObj.GetComponent<TextMeshProUGUI>();
+        lightEnergyText = lightEnergyTextObj.GetComponent<TextMeshProUGUI>();
+        hintText = hintTextObj.GetComponent<TextMeshProUGUI>();
+
+        fadeAwayPerSecond = 1 / fadeTimer;
+        alphaValue = hintText.color.a;
     }
 
     // Update is called once per frame
@@ -25,5 +35,31 @@ public class DarkLightUIUpdater : MonoBehaviour
     {
         darkEnergyText.text = player.currentDarkEnergy.ToString();
         lightEnergyText.text = player.currentLightEnergy.ToString();
+
+        if(fadeTimer >= 0)
+        {
+            alphaValue -= fadeAwayPerSecond * Time.deltaTime;
+            hintText.color = new Color(hintText.color.r, hintText.color.g, hintText.color.b, alphaValue);
+            fadeTimer -= Time.deltaTime;
+        }
+
+        if(fadeTimer <= 0)
+        {
+            hintTextObj.SetActive(false);
+        }
+        
+    }
+    public void TurnOff()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void TurnOn()
+    {
+        hintText.color = new Color(hintText.color.r, hintText.color.g, hintText.color.b, 1);
+        fadeTimer = 4f;
+        alphaValue = 1f;
+        hintTextObj.SetActive(true);
+        gameObject.SetActive(true);
     }
 }
