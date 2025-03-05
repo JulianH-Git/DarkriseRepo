@@ -34,13 +34,19 @@ public class Fireball : MonoBehaviour
         {
             Explode();
         }
+
+        if (Physics2D.Raycast(transform.position, new Vector2(direction.x,direction.y), 0.3f, groundLayer))
+        {
+            Explode();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (isExploding) return;
+        if (collision.CompareTag("Player")) return;
 
-        if (collision.CompareTag("Enemy")) //|| collision.IsTouchingLayers(groundLayer))
+        if (collision.CompareTag("Enemy"))
         {
             enemyBase enemy = collision.GetComponent<enemyBase>();
             if (enemy != null)
