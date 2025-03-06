@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,7 +21,6 @@ public class FootSolider : enemyBase
     [Header("Foot Soldier Detection Settings")]
     [SerializeField] private Transform detectionRangeTransform;
     [SerializeField] private Vector2 detectionRangeArea;
-
     protected override void Awake()
     {
         base.Awake();
@@ -52,7 +52,7 @@ public class FootSolider : enemyBase
         {
             Chase(playerInRange);
         }
-        if(retreating)
+        if (retreating)
         {
             Retreat();
         }
@@ -76,6 +76,8 @@ public class FootSolider : enemyBase
 
         if (playerInRange != null)
         {
+            currentAggroTimer = aggressionTimer;
+
             direction = (playerInRange.transform.position - transform.position).normalized;
 
             if ((direction.x < 0 && transform.localScale.x > 0) || (direction.x > 0 && transform.localScale.x < 0))
@@ -121,7 +123,7 @@ public class FootSolider : enemyBase
         }
     }
 
-    void OnDrawGizmos()
+        void OnDrawGizmos()
     {
         Gizmos.color = Color.black;
         Gizmos.DrawWireCube(attackRangeTransform.position, new Vector2(attackRange, 0.0f)); // attack range

@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1079690833239647374}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 0, z: 0}
+  m_LocalPosition: {x: 1.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -144,7 +144,7 @@ MonoBehaviour:
   damage: 2
   patrolDistance: 3
   footSoldierAttackTransform: {fileID: 208688081813466140}
-  footSoldierAttackArea: {x: 0, y: 0}
+  footSoldierAttackArea: {x: 1, y: 2}
   attackRangeTransform: {fileID: 7721110764756153808}
   attackRange: 2
   layer:

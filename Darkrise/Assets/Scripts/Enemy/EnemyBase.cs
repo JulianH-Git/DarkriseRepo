@@ -86,7 +86,7 @@ public class enemyBase : MonoBehaviour
         }
     }
 
-    protected void OnCollisionStay2D(Collision2D other)
+    protected virtual void OnCollisionStay2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player") && !PlayerController.Instance.pState.invincible)
         {
@@ -114,7 +114,6 @@ public class enemyBase : MonoBehaviour
 
     public void OnDeathComplete()
     {
-        Debug.Log("enemy dead");
         gameObject.SetActive(false);
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         Color color = sr.color;
