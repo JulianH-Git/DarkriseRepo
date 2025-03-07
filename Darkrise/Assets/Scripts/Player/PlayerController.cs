@@ -134,6 +134,7 @@ public class PlayerController : MonoBehaviour
     private bool restartPressed;
     private bool switchAttackTypeLeftPressed;
     private bool switchAttackTypeRightPressed;
+    private bool interactPressed;
 
     private bool stopFading = false;
 
@@ -283,6 +284,11 @@ public class PlayerController : MonoBehaviour
         if (!switchAttackTypeRightPressed)
         {
             switchAttackTypeRightPressed = player.GetButtonDown("Switch Attack Type R");
+        }
+
+        if (!interactPressed)
+        {
+            interactPressed = player.GetButtonDown("Interact");
         }
 
         if (jumpPressed)
@@ -746,6 +752,18 @@ public class PlayerController : MonoBehaviour
                 currentAttackType++;
             }
         }
+    }
+
+    public bool Interact() 
+    {
+        if (interactPressed)
+        {
+            interactPressed = false;
+            return true;
+        }
+
+        interactPressed = false;
+        return false;
     }
 
     IEnumerator StopTakingDamage()
