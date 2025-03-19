@@ -6,27 +6,24 @@ using UnityEngine;
 using UnityEngine.Playables;
 using Rewired;
 
-public class FallDownTrigger : MonoBehaviour
+public class InteractTrigger : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject player;
-    [SerializeField]
-    private PlayerController controller;
-    [SerializeField]
-    GameObject teleportPoint;
+    [SerializeField] protected GameObject player;
+    protected PlayerController controller;
 
-    [SerializeField] SpriteRenderer indicateColor;
+    [SerializeField] protected GameObject teleportPoint;
 
-    [SerializeField]
-    bool isGap = false;
+    [SerializeField] protected SpriteRenderer indicateColor;
+
+    [SerializeField] protected bool isGap = false;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
-        
+        controller = player.GetComponent<PlayerController>();
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    protected virtual void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") && !collision.isTrigger)
         {
@@ -51,7 +48,7 @@ public class FallDownTrigger : MonoBehaviour
 
         }
     }
-    private void OnTriggerExit2D(Collider2D collision)
+    protected virtual void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") && !isGap)
         {

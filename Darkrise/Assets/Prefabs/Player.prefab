@@ -103,7 +103,7 @@ Transform:
   - {fileID: 5488643421207372703}
   - {fileID: 7763854359382277787}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &343512142328514488
 SpriteRenderer:
@@ -189,7 +189,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.076319695}
+  m_Offset: {x: 0.0376755, y: 0.05538881}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -200,7 +200,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.6683798}
+  m_Size: {x: 0.924649, y: 1.626518}
   m_EdgeRadius: 0
 --- !u!50 &6587370032795239093
 Rigidbody2D:
@@ -290,7 +290,7 @@ MonoBehaviour:
   currentDarkEnergy: 20
   fireballCost: 5
   timeToCast: 0.3
-  fireballTransform: {fileID: 0}
+  fireballTransform: {fileID: 5488643421207372703}
   lightFireball: {fileID: 8231317321410085571, guid: be7f3867966df8b41817113e13fa8787, type: 3}
   darkFireball: {fileID: 3628386444350592255, guid: 14ab0bd023fd0f14094e7b4771f35245, type: 3}
   fade: {fileID: 0}
@@ -537,7 +537,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8785595542119681184}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.9, y: 0, z: 0}
+  m_LocalPosition: {x: 0.9, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

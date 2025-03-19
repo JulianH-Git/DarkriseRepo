@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 250
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sprite_sheet (3)_0
+      name: player_idle_0
       rect:
         serializedVersion: 2
         x: 0
@@ -118,7 +118,7 @@ TextureImporter:
         width: 449
         height: 449
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -131,7 +131,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (3)_1
+      name: player_idle_1
       rect:
         serializedVersion: 2
         x: 449
@@ -139,7 +139,7 @@ TextureImporter:
         width: 449
         height: 449
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -152,7 +152,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (3)_2
+      name: player_idle_2
       rect:
         serializedVersion: 2
         x: 898
@@ -160,7 +160,7 @@ TextureImporter:
         width: 449
         height: 449
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -173,7 +173,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (3)_3
+      name: player_idle_3
       rect:
         serializedVersion: 2
         x: 1347
@@ -181,7 +181,7 @@ TextureImporter:
         width: 449
         height: 449
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -194,7 +194,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (3)_4
+      name: player_walk_0
       rect:
         serializedVersion: 2
         x: 1796
@@ -202,7 +202,7 @@ TextureImporter:
         width: 449
         height: 449
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -215,7 +215,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (3)_5
+      name: player_walk_1
       rect:
         serializedVersion: 2
         x: 0
@@ -223,7 +223,7 @@ TextureImporter:
         width: 449
         height: 449
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -236,7 +236,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (3)_6
+      name: player_walk_2
       rect:
         serializedVersion: 2
         x: 449
@@ -244,7 +244,7 @@ TextureImporter:
         width: 449
         height: 449
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -257,7 +257,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (3)_7
+      name: player_jumpsquat_0
       rect:
         serializedVersion: 2
         x: 898
@@ -265,7 +265,7 @@ TextureImporter:
         width: 449
         height: 449
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -278,7 +278,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (3)_8
+      name: player_jumpsquat_1
       rect:
         serializedVersion: 2
         x: 1347
@@ -286,7 +286,7 @@ TextureImporter:
         width: 449
         height: 449
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -299,7 +299,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (3)_9
+      name: player_jump_0
       rect:
         serializedVersion: 2
         x: 1796
@@ -307,7 +307,7 @@ TextureImporter:
         width: 449
         height: 449
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -320,7 +320,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (3)_10
+      name: player_jump_1
       rect:
         serializedVersion: 2
         x: 0
@@ -328,7 +328,7 @@ TextureImporter:
         width: 449
         height: 449
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -341,7 +341,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (3)_11
+      name: player_jump_2
       rect:
         serializedVersion: 2
         x: 449
@@ -349,7 +349,7 @@ TextureImporter:
         width: 449
         height: 449
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -362,7 +362,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (3)_12
+      name: player_airborne_0
       rect:
         serializedVersion: 2
         x: 898
@@ -370,7 +370,7 @@ TextureImporter:
         width: 449
         height: 449
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -383,7 +383,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (3)_13
+      name: player_landsquat_0
       rect:
         serializedVersion: 2
         x: 1347
@@ -391,7 +391,7 @@ TextureImporter:
         width: 449
         height: 449
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -404,7 +404,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (3)_14
+      name: player_landsquat_1
       rect:
         serializedVersion: 2
         x: 1796
@@ -412,7 +412,7 @@ TextureImporter:
         width: 449
         height: 449
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -425,7 +425,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (3)_15
+      name: player_death_0
       rect:
         serializedVersion: 2
         x: 0
@@ -433,7 +433,7 @@ TextureImporter:
         width: 449
         height: 449
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -446,7 +446,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (3)_16
+      name: player_death_1
       rect:
         serializedVersion: 2
         x: 449
@@ -454,7 +454,7 @@ TextureImporter:
         width: 449
         height: 449
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -467,7 +467,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (3)_17
+      name: player_death_2
       rect:
         serializedVersion: 2
         x: 898
@@ -475,7 +475,7 @@ TextureImporter:
         width: 449
         height: 449
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -488,7 +488,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (3)_18
+      name: player_attack
       rect:
         serializedVersion: 2
         x: 1347
@@ -496,7 +496,7 @@ TextureImporter:
         width: 449
         height: 449
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -509,7 +509,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (3)_19
+      name: player_dash
       rect:
         serializedVersion: 2
         x: 1796
@@ -517,7 +517,7 @@ TextureImporter:
         width: 449
         height: 449
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -530,7 +530,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (3)_20
+      name: player_hurt
       rect:
         serializedVersion: 2
         x: 0
@@ -538,7 +538,7 @@ TextureImporter:
         width: 449
         height: 449
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -561,27 +561,27 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      sprite_sheet (3)_0: -571356538
-      sprite_sheet (3)_1: 1352432653
-      sprite_sheet (3)_10: 1452713878
-      sprite_sheet (3)_11: -888128552
-      sprite_sheet (3)_12: 1374348236
-      sprite_sheet (3)_13: 643440556
-      sprite_sheet (3)_14: -836629839
-      sprite_sheet (3)_15: -314196328
-      sprite_sheet (3)_16: 772388679
-      sprite_sheet (3)_17: 951654825
-      sprite_sheet (3)_18: 379027404
-      sprite_sheet (3)_19: 862825816
-      sprite_sheet (3)_2: 30204147
-      sprite_sheet (3)_20: -1948778500
-      sprite_sheet (3)_3: 1416858972
-      sprite_sheet (3)_4: 768171851
-      sprite_sheet (3)_5: -2007563567
-      sprite_sheet (3)_6: 77798918
-      sprite_sheet (3)_7: 126231358
-      sprite_sheet (3)_8: 1191595734
-      sprite_sheet (3)_9: -412392813
+      player_airborne_0: 1374348236
+      player_attack: 379027404
+      player_dash: 862825816
+      player_death_0: -314196328
+      player_death_1: 772388679
+      player_death_2: 951654825
+      player_hurt: -1948778500
+      player_idle_0: -571356538
+      player_idle_1: 1352432653
+      player_idle_2: 30204147
+      player_idle_3: 1416858972
+      player_jump_0: -412392813
+      player_jump_1: 1452713878
+      player_jump_2: -888128552
+      player_jumpsquat_0: 126231358
+      player_jumpsquat_1: 1191595734
+      player_landsquat_0: 643440556
+      player_landsquat_1: -836629839
+      player_walk_0: 768171851
+      player_walk_1: -2007563567
+      player_walk_2: 77798918
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

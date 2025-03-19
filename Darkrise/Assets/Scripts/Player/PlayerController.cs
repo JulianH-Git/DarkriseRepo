@@ -98,6 +98,7 @@ public class PlayerController : MonoBehaviour
     [Header("Other Objects")]
     [SerializeField] SpriteRenderer fade;
     float alpha = 1.0f;
+    [SerializeField] float timeBetweenGlances;
     public int Health
     {
         get { return health; }
@@ -135,6 +136,7 @@ public class PlayerController : MonoBehaviour
     private bool switchAttackTypeLeftPressed;
     private bool switchAttackTypeRightPressed;
     private bool interactPressed;
+    private bool idleGlancePlaying = false;
 
     private bool stopFading = false;
 
@@ -173,8 +175,6 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
 
         gravity = rb.gravityScale;
-
-
     }
 
     private void Update()
@@ -213,6 +213,15 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle") && idleGlancePlaying == false)
+        {
+            StartCoroutine(WaitForIdleGlance());
+        }
+        else
+        {
+            StopCoroutine(WaitForIdleGlance());
+        }
+
         if (pState.dashing)
         {
             ghost.makeGhost = true;
@@ -266,7 +275,7 @@ public class PlayerController : MonoBehaviour
             castSpell = player.GetButtonDown("Cast Spell");
         }
 
-        if (!dashPressed)
+        if (!dashPressed && canDash)
         {
             dashPressed = player.GetButtonDown("Dash");
         }
@@ -308,8 +317,6 @@ public class PlayerController : MonoBehaviour
         {
             restartPressed = player.GetButtonDown("Restart");
         }
-
-
     }
 
     void Flip() // this will be useful for animation stuff later
@@ -676,6 +683,8 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y * fallMultiplier, 0);
         }
     }
+
+
     void UpdateJumpVariables()
     {
         if (Grounded())
@@ -764,6 +773,20 @@ public class PlayerController : MonoBehaviour
 
         interactPressed = false;
         return false;
+    }
+    public void StatueRecharge()
+    {
+        currentDarkEnergy = maxDarkEnergy;
+        currentLightEnergy = maxLightEnergy;
+        //if we add anything else later we can add it here
+    }
+
+    IEnumerator WaitForIdleGlance()
+    {
+        idleGlancePlaying = true;
+        yield return new WaitForSeconds(5);
+        animator.SetTrigger("playGlance");
+        idleGlancePlaying = false;
     }
 
     IEnumerator StopTakingDamage()
