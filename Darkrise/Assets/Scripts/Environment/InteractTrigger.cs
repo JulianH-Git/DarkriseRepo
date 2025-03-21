@@ -17,10 +17,13 @@ public class InteractTrigger : MonoBehaviour
 
     [SerializeField] protected bool isGap = false;
 
+    [SerializeField] protected GameObject indicator;
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
         controller = player.GetComponent<PlayerController>();
+        indicator.SetActive(false);
     }
 
     protected virtual void OnTriggerStay2D(Collider2D collision)
@@ -37,6 +40,7 @@ public class InteractTrigger : MonoBehaviour
             else 
             {
                 indicateColor.color = Color.green;
+                indicator.SetActive(true);
 
                 if (controller.Interact())
                 {
@@ -52,6 +56,7 @@ public class InteractTrigger : MonoBehaviour
     {
         if (collision.CompareTag("Player") && !isGap)
         {
+            indicator.SetActive(false);
             indicateColor.color = Color.white;
         }
     }

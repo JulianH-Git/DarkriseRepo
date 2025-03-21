@@ -15,6 +15,7 @@ public class StatueInteraction : InteractTrigger
     {
         if (collision.CompareTag("Player") && !collision.isTrigger)
         {
+            indicator.SetActive(true);
             indicateColor.color = Color.green;
 
             if (controller.Interact())
