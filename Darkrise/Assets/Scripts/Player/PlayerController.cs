@@ -93,6 +93,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject lightFireball;
     [SerializeField] GameObject darkFireball;
     float timeSinceCast;
+    public bool lightUnlocked = false;
+    public bool darkUnlocked = false;
 
     [Space(5)]
     [Header("Other Objects")]
@@ -737,7 +739,52 @@ public class PlayerController : MonoBehaviour
     void SwitchAttackTypes()
     {
         //determine if swapping "left" or "right" (basically are we going forward or back on the wheel)
+        if(lightUnlocked && darkUnlocked)
+        {
+            if (switchAttackTypeLeftPressed)
+            {
+                switchAttackTypeLeftPressed = false;
 
+                if (currentAttackType == AttackType.Neutral)
+                {
+                    currentAttackType = AttackType.Dark;
+                }
+                else
+                {
+                    currentAttackType--;
+                }
+            }
+
+            if (switchAttackTypeRightPressed)
+            {
+                switchAttackTypeRightPressed = false;
+
+                if (currentAttackType == AttackType.Dark)
+                {
+                    currentAttackType = AttackType.Neutral;
+                }
+                else
+                {
+                    currentAttackType++;
+                }
+            }
+        }
+        else if(darkUnlocked && !lightUnlocked)
+        {
+            SwitchAttackTypesDarkOnly();
+        }
+        else
+        {
+            currentAttackType = AttackType.Neutral;
+            switchAttackTypeLeftPressed = false;
+            switchAttackTypeRightPressed = false;
+            return;
+        }
+        
+    }
+
+    void SwitchAttackTypesDarkOnly()
+    {
         if (switchAttackTypeLeftPressed)
         {
             switchAttackTypeLeftPressed = false;
@@ -748,7 +795,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                currentAttackType--;
+                currentAttackType = AttackType.Neutral;
             }
         }
 
@@ -762,7 +809,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                currentAttackType++;
+                currentAttackType = AttackType.Dark;
             }
         }
     }
@@ -780,6 +827,7 @@ public class PlayerController : MonoBehaviour
     }
     public void StatueRecharge()
     {
+        health = maxHealth;
         currentDarkEnergy = maxDarkEnergy;
         currentLightEnergy = maxLightEnergy;
         //if we add anything else later we can add it here
