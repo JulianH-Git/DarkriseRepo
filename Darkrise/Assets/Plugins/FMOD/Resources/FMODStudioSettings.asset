@@ -235,7 +235,7 @@ MonoBehaviour:
   HasSourceProject: 0
   HasPlatforms: 0
   sourceProjectPath: ../../../Fmod/DarkriseVersion/Projects/DarkriseSound/DarkriseSound.fspro
-  sourceBankPath: D:\Github\DarkriseRepo\Darkrise\Assets\Audio\Banks
+  sourceBankPath: Assets/Audio/Banks
   sourceBankPathUnformatted: 
   BankRefreshCooldown: -1
   ShowBankRefreshWindow: 1
