@@ -22,8 +22,17 @@ public class DarkLightUIUpdater : MonoBehaviour
     void Awake()
     {
         player = PlayerController.Instance;
-        darkEnergyText = darkEnergyTextObj.GetComponent<TextMeshProUGUI>();
-        lightEnergyText = lightEnergyTextObj.GetComponent<TextMeshProUGUI>();
+
+        if(darkEnergyTextObj != null)
+        {
+            darkEnergyText = darkEnergyTextObj.GetComponent<TextMeshProUGUI>();
+        }
+        
+        if(lightEnergyTextObj != null)
+        {
+            lightEnergyText = lightEnergyTextObj.GetComponent<TextMeshProUGUI>();
+        }
+        
         hintText = hintTextObj.GetComponent<TextMeshProUGUI>();
 
         fadeAwayPerSecond = 1 / fadeTimer;
@@ -33,8 +42,9 @@ public class DarkLightUIUpdater : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        darkEnergyText.text = player.currentDarkEnergy.ToString();
-        lightEnergyText.text = player.currentLightEnergy.ToString();
+        if(darkEnergyText != null) { darkEnergyText.text = player.currentDarkEnergy.ToString(); }
+
+        if (darkEnergyText != null) { darkEnergyText.text = player.currentLightEnergy.ToString(); }
 
         if(fadeTimer >= 0)
         {
