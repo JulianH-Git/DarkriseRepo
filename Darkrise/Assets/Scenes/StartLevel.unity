@@ -8559,6 +8559,11 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: 
   m_EditorClassIdentifier: 
+ Fmod
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 0}
+
+main
 --- !u!1 &578600385
 GameObject:
   m_ObjectHideFlags: 0
@@ -8570,7 +8575,7 @@ GameObject:
   - component: {fileID: 578600386}
   - component: {fileID: 578600387}
   m_Layer: 0
-  m_Name: VerticalArrow
+  m_Name: 
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
