@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using FMOD.Studio;
 
 public class PlayerController : MonoBehaviour
 {
@@ -77,9 +78,8 @@ public class PlayerController : MonoBehaviour
 
     [Space(5)]
     [Header("Audio Settings")]
-    public AudioSource audio;
     [SerializeField]
-    List<AudioClip> sfx = new List<AudioClip>();
+    private EventInstance playerFootsteps;
 
     [Space(5)]
     [Header("Dark/Light Attack Settings")]
@@ -175,6 +175,8 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
 
         gravity = rb.gravityScale;
+
+        playerFootsteps = AudioManager.instance.CreateInstance(FMODEvents.instance.playerFootsteps);
     }
 
     private void Update()
@@ -242,6 +244,7 @@ public class PlayerController : MonoBehaviour
         Recoil();
         StartDash();
         Restart();
+        UpdateSound();
         // animation update
         animator.SetBool("isGrounded", Grounded());
         animator.SetFloat("yVel", rb.velocity.y);
@@ -253,7 +256,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             animator.SetBool("isWalking", false);
-
+            UpdateSound();
         }
 
         rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxVelocity);
@@ -357,7 +360,7 @@ public class PlayerController : MonoBehaviour
     {
         if (dashPressed && canDash && !dashed)
         {
-            audio.PlayOneShot(sfx[2]);
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.dash, this.transform.position);
             StartCoroutine(Dash());
             dashed = true;
         }
@@ -426,15 +429,15 @@ public class PlayerController : MonoBehaviour
         animator.SetTrigger("attack");
         if (currentAttackType == AttackType.Neutral)
         {
-            audio.PlayOneShot(sfx[1]);
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.normalSlash, this.transform.position);
         }
         if (currentAttackType == AttackType.Dark)
         {
-            audio.PlayOneShot(sfx[4]);
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.darkSlash, this.transform.position);
         }
         if (currentAttackType == AttackType.Light)
         {
-            audio.PlayOneShot(sfx[5]);
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.lightSlash, this.transform.position);
         }
 
 
@@ -465,7 +468,8 @@ public class PlayerController : MonoBehaviour
         {
             if (ObjectsToHit[i].GetComponent<enemyBase>() != null)
             {
-                audio.PlayOneShot(sfx[3]);
+                
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.enemyHit, this.transform.position);
                 switch (currentAttackType)
                 {
                     case (AttackType.Neutral):
@@ -659,7 +663,7 @@ public class PlayerController : MonoBehaviour
     {
         if (jumpPressed && rb.velocity.y > 0)
         {
-            audio.PlayOneShot(sfx[0]);
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.playerJump, this.transform.position);
             //rb.velocity = new Vector3(rb.velocity.x, 0);
 
             pState.jumping = false;
@@ -799,6 +803,25 @@ public class PlayerController : MonoBehaviour
         if (health <= 0)
         {
             maxVelocity = 0.0f;
+        }
+    }
+    private void UpdateSound()
+    {
+        // start footsteps event if the player has an x velocity and is on the ground
+        if (rb.velocity.x != 0 && Grounded())
+        {
+            // get the playback state
+            PLAYBACK_STATE playbackState;
+            playerFootsteps.getPlaybackState(out playbackState);
+            if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
+            {
+                playerFootsteps.start();
+            }
+        }
+        // otherwise, stop the footsteps
+        else
+        {
+            playerFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
         }
     }
 }
