@@ -8661,18 +8661,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-Fmod
 --- !u!114 &573112878
 MonoBehaviour:
-
---- !u!1 &578600385
-GameObject:
-main
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-Fmod
   m_GameObject: {fileID: 573112872}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -8680,14 +8674,19 @@ Fmod
   m_Name: 
   m_EditorClassIdentifier: 
   nonRigidbodyVelocity: 0
-  attenuationObject: {fileID: 634704865}
-
+  attenuationObject: {fileID: 0}
+--- !u!1 &578600385
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
   - component: {fileID: 578600386}
   - component: {fileID: 578600387}
   m_Layer: 0
-  m_Name: VerticalArrow
+  m_Name: 
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8760,7 +8759,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
-main
 --- !u!1 &601383445
 GameObject:
   m_ObjectHideFlags: 3
