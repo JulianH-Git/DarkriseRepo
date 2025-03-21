@@ -683,6 +683,8 @@ MonoBehaviour:
   neutralModePrefab: {fileID: 7640129269678696865, guid: 1a9acda88261e1d4ba1640e749e6cd3b, type: 3}
   darkModePrefab: {fileID: 2107022776023966531, guid: ebc2d55b2f356024a9f36dba5daa220b, type: 3}
   lightModePrefab: {fileID: 1005811963858110907, guid: 68585577fa4950144abd2d8d18283bee, type: 3}
+  neutralModeDarkOnlyPrefab: {fileID: 7640129269678696865, guid: d93aa58a1ca223d4bac30f14b792df04, type: 3}
+  darkModeDarkOnlyPrefab: {fileID: 2107022776023966531, guid: 28c069dcc45d45f4b9ce80e82226d0ba, type: 3}
 --- !u!1 &100175386
 GameObject:
   m_ObjectHideFlags: 0
