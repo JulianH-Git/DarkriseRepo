@@ -44,7 +44,7 @@ public class SwitchTrigger : MonoBehaviour
                     hasBeenUsed = true;
                     indicateColor.color = Color.white;
                 }
-                this.gameObject.transform.rotation = new Quaternion(-1, 0, 0, 0);
+                this.GetComponent<SpriteRenderer>().flipY = true;
             }
         }
     }
