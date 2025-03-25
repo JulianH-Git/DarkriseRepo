@@ -478,16 +478,19 @@ public class PlayerController : MonoBehaviour
                 {
                     case (AttackType.Neutral):
                         ObjectsToHit[i].GetComponent<enemyBase>().EnemyHit(damage, (transform.position - ObjectsToHit[i].transform.position).normalized, _recoilStrength);
+                        onEnergyChangedCallback.Invoke();
                         break;
                     case (AttackType.Light):
                         if (currentLightEnergy > 0)
                         {
                             ObjectsToHit[i].GetComponent<enemyBase>().EnemyHit(damage + (-damage / 2.0f), (transform.position - ObjectsToHit[i].transform.position).normalized, _recoilStrength + (_recoilStrength));
                             currentLightEnergy--;
+                            onEnergyChangedCallback.Invoke();
                         }
                         else
                         {
                             ObjectsToHit[i].GetComponent<enemyBase>().EnemyHit(damage, (transform.position - ObjectsToHit[i].transform.position).normalized, _recoilStrength);
+                            onEnergyChangedCallback.Invoke();
                         }
                         break;
 
@@ -495,10 +498,13 @@ public class PlayerController : MonoBehaviour
                         if (currentDarkEnergy > 0)
                         {
                             ObjectsToHit[i].GetComponent<enemyBase>().EnemyHit(damage * 2.0f, (transform.position - ObjectsToHit[i].transform.position).normalized, _recoilStrength * 2);
+                            currentDarkEnergy--;
+                            onEnergyChangedCallback.Invoke();
                         }
                         else
                         {
                             ObjectsToHit[i].GetComponent<enemyBase>().EnemyHit(damage, (transform.position - ObjectsToHit[i].transform.position).normalized, _recoilStrength);
+                            onEnergyChangedCallback.Invoke();
                         }
                         break;
                 }
