@@ -103,6 +103,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] SpriteRenderer fade;
     float alpha = 1.0f;
     [SerializeField] float timeBetweenGlances;
+    float countUptoGlance = 0;
     public int Health
     {
         get { return health; }
@@ -219,13 +220,16 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle") && idleGlancePlaying == false)
+        countUptoGlance += Time.deltaTime;
+
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle") && !idleGlancePlaying && countUptoGlance >= timeBetweenGlances)
         {
             StartCoroutine(WaitForIdleGlance());
+            countUptoGlance = 0f;
         }
-        else
+        else if(!animator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
         {
-            StopCoroutine(WaitForIdleGlance());
+            countUptoGlance = 0f;
         }
 
         if (pState.dashing)

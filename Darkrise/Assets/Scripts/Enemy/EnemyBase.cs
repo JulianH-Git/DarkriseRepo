@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class enemyBase : MonoBehaviour
@@ -34,8 +35,9 @@ public class enemyBase : MonoBehaviour
 
     protected float retreatTimer = 5.0f;
     protected bool retreating;
+    protected bool isDying = false;
 
-    BoxCollider2D boxCollider;
+    protected BoxCollider2D boxCollider;
 
     // Start is called before the first frame update
     void Start()
@@ -58,9 +60,12 @@ public class enemyBase : MonoBehaviour
     {
         if (health <= 0)
         {
-            anim.SetTrigger("death");
-            rb.velocity = Vector2.zero;
+            isDying = true;
+            rb.simulated = false;
             boxCollider.enabled = false;
+
+            anim.SetTrigger("death");
+            
             //gameObject.SetActive(false);
         }
         if (isRecoiling)
@@ -93,7 +98,7 @@ public class enemyBase : MonoBehaviour
 
     protected virtual void OnCollisionStay2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player") && !PlayerController.Instance.pState.invincible)
+        if (other.gameObject.CompareTag("Player") && !PlayerController.Instance.pState.invincible && !isDying)
         {
             Attack();
         }
@@ -106,8 +111,10 @@ public class enemyBase : MonoBehaviour
     public virtual void Respawn()
     {
         health = maxHealth;
+        rb.simulated = true;
+        boxCollider.enabled = true;
         gameObject.SetActive(true);
-        boxCollider.enabled = false;
+        isDying = false;
         anim.ResetTrigger("death");
         anim.Play("idle");
         SetPosition(anchorPos);
@@ -120,6 +127,8 @@ public class enemyBase : MonoBehaviour
 
     public void OnDeathComplete()
     {
+        rb.simulated = false;
+
         gameObject.SetActive(false);
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         Color color = sr.color;
@@ -153,7 +162,7 @@ public class enemyBase : MonoBehaviour
 
         float test = Vector2.Distance(transform.position, anchorPos);
 
-        if (test <= 0.34f || retreatTimer <= 0)
+        if (test <= 0.36f || retreatTimer <= 0)
         {
             retreating = false;
             rb.velocity = Vector2.zero;

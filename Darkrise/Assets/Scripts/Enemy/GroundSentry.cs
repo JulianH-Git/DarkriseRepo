@@ -26,11 +26,11 @@ public class GroundSentry : enemyBase
 
     protected void FixedUpdate()
     {
-        if (!isRecoiling)
+        if (!isRecoiling && !isDying)
         {
             Patrol();
         }
-        if (Mathf.Abs((transform.position.x - anchorPos.x) + 0.34f) >= patrolDistance)
+        if (Mathf.Abs((transform.position.x - anchorPos.x) + 0.34f) >= patrolDistance && !isDying)
         {
             Retreat();
         }
@@ -40,12 +40,4 @@ public class GroundSentry : enemyBase
     {
         base.EnemyHit(_damageDone, _hitDirection, _hitForce);
     }
-
-    public override void Respawn()
-    {
-        health = maxHealth;
-        transform.position = anchorPos;
-        gameObject.SetActive(true);
-    }
-
 }
