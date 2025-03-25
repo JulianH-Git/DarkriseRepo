@@ -27,6 +27,7 @@ public class DarkModeUpgrade : MonoBehaviour
         if (collision.CompareTag("Player") && !collision.isTrigger)
         {
             controller.darkUnlocked = true;
+            controller.onEnergyChangedCallback.Invoke();
 
             foreach (GameObject insturct in onboarding)
             {

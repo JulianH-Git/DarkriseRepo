@@ -44,7 +44,7 @@ public class DarkLightUIUpdater : MonoBehaviour
     {
         if(darkEnergyText != null) { darkEnergyText.text = player.currentDarkEnergy.ToString(); }
 
-        if (darkEnergyText != null) { darkEnergyText.text = player.currentLightEnergy.ToString(); }
+        if (lightEnergyText != null) { lightEnergyText.text = player.currentLightEnergy.ToString(); }
 
         if(fadeTimer >= 0)
         {
@@ -67,7 +67,7 @@ public class DarkLightUIUpdater : MonoBehaviour
     public void TurnOn()
     {
         hintText.color = new Color(hintText.color.r, hintText.color.g, hintText.color.b, 1);
-        fadeTimer = 4f;
+        fadeTimer = 3f; 
         alphaValue = 1f;
         hintTextObj.SetActive(true);
         gameObject.SetActive(true);

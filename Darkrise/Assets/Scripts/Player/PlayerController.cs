@@ -95,6 +95,8 @@ public class PlayerController : MonoBehaviour
     float timeSinceCast;
     public bool lightUnlocked = false;
     public bool darkUnlocked = false;
+    public delegate void OnEnergyChangedDelegate();
+    [HideInInspector] public OnEnergyChangedDelegate onEnergyChangedCallback;
 
     [Space(5)]
     [Header("Other Objects")]
@@ -830,6 +832,7 @@ public class PlayerController : MonoBehaviour
         health = maxHealth;
         currentDarkEnergy = maxDarkEnergy;
         currentLightEnergy = maxLightEnergy;
+        onHealthChangedCallback.Invoke();
         //if we add anything else later we can add it here
     }
 

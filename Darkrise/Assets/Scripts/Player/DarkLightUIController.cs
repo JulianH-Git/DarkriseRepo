@@ -24,6 +24,7 @@ public class DarkLightUIController : MonoBehaviour
     void Start()
     {
         player = PlayerController.Instance;
+        player.onEnergyChangedCallback += UpdateUI;
         darkLightPrefabs = new GameObject[5];
         InstantiateDarkLightPrefabs(neutralModePrefab, 0); // 0 = neutral
         InstantiateDarkLightPrefabs(lightModePrefab, 1); // 1 = light
@@ -45,15 +46,24 @@ public class DarkLightUIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (player.currentAttackType != currentAttackType )
+        {
+            UpdateUI();
+            currentAttackType = player.currentAttackType; // Update stored attack type
+        }
+    }
+
+    void UpdateUI()
+    {
         if (darkLightPrefabs != null)
         {
-            if(player.darkUnlocked)
+            if (player.darkUnlocked)
             {
                 switch (player.currentAttackType)
                 {
 
                     case (PlayerController.AttackType.Neutral):
-                        if(player.darkUnlocked && !player.lightUnlocked)
+                        if (player.darkUnlocked && !player.lightUnlocked)
                         {
                             DLUIScripts[3].TurnOn();
                             DLUIScripts[4].TurnOff();
@@ -80,7 +90,7 @@ public class DarkLightUIController : MonoBehaviour
                         if (player.darkUnlocked && !player.lightUnlocked)
                         {
                             DLUIScripts[3].TurnOff();
-                           DLUIScripts[4].TurnOn();
+                            DLUIScripts[4].TurnOn();
                         }
                         else
                         {
@@ -94,7 +104,6 @@ public class DarkLightUIController : MonoBehaviour
                 }
             }
         }
-        currentAttackType = player.currentAttackType;
     }
 
     void InstantiateDarkLightPrefabs(GameObject _UIPrefab, int index)

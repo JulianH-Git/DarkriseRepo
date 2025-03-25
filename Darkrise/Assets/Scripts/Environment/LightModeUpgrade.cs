@@ -27,6 +27,7 @@ public class LightModeUpgrade : MonoBehaviour
         if (collision.CompareTag("Player") && !collision.isTrigger)
         {
             controller.lightUnlocked = true;
+            controller.onEnergyChangedCallback.Invoke();
 
             foreach (GameObject insturct in onboarding)
             {
