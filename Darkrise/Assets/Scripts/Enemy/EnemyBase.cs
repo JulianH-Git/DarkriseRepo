@@ -35,6 +35,8 @@ public class enemyBase : MonoBehaviour
     protected float retreatTimer = 5.0f;
     protected bool retreating;
 
+    BoxCollider2D boxCollider;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +50,7 @@ public class enemyBase : MonoBehaviour
         player = PlayerController.Instance;
         anim = GetComponent<Animator>();
         anchorPos = rb.position;
+        boxCollider = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -56,6 +59,8 @@ public class enemyBase : MonoBehaviour
         if (health <= 0)
         {
             anim.SetTrigger("death");
+            rb.velocity = Vector2.zero;
+            boxCollider.enabled = false;
             //gameObject.SetActive(false);
         }
         if (isRecoiling)
@@ -102,6 +107,7 @@ public class enemyBase : MonoBehaviour
     {
         health = maxHealth;
         gameObject.SetActive(true);
+        boxCollider.enabled = false;
         anim.ResetTrigger("death");
         anim.Play("idle");
         SetPosition(anchorPos);
