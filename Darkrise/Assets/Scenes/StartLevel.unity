@@ -28334,6 +28334,27 @@ MonoBehaviour:
       Data3: -266331007
       Data4: -669998463
     Path: event:/SFX/EnemyHit
+  <lightShot>k__BackingField:
+    Guid:
+      Data1: -2082271885
+      Data2: 1218800943
+      Data3: 1004206469
+      Data4: 1789121356
+    Path: event:/SFX/Player/Shots/LightShot
+  <darkShot>k__BackingField:
+    Guid:
+      Data1: -2096682608
+      Data2: 1240060802
+      Data3: -2056531811
+      Data4: 1884458003
+    Path: event:/SFX/Player/Shots/DarkShot
+  <powerSelect>k__BackingField:
+    Guid:
+      Data1: 1184914148
+      Data2: 1237349643
+      Data3: 220930223
+      Data4: -834448491
+    Path: event:/SFX/Player/PowerSelect
 --- !u!1 &2130324669
 GameObject:
   m_ObjectHideFlags: 3

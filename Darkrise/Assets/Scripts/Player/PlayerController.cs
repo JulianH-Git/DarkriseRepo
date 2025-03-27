@@ -531,6 +531,7 @@ public class PlayerController : MonoBehaviour
                         pState.casting = true;
                         timeSinceCast = 0;
                         CastFireball();
+                        AudioManager.instance.PlayOneShot(FMODEvents.instance.darkShot, this.transform.position);
                     }
                 break;
 
@@ -541,6 +542,7 @@ public class PlayerController : MonoBehaviour
                         pState.casting = true;
                         timeSinceCast = 0;
                         CastFireball();
+                        AudioManager.instance.PlayOneShot(FMODEvents.instance.lightShot, this.transform.position);
                     }
                     break;
             }
@@ -765,6 +767,7 @@ public class PlayerController : MonoBehaviour
                 {
                     currentAttackType--;
                 }
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.powerSelect, this.transform.position);
             }
 
             if (switchAttackTypeRightPressed)
@@ -779,6 +782,7 @@ public class PlayerController : MonoBehaviour
                 {
                     currentAttackType++;
                 }
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.powerSelect, this.transform.position);
             }
         }
         else if(darkUnlocked && !lightUnlocked)
@@ -809,6 +813,7 @@ public class PlayerController : MonoBehaviour
             {
                 currentAttackType = AttackType.Neutral;
             }
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.powerSelect, this.transform.position);
         }
 
         if (switchAttackTypeRightPressed)
@@ -823,6 +828,7 @@ public class PlayerController : MonoBehaviour
             {
                 currentAttackType = AttackType.Dark;
             }
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.powerSelect, this.transform.position);
         }
     }
 

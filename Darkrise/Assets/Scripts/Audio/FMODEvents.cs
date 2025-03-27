@@ -23,6 +23,12 @@ public class FMODEvents : MonoBehaviour
 
     [field: SerializeField] public EventReference enemyHit { get; private set; }
 
+    [field: SerializeField] public EventReference lightShot { get; private set; }
+
+    [field: SerializeField] public EventReference darkShot { get; private set; }
+
+    [field: SerializeField] public EventReference powerSelect { get; private set; }
+
     public static FMODEvents instance { get;private set; }
 
     private void Awake()
