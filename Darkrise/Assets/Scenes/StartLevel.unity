@@ -1542,11 +1542,11 @@ PrefabInstance:
       objectReference: {fileID: 1136699202408263754, guid: 1d94b97622e58b843bd0b895b4809ac6, type: 3}
     - target: {fileID: 1553066297793239972, guid: db2a1c1114c8fdd4fa5b3deec047c0b1, type: 3}
       propertyPath: roomArea.x
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1553066297793239972, guid: db2a1c1114c8fdd4fa5b3deec047c0b1, type: 3}
       propertyPath: roomArea.y
-      value: 5
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6707659142965435415, guid: db2a1c1114c8fdd4fa5b3deec047c0b1, type: 3}
       propertyPath: m_Name
@@ -26237,11 +26237,11 @@ PrefabInstance:
       objectReference: {fileID: 1136699202408263754, guid: 1d94b97622e58b843bd0b895b4809ac6, type: 3}
     - target: {fileID: 1553066297793239972, guid: db2a1c1114c8fdd4fa5b3deec047c0b1, type: 3}
       propertyPath: roomArea.x
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1553066297793239972, guid: db2a1c1114c8fdd4fa5b3deec047c0b1, type: 3}
       propertyPath: roomArea.y
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6707659142965435415, guid: db2a1c1114c8fdd4fa5b3deec047c0b1, type: 3}
       propertyPath: m_Name
@@ -26410,7 +26410,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1553066297793239972, guid: db2a1c1114c8fdd4fa5b3deec047c0b1, type: 3}
       propertyPath: roomArea.y
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6707659142965435415, guid: db2a1c1114c8fdd4fa5b3deec047c0b1, type: 3}
       propertyPath: m_Name
