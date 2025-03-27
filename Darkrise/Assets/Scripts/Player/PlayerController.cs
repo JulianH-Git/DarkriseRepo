@@ -533,6 +533,10 @@ public class PlayerController : MonoBehaviour
                         CastFireball();
                         AudioManager.instance.PlayOneShot(FMODEvents.instance.darkShot, this.transform.position);
                     }
+                    else
+                    {
+                        castSpell = false;
+                    }
                 break;
 
                 case AttackType.Light:
@@ -544,6 +548,14 @@ public class PlayerController : MonoBehaviour
                         CastFireball();
                         AudioManager.instance.PlayOneShot(FMODEvents.instance.lightShot, this.transform.position);
                     }
+                    else
+                    {
+                        castSpell = false;
+                    }
+                    break;
+                case AttackType.Neutral:
+                    timeSinceCast += Time.deltaTime;
+                    castSpell = false;
                     break;
             }
         }
