@@ -31,11 +31,21 @@ public class enemyBase : MonoBehaviour
     protected Vector2 direction;
     [Space(5)]
 
+    [Header("Alert Settings")]
+    [SerializeField] protected float alertedPatrolDistance;
+    [SerializeField] protected float alertedTimer;
+    protected float alertedTimerCountdown;
+    protected bool alerted;
+    protected bool alertedPatrol;
+    protected Vector2 alertPos;
+    [Space(5)]
+
     protected Rigidbody2D rb;
 
     protected float retreatTimer = 5.0f;
     protected bool retreating;
     protected bool isDying = false;
+
 
     protected BoxCollider2D boxCollider;
 
@@ -63,10 +73,7 @@ public class enemyBase : MonoBehaviour
             isDying = true;
             rb.simulated = false;
             boxCollider.enabled = false;
-
             anim.SetTrigger("death");
-            
-            //gameObject.SetActive(false);
         }
         if (isRecoiling)
         {
@@ -81,6 +88,10 @@ public class enemyBase : MonoBehaviour
         if (retreating)
         {
             retreatTimer -= Time.deltaTime;
+        }
+        if(alertedPatrol)
+        {
+            alertedTimer -= Time.deltaTime;
         }
     }
 
@@ -141,12 +152,33 @@ public class enemyBase : MonoBehaviour
         float distanceMoved = transform.position.x - anchorPos.x;
 
         if (Mathf.Abs(distanceMoved) >= patrolDistance + 0.34f)
-            {
+        {
             transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
         }
 
         rb.velocity = new Vector2(speed * Mathf.Sign(transform.localScale.x), rb.velocity.y);
 
+    }
+    protected virtual void Patrol(Vector2 alertAnchor)
+    {
+        
+        float distanceMoved = transform.position.x - alertAnchor.x;
+
+        if (Mathf.Abs(distanceMoved) >= patrolDistance + 0.34f)
+        {
+            transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
+        }
+
+        rb.velocity = new Vector2(speed * Mathf.Sign(transform.localScale.x), rb.velocity.y);
+
+        if(alertedTimer <= 0)
+        {
+            alertedTimer = alertedTimerCountdown;
+            alertedPatrol = false;
+            retreating = true;
+            Retreat();
+        }
+        Debug.Log(transform.position);
     }
 
     public void Retreat()
@@ -169,6 +201,32 @@ public class enemyBase : MonoBehaviour
             retreatTimer = 5.0f;
             Debug.Log("Retreat finished");
             Patrol();
+        }
+    }
+
+    public virtual void Alerted(Vector2 _alertPos)
+    {
+        Debug.Log("Alerted");
+        alerted = true;
+        alertPos = _alertPos;
+        direction = (_alertPos - (Vector2)transform.position).normalized;
+
+        if (direction.x != 0)
+        {
+            transform.localScale = new Vector2(Mathf.Sign(direction.x) * Mathf.Abs(transform.localScale.x), transform.localScale.y);
+        }
+
+        rb.velocity = new Vector2(direction.x * (speed * 1.3f), rb.velocity.y);
+
+        float test = Vector2.Distance(transform.position, _alertPos);
+        Debug.Log(test);
+
+        if (test <= 0.89f)
+        {
+            Debug.Log("Completed alert - patrolling");
+            alerted = false;
+            alertedPatrol = true;
+            Patrol(alertPos);
         }
     }
 

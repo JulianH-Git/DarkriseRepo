@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FootSolider : enemyBase
@@ -44,7 +41,19 @@ public class FootSolider : enemyBase
 
         Collider2D playerInRange = Physics2D.OverlapBox(detectionRangeTransform.position, detectionRangeArea, 0, layer);
 
-        if (!aggressive)
+        if(alerted)
+        {
+            Alerted(alertPos);
+        }
+        else if (retreating)
+        {
+            Retreat();
+        }
+        else if (alertedPatrol)
+        {
+            Patrol(playerInRange, alertPos);
+        }
+        else if (!aggressive)
         {
             Patrol(playerInRange);
         }
@@ -52,15 +61,24 @@ public class FootSolider : enemyBase
         {
             Chase(playerInRange);
         }
-        if (retreating)
-        {
-            Retreat();
-        }
+
     }
 
     protected void Patrol(Collider2D playerInRange)
     {
         base.Patrol();
+
+        if (playerInRange != null && playerInRange.CompareTag("Player"))
+        {
+            aggressive = true;
+            currentAggroTimer = aggressionTimer;
+            anim.SetBool("aggresive", true);
+        }
+    }
+
+    protected void Patrol(Collider2D playerInRange, Vector2 _alertPos)
+    {
+        base.Patrol(_alertPos);
 
         if (playerInRange != null && playerInRange.CompareTag("Player"))
         {
@@ -123,7 +141,7 @@ public class FootSolider : enemyBase
         }
     }
 
-        void OnDrawGizmos()
+    void OnDrawGizmos()
     {
         Gizmos.color = Color.black;
         Gizmos.DrawWireCube(attackRangeTransform.position, new Vector2(attackRange, 0.0f)); // attack range

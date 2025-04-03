@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4275184383192025666
 SpriteRenderer:
@@ -136,6 +136,8 @@ MonoBehaviour:
   speed: 2
   damage: 1
   patrolDistance: 1
+  alertedPatrolDistance: 0.5
+  alertedTimer: 6
 --- !u!61 &6365863313047211341
 BoxCollider2D:
   m_ObjectHideFlags: 0

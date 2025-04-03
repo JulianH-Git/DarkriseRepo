@@ -1,6 +1,9 @@
+using Rewired;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static PlayerController;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public enum SpotlightStates 
 {
@@ -11,27 +14,20 @@ public enum SpotlightStates
 
 public class SpotlightPrefab : MonoBehaviour
 {
-    [SerializeField]
-    GameObject lamp;
-    [SerializeField]
-    List<Sprite> lampSprites;
-    [SerializeField]
-    List<Sprite> spotlightSprites;
-
     public SpotlightStates state;
+    [SerializeField] GameObject lamp;
+    [SerializeField] List<Sprite> lampSprites;
+    [SerializeField] List<Sprite> spotlightSprites;
 
-    [SerializeField]
-    private PlayerStateList playerState;
-    [SerializeField]
-    private PlayerController controller;
+    PlayerController controller;
 
-    [SerializeField]
-    List<GameObject> gates = new List<GameObject>();
-
+    [SerializeField] List<GameObject> gates = new List<GameObject>();
     private List<Vector2> originalSizes = new List<Vector2>();
+    [SerializeField] List<Vector2> spottedSizes = new List<Vector2>();
 
-    [SerializeField]
-    List<Vector2> spottedSizes = new List<Vector2>();
+    [SerializeField] Transform enemyAlertTransform;
+    [SerializeField] Vector2 enemyAlertRadius;
+    [SerializeField] LayerMask enemyLayer;
 
 
     // player spotted
@@ -48,9 +44,11 @@ public class SpotlightPrefab : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < gates.Count; i++)
+        controller = PlayerController.Instance;
+
+        foreach (GameObject gate in gates)
         {
-            originalSizes.Add(gates[i].transform.localScale);
+            originalSizes.Add(gate.transform.localScale);
         }
     }
 
@@ -58,7 +56,7 @@ public class SpotlightPrefab : MonoBehaviour
     {
         if (collision.CompareTag("Player") && !collision.isTrigger)
         {
-            if (!playerState.dashing)
+            if (!controller.pState.dashing)
             {
                 playerSpotted = true;
                 cooldownTimer = cooldown;
@@ -72,6 +70,13 @@ public class SpotlightPrefab : MonoBehaviour
                 else if(state == SpotlightStates.Yellow && !controller.pState.invincible) 
                 {
                     controller.TakeDamage(1);
+                    Debug.Log("Starting enemy search");
+                    List<Collider2D> enemiesInRange = CheckForEnemies(enemyAlertTransform,enemyAlertRadius);
+                    if(enemiesInRange != null && enemiesInRange.Count > 0)
+                    {
+                        Debug.Log("Enemies in range - " + enemiesInRange.Count);
+                        SignalEnemies(enemiesInRange);
+                    }
                 }
             }
         }
@@ -167,6 +172,37 @@ public class SpotlightPrefab : MonoBehaviour
         if (gate != null)
         {
             gate.transform.localScale = originalSize; // Ensure exact final size
+        }
+    }
+
+    void OnDrawGizmos() // comment this out when we're done placing things to keep everything visible
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(enemyAlertTransform.position, enemyAlertRadius);
+    }
+
+    List<Collider2D> CheckForEnemies(Transform _roomTransform, Vector2 _roomArea)
+    {
+        Collider2D[] ObjectsToHit = Physics2D.OverlapBoxAll(_roomTransform.position, _roomArea, 0, enemyLayer);
+        List <Collider2D> enemiesInRange = new List<Collider2D>();
+
+        for (int i = 0; i < ObjectsToHit.Length; i++)
+        {
+            if (ObjectsToHit[i].GetComponent<enemyBase>() != null)
+            {
+                enemiesInRange.Add(ObjectsToHit[i]);
+            }
+        }
+
+        Debug.Log("Enemies found - " + enemiesInRange.Count);
+        return enemiesInRange;
+    }
+
+    void SignalEnemies(List<Collider2D> enemies)
+    {
+        foreach (Collider2D obj in enemies)
+        {
+            obj.GetComponent<enemyBase>().Alerted(enemyAlertTransform.position);
         }
     }
 }

@@ -61,7 +61,7 @@ void Update()
     {
         Collider2D[] ObjectsToHit = Physics2D.OverlapBoxAll(_roomTransform.position, _roomArea, 0, layer);
 
-        foreach (var obj in ObjectsToHit)
+        foreach (Collider2D obj in ObjectsToHit)
         {
             if (obj.CompareTag("Player"))
             {

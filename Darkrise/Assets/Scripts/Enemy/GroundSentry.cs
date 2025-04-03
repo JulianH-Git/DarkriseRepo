@@ -1,6 +1,3 @@
-using JetBrains.Annotations;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GroundSentry : enemyBase
@@ -10,12 +7,7 @@ public class GroundSentry : enemyBase
     protected override void Awake()
     {
         base.Awake();
-    }
-
-    void Start()
-    {
         rb.gravityScale = 12f;
-        anchorPos = rb.position;
     }
 
     // Update is called once per frame
@@ -26,18 +18,23 @@ public class GroundSentry : enemyBase
 
     protected void FixedUpdate()
     {
-        if (!isRecoiling && !isDying)
+        if (isRecoiling || isDying) return;
+
+        if (alerted)
         {
-            Patrol();
+            Alerted(alertPos);
         }
-        if (Mathf.Abs((transform.position.x - anchorPos.x) + 0.34f) >= patrolDistance && !isDying)
+        else if (alertedPatrol)
+        {
+            Patrol(alertPos);
+        }
+        else if (!alerted && Vector2.Distance(transform.position, anchorPos) >= patrolDistance && !isDying)
         {
             Retreat();
         }
-    }
-
-    public void EnemyHit(float _damageDone, Vector2 _hitDirection, float _hitForce)
-    {
-        base.EnemyHit(_damageDone, _hitDirection, _hitForce);
+        else
+        {
+            Patrol();
+        }
     }
 }
