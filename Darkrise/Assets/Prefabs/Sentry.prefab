@@ -136,8 +136,8 @@ MonoBehaviour:
   speed: 2
   damage: 1
   patrolDistance: 1
-  alertedPatrolDistance: 0.5
-  alertedTimer: 6
+  alertedPatrolDistance: 0
+  alertedTimer: 3
 --- !u!61 &6365863313047211341
 BoxCollider2D:
   m_ObjectHideFlags: 0

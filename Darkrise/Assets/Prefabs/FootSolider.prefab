@@ -143,8 +143,8 @@ MonoBehaviour:
   speed: 3
   damage: 2
   patrolDistance: 3
-  alertedPatrolDistance: 0.5
-  alertedTimer: 6
+  alertedPatrolDistance: 0
+  alertedTimer: 3
   footSoldierAttackTransform: {fileID: 208688081813466140}
   footSoldierAttackArea: {x: 1, y: 2}
   attackRangeTransform: {fileID: 7721110764756153808}
@@ -154,6 +154,7 @@ MonoBehaviour:
     m_Bits: 1
   timeBetweenAttacks: 1.5
   aggressionTimer: 10
+  aggressive: 0
   detectionRangeTransform: {fileID: 2377881673545313823}
   detectionRangeArea: {x: 5, y: 2.5}
 --- !u!61 &8123595661152672319
