@@ -104,6 +104,8 @@ public class PlayerController : MonoBehaviour
     float alpha = 1.0f;
     [SerializeField] float timeBetweenGlances;
     float countUptoGlance = 0;
+    float buttonReleaseCheck = 1f;
+    float buttonReleaseTimer = 0.0f;
     public int Health
     {
         get { return health; }
@@ -221,6 +223,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         countUptoGlance += Time.deltaTime;
+        buttonReleaseTimer += Time.deltaTime;
 
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle") && !idleGlancePlaying && countUptoGlance >= timeBetweenGlances)
         {
@@ -273,6 +276,8 @@ public class PlayerController : MonoBehaviour
 
     void GetInput()
     {
+
+        bool buttonReleased = false;
         xAxis = player.GetAxis("Move Horizontal");
         yAxis = player.GetAxis("Move Vertical");
 
@@ -310,6 +315,11 @@ public class PlayerController : MonoBehaviour
         {
             interactPressed = player.GetButtonDown("Interact");
         }
+        else if(interactPressed && buttonReleaseTimer >= buttonReleaseCheck)
+        {
+                interactPressed = false;
+                buttonReleased = true;
+        }
 
         if (jumpPressed)
         {
@@ -327,6 +337,12 @@ public class PlayerController : MonoBehaviour
         if (!restartPressed)
         {
             restartPressed = player.GetButtonDown("Restart");
+        }
+
+        if(buttonReleased)
+        {
+            buttonReleaseTimer = 0.0f;
+            buttonReleased = false;
         }
     }
 

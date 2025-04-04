@@ -164,7 +164,6 @@ public class enemyBase : MonoBehaviour
     }
     protected virtual void Patrol(Vector2 alertAnchor)
     {
-        
         float distanceMoved = transform.position.x - alertAnchor.x;
 
         if (Mathf.Abs(distanceMoved) >= alertedPatrolDistance + 0.34f) 
@@ -202,7 +201,7 @@ public class enemyBase : MonoBehaviour
             transform.localScale = new Vector2(Mathf.Sign(direction.x) * Mathf.Abs(transform.localScale.x), transform.localScale.y);
         }
 
-        rb.velocity = new Vector2(direction.x * (speed * 1.3f), rb.velocity.y);
+        rb.velocity = new Vector2(direction.x * (speed * 1.2f), rb.velocity.y);
 
         float test = Vector2.Distance(transform.position, anchorPos);
 

@@ -2,6 +2,12 @@ using UnityEngine;
 
 public class FootSolider : enemyBase
 {
+    public enum Behavior
+    {
+        Patrol,
+        Guard
+    }
+    [SerializeField] public Behavior behavior;
     [Header("Foot Soldier Attack Settings")]
     [SerializeField] private Transform footSoldierAttackTransform;
     [SerializeField] private Vector2 footSoldierAttackArea;
@@ -38,28 +44,55 @@ public class FootSolider : enemyBase
     protected void FixedUpdate()
     {
         if (isRecoiling) return;
-
         Collider2D playerInRange = PlayerCheck();
 
-        if (aggressive)
+        switch (behavior)
         {
-            Chase(playerInRange);
-        }
-        if (alerted && !aggressive)
-        {
-            Alerted(playerInRange, alertPos);
-        }
-        else if (retreating)
-        {
-            Retreat();
-        }
-        else if (alertedPatrol && !aggressive)
-        {
-            Patrol(playerInRange, alertPos);
-        }
-        else if(!aggressive)
-        {
-            Patrol(playerInRange);
+            case Behavior.Patrol:
+                if (aggressive)
+                {
+                    Chase(playerInRange);
+                }
+                if (alerted && !aggressive)
+                {
+                    Alerted(playerInRange, alertPos);
+                }
+                else if (retreating)
+                {
+                    Retreat(playerInRange);
+                }
+                else if (alertedPatrol && !aggressive)
+                {
+                    Patrol(playerInRange, alertPos);
+                }
+                else if (!aggressive)
+                {
+                    Patrol(playerInRange);
+                }
+            break;
+            case Behavior.Guard:
+                if (aggressive)
+                {
+                    Chase(playerInRange);
+                }
+                if (alerted && !aggressive)
+                {
+                    Alerted(playerInRange, alertPos);
+                }
+                else if (retreating)
+                {
+                    GuardRetreat(playerInRange);
+                }
+                else if (alertedPatrol && !aggressive)
+                {
+                    Patrol(playerInRange, alertPos);
+                }
+                else if (!aggressive)
+                {
+                    Guard(playerInRange);
+                }
+                break;
+
         }
 
     }
@@ -107,7 +140,7 @@ public class FootSolider : enemyBase
             }
         }
 
-        rb.velocity = new Vector2(direction.x * (speed * 1.3f), rb.velocity.y);
+        rb.velocity = new Vector2(direction.x * (speed * 2f), rb.velocity.y);
 
         if (timeSinceAttack >= timeBetweenAttacks && Physics2D.Raycast(attackRangeTransform.position, direction, attackRange, layer))
         {
@@ -146,7 +179,8 @@ public class FootSolider : enemyBase
 
     public void Alerted(Collider2D _playerInRange, Vector2 _alertPos)
     {
-        if(!aggressive)
+        anim.SetBool("idle", false);
+        if (!aggressive)
         {
             base.Alerted(_alertPos);
         }
@@ -187,5 +221,61 @@ public class FootSolider : enemyBase
             }
         }
         return null;
+    }
+
+    public void GuardRetreat(Collider2D playerInRange)
+    {
+        anim.SetBool("idle", false);
+        direction = (anchorPos - (Vector2)transform.position).normalized;
+
+        if (direction.x != 0)
+        {
+            transform.localScale = new Vector2(Mathf.Sign(direction.x) * Mathf.Abs(transform.localScale.x), transform.localScale.y);
+        }
+
+        rb.velocity = new Vector2(direction.x * (speed * 1.3f), rb.velocity.y);
+
+        float test = Vector2.Distance(transform.position, anchorPos);
+
+        if (test <= 0.36f || retreatTimer <= 0)
+        {
+            retreating = false;
+            rb.velocity = Vector2.zero;
+            retreatTimer = 5.0f;
+            Guard(playerInRange);
+        }
+
+        if (playerInRange != null && playerInRange.CompareTag("Player"))
+        {
+            anim.SetBool("idle", false);
+            aggressive = true;
+            currentAggroTimer = aggressionTimer;
+            anim.SetBool("aggresive", true);
+        }
+    }
+
+    protected void Guard(Collider2D _playerInRange)
+    {
+        anim.SetBool("idle", true);
+
+        if (_playerInRange != null && _playerInRange.CompareTag("Player"))
+        {
+            anim.SetBool("idle", false);
+            aggressive = true;
+            currentAggroTimer = aggressionTimer;
+            anim.SetBool("aggresive", true);
+        }
+    }
+
+    protected void Retreat(Collider2D _playerInRange)
+    {
+        base.Retreat();
+        if (_playerInRange != null && _playerInRange.CompareTag("Player"))
+        {
+            anim.SetBool("idle", false);
+            aggressive = true;
+            currentAggroTimer = aggressionTimer;
+            anim.SetBool("aggresive", true);
+        }
     }
 }
