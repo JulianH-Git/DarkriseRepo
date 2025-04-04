@@ -9,7 +9,8 @@ public enum SpotlightStates
 {
     Off,
     Red,
-    Yellow
+    Yellow,
+    Laser
 }
 
 public class SpotlightPrefab : MonoBehaviour
@@ -41,10 +42,16 @@ public class SpotlightPrefab : MonoBehaviour
 
     private float duration = 0.1f;
 
+
+    // temporary stuff until laser gets implemented
+
+    private SpriteRenderer sr;
+
     // Start is called before the first frame update
     void Start()
     {
         controller = PlayerController.Instance;
+        sr = GetComponent<SpriteRenderer>();
 
         foreach (GameObject gate in gates)
         {
@@ -69,7 +76,6 @@ public class SpotlightPrefab : MonoBehaviour
                 }
                 else if(state == SpotlightStates.Yellow && !controller.pState.invincible) 
                 {
-                    controller.TakeDamage(1);
                     Debug.Log("Starting enemy search");
                     List<Collider2D> enemiesInRange = CheckForEnemies(enemyAlertTransform,enemyAlertRadius);
                     if(enemiesInRange != null && enemiesInRange.Count > 0)
@@ -77,6 +83,10 @@ public class SpotlightPrefab : MonoBehaviour
                         Debug.Log("Enemies in range - " + enemiesInRange.Count);
                         SignalEnemies(enemiesInRange);
                     }
+                }
+                else if(state == SpotlightStates.Laser && !controller.pState.invincible)
+                {
+                    controller.TakeDamage(1);
                 }
             }
         }
@@ -90,21 +100,29 @@ public class SpotlightPrefab : MonoBehaviour
             case SpotlightStates.Off:
                 lamp.GetComponent<SpriteRenderer>().sprite = lampSprites[0];
                 this.GetComponent<BoxCollider2D>().enabled = false;
-                this.GetComponent<SpriteRenderer>().enabled = false;
+                sr.enabled = false;
                 break;
 
             case SpotlightStates.Red:
                 lamp.GetComponent<SpriteRenderer>().sprite = lampSprites[1];
                 this.GetComponent<BoxCollider2D>().enabled = true;
-                this.GetComponent<SpriteRenderer>().enabled = true;
-                this.GetComponent<SpriteRenderer>().sprite = spotlightSprites[0];
+                sr.enabled = true;
+                sr.sprite = spotlightSprites[0];
                 break;
 
             case SpotlightStates.Yellow:
                 lamp.GetComponent<SpriteRenderer>().sprite = lampSprites[2];
                 this.GetComponent<BoxCollider2D>().enabled = true;
-                this.GetComponent<SpriteRenderer>().enabled = true;
-                this.GetComponent<SpriteRenderer>().sprite = spotlightSprites[1];
+                sr.enabled = true;
+                sr.sprite = spotlightSprites[1];
+                sr.color = Color.white;
+                break;
+            case SpotlightStates.Laser:
+                lamp.GetComponent<SpriteRenderer>().sprite = lampSprites[2];
+                this.GetComponent<BoxCollider2D>().enabled = true;
+                sr.enabled = true;
+                sr.sprite = spotlightSprites[1];
+                sr.color = Color.magenta;
                 break;
         }
 
@@ -202,6 +220,14 @@ public class SpotlightPrefab : MonoBehaviour
     {
         foreach (Collider2D obj in enemies)
         {
+            if(obj.GetComponent<FootSolider>() != null)
+            {
+                Collider2D playerInRange = obj.GetComponent<FootSolider>().PlayerCheck();
+                if (playerInRange != null && !obj.GetComponent<FootSolider>().aggressive)
+                {
+                    obj.GetComponent<FootSolider>().Alerted(playerInRange, enemyAlertTransform.position);
+                }
+            }
             obj.GetComponent<enemyBase>().Alerted(enemyAlertTransform.position);
         }
     }

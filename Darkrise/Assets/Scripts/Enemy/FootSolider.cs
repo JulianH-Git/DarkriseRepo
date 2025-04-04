@@ -7,17 +7,17 @@ public class FootSolider : enemyBase
     [SerializeField] private Vector2 footSoldierAttackArea;
     [SerializeField] private Transform attackRangeTransform;
     [SerializeField] private float attackRange;
-    [SerializeField] LayerMask layer;
+    [SerializeField] public LayerMask layer;
     [SerializeField] float timeBetweenAttacks;
     [SerializeField] float aggressionTimer;
 
     float timeSinceAttack;
-    bool aggressive;
+    public bool aggressive;
     float currentAggroTimer;
 
     [Header("Foot Soldier Detection Settings")]
-    [SerializeField] private Transform detectionRangeTransform;
-    [SerializeField] private Vector2 detectionRangeArea;
+    [SerializeField] public Transform detectionRangeTransform;
+    [SerializeField] public Vector2 detectionRangeArea;
     protected override void Awake()
     {
         base.Awake();
@@ -39,33 +39,34 @@ public class FootSolider : enemyBase
     {
         if (isRecoiling) return;
 
-        Collider2D playerInRange = Physics2D.OverlapBox(detectionRangeTransform.position, detectionRangeArea, 0, layer);
+        Collider2D playerInRange = PlayerCheck();
 
-        if(alerted)
+        if (aggressive)
         {
-            Alerted(alertPos);
+            Chase(playerInRange);
+        }
+        if (alerted && !aggressive)
+        {
+            Alerted(playerInRange, alertPos);
         }
         else if (retreating)
         {
             Retreat();
         }
-        else if (alertedPatrol)
+        else if (alertedPatrol && !aggressive)
         {
             Patrol(playerInRange, alertPos);
         }
-        else if (!aggressive)
+        else if(!aggressive)
         {
             Patrol(playerInRange);
-        }
-        else
-        {
-            Chase(playerInRange);
         }
 
     }
 
     protected void Patrol(Collider2D playerInRange)
     {
+        anim.SetBool("idle", false);
         base.Patrol();
 
         if (playerInRange != null && playerInRange.CompareTag("Player"))
@@ -78,10 +79,12 @@ public class FootSolider : enemyBase
 
     protected void Patrol(Collider2D playerInRange, Vector2 _alertPos)
     {
+        anim.SetBool("idle", true);
         base.Patrol(_alertPos);
 
         if (playerInRange != null && playerInRange.CompareTag("Player"))
         {
+            anim.SetBool("idle", false);
             aggressive = true;
             currentAggroTimer = aggressionTimer;
             anim.SetBool("aggresive", true);
@@ -141,6 +144,23 @@ public class FootSolider : enemyBase
         }
     }
 
+    public void Alerted(Collider2D _playerInRange, Vector2 _alertPos)
+    {
+        if(!aggressive)
+        {
+            base.Alerted(_alertPos);
+        }
+        
+
+        if (_playerInRange != null && _playerInRange.CompareTag("Player"))
+        {
+            aggressive = true;
+            currentAggroTimer = aggressionTimer;
+            anim.SetBool("aggresive", true);
+        }
+
+    }
+
     void OnDrawGizmos()
     {
         Gizmos.color = Color.black;
@@ -151,5 +171,21 @@ public class FootSolider : enemyBase
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(detectionRangeTransform.position, detectionRangeArea); // detection range for aggro mode
+    }
+
+    public Collider2D PlayerCheck()
+    {
+        Collider2D[] playerInRange = Physics2D.OverlapBoxAll(detectionRangeTransform.position, detectionRangeArea, 0, layer);
+        if (playerInRange != null)
+        {
+            for (int i = 0; i < playerInRange.Length; i++)
+            {
+                if (playerInRange[i].CompareTag("Player"))
+                {
+                    return playerInRange[i];
+                }
+            }
+        }
+        return null;
     }
 }

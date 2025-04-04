@@ -37,6 +37,7 @@ public class enemyBase : MonoBehaviour
     protected float alertedTimerCountdown;
     protected bool alerted;
     protected bool alertedPatrol;
+    protected bool alertedFlip;
     protected Vector2 alertPos;
     [Space(5)]
 
@@ -63,11 +64,13 @@ public class enemyBase : MonoBehaviour
         anim = GetComponent<Animator>();
         anchorPos = rb.position;
         boxCollider = GetComponent<BoxCollider2D>();
+        alertedTimerCountdown = alertedTimer;
     }
 
     // Update is called once per frame
     protected virtual void Update()
     {
+        if (isDying) return;
         if (health <= 0)
         {
             isDying = true;
@@ -91,7 +94,7 @@ public class enemyBase : MonoBehaviour
         }
         if(alertedPatrol)
         {
-            alertedTimer -= Time.deltaTime;
+            alertedTimerCountdown -= Time.deltaTime;
         }
     }
 
@@ -164,18 +167,27 @@ public class enemyBase : MonoBehaviour
         
         float distanceMoved = transform.position.x - alertAnchor.x;
 
-        if (Mathf.Abs(distanceMoved) >= patrolDistance + 0.34f)
+        if (Mathf.Abs(distanceMoved) >= alertedPatrolDistance + 0.34f) 
         {
-            transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
+            rb.velocity = new Vector2(0.0f, rb.velocity.y);
+
+            if((alertedTimerCountdown <= alertedTimer / 2) && !alertedFlip) // turn halfway through
+            {
+                transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
+                alertedFlip = true;
+            }
+        }
+        else
+        {
+            rb.velocity = new Vector2(speed * Mathf.Sign(transform.localScale.x), rb.velocity.y);
         }
 
-        rb.velocity = new Vector2(speed * Mathf.Sign(transform.localScale.x), rb.velocity.y);
-
-        if(alertedTimer <= 0)
+        if(alertedTimerCountdown <= 0)
         {
-            alertedTimer = alertedTimerCountdown;
+            alertedTimerCountdown = alertedTimer;
             alertedPatrol = false;
             retreating = true;
+            alertedFlip = false;
             Retreat();
         }
         Debug.Log(transform.position);
