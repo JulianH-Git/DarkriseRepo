@@ -82,3 +82,4 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 1
+  gizmoColor: {r: 1, g: 0, b: 0, a: 1}

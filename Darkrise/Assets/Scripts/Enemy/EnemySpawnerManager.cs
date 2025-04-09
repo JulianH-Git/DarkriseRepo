@@ -10,6 +10,7 @@ public class EnemySpawnerManager : MonoBehaviour
     [SerializeField] GameObject enemy;
     [SerializeField] Vector2 roomArea;
     [SerializeField] LayerMask layer;
+    [SerializeField] Color gizmoColor;
     GameObject spawnedEnemyRef;
     enemyBase spawnedEnemyRefMethods;
 
@@ -74,7 +75,7 @@ void Update()
 
     void OnDrawGizmos() // comment this out when we're done placing things to keep everything visible
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = gizmoColor;
         Gizmos.DrawWireCube(roomTransform.position, roomArea);
     }
 
@@ -89,5 +90,11 @@ void Update()
                 spawnedEnemyRefMethods.Retreat();
             }
         }
+    }
+
+    public void KillEnemy()
+    {
+        spawnedEnemyRef.SetActive(false);
+        this.gameObject.SetActive(false);
     }
 }
