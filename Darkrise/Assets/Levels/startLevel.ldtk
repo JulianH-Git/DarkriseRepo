@@ -138,7 +138,7 @@
 			"__bgColor": "#696A79",
 			"bgColor": null,
 			"useAutoIdentifier": true,
-			"bgRelPath": "Images/BuildingBlackground5.2.png",
+			"bgRelPath": "Images/BuildingBackground5.3.png",
 			"bgPos": "Cover",
 			"bgPivotX": 0.5,
 			"bgPivotY": 0.75,
