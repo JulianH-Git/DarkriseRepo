@@ -6,13 +6,11 @@ using UnityEngine.Playables;
 
 public class DashUpgrade : MonoBehaviour
 {
-    [SerializeField]
-    private PlayerController controller;
-    [SerializeField]
-    List<SpotlightPrefab> lowerSpotlights = new List<SpotlightPrefab>();
+    [SerializeField] private PlayerController controller;
+    [SerializeField] List<SpotlightPrefab> lowerSpotlights = new List<SpotlightPrefab>();
+    [SerializeField] List<SpotlightPrefab> forcedEncounterSpotlights = new List<SpotlightPrefab>();
+    [SerializeField] List<GameObject> onboarding = new List<GameObject>();
 
-    [SerializeField]
-    List<GameObject> onboarding = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -36,9 +34,14 @@ public class DashUpgrade : MonoBehaviour
                 spot.state = SpotlightStates.Yellow;
             }
 
-            foreach (GameObject insturct in onboarding)
+            foreach (SpotlightPrefab spot in forcedEncounterSpotlights)
             {
-                insturct.SetActive(true);
+                spot.state = SpotlightStates.ForcedEncounter;
+            }
+
+            foreach (GameObject instruct in onboarding)
+            {
+                instruct.SetActive(true);
             }
         }
 

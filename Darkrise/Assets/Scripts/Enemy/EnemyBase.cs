@@ -70,7 +70,6 @@ public class enemyBase : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        if (isDying) return;
         if (health <= 0)
         {
             isDying = true;

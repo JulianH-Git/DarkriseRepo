@@ -10,7 +10,8 @@ public enum SpotlightStates
     Off,
     Red,
     Yellow,
-    Laser
+    Laser,
+    ForcedEncounter
 }
 
 public class SpotlightPrefab : MonoBehaviour
@@ -22,13 +23,23 @@ public class SpotlightPrefab : MonoBehaviour
 
     PlayerController controller;
 
+    [Header("Red Spotlight Settings")]
     [SerializeField] List<GameObject> gates = new List<GameObject>();
     private List<Vector2> originalSizes = new List<Vector2>();
     [SerializeField] List<Vector2> spottedSizes = new List<Vector2>();
+    [Space(5)]
 
+    [Header("Yellow Spotlight Settings")]
     [SerializeField] Transform enemyAlertTransform;
     [SerializeField] Vector2 enemyAlertRadius;
     [SerializeField] LayerMask enemyLayer;
+    [Space(5)]
+
+    [Header("Forced Encounter Spotlight Settings")]
+    [SerializeField] List<GameObject> forcedEncounterWalls = new List<GameObject>();
+    [SerializeField] List<GameObject> extraEnemySpawns = new List<GameObject>();
+    [SerializeField] GameObject breakerSwitch;
+    [Space(5)]
 
 
     // player spotted
@@ -36,10 +47,8 @@ public class SpotlightPrefab : MonoBehaviour
     public bool PlayerSpotted { get => playerSpotted; }
 
     // cooldown
-    [SerializeField]
-    private float cooldown = 2f; // 2 seconds
+    [SerializeField] private float cooldown = 2f; // 2 seconds
     private float cooldownTimer = 0f;
-
     private float duration = 0.1f;
 
 
@@ -67,26 +76,37 @@ public class SpotlightPrefab : MonoBehaviour
             {
                 playerSpotted = true;
                 cooldownTimer = cooldown;
-                if(state == SpotlightStates.Red) 
+
+                switch (state)
                 {
-                    for (int i = 0; i < gates.Count; i++)
-                    {
-                        StartCoroutine(MoveGates(gates[i], spottedSizes[i]));
-                    }
-                }
-                else if(state == SpotlightStates.Yellow && !controller.pState.invincible) 
-                {
-                    Debug.Log("Starting enemy search");
-                    List<Collider2D> enemiesInRange = CheckForEnemies(enemyAlertTransform,enemyAlertRadius);
-                    if(enemiesInRange != null && enemiesInRange.Count > 0)
-                    {
-                        Debug.Log("Enemies in range - " + enemiesInRange.Count);
-                        SignalEnemies(enemiesInRange);
-                    }
-                }
-                else if(state == SpotlightStates.Laser && !controller.pState.invincible)
-                {
-                    controller.TakeDamage(1);
+                    case SpotlightStates.Red:
+                        for (int i = 0; i < gates.Count; i++)
+                        {
+                            StartCoroutine(MoveGates(gates[i], spottedSizes[i]));
+                        }
+                        break;
+                    case SpotlightStates.Yellow:
+                        if (!controller.pState.invincible)
+                        {
+                            List<Collider2D> enemiesInRange = CheckForEnemies(enemyAlertTransform, enemyAlertRadius);
+                            if (enemiesInRange != null && enemiesInRange.Count > 0)
+                            {
+                                SignalEnemies(enemiesInRange);
+                            }
+                        }
+                        break;
+                    case SpotlightStates.Laser:
+                        if (!controller.pState.invincible)
+                        {
+                            controller.TakeDamage(1);
+                        }
+                        break;
+                    case SpotlightStates.ForcedEncounter:
+                        if(!controller.pState.invincible)
+                        {
+                            ForcedEncounterSetup();
+                        }
+                        break;
                 }
             }
         }
@@ -123,6 +143,13 @@ public class SpotlightPrefab : MonoBehaviour
                 sr.enabled = true;
                 sr.sprite = spotlightSprites[1];
                 sr.color = Color.magenta;
+                break;
+            case SpotlightStates.ForcedEncounter:
+                lamp.GetComponent<SpriteRenderer>().sprite = lampSprites[2];
+                this.GetComponent<BoxCollider2D>().enabled = true;
+                sr.enabled = true;
+                sr.sprite = spotlightSprites[1];
+                sr.color = Color.blue;
                 break;
         }
 
@@ -230,5 +257,19 @@ public class SpotlightPrefab : MonoBehaviour
             }
             obj.GetComponent<enemyBase>().Alerted(enemyAlertTransform.position);
         }
+    }
+
+    void ForcedEncounterSetup()
+    {
+        foreach(GameObject obj in forcedEncounterWalls)
+        {
+            obj.SetActive(true);
+        }
+        foreach(GameObject esm in extraEnemySpawns)
+        {
+            esm.SetActive(true);
+        }
+
+        breakerSwitch.SetActive(true);
     }
 }
