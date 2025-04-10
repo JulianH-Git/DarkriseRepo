@@ -41,6 +41,8 @@ public class SpotlightPrefab : MonoBehaviour
     [SerializeField] GameObject breakerSwitch;
     [Space(5)]
 
+    [Header("Music change")]
+    [SerializeField] private MusicArea area;
 
     // player spotted
     private bool playerSpotted = false;
@@ -105,6 +107,8 @@ public class SpotlightPrefab : MonoBehaviour
                         if(!controller.pState.invincible)
                         {
                             ForcedEncounterSetup();
+                            area = MusicArea.NormalArea;
+                            AudioManager.instance.SetMusicArea(area);
                         }
                         break;
                 }

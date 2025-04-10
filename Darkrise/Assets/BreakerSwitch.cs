@@ -6,6 +6,10 @@ public class BreakerSwitch : InteractTrigger
     [SerializeField] List<GameObject> encounterRoomLocks = new List<GameObject>();
     [SerializeField] List<GameObject> extraEnemySpawners = new List<GameObject>();
     [SerializeField] List<GameObject> spotlights = new List<GameObject>();
+
+    [Header("Music change")]
+    [SerializeField] private MusicArea area;
+
     protected override void Start()
     {
         base.Start();
@@ -26,7 +30,9 @@ public class BreakerSwitch : InteractTrigger
 
     public void DeactivateForcedEncounter()
     {
-        foreach(GameObject obj in encounterRoomLocks)
+        area = MusicArea.DarkArea;
+        AudioManager.instance.SetMusicArea(area);
+        foreach (GameObject obj in encounterRoomLocks)
         {
             if (obj.GetComponent<ForcedEncounterRoomLock>() != null)
             {
