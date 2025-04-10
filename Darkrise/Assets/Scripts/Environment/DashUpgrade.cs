@@ -39,9 +39,9 @@ public class DashUpgrade : MonoBehaviour
                 spot.state = SpotlightStates.ForcedEncounter;
             }
 
-            foreach (GameObject insturct in onboarding)
+            foreach (GameObject instruct in onboarding)
             {
-                insturct.SetActive(true);
+                instruct.SetActive(true);
             }
         }
 

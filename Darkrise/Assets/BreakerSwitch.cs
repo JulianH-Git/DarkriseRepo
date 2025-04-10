@@ -5,6 +5,7 @@ public class BreakerSwitch : InteractTrigger
 {
     [SerializeField] List<GameObject> encounterRoomLocks = new List<GameObject>();
     [SerializeField] List<GameObject> extraEnemySpawners = new List<GameObject>();
+    [SerializeField] List<GameObject> spotlights = new List<GameObject>();
     protected override void Start()
     {
         base.Start();
@@ -23,7 +24,7 @@ public class BreakerSwitch : InteractTrigger
         }
     }
 
-    void DeactivateForcedEncounter()
+    public void DeactivateForcedEncounter()
     {
         foreach(GameObject obj in encounterRoomLocks)
         {
@@ -39,6 +40,11 @@ public class BreakerSwitch : InteractTrigger
             {
                 esm.GetComponent<EnemySpawnerManager>().KillEnemy();
             }
+        }
+
+        foreach (GameObject spot in spotlights)
+        {
+            spot.GetComponent<SpotlightPrefab>().state = SpotlightStates.Off;
         }
 
         this.gameObject.SetActive(false);
