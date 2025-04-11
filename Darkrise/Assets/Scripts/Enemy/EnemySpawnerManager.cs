@@ -11,11 +11,11 @@ public class EnemySpawnerManager : MonoBehaviour
     [SerializeField] Vector2 roomArea;
     [SerializeField] LayerMask layer;
     [SerializeField] Color gizmoColor;
+    [SerializeField] float respawnTimer;
     GameObject spawnedEnemyRef;
     enemyBase spawnedEnemyRefMethods;
 
     bool enemySpawned = false;
-    float respawnTimer;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +23,6 @@ public class EnemySpawnerManager : MonoBehaviour
         spawnedEnemyRef = Instantiate(enemy, roomTransform.position, Quaternion.identity);
         enemySpawned = true;
         spawnedEnemyRefMethods = spawnedEnemyRef.GetComponent<enemyBase>();
-        respawnTimer = 5f;
     }
 
     // Update is called once per frame

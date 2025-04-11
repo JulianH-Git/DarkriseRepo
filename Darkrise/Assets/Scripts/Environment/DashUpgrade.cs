@@ -7,8 +7,7 @@ using UnityEngine.Playables;
 public class DashUpgrade : MonoBehaviour
 {
     [SerializeField] private PlayerController controller;
-    [SerializeField] List<SpotlightPrefab> lowerSpotlights = new List<SpotlightPrefab>();
-    [SerializeField] List<SpotlightPrefab> forcedEncounterSpotlights = new List<SpotlightPrefab>();
+    [SerializeField] private ForcedEncounterManager FEM;
     [SerializeField] List<GameObject> onboarding = new List<GameObject>();
 
 
@@ -29,15 +28,7 @@ public class DashUpgrade : MonoBehaviour
         if (collision.CompareTag("Player") && !collision.isTrigger)
         {
             controller.canDash = true;
-            foreach (SpotlightPrefab spot in lowerSpotlights) 
-            {
-                spot.state = SpotlightStates.Yellow;
-            }
-
-            foreach (SpotlightPrefab spot in forcedEncounterSpotlights)
-            {
-                spot.state = SpotlightStates.ForcedEncounter;
-            }
+            FEM.ActivateForcedEncounterRoom1();
 
             foreach (GameObject instruct in onboarding)
             {

@@ -3,9 +3,7 @@ using UnityEngine;
 
 public class BreakerSwitch : InteractTrigger
 {
-    [SerializeField] List<GameObject> encounterRoomLocks = new List<GameObject>();
-    [SerializeField] List<GameObject> extraEnemySpawners = new List<GameObject>();
-    [SerializeField] List<GameObject> spotlights = new List<GameObject>();
+    public bool deactivated;
 
     [Header("Music change")]
     [SerializeField] private MusicArea area;
@@ -23,36 +21,9 @@ public class BreakerSwitch : InteractTrigger
 
             if (controller.Interact())
             {
-                DeactivateForcedEncounter();
+                deactivated = true;
+                this.gameObject.SetActive(false);
             }
         }
-    }
-
-    public void DeactivateForcedEncounter()
-    {
-        area = MusicArea.DarkArea;
-        AudioManager.instance.SetMusicArea(area);
-        foreach (GameObject obj in encounterRoomLocks)
-        {
-            if (obj.GetComponent<ForcedEncounterRoomLock>() != null)
-            {
-                obj.GetComponent<ForcedEncounterRoomLock>().RemoveLock();
-            }
-        }
-
-        foreach (GameObject esm in extraEnemySpawners)
-        {
-            if (esm.GetComponent<EnemySpawnerManager>() != null)
-            {
-                esm.GetComponent<EnemySpawnerManager>().KillEnemy();
-            }
-        }
-
-        foreach (GameObject spot in spotlights)
-        {
-            spot.GetComponent<SpotlightPrefab>().state = SpotlightStates.Off;
-        }
-
-        this.gameObject.SetActive(false);
     }
 }

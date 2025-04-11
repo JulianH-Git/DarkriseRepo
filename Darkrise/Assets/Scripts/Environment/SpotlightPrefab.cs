@@ -36,9 +36,8 @@ public class SpotlightPrefab : MonoBehaviour
     [Space(5)]
 
     [Header("Forced Encounter Spotlight Settings")]
-    [SerializeField] List<GameObject> forcedEncounterWalls = new List<GameObject>();
-    [SerializeField] List<GameObject> extraEnemySpawns = new List<GameObject>();
-    [SerializeField] GameObject breakerSwitch;
+    [SerializeField] EnemySpawnerManager enemySpawner;
+    public bool startEncounter = false;
     [Space(5)]
 
     [Header("Music change")]
@@ -106,9 +105,17 @@ public class SpotlightPrefab : MonoBehaviour
                     case SpotlightStates.ForcedEncounter:
                         if(!controller.pState.invincible)
                         {
-                            ForcedEncounterSetup();
                             area = MusicArea.NormalArea;
                             AudioManager.instance.SetMusicArea(area);
+
+                            startEncounter = true;
+                            enemySpawner.gameObject.SetActive(true);
+
+                            List<Collider2D> enemiesinRange = CheckForEnemies(enemyAlertTransform, enemyAlertRadius);
+                            if(enemiesinRange != null && enemiesinRange.Count > 0)
+                            {
+                                SignalEnemies(enemiesinRange);
+                            }
                         }
                         break;
                 }
@@ -136,6 +143,7 @@ public class SpotlightPrefab : MonoBehaviour
 
             case SpotlightStates.Yellow:
                 lamp.GetComponent<SpriteRenderer>().sprite = lampSprites[2];
+
                 this.GetComponent<BoxCollider2D>().enabled = true;
                 sr.enabled = true;
                 sr.sprite = spotlightSprites[1];
@@ -154,6 +162,12 @@ public class SpotlightPrefab : MonoBehaviour
                 sr.enabled = true;
                 sr.sprite = spotlightSprites[1];
                 sr.color = Color.blue;
+
+                if(startEncounter == false)
+                {
+                    enemySpawner.gameObject.SetActive(false);
+                }
+
                 break;
         }
 
@@ -242,8 +256,6 @@ public class SpotlightPrefab : MonoBehaviour
                 enemiesInRange.Add(ObjectsToHit[i]);
             }
         }
-
-        Debug.Log("Enemies found - " + enemiesInRange.Count);
         return enemiesInRange;
     }
 
@@ -261,19 +273,5 @@ public class SpotlightPrefab : MonoBehaviour
             }
             obj.GetComponent<enemyBase>().Alerted(enemyAlertTransform.position);
         }
-    }
-
-    void ForcedEncounterSetup()
-    {
-        foreach(GameObject obj in forcedEncounterWalls)
-        {
-            obj.SetActive(true);
-        }
-        foreach(GameObject esm in extraEnemySpawns)
-        {
-            esm.SetActive(true);
-        }
-
-        breakerSwitch.SetActive(true);
     }
 }
