@@ -36,7 +36,6 @@ public class SpotlightPrefab : MonoBehaviour
     [Space(5)]
 
     [Header("Forced Encounter Spotlight Settings")]
-    [SerializeField] EnemySpawnerManager enemySpawner;
     public bool startEncounter = false;
     [Space(5)]
 
@@ -109,7 +108,6 @@ public class SpotlightPrefab : MonoBehaviour
                             AudioManager.instance.SetMusicArea(area);
 
                             startEncounter = true;
-                            enemySpawner.gameObject.SetActive(true);
 
                             List<Collider2D> enemiesinRange = CheckForEnemies(enemyAlertTransform, enemyAlertRadius);
                             if(enemiesinRange != null && enemiesinRange.Count > 0)
@@ -162,12 +160,6 @@ public class SpotlightPrefab : MonoBehaviour
                 sr.enabled = true;
                 sr.sprite = spotlightSprites[1];
                 sr.color = Color.blue;
-
-                if(startEncounter == false)
-                {
-                    enemySpawner.gameObject.SetActive(false);
-                }
-
                 break;
         }
 

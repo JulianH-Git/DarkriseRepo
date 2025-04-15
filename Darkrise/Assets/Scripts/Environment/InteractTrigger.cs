@@ -10,13 +10,7 @@ public class InteractTrigger : MonoBehaviour
 {
     [SerializeField] protected GameObject player;
     protected PlayerController controller;
-
-    [SerializeField] protected GameObject teleportPoint;
-
     [SerializeField] protected SpriteRenderer indicateColor;
-
-    [SerializeField] protected bool isGap = false;
-
     [SerializeField] protected GameObject indicator;
 
     // Start is called before the first frame update
@@ -30,31 +24,12 @@ public class InteractTrigger : MonoBehaviour
     {
         if (collision.CompareTag("Player") && !collision.isTrigger)
         {
-            if (isGap)
-            {
-                Vector2 point = new Vector2(teleportPoint.transform.position.x, teleportPoint.transform.position.y);
-
-                player.transform.localPosition = point;
-                controller.TakeDamage(1);
-            }
-            else 
-            {
-                indicateColor.color = Color.green;
-                indicator.SetActive(true);
-
-                if (controller.Interact())
-                {
-                    Vector2 point = new Vector2(teleportPoint.transform.position.x, teleportPoint.transform.position.y);
-
-                    player.transform.localPosition = point;
-                }
-            }
-
+            TriggerActivated();
         }
     }
     protected virtual void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && !isGap)
+        if (collision.CompareTag("Player"))
         {
             indicator.SetActive(false);
             indicateColor.color = Color.white;
@@ -62,7 +37,7 @@ public class InteractTrigger : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void TriggerActivated()
     {
 
     }
