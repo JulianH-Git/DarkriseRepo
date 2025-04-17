@@ -148,11 +148,8 @@ public class SpotlightPrefab : MonoBehaviour
                 sr.color = Color.white;
                 break;
             case SpotlightStates.Laser:
-                lamp.GetComponent<SpriteRenderer>().sprite = lampSprites[2];
                 this.GetComponent<BoxCollider2D>().enabled = true;
                 sr.enabled = true;
-                sr.sprite = spotlightSprites[1];
-                sr.color = Color.magenta;
                 break;
             case SpotlightStates.ForcedEncounter:
                 lamp.GetComponent<SpriteRenderer>().sprite = lampSprites[2];
