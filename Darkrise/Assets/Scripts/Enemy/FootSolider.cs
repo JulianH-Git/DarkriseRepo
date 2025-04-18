@@ -127,7 +127,7 @@ public class FootSolider : enemyBase
     protected virtual void Chase(Collider2D playerInRange)
     {
         currentAggroTimer -= Time.deltaTime;
-
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.SoldierDetected, this.transform.position);
         if (playerInRange != null)
         {
             currentAggroTimer = aggressionTimer;
@@ -191,6 +191,7 @@ public class FootSolider : enemyBase
             aggressive = true;
             currentAggroTimer = aggressionTimer;
             anim.SetBool("aggresive", true);
+            
         }
 
     }

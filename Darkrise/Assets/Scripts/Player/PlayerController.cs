@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb; // player rigid body
     private Animator animator;
-
+    private enemyBase enemy;
     [Header("Horizontal Movement Settings")]
     [SerializeField] private float walkSpeed;
     private float xAxis;
@@ -499,8 +499,18 @@ public class PlayerController : MonoBehaviour
         {
             if (ObjectsToHit[i].GetComponent<enemyBase>() != null)
             {
-                
-                AudioManager.instance.PlayOneShot(FMODEvents.instance.enemyHit, this.transform.position);
+
+                enemy = ObjectsToHit[i].GetComponent<enemyBase>();
+
+            if (enemy.GetComponent<FootSolider>() != null) 
+                {
+                    AudioManager.instance.PlayOneShot(FMODEvents.instance.SoldierHurt, this.transform.position);
+                }
+                if (enemy.GetComponent<GroundSentry>() != null)
+                {
+                    AudioManager.instance.PlayOneShot(FMODEvents.instance.SentryHurt, this.transform.position);
+                }
+
                 switch (currentAttackType)
                 {
                     case (AttackType.Neutral):
