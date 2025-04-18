@@ -247,6 +247,11 @@ public class PlayerController : MonoBehaviour
             ghost.makeGhost = false;
             animator.SetBool("isDashing", false);
         }
+
+        if(pState.casting)
+        {
+            return;
+        }
         Flip();
         Move();
         Jump();
@@ -319,6 +324,7 @@ public class PlayerController : MonoBehaviour
         {
             if (Grounded() || !doubleJumpPressed)
             {
+                animator.SetTrigger("jumpSquat");
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 doubleJumpPressed = !Grounded();
             }
@@ -553,7 +559,7 @@ public class PlayerController : MonoBehaviour
                         currentDarkEnergy -= fireballCost;
                         pState.casting = true;
                         timeSinceCast = 0;
-                        CastFireball();
+                        StartCoroutine(CastFireball());
                         AudioManager.instance.PlayOneShot(FMODEvents.instance.darkShot, this.transform.position);
                     }
                     else
@@ -568,7 +574,7 @@ public class PlayerController : MonoBehaviour
                         currentLightEnergy -= fireballCost;
                         pState.casting = true;
                         timeSinceCast = 0;
-                        CastFireball();
+                        StartCoroutine(CastFireball());
                         AudioManager.instance.PlayOneShot(FMODEvents.instance.lightShot, this.transform.position);
                     }
                     else
@@ -589,31 +595,34 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void CastFireball() // this should become a coroutine later when we implement a casting animation.
+    IEnumerator CastFireball() // this should become a coroutine later when we implement a casting animation.
     {
-        //anim.SetBool("casting", true); - for if/when we get a fireball casting animation
 
         if (yAxis == 0 || yAxis < 0 && Grounded())
         {
             GameObject fireball = null;
+            pState.casting = true;
 
             if (currentAttackType == AttackType.Light)
             {
+                rb.velocity = new Vector2(0.0f, rb.velocity.y);
+                animator.SetTrigger("lightFireballShoot");
+                yield return new WaitForSeconds(timeToCast);
                 fireball = Instantiate(lightFireball, fireballTransform.position, Quaternion.identity);
             }
                 
             else if (currentAttackType == AttackType.Dark)
             {
+                rb.velocity = new Vector2(0.0f, rb.velocity.y);
+                animator.SetTrigger("darkFireballShoot");
+                yield return new WaitForSeconds(timeToCast);
                 fireball = Instantiate(darkFireball, fireballTransform.position, Quaternion.identity);
             }
 
-
             fireball.GetComponent<Fireball>().SetDirection(pState.lookingRight);
-
 
             pState.casting = false;
             castSpell = false;
-
         }
     }
 
