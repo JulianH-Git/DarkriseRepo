@@ -62,9 +62,12 @@ public class SpotlightPrefab : MonoBehaviour
         controller = PlayerController.Instance;
         sr = GetComponent<SpriteRenderer>();
 
-        foreach (GameObject gate in gates)
+        if(gates != null && gates.Count > 0)
         {
-            originalSizes.Add(gate.transform.localScale);
+            foreach (GameObject gate in gates)
+            {
+                originalSizes.Add(gate.transform.localScale);
+            }
         }
     }
 
@@ -113,6 +116,15 @@ public class SpotlightPrefab : MonoBehaviour
                             if(enemiesinRange != null && enemiesinRange.Count > 0)
                             {
                                 SignalEnemies(enemiesinRange);
+                            }
+
+                            List<Collider2D> wallsInRange = CheckForWalls(enemyAlertTransform, enemyAlertRadius);
+                            if(wallsInRange != null && wallsInRange.Count > 0)
+                            {
+                                foreach(Collider2D wall in wallsInRange)
+                                {
+                                    wall.GetComponent<ForcedEncounterRoomLock>().ActivateLock();
+                                }
                             }
                         }
                         break;
@@ -246,6 +258,20 @@ public class SpotlightPrefab : MonoBehaviour
             }
         }
         return enemiesInRange;
+    }
+    List<Collider2D> CheckForWalls(Transform _roomTransform, Vector2 _roomArea)
+    {
+        Collider2D[] potentialWalls = Physics2D.OverlapBoxAll(_roomTransform.position, _roomArea, 0, enemyLayer);
+        List<Collider2D> wallsInRange = new List<Collider2D>();
+
+        for (int i = 0; i < potentialWalls.Length; i++)
+        {
+            if (potentialWalls[i].GetComponent<ForcedEncounterRoomLock>() != null)
+            {
+                wallsInRange.Add(potentialWalls[i]);
+            }
+        }
+        return wallsInRange;
     }
 
     void SignalEnemies(List<Collider2D> enemies)

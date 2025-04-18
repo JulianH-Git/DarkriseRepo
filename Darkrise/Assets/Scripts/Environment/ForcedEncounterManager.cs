@@ -6,10 +6,12 @@ using UnityEngine;
 public class ForcedEncounterManager : MonoBehaviour
 {
     [SerializeField] BreakerSwitch breaker;
-    [SerializeField] List<GameObject> spotlights = new List<GameObject>();
+    [SerializeField] List<GameObject> feSpotlights = new List<GameObject>();
+    [SerializeField] List<GameObject> lasers = new List<GameObject>();
     [SerializeField] List<GameObject> forcedEncounterWalls = new List<GameObject>();
     [SerializeField] List<GameObject> extraEnemySpawns = new List<GameObject>();
     [SerializeField] List<GameObject> permanentEnemySpawns = new List<GameObject>();
+    [SerializeField] ForcedEncounterManager chainNextEncounter;
 
     [Header("Audio Settings")]
     [SerializeField] private MusicArea area;
@@ -24,11 +26,15 @@ public class ForcedEncounterManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(breaker.deactivated)
+        if (breaker.deactivated)
         {
             DeactivateForcedEncounter();
+            if (chainNextEncounter != null)
+            {
+                chainNextEncounter.ActivateForcedEncounterMidSecurity();
+            }
         }
-        foreach(GameObject obj in spotlights)
+        foreach(GameObject obj in feSpotlights)
         {
             if (obj.GetComponent<SpotlightPrefab>() != null && obj.GetComponent<SpotlightPrefab>().startEncounter == true)
             {
@@ -38,23 +44,24 @@ public class ForcedEncounterManager : MonoBehaviour
         }
     }
 
-    void ActivateForcedEncounter()
+    public void ActivateForcedEncounter()
     {
         breaker.gameObject.SetActive(true);
         ActivateWalls();
         ActivateSpotlights();
+        ActivateLasers();
         ActivateSpawners();
     }
 
-    public void ActivateForcedEncounterRoom1()
+    public void ActivateForcedEncounterMidSecurity()
     {
         breaker.gameObject.SetActive(true);
         foreach (GameObject psm in permanentEnemySpawns)
         {
             psm.SetActive(true);
         }
-        ActivateWalls();
         ActivateSpotlights();
+        ActivateLasers();
     }
 
     void DeactivateForcedEncounter()
@@ -78,7 +85,7 @@ public class ForcedEncounterManager : MonoBehaviour
             }
         }
 
-        foreach (GameObject spot in spotlights)
+        foreach (GameObject spot in feSpotlights)
         {
             if(spot.activeSelf == true)
             {
@@ -111,9 +118,17 @@ public class ForcedEncounterManager : MonoBehaviour
 
     void ActivateSpotlights()
     {
-        foreach(GameObject spot in spotlights)
+        foreach(GameObject spot in feSpotlights)
         {
             spot.GetComponent<SpotlightPrefab>().state = SpotlightStates.ForcedEncounter;
+        }
+    }
+
+    void ActivateLasers()
+    {
+        foreach(GameObject laser in lasers)
+        {
+            laser.GetComponent<SpotlightPrefab>().state = SpotlightStates.Laser;
         }
     }
 }

@@ -8,4 +8,9 @@ public class ForcedEncounterRoomLock : MonoBehaviour
     {
         this.gameObject.SetActive(false);
     }
+
+    public void ActivateLock()
+    {
+        this.gameObject.SetActive(true);
+    }
 }
