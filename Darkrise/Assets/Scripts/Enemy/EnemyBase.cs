@@ -41,6 +41,10 @@ public class enemyBase : MonoBehaviour
     protected Vector2 alertPos;
     [Space(5)]
 
+    [Header("Audio Settings")]
+    protected bool dieOnce = false;
+
+
     protected Rigidbody2D rb;
 
     protected float retreatTimer = 5.0f;
@@ -76,6 +80,27 @@ public class enemyBase : MonoBehaviour
             rb.simulated = false;
             boxCollider.enabled = false;
             anim.SetTrigger("death");
+
+            //Temporary solution for differentiating between enemy death sounds
+            //Currently based on how much damage an enemy is capable of doing to the player
+            //Could probably be refactored to just be based on what type of enemy it is
+            //dieOnce makes sure that the death noise doesn't loop forever since its in update
+            if (!dieOnce)
+            {
+                if (damage == 1)
+                {
+                    AudioManager.instance.PlayOneShot(FMODEvents.instance.SentryDestroyed, this.transform.position);
+                }
+                else if (damage == 2) 
+                {
+                    AudioManager.instance.PlayOneShot(FMODEvents.instance.SoldierDestroyed, this.transform.position);
+                }
+                
+                dieOnce = true;
+            }
+            
+
+
         }
         if (isRecoiling)
         {
@@ -107,6 +132,7 @@ public class enemyBase : MonoBehaviour
             rb.AddForce(-_hitForce * recoilFactor * _hitDirection);
             isRecoiling = true;
         }
+        
     }
 
     protected virtual void OnCollisionStay2D(Collision2D other)
@@ -147,6 +173,11 @@ public class enemyBase : MonoBehaviour
         Color color = sr.color;
         color.a = 255;
         sr.color = color;
+    }
+
+    public void DeathNoise()
+    {
+            
     }
 
     protected virtual void Patrol()

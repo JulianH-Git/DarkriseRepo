@@ -24,6 +24,8 @@ public class FootSolider : enemyBase
     [Header("Foot Soldier Detection Settings")]
     [SerializeField] public Transform detectionRangeTransform;
     [SerializeField] public Vector2 detectionRangeArea;
+
+    bool chaseOnce = false;
     protected override void Awake()
     {
         base.Awake();
@@ -52,6 +54,13 @@ public class FootSolider : enemyBase
                 if (aggressive)
                 {
                     Chase(playerInRange);
+                    //Should probably be adjusted later to just trigger when the Soldier sees the player but the moment he detects you wasn't clear
+                    if(!chaseOnce)
+                    {
+                        AudioManager.instance.PlayOneShot(FMODEvents.instance.SoldierDetected, this.transform.position);
+                        chaseOnce = true;
+                    }
+                    
                 }
                 if (alerted && !aggressive)
                 {
@@ -127,7 +136,6 @@ public class FootSolider : enemyBase
     protected virtual void Chase(Collider2D playerInRange)
     {
         currentAggroTimer -= Time.deltaTime;
-        AudioManager.instance.PlayOneShot(FMODEvents.instance.SoldierDetected, this.transform.position);
         if (playerInRange != null)
         {
             currentAggroTimer = aggressionTimer;

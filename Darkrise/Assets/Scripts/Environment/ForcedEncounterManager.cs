@@ -12,7 +12,7 @@ public class ForcedEncounterManager : MonoBehaviour
     [SerializeField] List<GameObject> extraEnemySpawns = new List<GameObject>();
     [SerializeField] List<GameObject> permanentEnemySpawns = new List<GameObject>();
     [SerializeField] ForcedEncounterManager chainNextEncounter;
-
+    [SerializeField] private enemyBase enemy;
     [Header("Audio Settings")]
     [SerializeField] private MusicArea area;
 
