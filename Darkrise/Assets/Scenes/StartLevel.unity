@@ -31994,6 +31994,7 @@ MonoBehaviour:
   - {fileID: 254262687}
   permanentEnemySpawns: []
   chainNextEncounter: {fileID: 1652745188}
+  enemy: {fileID: 0}
   area: 0
 --- !u!1 &573112872
 GameObject:
@@ -40490,6 +40491,7 @@ MonoBehaviour:
   - {fileID: 89601862}
   - {fileID: 1800780338}
   chainNextEncounter: {fileID: 0}
+  enemy: {fileID: 0}
   area: 0
 --- !u!1 &1656518528
 GameObject:
@@ -43598,55 +43600,76 @@ MonoBehaviour:
       Data3: 220930223
       Data4: -834448491
     Path: event:/SFX/Player/PowerSelect
-  <SoldierHurt>k__BackingField:
+  <soldierHurt>k__BackingField:
     Guid:
       Data1: 869750778
       Data2: 1190146412
       Data3: 1925680054
       Data4: 189568926
     Path: event:/SFX/Enemies/Soldier/SoldierDamage
-  <SoldierDestroyed>k__BackingField:
+  <soldierDestroyed>k__BackingField:
     Guid:
       Data1: 791326486
       Data2: 1145060513
       Data3: 1792809876
       Data4: -1326743819
     Path: event:/SFX/Enemies/Soldier/SoldierDestroyed
-  <SoldierSpawns>k__BackingField:
+  <soldierSpawns>k__BackingField:
     Guid:
       Data1: -1553779112
       Data2: 1170245016
       Data3: -240058473
       Data4: -743939466
     Path: event:/SFX/Enemies/Soldier/SoldierSpawns
-  <SoldierDetected>k__BackingField:
+  <soldierDetected>k__BackingField:
     Guid:
       Data1: 2044956913
       Data2: 1330037972
       Data3: 231036056
       Data4: -1539141405
     Path: event:/SFX/Enemies/Soldier/SoldierDetected
-  <SentryHurt>k__BackingField:
+  <sentryHurt>k__BackingField:
     Guid:
       Data1: 1420656777
       Data2: 1148641176
       Data3: -689290328
       Data4: 205277894
     Path: event:/SFX/Enemies/Sentry/SentryDamage
-  <SentrySpawns>k__BackingField:
+  <sentrySpawns>k__BackingField:
     Guid:
       Data1: 1662880024
       Data2: 1109354695
       Data3: 595749039
       Data4: 1716748648
     Path: event:/SFX/Enemies/Sentry/SentrySpawns
-  <SentryDestroyed>k__BackingField:
+  <sentryDestroyed>k__BackingField:
     Guid:
       Data1: 924017511
       Data2: 1272017544
       Data3: 866376355
       Data4: 944872764
     Path: event:/SFX/Enemies/Sentry/SentryDestroyed
+  <redAlarm>k__BackingField:
+    Guid:
+      Data1: 1799431455
+      Data2: 1275318575
+      Data3: 14921876
+      Data4: 1931445824
+    Path: event:/SFX/Spotlights/RedSpotlightAlarm
+  <blueAlarm>k__BackingField:
+    Guid:
+      Data1: 1455041739
+      Data2: 1322569894
+      Data3: 323495315
+      Data4: 64427093
+    Path: event:/SFX/Spotlights/BlueSpotlightAlarm
+  <encounterPanel>k__BackingField:
+    Guid:
+      Data1: -534365283
+      Data2: 1109059544
+      Data3: 463722116
+      Data4: -239367458
+    Path: event:/SFX/Interactables/EncounterPanel
 --- !u!1 &2128627541
 GameObject:
   m_ObjectHideFlags: 0

@@ -57,7 +57,7 @@ public class FootSolider : enemyBase
                     //Should probably be adjusted later to just trigger when the Soldier sees the player but the moment he detects you wasn't clear
                     if(!chaseOnce)
                     {
-                        AudioManager.instance.PlayOneShot(FMODEvents.instance.SoldierDetected, this.transform.position);
+                        AudioManager.instance.PlayOneShot(FMODEvents.instance.soldierDetected, this.transform.position);
                         chaseOnce = true;
                     }
                     

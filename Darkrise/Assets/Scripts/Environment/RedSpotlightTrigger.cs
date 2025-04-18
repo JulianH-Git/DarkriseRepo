@@ -46,6 +46,7 @@ public class RedSpotlightTrigger : MonoBehaviour
             if (!playerState.dashing)
             {
                 playerSpotted = true;
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.redAlarm, this.transform.position);
                 cooldownTimer = cooldown;
                 for (int i = 0; i < gates.Count; i++)
                 {

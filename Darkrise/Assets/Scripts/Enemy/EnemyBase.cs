@@ -89,11 +89,11 @@ public class enemyBase : MonoBehaviour
             {
                 if (damage == 1)
                 {
-                    AudioManager.instance.PlayOneShot(FMODEvents.instance.SentryDestroyed, this.transform.position);
+                    AudioManager.instance.PlayOneShot(FMODEvents.instance.sentryDestroyed, this.transform.position);
                 }
                 else if (damage == 2) 
                 {
-                    AudioManager.instance.PlayOneShot(FMODEvents.instance.SoldierDestroyed, this.transform.position);
+                    AudioManager.instance.PlayOneShot(FMODEvents.instance.soldierDestroyed, this.transform.position);
                 }
                 
                 dieOnce = true;

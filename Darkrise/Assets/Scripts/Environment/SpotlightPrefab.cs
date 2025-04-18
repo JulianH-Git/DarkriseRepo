@@ -39,8 +39,9 @@ public class SpotlightPrefab : MonoBehaviour
     public bool startEncounter = false;
     [Space(5)]
 
-    [Header("Music change")]
+    [Header("Audio Settings")]
     [SerializeField] private MusicArea area;
+    [SerializeField] private bool spotOnce = false;
 
     // player spotted
     private bool playerSpotted = false;
@@ -83,6 +84,11 @@ public class SpotlightPrefab : MonoBehaviour
                 switch (state)
                 {
                     case SpotlightStates.Red:
+                        if (!spotOnce)
+                        {
+                            AudioManager.instance.PlayOneShot(FMODEvents.instance.redAlarm, this.transform.position);
+                            spotOnce = true;
+                        }
                         for (int i = 0; i < gates.Count; i++)
                         {
                             StartCoroutine(MoveGates(gates[i], spottedSizes[i]));
@@ -107,8 +113,12 @@ public class SpotlightPrefab : MonoBehaviour
                     case SpotlightStates.ForcedEncounter:
                         if(!controller.pState.invincible)
                         {
-                            area = MusicArea.NormalArea;
-                            AudioManager.instance.SetMusicArea(area);
+                            if (!spotOnce)
+                            {
+                                AudioManager.instance.PlayOneShot(FMODEvents.instance.blueAlarm, this.transform.position);
+                                spotOnce = true;
+                            }
+                            
 
                             startEncounter = true;
 

@@ -15,6 +15,7 @@ public class ForcedEncounterManager : MonoBehaviour
     [SerializeField] private enemyBase enemy;
     [Header("Audio Settings")]
     [SerializeField] private MusicArea area;
+    [SerializeField] private bool deactivateOnce = false;
 
 
     // Start is called before the first frame update
@@ -66,8 +67,13 @@ public class ForcedEncounterManager : MonoBehaviour
 
     void DeactivateForcedEncounter()
     {
-        area = MusicArea.DarkArea;
-        AudioManager.instance.SetMusicArea(area);
+        if (!deactivateOnce)
+        {
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.encounterPanel, this.transform.position);
+            deactivateOnce = true;
+        }
+            
+        
 
         foreach (GameObject obj in forcedEncounterWalls)
         {

@@ -510,11 +510,11 @@ public class PlayerController : MonoBehaviour
 
             if (enemy.GetComponent<FootSolider>() != null) 
                 {
-                    AudioManager.instance.PlayOneShot(FMODEvents.instance.SoldierHurt, this.transform.position);
+                    AudioManager.instance.PlayOneShot(FMODEvents.instance.soldierHurt, this.transform.position);
                 }
                 if (enemy.GetComponent<GroundSentry>() != null)
                 {
-                    AudioManager.instance.PlayOneShot(FMODEvents.instance.SentryHurt, this.transform.position);
+                    AudioManager.instance.PlayOneShot(FMODEvents.instance.sentryHurt, this.transform.position);
                 }
 
                 switch (currentAttackType)
