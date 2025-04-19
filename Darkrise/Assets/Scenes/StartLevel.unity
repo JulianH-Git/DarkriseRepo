@@ -137,7 +137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 393860903751505740, guid: c716b9feee4a4404a908e1cc4cc6c015, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1543519170011586390, guid: c716b9feee4a4404a908e1cc4cc6c015, type: 3}
       propertyPath: m_RootOrder
@@ -187,42 +187,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 634704865}
-    - target: {fileID: 2852693000755033878, guid: c716b9feee4a4404a908e1cc4cc6c015, type: 3}
-      propertyPath: spotlights.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2852693000755033878, guid: c716b9feee4a4404a908e1cc4cc6c015, type: 3}
-      propertyPath: spotlights.Array.data[0]
-      value: 
-      objectReference: {fileID: 5212517018604756877}
-    - target: {fileID: 2852693000755033878, guid: c716b9feee4a4404a908e1cc4cc6c015, type: 3}
-      propertyPath: encounterRoomLocks.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2852693000755033878, guid: c716b9feee4a4404a908e1cc4cc6c015, type: 3}
-      propertyPath: extraEnemySpawners.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2852693000755033878, guid: c716b9feee4a4404a908e1cc4cc6c015, type: 3}
-      propertyPath: encounterRoomLocks.Array.data[0]
-      value: 
-      objectReference: {fileID: 74879627}
-    - target: {fileID: 2852693000755033878, guid: c716b9feee4a4404a908e1cc4cc6c015, type: 3}
-      propertyPath: encounterRoomLocks.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2852693000755033878, guid: c716b9feee4a4404a908e1cc4cc6c015, type: 3}
-      propertyPath: encounterRoomLocks.Array.data[2]
-      value: 
-      objectReference: {fileID: 1165637576}
-    - target: {fileID: 2852693000755033878, guid: c716b9feee4a4404a908e1cc4cc6c015, type: 3}
-      propertyPath: extraEnemySpawners.Array.data[0]
-      value: 
-      objectReference: {fileID: 90682718}
-    - target: {fileID: 2852693000755033878, guid: c716b9feee4a4404a908e1cc4cc6c015, type: 3}
-      propertyPath: extraEnemySpawners.Array.data[1]
-      value: 
-      objectReference: {fileID: 328116528}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -600,6 +564,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1652745187}
     m_Modifications:
+    - target: {fileID: 3897416292227738053, guid: 883bfc8d3ed09194ca84006fa07183eb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897416292227738053, guid: 883bfc8d3ed09194ca84006fa07183eb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 6062104180305504464, guid: 883bfc8d3ed09194ca84006fa07183eb, type: 3}
       propertyPath: m_Name
       value: ForcedEncounterRoomLock
@@ -2263,6 +2235,14 @@ PrefabInstance:
     - target: {fileID: 3304965231837917979, guid: 883bfc8d3ed09194ca84006fa07183eb, type: 3}
       propertyPath: m_Offset.y
       value: 0.015510201
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897416292227738053, guid: 883bfc8d3ed09194ca84006fa07183eb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897416292227738053, guid: 883bfc8d3ed09194ca84006fa07183eb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6062104180305504464, guid: 883bfc8d3ed09194ca84006fa07183eb, type: 3}
       propertyPath: m_Name
@@ -31996,6 +31976,7 @@ MonoBehaviour:
   chainNextEncounter: {fileID: 1652745188}
   enemy: {fileID: 0}
   area: 0
+  deactivateOnce: 0
 --- !u!1 &573112872
 GameObject:
   m_ObjectHideFlags: 0
@@ -36642,6 +36623,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1652745187}
     m_Modifications:
+    - target: {fileID: 3897416292227738053, guid: 883bfc8d3ed09194ca84006fa07183eb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -17
+      objectReference: {fileID: 0}
     - target: {fileID: 6062104180305504464, guid: 883bfc8d3ed09194ca84006fa07183eb, type: 3}
       propertyPath: m_Name
       value: ForcedEncounterRoomLock (1)
@@ -40493,6 +40478,7 @@ MonoBehaviour:
   chainNextEncounter: {fileID: 0}
   enemy: {fileID: 0}
   area: 0
+  deactivateOnce: 0
 --- !u!1 &1656518528
 GameObject:
   m_ObjectHideFlags: 0
@@ -42258,18 +42244,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 1308641660}
     m_Modifications:
     - target: {fileID: 3327180989059840667, guid: bf98181d469bef1428e6365de880d072, type: 3}
-      propertyPath: state
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3327180989059840667, guid: bf98181d469bef1428e6365de880d072, type: 3}
-      propertyPath: controller
-      value: 
-      objectReference: {fileID: 790657393}
-    - target: {fileID: 3327180989059840667, guid: bf98181d469bef1428e6365de880d072, type: 3}
-      propertyPath: playerState
-      value: 
-      objectReference: {fileID: 790657394}
-    - target: {fileID: 3327180989059840667, guid: bf98181d469bef1428e6365de880d072, type: 3}
       propertyPath: gates.Array.data[0]
       value: 
       objectReference: {fileID: 1789835513}
@@ -42277,6 +42251,22 @@ PrefabInstance:
       propertyPath: gates.Array.data[1]
       value: 
       objectReference: {fileID: 755568405}
+    - target: {fileID: 3327180989059840667, guid: bf98181d469bef1428e6365de880d072, type: 3}
+      propertyPath: lampSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 57208d6b15b4ccb4fa7654f278d62bb3, type: 3}
+    - target: {fileID: 3327180989059840667, guid: bf98181d469bef1428e6365de880d072, type: 3}
+      propertyPath: lampSprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: d7055789a7b3a6244894b1f2fb71bda0, type: 3}
+    - target: {fileID: 3327180989059840667, guid: bf98181d469bef1428e6365de880d072, type: 3}
+      propertyPath: spotlightSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: c820b01e4e8614b75b0ba2f21b7d4f71, type: 3}
+    - target: {fileID: 3327180989059840667, guid: bf98181d469bef1428e6365de880d072, type: 3}
+      propertyPath: spotlightSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 5dc373a543e51424680aefcb82ab3072, type: 3}
     - target: {fileID: 5206277792036985411, guid: bf98181d469bef1428e6365de880d072, type: 3}
       propertyPath: m_Name
       value: LampSpotlight

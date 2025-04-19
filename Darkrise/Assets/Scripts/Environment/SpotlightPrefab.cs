@@ -163,13 +163,13 @@ public class SpotlightPrefab : MonoBehaviour
 
             case SpotlightStates.Yellow:
                 lamp.GetComponent<SpriteRenderer>().sprite = lampSprites[2];
-
                 this.GetComponent<BoxCollider2D>().enabled = true;
                 sr.enabled = true;
                 sr.sprite = spotlightSprites[1];
                 sr.color = Color.white;
                 break;
             case SpotlightStates.Laser:
+                lamp.GetComponent<SpriteRenderer>().sprite = lampSprites[2];
                 this.GetComponent<BoxCollider2D>().enabled = true;
                 sr.enabled = true;
                 break;

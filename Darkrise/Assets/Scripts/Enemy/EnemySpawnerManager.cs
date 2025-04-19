@@ -93,7 +93,7 @@ void Update()
 
     public void KillEnemy()
     {
-        spawnedEnemyRef.SetActive(false);
+        spawnedEnemyRefMethods.Die();
         this.gameObject.SetActive(false);
     }
 }

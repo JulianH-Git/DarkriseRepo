@@ -28,7 +28,7 @@ public class DashUpgrade : MonoBehaviour
         if (collision.CompareTag("Player") && !collision.isTrigger)
         {
             controller.canDash = true;
-            FEM.ActivateForcedEncounter();
+            FEM.ActivateForcedEncounterTutorial();
 
             foreach (GameObject instruct in onboarding)
             {

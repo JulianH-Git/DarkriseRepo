@@ -62,7 +62,7 @@ Transform:
   m_Children:
   - {fileID: 6253434077017923244}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8961552654097415854
 SpriteRenderer:
@@ -143,8 +143,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5212517016860725066}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.016670225, y: -4.5666656, z: 1}
-  m_LocalScale: {x: 0.35675535, y: 0.7135107, z: 1.0002487}
+  m_LocalPosition: {x: -0.08, y: -4.68, z: 1}
+  m_LocalScale: {x: 0.35675535, y: 0.7714183, z: 1.0002487}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2022688818826738660}
@@ -192,7 +192,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6dff0e3f1889e7048927c51134cb4353, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5dc373a543e51424680aefcb82ab3072, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -239,7 +239,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 7.9025, y: 12.644}
+    oldSize: {x: 9, y: 11.252748}
     newSize: {x: 15.43457, y: 24.695312}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -260,15 +260,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f6f91e55ed921b47b80f764ff3f5a7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 0
+  state: 1
   lamp: {fileID: 5206277792036985411}
   lampSprites:
   - {fileID: 21300000, guid: 6be517762e88ff741995bd2e97f98dd7, type: 3}
   - {fileID: 21300000, guid: 57208d6b15b4ccb4fa7654f278d62bb3, type: 3}
   - {fileID: 21300000, guid: d7055789a7b3a6244894b1f2fb71bda0, type: 3}
   spotlightSprites:
-  - {fileID: 21300000, guid: 6e3d98a7f17fd604c897c0c8c9ce21da, type: 3}
-  - {fileID: 21300000, guid: 6dff0e3f1889e7048927c51134cb4353, type: 3}
+  - {fileID: 21300000, guid: c820b01e4e8614b75b0ba2f21b7d4f71, type: 3}
+  - {fileID: 21300000, guid: 5dc373a543e51424680aefcb82ab3072, type: 3}
   gates:
   - {fileID: 0}
   - {fileID: 0}
@@ -282,4 +282,5 @@ MonoBehaviour:
     m_Bits: 64
   startEncounter: 0
   area: 0
+  spotOnce: 0
   cooldown: 2

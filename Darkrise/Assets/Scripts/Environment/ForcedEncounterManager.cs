@@ -65,6 +65,18 @@ public class ForcedEncounterManager : MonoBehaviour
         ActivateLasers();
     }
 
+    public void ActivateForcedEncounterTutorial()
+    {
+        breaker.gameObject.SetActive(true);
+        foreach (GameObject psm in permanentEnemySpawns)
+        {
+            psm.SetActive(true);
+        }
+        ActivateSpotlights();
+        ActivateLasers();
+        ActivateWalls();
+    }
+
     void DeactivateForcedEncounter()
     {
         if (!deactivateOnce)
@@ -97,6 +109,15 @@ public class ForcedEncounterManager : MonoBehaviour
             {
                 spot.GetComponent<SpotlightPrefab>().startEncounter = false;
                 spot.GetComponent<SpotlightPrefab>().state = SpotlightStates.Off;
+            }
+        }
+
+        foreach (GameObject laser in lasers)
+        {
+            if (laser.activeSelf == true)
+            {
+                laser.GetComponent<SpotlightPrefab>().startEncounter = false;
+                laser.GetComponent<SpotlightPrefab>().state = SpotlightStates.Off;
             }
         }
     }

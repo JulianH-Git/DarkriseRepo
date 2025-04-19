@@ -175,6 +175,11 @@ public class enemyBase : MonoBehaviour
         sr.color = color;
     }
 
+    public void Die()
+    {
+        health = 0;
+    }
+
     public void DeathNoise()
     {
             
