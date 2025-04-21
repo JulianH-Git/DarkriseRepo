@@ -44,6 +44,7 @@ public class SwitchTrigger : MonoBehaviour
                     hasBeenUsed = true;
                     indicateColor.color = Color.white;
                 }
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.pullLever, this.transform.position);
                 this.GetComponent<SpriteRenderer>().flipY = true;
             }
         }

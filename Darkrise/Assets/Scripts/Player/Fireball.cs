@@ -33,6 +33,7 @@ public class Fireball : MonoBehaviour
         if (currentLifetime >= maxLifetime)
         {
             Explode();
+
         }
 
         if (Physics2D.Raycast(transform.position, new Vector2(direction.x,direction.y), 0.3f, groundLayer))
@@ -75,6 +76,11 @@ public class Fireball : MonoBehaviour
         if (isDark)
         {
             transform.localScale = new Vector3(transform.localScale.x * 2, transform.localScale.y * 2, transform.localScale.z * 2);
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.darkExplode, this.transform.position);
+        }
+        else
+        {
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.lightExplode, this.transform.position);
         }
         Destroy(gameObject, explosionDuration);
     }

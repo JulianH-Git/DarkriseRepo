@@ -119,7 +119,7 @@ public class SpotlightPrefab : MonoBehaviour
                                 
                                 spotOnce = true;
                             }
-                            spotOnce = false;
+                            
                             AudioManager.instance.SetMusicArea(MusicArea.EncounterArea);
 
                             startEncounter = true;
