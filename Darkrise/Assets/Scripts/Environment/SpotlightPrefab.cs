@@ -116,9 +116,11 @@ public class SpotlightPrefab : MonoBehaviour
                             if (!spotOnce)
                             {
                                 AudioManager.instance.PlayOneShot(FMODEvents.instance.blueAlarm, this.transform.position);
+                                
                                 spotOnce = true;
                             }
-                            
+                            spotOnce = false;
+                            AudioManager.instance.SetMusicArea(MusicArea.EncounterArea);
 
                             startEncounter = true;
 

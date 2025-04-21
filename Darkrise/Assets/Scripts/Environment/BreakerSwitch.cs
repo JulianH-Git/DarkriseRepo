@@ -4,8 +4,7 @@ public class BreakerSwitch : InteractTrigger
 {
     public bool deactivated;
 
-    [Header("Music change")]
-    [SerializeField] private MusicArea area;
+    
     Animator animator;
     BoxCollider2D trigger;
 

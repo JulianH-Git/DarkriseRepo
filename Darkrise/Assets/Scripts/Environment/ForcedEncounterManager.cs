@@ -14,7 +14,6 @@ public class ForcedEncounterManager : MonoBehaviour
     [SerializeField] ForcedEncounterManager chainNextEncounter;
     [SerializeField] private enemyBase enemy;
     [Header("Audio Settings")]
-    [SerializeField] private MusicArea area;
     [SerializeField] private bool deactivateOnce = false;
 
 
@@ -81,7 +80,9 @@ public class ForcedEncounterManager : MonoBehaviour
     {
         if (!deactivateOnce)
         {
+            
             AudioManager.instance.PlayOneShot(FMODEvents.instance.encounterPanel, this.transform.position);
+            AudioManager.instance.SetMusicArea(MusicArea.DarkArea);
             deactivateOnce = true;
         }
             

@@ -23,7 +23,11 @@ public class FMODEvents : MonoBehaviour
 
     [field: SerializeField] public EventReference lightShot { get; private set; }
 
+    [field: SerializeField] public EventReference lightExplode { get; private set; }
+
     [field: SerializeField] public EventReference darkShot { get; private set; }
+
+    [field: SerializeField] public EventReference darkExplode { get; private set; }
 
     [field: SerializeField] public EventReference powerSelect { get; private set; }
 
@@ -45,6 +49,10 @@ public class FMODEvents : MonoBehaviour
 
     [field: Header("Interactable SFX")]
     [field: SerializeField] public EventReference encounterPanel { get; private set; }
+
+    [field: SerializeField] public EventReference pullLever { get; private set; }
+
+    [field: SerializeField] public EventReference useStatue { get; private set; }
 
 
     public static FMODEvents instance { get;private set; }

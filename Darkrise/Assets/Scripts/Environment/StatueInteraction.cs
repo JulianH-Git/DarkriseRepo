@@ -45,6 +45,7 @@ public class StatueInteraction : InteractTrigger
 
             if (controller.Interact())
             {
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.useStatue, this.transform.position);
                 controller.StatueRecharge();
                 hintTextRef.color = new Color(hintTextRef.color.r, hintTextRef.color.g, hintTextRef.color.b, 1);
                 fadeTimer = 3f;
