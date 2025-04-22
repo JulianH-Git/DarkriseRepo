@@ -6,21 +6,15 @@ using UnityEngine.UI;
 
 public class HeartController : MonoBehaviour
 {
-    PlayerController player;
+    [SerializeField] GameObject[] heartContainers;
+    [SerializeField] SpriteRenderer playerIconSR;
+    [SerializeField] Sprite normalHealthIcon;
+    [SerializeField] Sprite lowHealthIcon;
 
-    private GameObject[] heartContainers;
-    private Image[] heartFills;
-    public Transform heartsParent;
-    public GameObject heartContainerPrefab;
 
     // Start is called before the first frame update
     void Start()
     {
-        player = PlayerController.Instance;
-        int heartCount = PlayerController.Instance.maxHealth / 4;
-        heartContainers = new GameObject[heartCount];
-        heartFills = new Image[heartCount];
-        InstantiateHeartContainers();
         UpdateHeartsHUD();
         PlayerController.Instance.onHealthChangedCallback += UpdateHeartsHUD;
     }
@@ -31,11 +25,11 @@ public class HeartController : MonoBehaviour
 
     }
 
-    void SetHeartContainers()
+    void SetHealth()
     {
         for (int i = 0; i < heartContainers.Length; i++)
         {
-            if (i < PlayerController.Instance.maxHealth / 4)
+            if (i < PlayerController.Instance.health)
             {
                 heartContainers[i].SetActive(true);
             }
@@ -46,38 +40,22 @@ public class HeartController : MonoBehaviour
         }
     }
 
-    void SetFilledHearts()
-    {
-        int health = PlayerController.Instance.Health;
-        for (int i = 0; i < heartFills.Length; i++)
-        {
-            if (health >= 4)
-            {
-                heartFills[i].fillAmount = 1;
-                health -= 4;
-            }
-            else
-            {
-                heartFills[i].fillAmount = health / 4f;
-                health = 0;
-            }
-        }
-    }
-
-    void InstantiateHeartContainers()
-    {
-        for (int i = 0; i < PlayerController.Instance.maxHealth / 4; i++)
-        {
-            GameObject temp = Instantiate(heartContainerPrefab);
-            temp.transform.SetParent(heartsParent, false);
-            heartContainers[i] = temp;
-            heartFills[i] = temp.transform.Find("Heart_Fill").GetComponent<Image>();
-        }
-    }
-
     void UpdateHeartsHUD()
     {
-        SetHeartContainers();
-        SetFilledHearts();
+        SetHealth();
+        UpdatePlayerIcon();
     }
+
+    void UpdatePlayerIcon()
+    {
+        if (PlayerController.Instance.health == 1)
+        {
+            playerIconSR.sprite = lowHealthIcon;
+        }
+        else
+        {
+            playerIconSR.sprite = normalHealthIcon;
+        }
+    }
+
 }

@@ -20,6 +20,12 @@ public class DarkLightUIController : MonoBehaviour
 
     DarkLightUIUpdater[] DLUIScripts;
 
+    [SerializeField] GameObject text;
+    SpriteRenderer textSR;
+    [SerializeField] Sprite neutralText;
+    [SerializeField] Sprite lightText;
+    [SerializeField] Sprite darkText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +47,8 @@ public class DarkLightUIController : MonoBehaviour
         DLUIScripts[4] = darkLightPrefabs[4].GetComponent<DarkLightUIUpdater>();
 
         currentAttackType = player.currentAttackType;
+
+        textSR = text.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -59,6 +67,7 @@ public class DarkLightUIController : MonoBehaviour
         {
             if (player.darkUnlocked)
             {
+                text.SetActive(true);
                 switch (player.currentAttackType)
                 {
 
@@ -67,6 +76,7 @@ public class DarkLightUIController : MonoBehaviour
                         {
                             DLUIScripts[3].TurnOn();
                             DLUIScripts[4].TurnOff();
+                            textSR.sprite = neutralText;
                         }
                         else
                         {
@@ -75,6 +85,7 @@ public class DarkLightUIController : MonoBehaviour
                             DLUIScripts[1].TurnOff();
                             DLUIScripts[3].TurnOff();
                             DLUIScripts[4].TurnOff();
+                            textSR.sprite = neutralText;
                         }
                         break;
 
@@ -84,6 +95,7 @@ public class DarkLightUIController : MonoBehaviour
                         DLUIScripts[1].TurnOn();
                         DLUIScripts[3].TurnOff();
                         DLUIScripts[4].TurnOff();
+                        textSR.sprite = lightText;
                         break;
 
                     case (PlayerController.AttackType.Dark):
@@ -91,6 +103,7 @@ public class DarkLightUIController : MonoBehaviour
                         {
                             DLUIScripts[3].TurnOff();
                             DLUIScripts[4].TurnOn();
+                            textSR.sprite = darkText;
                         }
                         else
                         {
@@ -99,6 +112,7 @@ public class DarkLightUIController : MonoBehaviour
                             DLUIScripts[1].TurnOff();
                             DLUIScripts[3].TurnOff();
                             DLUIScripts[4].TurnOff();
+                            textSR.sprite = darkText;
                         }
                         break;
                 }
