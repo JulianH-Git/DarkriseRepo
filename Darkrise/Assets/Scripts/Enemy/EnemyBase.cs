@@ -26,8 +26,8 @@ public class enemyBase : MonoBehaviour
     protected Animator anim;
 
     [Header("Patrol Settings")]
-    [SerializeField] protected float patrolDistance;
-    protected Vector2 anchorPos;
+    [SerializeField] public float patrolDistance;
+    public Vector2 anchorPos;
     protected Vector2 direction;
     [Space(5)]
 

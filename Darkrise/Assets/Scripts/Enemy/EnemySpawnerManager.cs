@@ -12,6 +12,8 @@ public class EnemySpawnerManager : MonoBehaviour
     [SerializeField] LayerMask layer;
     [SerializeField] Color gizmoColor;
     [SerializeField] float respawnTimer;
+    [SerializeField] Vector2 roomAreaOffset;
+    [SerializeField] float patrolRadius;
     GameObject spawnedEnemyRef;
     enemyBase spawnedEnemyRefMethods;
 
@@ -20,9 +22,13 @@ public class EnemySpawnerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        spawnedEnemyRef = Instantiate(enemy, roomTransform.position, Quaternion.identity);
+        spawnedEnemyRef = Instantiate(enemy, new Vector2(roomTransform.position.x + roomAreaOffset.x,roomTransform.position.y + roomAreaOffset.y), Quaternion.identity);
         enemySpawned = true;
         spawnedEnemyRefMethods = spawnedEnemyRef.GetComponent<enemyBase>();
+        if(patrolRadius != 0)
+        {
+            spawnedEnemyRefMethods.patrolDistance = patrolRadius;
+        }
     }
 
     // Update is called once per frame

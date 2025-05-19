@@ -346,9 +346,10 @@ public class PlayerController : MonoBehaviour
             restartPressed = player.GetButtonDown("Restart");
         }
 
+        Debug.Log(xAxis);
+
         if (Input.GetKey(KeyCode.LeftArrow) && (Input.GetKey(KeyCode.RightArrow))
-        || Input.GetKey(KeyCode.A) && (Input.GetKey(KeyCode.D))
-        )
+        || Input.GetKey(KeyCode.A) && (Input.GetKey(KeyCode.D)))
         {
             xAxis = 0;
         }

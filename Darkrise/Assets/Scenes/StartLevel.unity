@@ -45608,6 +45608,10 @@ PrefabInstance:
       propertyPath: roomArea.y
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 1553066297793239972, guid: db2a1c1114c8fdd4fa5b3deec047c0b1, type: 3}
+      propertyPath: roomAreaOffset.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6707659142965435415, guid: db2a1c1114c8fdd4fa5b3deec047c0b1, type: 3}
       propertyPath: m_Name
       value: Enemy Spawner
