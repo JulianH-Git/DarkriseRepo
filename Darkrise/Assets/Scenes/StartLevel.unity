@@ -32839,6 +32839,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7908579622631093191, guid: d7a9f4b6f2debbb40a0c8be76843353c, type: 3}
+      propertyPath: _userData.configVars.runInEditMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7908579622631093191, guid: d7a9f4b6f2debbb40a0c8be76843353c, type: 3}
+      propertyPath: _userData.actions.Array.data[0]._behaviorId
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7908579622631093191, guid: d7a9f4b6f2debbb40a0c8be76843353c, type: 3}
+      propertyPath: _userData.inputBehaviors.Array.data[0]._digitalAxisSnap
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7908579622631093191, guid: d7a9f4b6f2debbb40a0c8be76843353c, type: 3}
+      propertyPath: _userData.inputBehaviors.Array.data[0]._digitalAxisInstantReverse
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8424373188223234660, guid: d7a9f4b6f2debbb40a0c8be76843353c, type: 3}
       propertyPath: m_Name
       value: Rewired Input Manager
@@ -35349,11 +35365,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 931077289769193537, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
       propertyPath: recoilSpeedX
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 931077289769193537, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
       propertyPath: recoilSpeedY
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 931077289769193537, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
       propertyPath: dashSound.Path

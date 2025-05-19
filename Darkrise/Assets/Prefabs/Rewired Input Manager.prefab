@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7908579622631093191
 MonoBehaviour:
@@ -738,7 +738,7 @@ MonoBehaviour:
         _axisRange: 0
         _invert: 0
         _axisContribution: 0
-        _keyboardKeyCode: 118
+        _keyboardKeyCode: 109
         _modifierKey1: 0
         _modifierKey2: 0
         _modifierKey3: 0
@@ -770,9 +770,9 @@ MonoBehaviour:
     controllerMapLayoutManagerRuleSets: []
     controllerMapEnablerRuleSets: []
     playerIdCounter: 2
-    actionIdCounter: 10
+    actionIdCounter: 11
     actionCategoryIdCounter: 1
-    inputBehaviorIdCounter: 2
+    inputBehaviorIdCounter: 6
     mapCategoryIdCounter: 1
     joystickLayoutIdCounter: 2
     keyboardLayoutIdCounter: 1
