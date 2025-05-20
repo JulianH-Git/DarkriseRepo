@@ -80,8 +80,10 @@ void Update()
 
     void OnDrawGizmos() // comment this out when we're done placing things to keep everything visible
     {
+       
         Gizmos.color = gizmoColor;
         Gizmos.DrawWireCube(roomTransform.position, roomArea);
+        Gizmos.DrawSphere(new Vector3(roomTransform.position.x + enemySpawnOffset.x, roomTransform.position.y + enemySpawnOffset.y, 0.0f), 0.1f);
     }
 
     void OnTriggerExit2D(Collider2D other)

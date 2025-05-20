@@ -188,14 +188,15 @@ public class enemyBase : MonoBehaviour
     protected virtual void Patrol()
     {
         float distanceMoved = transform.position.x - anchorPos.x;
+        float directionX = Mathf.Sign(transform.localScale.x);
 
         if (Mathf.Abs(distanceMoved) >= patrolDistance + 0.34f)
         {
-            transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
+            directionX = Mathf.Sign(anchorPos.x - transform.position.x);
+            transform.localScale = new Vector2(directionX * Mathf.Abs(transform.localScale.x), transform.localScale.y);
         }
 
-        rb.velocity = new Vector2(speed * Mathf.Sign(transform.localScale.x), rb.velocity.y);
-
+        rb.velocity = new Vector2(speed * directionX, rb.velocity.y);
     }
     protected virtual void Patrol(Vector2 alertAnchor)
     {
@@ -229,7 +230,19 @@ public class enemyBase : MonoBehaviour
 
     public void Retreat()
     {
-        direction = (anchorPos - (Vector2)transform.position).normalized;
+        float distanceToAnchorX = Mathf.Abs(rb.position.x - anchorPos.x);
+
+        if (distanceToAnchorX <= 0.36f || retreatTimer <= 0)
+        {
+            retreating = false;
+            rb.velocity = Vector2.zero;
+            retreatTimer = 5.0f;
+            Debug.Log("Retreat finished");
+            Patrol();
+            return;
+        }
+
+        direction = new Vector2(anchorPos.x - rb.position.x, 0).normalized;
 
         if (direction.x != 0)
         {
@@ -237,17 +250,7 @@ public class enemyBase : MonoBehaviour
         }
 
         rb.velocity = new Vector2(direction.x * (speed * 1.2f), rb.velocity.y);
-
-        float test = Vector2.Distance(transform.position, anchorPos);
-
-        if (test <= 0.36f || retreatTimer <= 0)
-        {
-            retreating = false;
-            rb.velocity = Vector2.zero;
-            retreatTimer = 5.0f;
-            Debug.Log("Retreat finished");
-            Patrol();
-        }
+        retreatTimer -= Time.deltaTime;
     }
 
     public virtual void Alerted(Vector2 _alertPos)
