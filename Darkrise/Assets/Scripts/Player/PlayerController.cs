@@ -201,7 +201,7 @@ public class PlayerController : MonoBehaviour
         }
         if (alpha >= 0.0f && !stopFading)
         {
-            fade.sortingOrder = 5;
+            fade.sortingOrder = 10;
             fade.color = new Color(fade.color.r, fade.color.g, fade.color.b, alpha);
             alpha -= 0.05f;
 
@@ -223,13 +223,14 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator WaitTillEnd()
     {
-        animator.SetTrigger("isDead");
+        animator.SetBool("isDead",true);
+        pState.invincible = true;
         rb.gravityScale = 0;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         sr.sortingOrder = 10; // render above everything
         while (alpha < 1.1f)
         {
-            fade.sortingOrder = 5; // render above everything except the player
+            fade.sortingOrder = 6; // render above everything except the player
             fade.color = new Color(fade.color.r, fade.color.g, fade.color.b, alpha);
             alpha += 0.05f;
             yield return new WaitForSeconds(0.05f);
@@ -845,8 +846,13 @@ public class PlayerController : MonoBehaviour
         if (!DebugMode)
         {
             Health -= Mathf.RoundToInt(_damage);
+            StartCoroutine(StopTakingDamage());
         }
-        StartCoroutine(StopTakingDamage());
+        else if(Health !<= 0)
+        {
+            Health -= Mathf.RoundToInt(_damage);
+            StartCoroutine(StopTakingDamage());
+        }
     }
 
     void Restart()
