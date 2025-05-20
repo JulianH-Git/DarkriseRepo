@@ -145,7 +145,10 @@ public class enemyBase : MonoBehaviour
 
     protected virtual void Attack()
     {
-        PlayerController.Instance.TakeDamage(damage);
+        if(PlayerController.Instance.Health > 0)
+        {
+            PlayerController.Instance.TakeDamage(damage);
+        }
     }
     public virtual void Respawn()
     {

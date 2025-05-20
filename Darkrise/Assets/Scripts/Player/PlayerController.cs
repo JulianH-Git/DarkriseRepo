@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb; // player rigid body
     private Animator animator;
     private enemyBase enemy;
+    private SpriteRenderer sr;
+
     [Header("Debug Settings")]
     [SerializeField] private bool DebugMode;
     private bool debugran = false;
@@ -185,6 +187,8 @@ public class PlayerController : MonoBehaviour
 
         gravity = rb.gravityScale;
 
+        sr = GetComponent<SpriteRenderer>();
+
         playerFootsteps = AudioManager.instance.CreateInstance(FMODEvents.instance.playerFootsteps);
     }
 
@@ -197,6 +201,7 @@ public class PlayerController : MonoBehaviour
         }
         if (alpha >= 0.0f && !stopFading)
         {
+            fade.sortingOrder = 5;
             fade.color = new Color(fade.color.r, fade.color.g, fade.color.b, alpha);
             alpha -= 0.05f;
 
@@ -211,12 +216,6 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            animator.SetTrigger("isDead");
-            while (alpha < 1.1f)
-            {
-                fade.color = new Color(fade.color.r, fade.color.g, fade.color.b, alpha);
-                alpha += 0.05f;
-            }
             StartCoroutine(WaitTillEnd());
         }
 
@@ -224,12 +223,24 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator WaitTillEnd()
     {
+        animator.SetTrigger("isDead");
+        rb.gravityScale = 0;
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        sr.sortingOrder = 10; // render above everything
+        while (alpha < 1.1f)
+        {
+            fade.sortingOrder = 5; // render above everything except the player
+            fade.color = new Color(fade.color.r, fade.color.g, fade.color.b, alpha);
+            alpha += 0.05f;
+            yield return new WaitForSeconds(0.05f);
+        }
         yield return new WaitForSeconds(2);
         SceneManager.LoadScene("GameOverScreen");
     }
 
     void FixedUpdate()
     {
+        if(health <= 0) { return; }
         countUptoGlance += Time.deltaTime;
 
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle") && !idleGlancePlaying && countUptoGlance >= timeBetweenGlances)
@@ -346,7 +357,6 @@ public class PlayerController : MonoBehaviour
             restartPressed = player.GetButtonDown("Restart");
         }
 
-        Debug.Log(xAxis);
 
         if (Input.GetKey(KeyCode.LeftArrow) && (Input.GetKey(KeyCode.RightArrow))
         || Input.GetKey(KeyCode.A) && (Input.GetKey(KeyCode.D)))
@@ -497,7 +507,6 @@ public class PlayerController : MonoBehaviour
         {
             Hit(sideAttackTransform, sideAttackArea, ref pState.recoilingX,recoilSpeedX);
             Instantiate(slashEffect, sideAttackTransform);
-
         }
         else if (!Grounded())
         {

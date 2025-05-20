@@ -23,6 +23,7 @@ public class EnemySpawnerManager : MonoBehaviour
     void Start()
     {
         spawnedEnemyRef = Instantiate(enemy, new Vector2(roomTransform.position.x + enemySpawnOffset.x,roomTransform.position.y + enemySpawnOffset.y), Quaternion.identity);
+        spawnedEnemyRef.transform.parent = roomTransform;
         enemySpawned = true;
         spawnedEnemyRefMethods = spawnedEnemyRef.GetComponent<enemyBase>();
         if(patrolRadius != 0)
