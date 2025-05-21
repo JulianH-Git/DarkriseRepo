@@ -86,10 +86,8 @@ public class PlayerController : MonoBehaviour
 
     [Space(5)]
     [Header("Dark/Light Attack Settings")]
-    [SerializeField] private int maxLightEnergy;
-    public int currentLightEnergy;
-    [SerializeField] private int maxDarkEnergy;
-    public int currentDarkEnergy;
+    [SerializeField] private int maxEnergy;
+    public int currentEnergy;
     [SerializeField] int fireballCost;
     [SerializeField] float timeToCast;
     [SerializeField] private Transform fireballTransform;
@@ -443,7 +441,7 @@ public class PlayerController : MonoBehaviour
                 break;
 
             case (AttackType.Dark):
-                if (currentDarkEnergy > 0)
+                if (currentEnergy > 0)
                 {
                     if (attack && timeSinceAttack >= timeBetweenDarkAttacks)
                     {
@@ -461,7 +459,7 @@ public class PlayerController : MonoBehaviour
                 }
                 break;
             case (AttackType.Light):
-                if (currentLightEnergy > 0)
+                if (currentEnergy > 0)
                 {
                     if (attack && timeSinceAttack >= timeBetweenLightAttacks)
                     {
@@ -518,11 +516,11 @@ public class PlayerController : MonoBehaviour
             case (AttackType.Neutral):
                 return damage;
             case (AttackType.Light):
-                if (currentLightEnergy > 0)
+                if (currentEnergy > 0)
                 {
                     if (!DebugMode)
                     {
-                        currentLightEnergy--;
+                        currentEnergy--;
                     }
                     onEnergyChangedCallback.Invoke();
                     return damage + (-damage / 2.0f);
@@ -534,11 +532,11 @@ public class PlayerController : MonoBehaviour
 
                 }
             case (AttackType.Dark):
-                if (currentDarkEnergy > 0)
+                if (currentEnergy > 0)
                 {
                     if (!DebugMode)
                     {
-                        currentDarkEnergy--;
+                        currentEnergy--;
                     }
                     onEnergyChangedCallback.Invoke();
                     return damage * 2.0f;
@@ -609,9 +607,9 @@ public class PlayerController : MonoBehaviour
             switch (currentAttackType)
             {
                 case AttackType.Dark:
-                    if (currentDarkEnergy >= fireballCost)
+                    if (currentEnergy >= fireballCost)
                     {
-                        currentDarkEnergy -= fireballCost;
+                        currentEnergy -= fireballCost;
                         pState.casting = true;
                         timeSinceCast = 0;
                         StartCoroutine(CastFireball());
@@ -624,9 +622,9 @@ public class PlayerController : MonoBehaviour
                     break;
 
                 case AttackType.Light:
-                    if (currentLightEnergy >= fireballCost)
+                    if (currentEnergy >= fireballCost)
                     {
-                        currentLightEnergy -= fireballCost;
+                        currentEnergy -= fireballCost;
                         pState.casting = true;
                         timeSinceCast = 0;
                         StartCoroutine(CastFireball());
@@ -945,8 +943,8 @@ public class PlayerController : MonoBehaviour
     public void StatueRecharge()
     {
         health = maxHealth;
-        currentDarkEnergy = maxDarkEnergy;
-        currentLightEnergy = maxLightEnergy;
+        currentEnergy = maxEnergy;
+        currentEnergy = maxEnergy;
         onHealthChangedCallback.Invoke();
         //if we add anything else later we can add it here
     }

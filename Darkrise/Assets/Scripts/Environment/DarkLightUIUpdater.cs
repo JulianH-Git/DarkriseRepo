@@ -44,9 +44,9 @@ public class DarkLightUIUpdater : MonoBehaviour
     {
         if(player.Health <= 0) { TurnOff(); }
 
-        if(darkEnergyText != null) { darkEnergyText.text = player.currentDarkEnergy.ToString(); }
+        if(darkEnergyText != null) { darkEnergyText.text = player.currentEnergy.ToString(); }
 
-        if (lightEnergyText != null) { lightEnergyText.text = player.currentLightEnergy.ToString(); }
+        if (lightEnergyText != null) { lightEnergyText.text = player.currentEnergy.ToString(); }
 
         if(fadeTimer >= 0)
         {
