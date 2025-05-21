@@ -129,7 +129,7 @@ public class PlayerController : MonoBehaviour
     }
 
     [Space(5)]
-    public PlayerStateList pState; // this will be expanded a lot more after the MVI
+    public PlayerStateList pState;
 
     private Player player; // The Rewired Player
     public int playerId = 0; // The Rewired player id of this character
@@ -143,7 +143,6 @@ public class PlayerController : MonoBehaviour
     private bool dashPressed;
     private bool jumpPressed;
     private bool doubleJumpPressed;
-    private bool restartPressed;
     private bool switchAttackTypeLeftPressed;
     private bool switchAttackTypeRightPressed;
     private bool interactPressed;
@@ -278,7 +277,6 @@ public class PlayerController : MonoBehaviour
         CastSpell();
         Recoil();
         StartDash();
-        Restart();
         UpdateSound();
         // animation update
         animator.SetBool("isGrounded", Grounded());
@@ -301,6 +299,8 @@ public class PlayerController : MonoBehaviour
 
     void GetInput()
     {
+        if(PauseMenu.GamePaused == true) { return; }
+
         xAxis = player.GetAxis("Move Horizontal");
         yAxis = player.GetAxis("Move Vertical");
 
@@ -351,11 +351,6 @@ public class PlayerController : MonoBehaviour
         if (Grounded())
         {
             doubleJumpPressed = false;
-        }
-
-        if (!restartPressed)
-        {
-            restartPressed = player.GetButtonDown("Restart");
         }
 
 
@@ -852,14 +847,6 @@ public class PlayerController : MonoBehaviour
         {
             Health -= Mathf.RoundToInt(_damage);
             StartCoroutine(StopTakingDamage());
-        }
-    }
-
-    void Restart()
-    {
-        if (restartPressed)
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
     void SwitchAttackTypes()
