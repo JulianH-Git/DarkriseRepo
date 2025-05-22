@@ -62,7 +62,6 @@ public class enemyBase : MonoBehaviour
 
     protected virtual void Awake()
     {
-        Debug.Log("Enemy awake called");
         rb = GetComponent<Rigidbody2D>();
         player = PlayerController.Instance;
         anim = GetComponent<Animator>();
@@ -137,7 +136,7 @@ public class enemyBase : MonoBehaviour
 
     protected virtual void OnCollisionStay2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player") && !PlayerController.Instance.pState.invincible && !isDying)
+        if (other.gameObject.CompareTag("Player") && !PlayerController.Instance.pState.invincible && !PlayerController.Instance.pState.hiding && !isDying)
         {
             Attack();
         }
@@ -240,7 +239,6 @@ public class enemyBase : MonoBehaviour
             retreating = false;
             rb.velocity = Vector2.zero;
             retreatTimer = 5.0f;
-            Debug.Log("Retreat finished");
             Patrol();
             return;
         }
@@ -258,7 +256,6 @@ public class enemyBase : MonoBehaviour
 
     public virtual void Alerted(Vector2 _alertPos)
     {
-        Debug.Log("Alerted");
         alerted = true;
         alertPos = _alertPos;
         direction = (_alertPos - (Vector2)transform.position).normalized;
@@ -271,16 +268,13 @@ public class enemyBase : MonoBehaviour
         rb.velocity = new Vector2(direction.x * (speed * 1.3f), rb.velocity.y);
 
         float test = Vector2.Distance(transform.position, _alertPos);
-        Debug.Log(test);
 
         if (test <= 0.89f)
         {
-            Debug.Log("Completed alert - patrolling");
             alerted = false;
             alertedPatrol = true;
             Patrol(alertPos);
         }
     }
-
 
 }

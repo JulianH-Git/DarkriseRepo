@@ -225,7 +225,11 @@ public class FootSolider : enemyBase
             {
                 if (playerInRange[i].CompareTag("Player"))
                 {
-                    return playerInRange[i];
+                    if(!PlayerController.Instance.pState.hiding)
+                    {
+                        return playerInRange[i];
+                    }
+                    
                 }
             }
         }

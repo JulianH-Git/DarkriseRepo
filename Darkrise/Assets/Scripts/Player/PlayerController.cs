@@ -86,8 +86,8 @@ public class PlayerController : MonoBehaviour
 
     [Space(5)]
     [Header("Dark/Light Attack Settings")]
-    [SerializeField] private int maxEnergy;
-    public int currentEnergy;
+    [SerializeField] private float maxEnergy;
+    public float currentEnergy;
     [SerializeField] int fireballCost;
     [SerializeField] float timeToCast;
     [SerializeField] private Transform fireballTransform;
@@ -98,6 +98,10 @@ public class PlayerController : MonoBehaviour
     public bool darkUnlocked = false;
     public delegate void OnEnergyChangedDelegate();
     [HideInInspector] public OnEnergyChangedDelegate onEnergyChangedCallback;
+
+    [Space(5)]
+    [Header("Dark/Light Environment Settings")]
+    [SerializeField] float energyLossRate;
 
     [Space(5)]
     [Header("Other Objects")]
@@ -240,6 +244,8 @@ public class PlayerController : MonoBehaviour
     {
         if(health <= 0) { return; }
         countUptoGlance += Time.deltaTime;
+
+        if(pState.hiding) { Hiding(); return; }
 
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle") && !idleGlancePlaying && countUptoGlance >= timeBetweenGlances)
         {
@@ -404,9 +410,11 @@ public class PlayerController : MonoBehaviour
         //trigger dash animation
         rb.gravityScale = 0; // this allows the dash to keep the player from falling if they do so in the air
         rb.velocity = new Vector2(transform.localScale.x * dashSpeed, 0);
+        Physics2D.IgnoreLayerCollision(0, 6, true);
         yield return new WaitForSeconds(dashTime);
         rb.gravityScale = gravity;
         pState.dashing = false;
+        Physics2D.IgnoreLayerCollision(0, 6, false);
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
         dashPressed = false;
@@ -941,6 +949,53 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void Hiding()
+    {
+        if(currentAttackType == AttackType.Light || currentEnergy == 0)
+        {
+            Physics2D.IgnoreLayerCollision(0, 6, false);
+            sr.sortingOrder = 1;
+            pState.hiding = false;
+            animator.SetBool("hiding", false);
+            return;
+        }
+
+        if (pState.hiding)
+        {
+            StopRecoilX();
+            StopRecoilY();
+            rb.velocity = Vector2.zero;
+            Physics2D.IgnoreLayerCollision(0, 6, true);
+            sr.sortingOrder = -2;
+            animator.SetBool("hiding", true);
+            switch (currentAttackType)
+            {
+                 case (AttackType.Neutral):
+                    currentEnergy -= energyLossRate;
+                    break;
+                 case (AttackType.Dark):
+                    currentEnergy -= energyLossRate / 2;
+                    break;
+            }
+
+            if(currentEnergy == 0)
+            {
+                Physics2D.IgnoreLayerCollision(0, 6, false);
+                sr.sortingOrder = 1;
+                animator.SetBool("hiding", false);
+                pState.hiding = false;
+            }
+        }
+
+        if (dashPressed || jumpPressed || Interact())
+        {
+            Physics2D.IgnoreLayerCollision(0, 6, false);
+            sr.sortingOrder = 1;
+            animator.SetBool("hiding", false);
+            pState.hiding = false;
+        }
+    }
+
     private void DebugModeUnlocks()
     {
         canDash = true;
@@ -948,6 +1003,7 @@ public class PlayerController : MonoBehaviour
         lightUnlocked = true;
         darkUnlocked = true;
         fireballCost = 0;
+        energyLossRate = 0;
         onEnergyChangedCallback();
     }
 }
