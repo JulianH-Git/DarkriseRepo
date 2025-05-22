@@ -441,39 +441,18 @@ public class PlayerController : MonoBehaviour
                 break;
 
             case (AttackType.Dark):
-                if (currentEnergy > 0)
+                if (attack && timeSinceAttack >= timeBetweenDarkAttacks)
                 {
-                    if (attack && timeSinceAttack >= timeBetweenDarkAttacks)
-                    {
-                        PrepareToHit();
-                        attack = false;
-                    }
-                }
-                else
-                {
-                    if (attack && timeSinceAttack >= timeBetweenNeutralAttacks)
-                    {
-                        PrepareToHit();
-                        attack = false;
-                    }
+                    PrepareToHit();
+                    attack = false;
                 }
                 break;
+
             case (AttackType.Light):
-                if (currentEnergy > 0)
+                if (attack && timeSinceAttack >= timeBetweenLightAttacks)
                 {
-                    if (attack && timeSinceAttack >= timeBetweenLightAttacks)
-                    {
-                        PrepareToHit();
-                        attack = false;
-                    }
-                }
-                else
-                {
-                    if (attack && timeSinceAttack >= timeBetweenNeutralAttacks)
-                    {
-                        PrepareToHit();
-                        attack = false;
-                    }
+                    PrepareToHit();
+                    attack = false;
                 }
                 break;
         }
@@ -516,36 +495,9 @@ public class PlayerController : MonoBehaviour
             case (AttackType.Neutral):
                 return damage;
             case (AttackType.Light):
-                if (currentEnergy > 0)
-                {
-                    if (!DebugMode)
-                    {
-                        currentEnergy--;
-                    }
-                    onEnergyChangedCallback.Invoke();
-                    return damage + (-damage / 2.0f);
-                }
-                else
-                {
-                    onEnergyChangedCallback.Invoke();
-                    return damage;
-
-                }
+                return damage + (-damage / 2.0f);
             case (AttackType.Dark):
-                if (currentEnergy > 0)
-                {
-                    if (!DebugMode)
-                    {
-                        currentEnergy--;
-                    }
-                    onEnergyChangedCallback.Invoke();
-                    return damage * 2.0f;
-                }
-                else
-                {
-                    onEnergyChangedCallback.Invoke();
-                    return damage;
-                }
+                return damage * 2.0f;
         }
 
         return damage;
