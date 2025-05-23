@@ -167,7 +167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 3
   hitForce: 5
-  speed: 12
+  speed: 15
   maxLifetime: 3
   groundLayer:
     serializedVersion: 2

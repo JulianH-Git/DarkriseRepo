@@ -11,4 +11,5 @@ public class PlayerStateList : MonoBehaviour
     public bool lookingRight;
     public bool invincible;
     public bool casting;
+    public bool hiding = false;
 }

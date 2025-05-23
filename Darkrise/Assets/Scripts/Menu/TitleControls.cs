@@ -13,6 +13,11 @@ public class TitleControls : MonoBehaviour
 
     float alpha = 0.0f;
 
+    private void Start()
+    {
+        Screen.SetResolution(1920, 1080, true);
+    }
+
     // Update is called once per frame
     void Update()
     {

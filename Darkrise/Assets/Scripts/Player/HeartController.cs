@@ -48,7 +48,7 @@ public class HeartController : MonoBehaviour
 
     void UpdatePlayerIcon()
     {
-        if (PlayerController.Instance.health == 1)
+        if (PlayerController.Instance.health <= 2)
         {
             playerIconSR.sprite = lowHealthIcon;
         }

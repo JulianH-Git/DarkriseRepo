@@ -12,6 +12,8 @@ public class EnemySpawnerManager : MonoBehaviour
     [SerializeField] LayerMask layer;
     [SerializeField] Color gizmoColor;
     [SerializeField] float respawnTimer;
+    [SerializeField] Vector2 enemySpawnOffset;
+    [SerializeField] float patrolRadius;
     GameObject spawnedEnemyRef;
     enemyBase spawnedEnemyRefMethods;
 
@@ -20,9 +22,14 @@ public class EnemySpawnerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        spawnedEnemyRef = Instantiate(enemy, roomTransform.position, Quaternion.identity);
+        spawnedEnemyRef = Instantiate(enemy, new Vector2(roomTransform.position.x + enemySpawnOffset.x,roomTransform.position.y + enemySpawnOffset.y), Quaternion.identity);
+        spawnedEnemyRef.transform.parent = roomTransform;
         enemySpawned = true;
         spawnedEnemyRefMethods = spawnedEnemyRef.GetComponent<enemyBase>();
+        if(patrolRadius != 0)
+        {
+            spawnedEnemyRefMethods.patrolDistance = patrolRadius;
+        }
     }
 
     // Update is called once per frame
@@ -74,8 +81,10 @@ void Update()
 
     void OnDrawGizmos() // comment this out when we're done placing things to keep everything visible
     {
+       
         Gizmos.color = gizmoColor;
         Gizmos.DrawWireCube(roomTransform.position, roomArea);
+        Gizmos.DrawSphere(new Vector3(roomTransform.position.x + enemySpawnOffset.x, roomTransform.position.y + enemySpawnOffset.y, 0.0f), 0.1f);
     }
 
     void OnTriggerExit2D(Collider2D other)

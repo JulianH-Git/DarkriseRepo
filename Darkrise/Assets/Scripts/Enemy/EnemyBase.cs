@@ -26,8 +26,8 @@ public class enemyBase : MonoBehaviour
     protected Animator anim;
 
     [Header("Patrol Settings")]
-    [SerializeField] protected float patrolDistance;
-    protected Vector2 anchorPos;
+    [SerializeField] public float patrolDistance;
+    public Vector2 anchorPos;
     protected Vector2 direction;
     [Space(5)]
 
@@ -62,7 +62,6 @@ public class enemyBase : MonoBehaviour
 
     protected virtual void Awake()
     {
-        Debug.Log("Enemy awake called");
         rb = GetComponent<Rigidbody2D>();
         player = PlayerController.Instance;
         anim = GetComponent<Animator>();
@@ -137,7 +136,7 @@ public class enemyBase : MonoBehaviour
 
     protected virtual void OnCollisionStay2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player") && !PlayerController.Instance.pState.invincible && !isDying)
+        if (other.gameObject.CompareTag("Player") && !PlayerController.Instance.pState.invincible && !PlayerController.Instance.pState.hiding && !isDying)
         {
             Attack();
         }
@@ -145,7 +144,10 @@ public class enemyBase : MonoBehaviour
 
     protected virtual void Attack()
     {
-        PlayerController.Instance.TakeDamage(damage);
+        if(PlayerController.Instance.Health > 0)
+        {
+            PlayerController.Instance.TakeDamage(damage);
+        }
     }
     public virtual void Respawn()
     {
@@ -188,14 +190,15 @@ public class enemyBase : MonoBehaviour
     protected virtual void Patrol()
     {
         float distanceMoved = transform.position.x - anchorPos.x;
+        float directionX = Mathf.Sign(transform.localScale.x);
 
         if (Mathf.Abs(distanceMoved) >= patrolDistance + 0.34f)
         {
-            transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
+            directionX = Mathf.Sign(anchorPos.x - transform.position.x);
+            transform.localScale = new Vector2(directionX * Mathf.Abs(transform.localScale.x), transform.localScale.y);
         }
 
-        rb.velocity = new Vector2(speed * Mathf.Sign(transform.localScale.x), rb.velocity.y);
-
+        rb.velocity = new Vector2(speed * directionX, rb.velocity.y);
     }
     protected virtual void Patrol(Vector2 alertAnchor)
     {
@@ -229,7 +232,18 @@ public class enemyBase : MonoBehaviour
 
     public void Retreat()
     {
-        direction = (anchorPos - (Vector2)transform.position).normalized;
+        float distanceToAnchorX = Mathf.Abs(rb.position.x - anchorPos.x);
+
+        if (distanceToAnchorX <= 0.36f || retreatTimer <= 0)
+        {
+            retreating = false;
+            rb.velocity = Vector2.zero;
+            retreatTimer = 5.0f;
+            Patrol();
+            return;
+        }
+
+        direction = new Vector2(anchorPos.x - rb.position.x, 0).normalized;
 
         if (direction.x != 0)
         {
@@ -237,22 +251,11 @@ public class enemyBase : MonoBehaviour
         }
 
         rb.velocity = new Vector2(direction.x * (speed * 1.2f), rb.velocity.y);
-
-        float test = Vector2.Distance(transform.position, anchorPos);
-
-        if (test <= 0.36f || retreatTimer <= 0)
-        {
-            retreating = false;
-            rb.velocity = Vector2.zero;
-            retreatTimer = 5.0f;
-            Debug.Log("Retreat finished");
-            Patrol();
-        }
+        retreatTimer -= Time.deltaTime;
     }
 
     public virtual void Alerted(Vector2 _alertPos)
     {
-        Debug.Log("Alerted");
         alerted = true;
         alertPos = _alertPos;
         direction = (_alertPos - (Vector2)transform.position).normalized;
@@ -265,16 +268,13 @@ public class enemyBase : MonoBehaviour
         rb.velocity = new Vector2(direction.x * (speed * 1.3f), rb.velocity.y);
 
         float test = Vector2.Distance(transform.position, _alertPos);
-        Debug.Log(test);
 
         if (test <= 0.89f)
         {
-            Debug.Log("Completed alert - patrolling");
             alerted = false;
             alertedPatrol = true;
             Patrol(alertPos);
         }
     }
-
 
 }

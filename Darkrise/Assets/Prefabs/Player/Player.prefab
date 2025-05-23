@@ -241,6 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94864de73c0b84683831587ba39105, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DebugMode: 0
   walkSpeed: 6
   jumpForce: 20
   jumpBuffer: 0.1
@@ -275,15 +276,15 @@ MonoBehaviour:
   recoilSpeedY: 20
   health: 0
   maxHealth: 8
-  maxLightEnergy: 20
-  currentLightEnergy: 20
-  maxDarkEnergy: 20
-  currentDarkEnergy: 20
+  maxEnergy: 20
+  currentEnergy: 20
   fireballCost: 5
   timeToCast: 0.3
   fireballTransform: {fileID: 5488643421207372703}
   lightFireball: {fileID: 8231317321410085571, guid: be7f3867966df8b41817113e13fa8787, type: 3}
   darkFireball: {fileID: 3628386444350592255, guid: 14ab0bd023fd0f14094e7b4771f35245, type: 3}
+  lightUnlocked: 0
+  darkUnlocked: 0
   fade: {fileID: 0}
   timeBetweenGlances: 0
   pState: {fileID: 0}

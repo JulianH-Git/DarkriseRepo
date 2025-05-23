@@ -42,9 +42,11 @@ public class DarkLightUIUpdater : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(darkEnergyText != null) { darkEnergyText.text = player.currentDarkEnergy.ToString(); }
+        if(player.Health <= 0) { TurnOff(); }
 
-        if (lightEnergyText != null) { lightEnergyText.text = player.currentLightEnergy.ToString(); }
+        if(darkEnergyText != null) { darkEnergyText.text = player.currentEnergy.ToString(); }
+
+        if (lightEnergyText != null) { lightEnergyText.text = player.currentEnergy.ToString(); }
 
         if(fadeTimer >= 0)
         {

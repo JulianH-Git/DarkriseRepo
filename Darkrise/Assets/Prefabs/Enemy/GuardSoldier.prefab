@@ -59,8 +59,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1136699202408263754}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.237885, y: -2.4905348, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -68,8 +68,8 @@ Transform:
   - {fileID: 7721110764756153808}
   - {fileID: 2377881673545313823}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7790837909570842076
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -136,13 +136,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 10
   maxHealth: 10
-  recoilLength: 0.5
+  recoilLength: 0.3
   recoilFactor: 0.5
   isRecoiling: 0
   player: {fileID: 0}
   speed: 3
   damage: 2
   patrolDistance: 3
+  anchorPos: {x: 0, y: 0}
   alertedPatrolDistance: 0
   alertedTimer: 3
   behavior: 1
@@ -157,7 +158,7 @@ MonoBehaviour:
   aggressionTimer: 10
   aggressive: 0
   detectionRangeTransform: {fileID: 2377881673545313823}
-  detectionRangeArea: {x: 5, y: 3}
+  detectionRangeArea: {x: 5, y: 2.5}
 --- !u!61 &8123595661152672319
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -275,7 +276,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1367825090724088187}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.5, y: 0, z: 0}
+  m_LocalPosition: {x: 4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
