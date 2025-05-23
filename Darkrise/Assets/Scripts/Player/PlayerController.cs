@@ -101,7 +101,14 @@ public class PlayerController : MonoBehaviour
 
     [Space(5)]
     [Header("Dark/Light Environment Settings")]
-    [SerializeField] float energyLossRate;
+    [SerializeField] float hidingEnergyLossRate;
+    [SerializeField] float bubbleEnergyLossRate;
+    [SerializeField] SpriteMask lightModeBubble;
+    bool bubbleUp = false;
+    public bool BubbleUp
+    {
+        get { return bubbleUp; }
+    }
 
     [Space(5)]
     [Header("Other Objects")]
@@ -130,6 +137,23 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public float CurrentEnergy
+    {
+        get { return currentEnergy; }
+        set
+        {
+            if (currentEnergy != value)
+            {
+                currentEnergy = Mathf.Clamp(value, 0, maxEnergy);
+
+                if(onEnergyChangedCallback != null)
+                {
+                    onEnergyChangedCallback.Invoke();
+                }
+            }
+        }
+    }
+
     [Space(5)]
     public PlayerStateList pState;
 
@@ -149,6 +173,7 @@ public class PlayerController : MonoBehaviour
     private bool switchAttackTypeRightPressed;
     private bool interactPressed;
     private bool idleGlancePlaying = false;
+    private bool spellSwapPressed;
 
     private bool stopFading = false;
 
@@ -160,6 +185,21 @@ public class PlayerController : MonoBehaviour
     }
 
     public AttackType currentAttackType = AttackType.Neutral;
+
+    public enum EquippedLightSpell
+    {
+        Fireball,
+        LightBubble
+    }
+
+    public EquippedLightSpell currentLightSpell = EquippedLightSpell.Fireball;
+
+    public enum EquippedDarkSpell
+    {
+        Fireball
+    }
+
+    public EquippedDarkSpell currentDarkSpell = EquippedDarkSpell.Fireball;
 
     private void Awake()
     {
@@ -224,7 +264,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator WaitTillEnd()
     {
-        animator.SetBool("isDead",true);
+        animator.SetBool("isDead", true);
         pState.invincible = true;
         rb.gravityScale = 0;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
@@ -242,10 +282,11 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(health <= 0) { return; }
+        if (health <= 0) { return; }
+
         countUptoGlance += Time.deltaTime;
 
-        if(pState.hiding) { Hiding(); return; }
+        if (pState.hiding) { Hiding(); return; }
 
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle") && !idleGlancePlaying && countUptoGlance >= timeBetweenGlances)
         {
@@ -269,14 +310,29 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("isDashing", false);
         }
 
+        if (bubbleUp)
+        {
+            if (CurrentEnergy > 0)
+            {
+                CurrentEnergy -= bubbleEnergyLossRate;
+            }
+            else if(CurrentEnergy == 0)
+            {
+                bubbleUp = false;
+                lightModeBubble.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
+            }
+        }
+
         if (pState.casting)
         {
             return;
         }
+        
         Flip();
         Move();
         Jump();
         SwitchAttackTypes();
+        SwapSpell();
         Attack();
         CastSpell();
         Recoil();
@@ -303,7 +359,7 @@ public class PlayerController : MonoBehaviour
 
     void GetInput()
     {
-        if(PauseMenu.GamePaused == true) { return; }
+        if (PauseMenu.GamePaused == true) { return; }
 
         xAxis = player.GetAxis("Move Horizontal");
         yAxis = player.GetAxis("Move Vertical");
@@ -355,6 +411,11 @@ public class PlayerController : MonoBehaviour
         if (Grounded())
         {
             doubleJumpPressed = false;
+        }
+
+        if (!spellSwapPressed)
+        {
+            spellSwapPressed = player.GetButtonDown("SpellSwap");
         }
 
 
@@ -410,11 +471,11 @@ public class PlayerController : MonoBehaviour
         //trigger dash animation
         rb.gravityScale = 0; // this allows the dash to keep the player from falling if they do so in the air
         rb.velocity = new Vector2(transform.localScale.x * dashSpeed, 0);
-        Physics2D.IgnoreLayerCollision(0, 6, true);
+        //Physics2D.IgnoreLayerCollision(0, 6, true); this line is what activates passing through enemies
         yield return new WaitForSeconds(dashTime);
         rb.gravityScale = gravity;
         pState.dashing = false;
-        Physics2D.IgnoreLayerCollision(0, 6, false);
+        //Physics2D.IgnoreLayerCollision(0, 6, false); this line is what deactivates passing through enemies
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
         dashPressed = false;
@@ -486,7 +547,7 @@ public class PlayerController : MonoBehaviour
 
         if (Grounded())
         {
-            Hit(sideAttackTransform, sideAttackArea, ref pState.recoilingX,recoilSpeedX);
+            Hit(sideAttackTransform, sideAttackArea, ref pState.recoilingX, recoilSpeedX);
             Instantiate(slashEffect, sideAttackTransform);
         }
         else if (!Grounded())
@@ -525,7 +586,7 @@ public class PlayerController : MonoBehaviour
 
         return recoilSpeed;
     }
-    void Hit(Transform _attackTransform, Vector2 _attackArea, ref bool _recoilDir,float recoilSpeed)
+    void Hit(Transform _attackTransform, Vector2 _attackArea, ref bool _recoilDir, float recoilSpeed)
     {
         // The way this function works is it grabs every object within the area and then sorts out what is and isnt hittable.
 
@@ -567,33 +628,11 @@ public class PlayerController : MonoBehaviour
             switch (currentAttackType)
             {
                 case AttackType.Dark:
-                    if (currentEnergy >= fireballCost)
-                    {
-                        currentEnergy -= fireballCost;
-                        pState.casting = true;
-                        timeSinceCast = 0;
-                        StartCoroutine(CastFireball());
-                        AudioManager.instance.PlayOneShot(FMODEvents.instance.darkShot, this.transform.position);
-                    }
-                    else
-                    {
-                        castSpell = false;
-                    }
+                    CastDarkSpell();
                     break;
 
                 case AttackType.Light:
-                    if (currentEnergy >= fireballCost)
-                    {
-                        currentEnergy -= fireballCost;
-                        pState.casting = true;
-                        timeSinceCast = 0;
-                        StartCoroutine(CastFireball());
-                        AudioManager.instance.PlayOneShot(FMODEvents.instance.lightShot, this.transform.position);
-                    }
-                    else
-                    {
-                        castSpell = false;
-                    }
+                    CastLightSpell();
                     break;
                 case AttackType.Neutral:
                     timeSinceCast += Time.deltaTime;
@@ -608,9 +647,105 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    IEnumerator CastFireball() // this should become a coroutine later when we implement a casting animation.
+    void SwapSpell()
     {
+        if (spellSwapPressed)
+        {
+            switch (currentAttackType)
+            {
+                case AttackType.Dark:
+                    currentDarkSpell = EquippedDarkSpell.Fireball; // add others in later
+                    Debug.Log($"Current dark spell - {currentDarkSpell}");
+                    spellSwapPressed = false;
+                    break;
+                case AttackType.Light:
+                    if (currentLightSpell == EquippedLightSpell.Fireball) 
+                    { 
+                        currentLightSpell = EquippedLightSpell.LightBubble; 
+                        Debug.Log($"Current light spell - {currentLightSpell}");
+                        spellSwapPressed = false;
+                    }
+                    else 
+                    { 
+                        currentLightSpell = EquippedLightSpell.Fireball;
+                        bubbleUp = false;
+                        lightModeBubble.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
+                        Debug.Log($"Current light spell - {currentLightSpell}");
+                        spellSwapPressed = false;
+                    }
+                    break;
+            }
+        }
+    }
 
+    void CastDarkSpell()
+    {
+        switch (currentDarkSpell)
+        {
+            case EquippedDarkSpell.Fireball:
+                FireballTime();
+                break;
+        }
+
+    }
+
+    void CastLightSpell()
+    {
+        switch(currentLightSpell)
+        {
+            case EquippedLightSpell.Fireball:
+                FireballTime();
+                break;
+            case EquippedLightSpell.LightBubble:
+                LightBubbleTime();
+                break;
+        }
+    }
+
+    void FireballTime()
+    {
+        if (CurrentEnergy >= fireballCost)
+        {
+            CurrentEnergy -= fireballCost;
+            pState.casting = true;
+            timeSinceCast = 0;
+            StartCoroutine(CastFireball());
+            if (currentAttackType == AttackType.Dark)
+            {
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.darkShot, this.transform.position);
+            }
+            else
+            {
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.lightShot, this.transform.position);
+            }
+
+        }
+        else
+        {
+            castSpell = false;
+        }
+    }
+
+    void LightBubbleTime()
+    {
+        if(CurrentEnergy > 0 && !bubbleUp && castSpell)
+        {
+            bubbleUp = true;
+            timeSinceCast = 0;
+            animator.SetTrigger("lightFireballShoot");
+            castSpell = false;
+            lightModeBubble.transform.localScale = new Vector3(5.0f, 5.0f, 5.0f);
+        }
+        else if ((bubbleUp && castSpell))
+        {
+            bubbleUp = false;
+            lightModeBubble.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
+            castSpell = false;
+        }
+    }
+
+    IEnumerator CastFireball()
+    {
         if (yAxis == 0 || yAxis < 0 && Grounded())
         {
             GameObject fireball = null;
@@ -801,7 +936,7 @@ public class PlayerController : MonoBehaviour
             Health -= Mathf.RoundToInt(_damage);
             StartCoroutine(StopTakingDamage());
         }
-        else if(Health !<= 0)
+        else if (Health! <= 0)
         {
             Health -= Mathf.RoundToInt(_damage);
             StartCoroutine(StopTakingDamage());
@@ -823,6 +958,7 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     currentAttackType--;
+                    DarkRoomBubble();
                 }
                 AudioManager.instance.PlayOneShot(FMODEvents.instance.powerSelect, this.transform.position);
             }
@@ -838,6 +974,7 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     currentAttackType++;
+                    DarkRoomBubble();
                 }
                 AudioManager.instance.PlayOneShot(FMODEvents.instance.powerSelect, this.transform.position);
             }
@@ -851,8 +988,11 @@ public class PlayerController : MonoBehaviour
             currentAttackType = AttackType.Neutral;
             switchAttackTypeLeftPressed = false;
             switchAttackTypeRightPressed = false;
+            DarkRoomBubble();
             return;
         }
+
+        
 
     }
 
@@ -903,8 +1043,8 @@ public class PlayerController : MonoBehaviour
     public void StatueRecharge()
     {
         health = maxHealth;
-        currentEnergy = maxEnergy;
-        currentEnergy = maxEnergy;
+        CurrentEnergy = maxEnergy;
+        CurrentEnergy = maxEnergy;
         onHealthChangedCallback.Invoke();
         //if we add anything else later we can add it here
     }
@@ -951,7 +1091,7 @@ public class PlayerController : MonoBehaviour
 
     private void Hiding()
     {
-        if(currentAttackType == AttackType.Light || currentEnergy == 0)
+        if (currentAttackType == AttackType.Light || CurrentEnergy == 0)
         {
             Physics2D.IgnoreLayerCollision(0, 6, false);
             sr.sortingOrder = 1;
@@ -966,19 +1106,19 @@ public class PlayerController : MonoBehaviour
             StopRecoilY();
             rb.velocity = Vector2.zero;
             Physics2D.IgnoreLayerCollision(0, 6, true);
-            sr.sortingOrder = -2;
+            sr.sortingOrder = -1;
             animator.SetBool("hiding", true);
             switch (currentAttackType)
             {
-                 case (AttackType.Neutral):
-                    currentEnergy -= energyLossRate;
+                case (AttackType.Neutral):
+                    CurrentEnergy -= hidingEnergyLossRate;
                     break;
-                 case (AttackType.Dark):
-                    currentEnergy -= energyLossRate / 2;
+                case (AttackType.Dark):
+                    CurrentEnergy -= hidingEnergyLossRate / 2;
                     break;
             }
 
-            if(currentEnergy == 0)
+            if (CurrentEnergy == 0)
             {
                 Physics2D.IgnoreLayerCollision(0, 6, false);
                 sr.sortingOrder = 1;
@@ -996,6 +1136,23 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void DarkRoomBubble()
+    {
+        switch (currentAttackType)
+        {
+            case AttackType.Neutral:
+                lightModeBubble.gameObject.SetActive(false);
+                break;
+            case AttackType.Dark:
+                lightModeBubble.gameObject.SetActive(false);
+                break;
+            case AttackType.Light:
+                lightModeBubble.gameObject.SetActive(true);
+                lightModeBubble.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
+                break;
+        }
+    }
+
     private void DebugModeUnlocks()
     {
         canDash = true;
@@ -1003,7 +1160,8 @@ public class PlayerController : MonoBehaviour
         lightUnlocked = true;
         darkUnlocked = true;
         fireballCost = 0;
-        energyLossRate = 0;
+        hidingEnergyLossRate = 0;
+        bubbleEnergyLossRate = 0;
         onEnergyChangedCallback();
     }
 }

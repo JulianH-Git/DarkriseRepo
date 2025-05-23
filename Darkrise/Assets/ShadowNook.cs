@@ -9,7 +9,7 @@ public class ShadowNook : InteractTrigger
     // Update is called once per frame
     void Update()
     {
-        
+        if(playerHiding) { indicator.SetActive(false); }
     }
     protected override void OnTriggerExit2D(Collider2D collision)
     {
@@ -30,7 +30,10 @@ public class ShadowNook : InteractTrigger
             indicator.SetActive(false);
             playerHiding = true;
             controller.pState.hiding = true;
-            controller.transform.position = new Vector2(transform.position.x,controller.transform.position.y); // this might not work if the player is on a slope, so keep that in mind
+            if(controller.currentAttackType != PlayerController.AttackType.Light)
+            {
+                controller.transform.position = new Vector2(transform.position.x, controller.transform.position.y); // this might not work if the player is on a slope, so keep that in mind
+            }
         }
     }
 
