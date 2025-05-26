@@ -42555,9 +42555,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useParallax: 1
   useFixedUpdate: 1
-  parallaxFactor: {x: -0.00001, y: 0.15}
-  halfLevelSize: {x: -7.7, y: 0}
-  scaled: 0
+  parallaxFactor: {x: -0.0075, y: 0.15}
+  halfLevelSize: {x: 16, y: 0}
+  scaled: 1
 --- !u!1 &1563079425
 GameObject:
   m_ObjectHideFlags: 3
