@@ -4842,6 +4842,10 @@ PrefabInstance:
       propertyPath: m_ChunkCullingBounds.y
       value: 1.375
       objectReference: {fileID: 0}
+    - target: {fileID: -7253210340301611594, guid: 0dac8f0ef6d88a1479936bd27c92d0b0, type: 3}
+      propertyPath: <LevelBgPos>k__BackingField
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: -7083776801684115766, guid: 0dac8f0ef6d88a1479936bd27c92d0b0, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -36494,11 +36498,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2308073590197729602, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.23
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 2308073590197729602, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.03
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 2308073590197729602, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -42113,8 +42117,8 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -27.1, y: 4.75}
-      - {x: -27.1, y: -5}
+    - - {x: -27, y: 4.75}
+      - {x: -27, y: -5}
       - {x: -9.35, y: -5}
       - {x: -9.35, y: 4.75}
   m_UseDelaunayMesh: 0
@@ -42551,9 +42555,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useParallax: 1
   useFixedUpdate: 1
-  parallaxFactor: {x: 0.25, y: 0.1}
-  halfLevelSize: {x: 0, y: 0}
-  scaled: 1
+  parallaxFactor: {x: -0.00001, y: 0.15}
+  halfLevelSize: {x: -7.7, y: 0}
+  scaled: 0
 --- !u!1 &1563079425
 GameObject:
   m_ObjectHideFlags: 3
