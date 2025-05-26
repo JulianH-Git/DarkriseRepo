@@ -18344,7 +18344,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1138270975375306406, guid: 0dac8f0ef6d88a1479936bd27c92d0b0, type: 3}
       propertyPath: m_CompositePaths.m_Paths.Array.data[0].Array.data[2].x
-      value: 34.965
+      value: 30.525
       objectReference: {fileID: 0}
     - target: {fileID: 1138270975375306406, guid: 0dac8f0ef6d88a1479936bd27c92d0b0, type: 3}
       propertyPath: m_CompositePaths.m_Paths.Array.data[0].Array.data[2].y
@@ -18352,7 +18352,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1138270975375306406, guid: 0dac8f0ef6d88a1479936bd27c92d0b0, type: 3}
       propertyPath: m_CompositePaths.m_Paths.Array.data[0].Array.data[3].x
-      value: 34.964973
+      value: 30.52497
       objectReference: {fileID: 0}
     - target: {fileID: 1138270975375306406, guid: 0dac8f0ef6d88a1479936bd27c92d0b0, type: 3}
       propertyPath: m_CompositePaths.m_Paths.Array.data[0].Array.data[3].y
@@ -19948,7 +19948,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1138270975375306406, guid: 0dac8f0ef6d88a1479936bd27c92d0b0, type: 3}
       propertyPath: m_ColliderPaths.Array.data[0].m_ColliderPaths.Array.data[0].Array.data[1].X
-      value: 349650016
+      value: 305249984
       objectReference: {fileID: 0}
     - target: {fileID: 1138270975375306406, guid: 0dac8f0ef6d88a1479936bd27c92d0b0, type: 3}
       propertyPath: m_ColliderPaths.Array.data[0].m_ColliderPaths.Array.data[0].Array.data[1].Y
@@ -19956,7 +19956,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1138270975375306406, guid: 0dac8f0ef6d88a1479936bd27c92d0b0, type: 3}
       propertyPath: m_ColliderPaths.Array.data[0].m_ColliderPaths.Array.data[0].Array.data[2].X
-      value: 349650016
+      value: 305249984
       objectReference: {fileID: 0}
     - target: {fileID: 1138270975375306406, guid: 0dac8f0ef6d88a1479936bd27c92d0b0, type: 3}
       propertyPath: m_ColliderPaths.Array.data[0].m_ColliderPaths.Array.data[0].Array.data[2].Y
@@ -36410,6 +36410,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 432558171}
     - target: {fileID: 931077289769193537, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
+      propertyPath: DebugMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 931077289769193537, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
       propertyPath: timeToCast
       value: 0.1
       objectReference: {fileID: 0}
@@ -36471,7 +36475,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2308073590197729602, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.9
+      value: -3.23
       objectReference: {fileID: 0}
     - target: {fileID: 2308073590197729602, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
       propertyPath: m_LocalPosition.y
