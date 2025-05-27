@@ -23,9 +23,12 @@ public class ShadowNook : InteractTrigger
 
     protected override void TriggerActivated()
     {
-        indicator.SetActive(true);
+        if(controller.currentAttackType != PlayerController.AttackType.Light)
+        {
+            indicator.SetActive(true);
+        }
 
-        if(controller.Interact())
+        if(controller.Interact() && controller.currentAttackType != PlayerController.AttackType.Light)
         {
             indicator.SetActive(false);
             playerHiding = true;

@@ -7,8 +7,6 @@ using TMPro;
 public class DarkLightUIUpdater : MonoBehaviour
 {
     PlayerController player;
-    [SerializeField] GameObject darkEnergyTextObj;
-    [SerializeField] GameObject lightEnergyTextObj;
     [SerializeField] GameObject hintTextObj;
     TextMeshProUGUI darkEnergyText;
     TextMeshProUGUI lightEnergyText;
@@ -22,16 +20,6 @@ public class DarkLightUIUpdater : MonoBehaviour
     void Awake()
     {
         player = PlayerController.Instance;
-
-        if(darkEnergyTextObj != null)
-        {
-            darkEnergyText = darkEnergyTextObj.GetComponent<TextMeshProUGUI>();
-        }
-        
-        if(lightEnergyTextObj != null)
-        {
-            lightEnergyText = lightEnergyTextObj.GetComponent<TextMeshProUGUI>();
-        }
         
         hintText = hintTextObj.GetComponent<TextMeshProUGUI>();
 
@@ -43,10 +31,6 @@ public class DarkLightUIUpdater : MonoBehaviour
     void Update()
     {
         if(player.Health <= 0) { TurnOff(); }
-
-        if(darkEnergyText != null) { darkEnergyText.text = player.currentEnergy.ToString(); }
-
-        if (lightEnergyText != null) { lightEnergyText.text = player.currentEnergy.ToString(); }
 
         if(fadeTimer >= 0)
         {

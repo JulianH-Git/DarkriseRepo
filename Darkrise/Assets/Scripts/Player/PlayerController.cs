@@ -86,9 +86,14 @@ public class PlayerController : MonoBehaviour
 
     [Space(5)]
     [Header("Dark/Light Attack Settings")]
-    [SerializeField] private float maxEnergy;
+    [SerializeField] public float maxEnergy;
     public float currentEnergy;
-    [SerializeField] int fireballCost;
+    [SerializeField] float recoveryTimer;
+    [SerializeField] float recoveryRate;
+    float timeSinceSpellUsed = 0f;
+    bool spellUsedRecently;
+
+    int fireballCost;
     [SerializeField] float timeToCast;
     [SerializeField] private Transform fireballTransform;
     [SerializeField] GameObject lightFireball;
@@ -231,6 +236,8 @@ public class PlayerController : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
 
         playerFootsteps = AudioManager.instance.CreateInstance(FMODEvents.instance.playerFootsteps);
+
+        fireballCost = (int)maxEnergy;
     }
 
     private void Update()
@@ -320,6 +327,27 @@ public class PlayerController : MonoBehaviour
             {
                 bubbleUp = false;
                 lightModeBubble.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
+                spellUsedRecently = true;
+            }
+        }
+
+        if(spellUsedRecently)
+        {
+            timeSinceSpellUsed = timeSinceSpellUsed + Time.deltaTime;
+            if(timeSinceSpellUsed >= recoveryTimer)
+            {
+                timeSinceSpellUsed = 0f;
+                spellUsedRecently = false;
+                pState.recovering = true;
+            }
+        }
+
+        if(pState.recovering)
+        {
+            currentEnergy += recoveryRate;
+            if(currentEnergy >= maxEnergy)
+            {
+                pState.recovering = false;
             }
         }
 
@@ -718,6 +746,7 @@ public class PlayerController : MonoBehaviour
             {
                 AudioManager.instance.PlayOneShot(FMODEvents.instance.lightShot, this.transform.position);
             }
+            spellUsedRecently = true;
 
         }
         else
@@ -741,6 +770,7 @@ public class PlayerController : MonoBehaviour
             bubbleUp = false;
             lightModeBubble.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
             castSpell = false;
+            spellUsedRecently = true;
         }
     }
 
@@ -1044,7 +1074,6 @@ public class PlayerController : MonoBehaviour
     {
         health = maxHealth;
         CurrentEnergy = maxEnergy;
-        CurrentEnergy = maxEnergy;
         onHealthChangedCallback.Invoke();
         //if we add anything else later we can add it here
     }
@@ -1124,6 +1153,7 @@ public class PlayerController : MonoBehaviour
                 sr.sortingOrder = 1;
                 animator.SetBool("hiding", false);
                 pState.hiding = false;
+                spellUsedRecently = true;
             }
         }
 
@@ -1133,6 +1163,7 @@ public class PlayerController : MonoBehaviour
             sr.sortingOrder = 1;
             animator.SetBool("hiding", false);
             pState.hiding = false;
+            spellUsedRecently = true;
         }
     }
 
