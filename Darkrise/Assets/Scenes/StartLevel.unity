@@ -30906,6 +30906,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8102878676104275423, guid: 0dac8f0ef6d88a1479936bd27c92d0b0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8263422584364716043, guid: 0dac8f0ef6d88a1479936bd27c92d0b0, type: 3}
       propertyPath: m_ChunkCullingBounds.x
       value: 1.375
@@ -33304,7 +33308,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -6631194462840742386, guid: 0dac8f0ef6d88a1479936bd27c92d0b0, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1555653301}
+      addedObject: {fileID: 1555653304}
   m_SourcePrefab: {fileID: -5765183769023986340, guid: 0dac8f0ef6d88a1479936bd27c92d0b0, type: 3}
 --- !u!19719996 &553113352 stripped
 TilemapCollider2D:
@@ -42541,7 +42545,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: -6631194462840742386, guid: 0dac8f0ef6d88a1479936bd27c92d0b0, type: 3}
   m_PrefabInstance: {fileID: 553113351}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1555653301
+--- !u!114 &1555653304
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42550,14 +42554,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1555653299}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b59466914a454076aaa086a22e255b23, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c3caa16b1814b347a0f6e5cf2c450b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   useParallax: 1
   useFixedUpdate: 1
-  parallaxFactor: {x: -0.0075, y: 0.15}
+  parallaxFactor: {x: 0.05, y: 0.02}
   halfLevelSize: {x: 16, y: 0}
   scaled: 1
+  cam: {fileID: 573112873}
+  refView: {fileID: 1492068501}
 --- !u!1 &1563079425
 GameObject:
   m_ObjectHideFlags: 3

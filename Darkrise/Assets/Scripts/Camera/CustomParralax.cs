@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +16,8 @@ public class CustomParralax : MonoBehaviour
     public Vector2 parallaxFactor;
     public Vector2 halfLevelSize;
     public bool scaled;
-    public GameObject cam;
+    public Camera cam;
+    public GameObject refView;
 
     private Transform _cameraTransform;
     private Vector3 _prevPos;
@@ -44,12 +46,14 @@ public class CustomParralax : MonoBehaviour
 
     private void Start()
     {
+
         //If already cached from external code, don't fight with it
         if (_cameraTransform)
         {
             return;
         }
 
+        Camera cam = Camera.main;
         if (cam)
         {
             SetCamera(cam.transform);
@@ -112,7 +116,13 @@ public class CustomParralax : MonoBehaviour
             return;
         }
 
+        if (!refView.activeSelf)
+        {
+            return;
+        }
+
         Vector3 cameraPos = _cameraTransform.position;
+
 
         //only realize a difference if the parallax is enabled
         if (useParallax && !_prevUseParallax)
@@ -126,5 +136,6 @@ public class CustomParralax : MonoBehaviour
         transform.position += Vector3.Scale(_delta, parallaxFactor);
 
         _prevPos = cameraPos;
+
     }
 }
