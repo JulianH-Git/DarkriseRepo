@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - GroundTile
+  - Room Wide Effect
   layers:
   - Default
   - TransparentFX
@@ -15,7 +16,7 @@ TagManager:
   - UI
   - Attackable
   - Player Invul
-  - 
+  - Room Wide Effect
   - 
   - 
   - 

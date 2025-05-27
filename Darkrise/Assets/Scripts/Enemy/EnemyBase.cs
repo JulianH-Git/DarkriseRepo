@@ -227,7 +227,6 @@ public class enemyBase : MonoBehaviour
             alertedFlip = false;
             Retreat();
         }
-        Debug.Log(transform.position);
     }
 
     public void Retreat()

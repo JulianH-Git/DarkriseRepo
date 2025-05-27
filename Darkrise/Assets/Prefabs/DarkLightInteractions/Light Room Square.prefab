@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1998221086522330958}
   - component: {fileID: 6882808297980752082}
   m_Layer: 8
-  m_Name: Dark Room Square
+  m_Name: Light Room Square
   m_TagString: Room Wide Effect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6681350463372234027
 SpriteRenderer:
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.19607843}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -84,7 +84,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 2
+  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &1998221086522330958
 BoxCollider2D:
@@ -145,5 +145,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeTillDamage: 3
   damage: 1
-  darkOrLight: 0
+  darkOrLight: 1
   fb: {fileID: 0}
