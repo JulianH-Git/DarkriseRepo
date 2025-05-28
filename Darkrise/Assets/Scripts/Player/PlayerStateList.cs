@@ -12,4 +12,5 @@ public class PlayerStateList : MonoBehaviour
     public bool invincible;
     public bool casting;
     public bool hiding = false;
+    public bool recovering = false;
 }
