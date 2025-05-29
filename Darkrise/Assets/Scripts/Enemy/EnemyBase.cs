@@ -11,6 +11,14 @@ public class enemyBase : MonoBehaviour
     [SerializeField] protected float maxHealth;
     [Space(5)]
 
+    [Header("Stun Settings")]
+    [SerializeField] protected float stun;
+    [SerializeField] protected float maxStun;
+    [SerializeField] protected float stunTimer;
+    protected float timeToReleaseStun;
+    protected bool stunned;
+    [Space(5)]
+
     [Header("Recoil Settings")]
     [SerializeField] protected float recoilLength;
     [SerializeField] protected float recoilFactor;
@@ -119,12 +127,17 @@ public class enemyBase : MonoBehaviour
         {
             alertedTimerCountdown -= Time.deltaTime;
         }
+        if(stun >= maxStun)
+        {
+            Stunned();
+        }
     }
 
-    public virtual void EnemyHit(float _damageDone, Vector2 _hitDirection, float _hitForce)
+    public virtual void EnemyHit(float _damageDone, Vector2 _hitDirection, float _hitForce, bool _damage)
     {
-        health -= _damageDone;
-
+        if (_damage) { health -= _damageDone; }
+        else { stun += _damageDone; }
+        
         if (!isRecoiling)
         {
             anim.SetBool("isRecoiling", true);
@@ -136,7 +149,7 @@ public class enemyBase : MonoBehaviour
 
     protected virtual void OnCollisionStay2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player") && !PlayerController.Instance.pState.invincible && !PlayerController.Instance.pState.hiding && !isDying)
+        if (other.gameObject.CompareTag("Player") && !PlayerController.Instance.pState.invincible && !PlayerController.Instance.pState.hiding && !isDying && !stunned)
         {
             Attack();
         }
@@ -185,6 +198,23 @@ public class enemyBase : MonoBehaviour
     public void DeathNoise()
     {
             
+    }
+
+    protected virtual void Stunned()
+    {
+        stunned = true;
+        anim.SetBool("isStunned", true);
+        timeToReleaseStun += Time.deltaTime;
+        Physics2D.IgnoreCollision(boxCollider, PlayerController.Instance.GetComponent<Collider2D>(), true);
+
+        if (timeToReleaseStun >= stunTimer)
+        {
+            stunned = false;
+            anim.SetBool("isStunned", false);
+            Physics2D.IgnoreCollision(boxCollider, PlayerController.Instance.GetComponent<Collider2D>(), false);
+            timeToReleaseStun = 0;
+            stun = 0;
+        }
     }
 
     protected virtual void Patrol()

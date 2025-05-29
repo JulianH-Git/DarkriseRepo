@@ -45,7 +45,7 @@ public class FootSolider : enemyBase
 
     protected void FixedUpdate()
     {
-        if (isRecoiling) return;
+        if (isRecoiling || stunned) return;
         Collider2D playerInRange = PlayerCheck();
 
         switch (behavior)

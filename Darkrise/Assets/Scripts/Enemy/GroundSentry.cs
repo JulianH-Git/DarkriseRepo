@@ -18,7 +18,7 @@ public class GroundSentry : enemyBase
 
     protected void FixedUpdate()
     {
-        if (isRecoiling || isDying) return;
+        if (isRecoiling || isDying || stunned) return;
 
         if (alerted)
         {

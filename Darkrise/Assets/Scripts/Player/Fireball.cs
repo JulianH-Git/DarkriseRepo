@@ -52,7 +52,15 @@ public class Fireball : MonoBehaviour
             enemyBase enemy = collision.GetComponent<enemyBase>();
             if (enemy != null)
             {
-                enemy.EnemyHit(damage, (collision.transform.position - transform.position).normalized, -hitForce);
+                if(isDark)
+                {
+                    enemy.EnemyHit(damage, (collision.transform.position - transform.position).normalized, -hitForce,true);
+                }
+                else
+                {
+                    enemy.EnemyHit(damage, (collision.transform.position - transform.position).normalized, -hitForce,false);
+                }
+                
             }
             Explode();
         }

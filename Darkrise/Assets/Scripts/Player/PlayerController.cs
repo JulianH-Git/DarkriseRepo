@@ -583,6 +583,24 @@ public class PlayerController : MonoBehaviour
             Hit(airAttackTransform, airAttackArea, ref pState.recoilingY, recoilSpeedY);
             SlashEffectAtAngle(slashEffect, 0, airAttackTransform);
         }
+    }   
+
+    bool EnemyDirection(enemyBase _enemy)
+    {
+        if(transform.localScale.x > 0 && _enemy.transform.localScale.x > 0)
+        {
+            return true;
+        }
+        else if(transform.localScale.x < 0 && _enemy.transform.localScale.x < 0)
+        {
+            return true;
+        }
+        else if(_enemy.transform.localScale.x == 0)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     float GetAttackDamage()
@@ -627,23 +645,28 @@ public class PlayerController : MonoBehaviour
 
         for (int i = 0; i < ObjectsToHit.Length; i++)
         {
-            if (ObjectsToHit[i].GetComponent<enemyBase>() != null)
+            if (ObjectsToHit[i].GetComponent<enemyBase>() != null && ObjectsToHit[i].isTrigger)
             {
                 enemy = ObjectsToHit[i].GetComponent<enemyBase>();
 
-                if (enemy.GetComponent<FootSolider>() != null)
+                if(EnemyDirection(enemy))
                 {
-                    AudioManager.instance.PlayOneShot(FMODEvents.instance.soldierHurt, this.transform.position);
-                }
-                if (enemy.GetComponent<GroundSentry>() != null)
-                {
-                    AudioManager.instance.PlayOneShot(FMODEvents.instance.sentryHurt, this.transform.position);
-                }
+                    if (enemy.GetComponent<FootSolider>() != null)
+                    {
+                        AudioManager.instance.PlayOneShot(FMODEvents.instance.soldierHurt, this.transform.position);
+                    }
+                    if (enemy.GetComponent<GroundSentry>() != null)
+                    {
+                        AudioManager.instance.PlayOneShot(FMODEvents.instance.sentryHurt, this.transform.position);
+                    }
 
-                float _damage = GetAttackDamage();
-                float _recoilStrength = GetRecoil(recoilSpeed);
+                    float _damage = GetAttackDamage();
+                    float _recoilStrength = GetRecoil(recoilSpeed);
 
-                enemy.EnemyHit(_damage, (transform.position - ObjectsToHit[i].transform.position).normalized, _recoilStrength);
+                    if (currentAttackType == AttackType.Light) { enemy.EnemyHit(_damage, (transform.position - ObjectsToHit[i].transform.position).normalized, _recoilStrength, false); }
+                    else { enemy.EnemyHit(_damage, (transform.position - ObjectsToHit[i].transform.position).normalized, _recoilStrength, true); }
+                }
+                
             }
         }
 
