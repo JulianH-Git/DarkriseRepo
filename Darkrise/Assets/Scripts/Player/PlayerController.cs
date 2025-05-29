@@ -1135,7 +1135,7 @@ public class PlayerController : MonoBehaviour
             StopRecoilY();
             rb.velocity = Vector2.zero;
             Physics2D.IgnoreLayerCollision(0, 6, true);
-            sr.sortingOrder = -2;
+            sr.sortingOrder = -1;
             animator.SetBool("hiding", true);
             switch (currentAttackType)
             {
