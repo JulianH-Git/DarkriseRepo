@@ -11,6 +11,12 @@ public class PlayerController : MonoBehaviour
     private enemyBase enemy;
     private SpriteRenderer sr;
 
+    public SpriteRenderer SR
+    {
+        get { return sr; }
+        set { sr = value; }
+    }
+
     [Header("Debug Settings")]
     [SerializeField] private bool DebugMode;
     private bool debugran = false;
@@ -294,6 +300,8 @@ public class PlayerController : MonoBehaviour
         countUptoGlance += Time.deltaTime;
 
         if (pState.hiding) { Hiding(); return; }
+
+        if(pState.shadowWalking) { ShadowBlockMovement(); return; }
 
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle") && !idleGlancePlaying && countUptoGlance >= timeBetweenGlances)
         {
@@ -1044,9 +1052,6 @@ public class PlayerController : MonoBehaviour
             DarkRoomBubble();
             return;
         }
-
-        
-
     }
 
     void SwitchAttackTypesDarkOnly()
@@ -1205,6 +1210,52 @@ public class PlayerController : MonoBehaviour
                 lightModeBubble.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
                 break;
         }
+    }
+
+    private void ShadowBlockMovement()
+    {
+        if (currentAttackType == AttackType.Light || CurrentEnergy == 0)
+        {
+            Physics2D.IgnoreLayerCollision(0, 6, false);
+            sr.sortingOrder = 1;
+            rb.gravityScale = gravity;
+            pState.shadowWalking = false;
+            return;
+        }
+
+        if (pState.shadowWalking)
+        {
+            StopRecoilX();
+            StopRecoilY();
+            rb.gravityScale = 0;
+            Physics2D.IgnoreLayerCollision(0, 6, true);
+            sr.sortingOrder = -1;
+            ShadowWalk();
+            CurrentEnergy -= hidingEnergyLossRate;
+
+            if (CurrentEnergy == 0)
+            {
+                Physics2D.IgnoreLayerCollision(0, 6, false);
+                sr.sortingOrder = 1;
+                rb.gravityScale = gravity;
+                pState.shadowWalking = false;
+                spellUsedRecently = true;
+            }
+        }
+
+        if (dashPressed || jumpPressed)
+        {
+            Physics2D.IgnoreLayerCollision(0, 6, false);
+            sr.sortingOrder = 1;
+            rb.gravityScale = gravity;
+            pState.shadowWalking = false;
+            spellUsedRecently = true;
+        }
+    }
+
+    private void ShadowWalk()
+    {
+        rb.velocity = new Vector2(walkSpeed * xAxis, walkSpeed * yAxis);
     }
 
     private void DebugModeUnlocks()

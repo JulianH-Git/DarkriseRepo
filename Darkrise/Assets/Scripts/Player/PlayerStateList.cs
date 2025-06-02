@@ -13,4 +13,5 @@ public class PlayerStateList : MonoBehaviour
     public bool casting;
     public bool hiding = false;
     public bool recovering = false;
+    public bool shadowWalking = false;
 }
