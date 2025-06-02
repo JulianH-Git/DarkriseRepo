@@ -22,13 +22,81 @@ public class ShadowBlock : MonoBehaviour
         ctf.useTriggers = true;
         ctf.SetLayerMask(ShadowBlockLayer);
         Physics2D.IgnoreLayerCollision(2, 7, true);
+        CheckForShadowBlocks();
+    }
 
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+    protected void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            PlayerController.Instance.playerArrowIndicator.SetActive(false);
+
+            Vector2 direction = (collision.transform.position - transform.position).normalized;
+
+            int exitDirection;
+
+            if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+            {
+                exitDirection = direction.x > 0 ? 3 : 2;
+            }
+            else
+            {
+                exitDirection = direction.y > 0 ? 1 : 0;
+            }
+
+            if (connected[exitDirection] == false)
+            {
+                sr.sortingOrder = 0;
+                PlayerController.Instance.pState.shadowWalking = false;
+                PlayerController.Instance.SR.sortingOrder = 1;
+            }
+        }
+    }
+    protected void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player") && !collision.isTrigger)
+        {
+            if(PlayerController.Instance.currentAttackType == PlayerController.AttackType.Dark)
+            {
+                if (!PlayerController.Instance.pState.shadowWalking) { PlayerController.Instance.playerArrowIndicator.SetActive(true); }
+  
+                if (PlayerController.Instance.Interact())
+                {
+                    PlayerController.Instance.pState.shadowWalking = true;
+                    PlayerController.Instance.playerArrowIndicator.SetActive(false);
+                }
+                
+            }
+            else
+            {
+                PlayerController.Instance.pState.shadowWalking = false;
+                PlayerController.Instance.playerArrowIndicator.SetActive(false);
+            }
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = new Color(255f, 255f, 255f, 0.5f);
+        Gizmos.DrawRay(transform.position, Vector2.down * verticalConnectionLength);
+        Gizmos.DrawRay(transform.position, Vector2.up * verticalConnectionLength);
+        Gizmos.DrawRay(transform.position, Vector2.left * horizontalConnectionLength);
+        Gizmos.DrawRay(transform.position, Vector2.right * horizontalConnectionLength);
+    }
+
+    private void CheckForShadowBlocks() // this could probably be made more efficient ngl
+    {
         List<RaycastHit2D> results1 = new List<RaycastHit2D>();
         List<RaycastHit2D> results2 = new List<RaycastHit2D>();
         List<RaycastHit2D> results3 = new List<RaycastHit2D>();
         List<RaycastHit2D> results4 = new List<RaycastHit2D>();
 
-        int downHit = Physics2D.Raycast(transform.position, Vector2.down, ctf, results1,verticalConnectionLength);
+        int downHit = Physics2D.Raycast(transform.position, Vector2.down, ctf, results1, verticalConnectionLength);
         int upHit = Physics2D.Raycast(transform.position, Vector2.up, ctf, results2, verticalConnectionLength);
         int leftHit = Physics2D.Raycast(transform.position, Vector2.left, ctf, results3, horizontalConnectionLength);
         int rightHit = Physics2D.Raycast(transform.position, Vector2.right, ctf, results4, horizontalConnectionLength);
@@ -49,69 +117,5 @@ public class ShadowBlock : MonoBehaviour
         {
             connected[3] = true;
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    protected void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player")) //&& !connected)
-        {
-            Vector2 direction = (collision.transform.position - transform.position).normalized;
-
-            int exitDirection;
-
-            if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
-            {
-                exitDirection = direction.x > 0 ? 3 : 2;
-            }
-            else
-            {
-                exitDirection = direction.y > 0 ? 1 : 0;
-            }
-
-            Debug.Log(exitDirection);
-
-            if (connected[exitDirection] == false)
-            {
-                sr.sortingOrder = 0;
-                PlayerController.Instance.pState.shadowWalking = false;
-                PlayerController.Instance.SR.sortingOrder = 1;
-            }
-        }
-    }
-    protected void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player") && !collision.isTrigger)
-        {
-            if(PlayerController.Instance.currentAttackType == PlayerController.AttackType.Dark)
-            {
-                if(PlayerController.Instance.Interact())
-                {
-                    PlayerController.Instance.pState.shadowWalking = true;
-                }
-                
-            }
-            else
-            {
-                PlayerController.Instance.pState.shadowWalking = false;
-            }
-        }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawRay(transform.position, Vector2.down * verticalConnectionLength);
-        Gizmos.DrawRay(transform.position, Vector2.up * verticalConnectionLength);
-        Gizmos.DrawRay(transform.position, Vector2.left * horizontalConnectionLength);
-        Gizmos.DrawRay(transform.position, Vector2.right * horizontalConnectionLength);
-    }
-
-    private void CheckForShadowBlocks()
-    {
-
     }
 }
