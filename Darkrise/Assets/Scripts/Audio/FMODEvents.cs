@@ -34,16 +34,23 @@ public class FMODEvents : MonoBehaviour
 
     [field: Header("Enemy SFX")]
     [field: SerializeField] public EventReference soldierHurt { get; private set; }
+
     [field: SerializeField] public EventReference soldierDestroyed { get; private set; }
+
     [field: SerializeField] public EventReference soldierSpawns { get; private set; }
+
     [field: SerializeField] public EventReference soldierDetected { get; private set; }
+
     [field: SerializeField] public EventReference sentryHurt { get; private set; }
+
     [field: SerializeField] public EventReference sentrySpawns { get; private set; }
+
     [field: SerializeField] public EventReference sentryDestroyed { get; private set; }
 
 
     [field: Header("Spotlight SFX")]
     [field: SerializeField] public EventReference redAlarm { get; private set; }
+
     [field: SerializeField] public EventReference blueAlarm { get; private set; }
 
 
