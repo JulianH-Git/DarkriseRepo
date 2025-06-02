@@ -126,8 +126,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] SpriteRenderer fade;
     float alpha = 1.0f;
     [SerializeField] float timeBetweenGlances;
+    [SerializeField] public GameObject playerArrowIndicator;
     float countUptoGlance = 0;
-
     float releaseStaleInputs = 0.1f;
     float releaseStateInputsIncrement = 0.0f;
     public int Health
@@ -329,7 +329,7 @@ public class PlayerController : MonoBehaviour
         {
             if (CurrentEnergy > 0)
             {
-                CurrentEnergy -= bubbleEnergyLossRate;
+                CurrentEnergy -= bubbleEnergyLossRate * Time.deltaTime;
             }
             else if(CurrentEnergy == 0)
             {
@@ -1168,10 +1168,10 @@ public class PlayerController : MonoBehaviour
             switch (currentAttackType)
             {
                 case (AttackType.Neutral):
-                    CurrentEnergy -= hidingEnergyLossRate;
+                    CurrentEnergy -= hidingEnergyLossRate * Time.deltaTime;
                     break;
                 case (AttackType.Dark):
-                    CurrentEnergy -= hidingEnergyLossRate / 2;
+                    CurrentEnergy -= (hidingEnergyLossRate / 2) * Time.deltaTime;
                     break;
             }
 
@@ -1231,7 +1231,7 @@ public class PlayerController : MonoBehaviour
             Physics2D.IgnoreLayerCollision(0, 6, true);
             sr.sortingOrder = -1;
             ShadowWalk();
-            CurrentEnergy -= hidingEnergyLossRate;
+            CurrentEnergy -= hidingEnergyLossRate * Time.deltaTime;
 
             if (CurrentEnergy == 0)
             {
