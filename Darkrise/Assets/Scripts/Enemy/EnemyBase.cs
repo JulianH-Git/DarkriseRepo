@@ -172,6 +172,7 @@ public class enemyBase : MonoBehaviour
         anim.ResetTrigger("death");
         anim.Play("idle");
         SetPosition(anchorPos);
+        dieOnce = false;
     }
 
     public virtual void SetPosition(Vector2 pos)
