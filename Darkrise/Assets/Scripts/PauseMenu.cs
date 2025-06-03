@@ -54,6 +54,7 @@ public class PauseMenu : MonoBehaviour
         pauseAnim.SetTrigger("exitMenu");
         yield return new WaitForSecondsRealtime(0.1f);
         pauseMenuUI.SetActive(false);
+        mapper.Close(true);
         //resume music here!
         Time.timeScale = 1.0f;
 
