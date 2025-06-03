@@ -54,6 +54,7 @@ public class ShadowBlock : MonoBehaviour
                 sr.sortingOrder = 0;
                 PlayerController.Instance.pState.shadowWalking = false;
                 PlayerController.Instance.SR.sortingOrder = 1;
+                PlayerController.Instance.ExitShadowWalk();
             }
         }
     }

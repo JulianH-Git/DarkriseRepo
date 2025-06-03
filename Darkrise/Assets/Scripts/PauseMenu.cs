@@ -11,6 +11,7 @@ public class PauseMenu : MonoBehaviour
     public static bool GamePaused = false;
     [SerializeField] public GameObject pauseMenuUI;
     [SerializeField] public GameObject settingsMenuUI;
+    [SerializeField] private Rewired.UI.ControlMapper.ControlMapper mapper = null;
     private Animator pauseAnim;
     private Animator settingsAnim;
     private Player player;
@@ -19,7 +20,7 @@ public class PauseMenu : MonoBehaviour
     private List<ActionElementMap> keyboardActionID = new List<ActionElementMap>();
     public GameObject pauseFirstButton, //button that's highlighted when you pause
         optionsFirstButton, //button that's highlighted when you first open the options menu
-        optionsClosedButton; //button that's highlighted after you close the options menu
+        optionsClosedButton;
 
     private void Awake()
     {
@@ -101,15 +102,35 @@ public class PauseMenu : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(optionsFirstButton);
     }
 
+    public void ControlsMenu()
+    {
+        Debug.Log("Loading controls menu...");
+        mapper.Open();
+    }
+
     public void StartExitingSettingsMenu()
     {
         StartCoroutine(ExitSettingsMenu());
     }
 
+    public void StartExitingControlsMenu()
+    {
+        StartCoroutine(ExitControlsMenu());
+    }
+
+    public IEnumerator ExitControlsMenu()
+    {
+        Debug.Log("Exiting controls menu...");
+        yield return new WaitForSecondsRealtime(0.3f);
+        mapper.Close(true);
+        EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
+        EventSystem.current.SetSelectedGameObject(optionsFirstButton);
+        Debug.Log("Controls off");
+    }
+
     public IEnumerator ExitSettingsMenu()
     {
         Debug.Log("Exiting settings menu...");
-        settingsAnim.SetTrigger("exitSettingsMenu");
         yield return new WaitForSecondsRealtime(0.3f);
         EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
         EventSystem.current.SetSelectedGameObject(optionsClosedButton);

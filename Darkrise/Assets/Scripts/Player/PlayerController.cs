@@ -1177,22 +1177,23 @@ public class PlayerController : MonoBehaviour
 
             if (CurrentEnergy == 0)
             {
-                Physics2D.IgnoreLayerCollision(0, 6, false);
-                sr.sortingOrder = 1;
-                animator.SetBool("hiding", false);
-                pState.hiding = false;
-                spellUsedRecently = true;
+                ExitShadowWalk();
             }
         }
 
         if (dashPressed || jumpPressed || Interact())
         {
-            Physics2D.IgnoreLayerCollision(0, 6, false);
-            sr.sortingOrder = 1;
-            animator.SetBool("hiding", false);
-            pState.hiding = false;
-            spellUsedRecently = true;
+            ExitShadowWalk();
         }
+    }
+
+    public void ExitShadowWalk()
+    {
+        Physics2D.IgnoreLayerCollision(0, 6, false);
+        sr.sortingOrder = 1;
+        animator.SetBool("hiding", false);
+        pState.hiding = false;
+        spellUsedRecently = true;
     }
 
     private void DarkRoomBubble()

@@ -53,8 +53,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4df04e3c9344904eb85222a949d82a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  darkEnergyTextObj: {fileID: 0}
-  lightEnergyTextObj: {fileID: 0}
   hintTextObj: {fileID: 4096763128481623265}
 --- !u!1 &2733209769106124574
 GameObject:
@@ -128,7 +126,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 6
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 8fa691599fabd114a95ed9996eda3896, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -347,7 +345,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 6
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 780b5ca9f790a364dbaeff29f9f9935a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -431,7 +429,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 6
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: b8416bcabaef1a148b2b3f1eb1635acb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
