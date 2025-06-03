@@ -55,6 +55,7 @@ public class PauseMenu : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.1f);
         pauseMenuUI.SetActive(false);
         mapper.Close(true);
+        settingsMenuUI.SetActive(false);
         //resume music here!
         Time.timeScale = 1.0f;
 
