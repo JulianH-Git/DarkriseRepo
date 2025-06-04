@@ -212,8 +212,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 142acb35dcc90b241bb26ee7b89f08c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
-  maxHealth: 10
+  health: 1
+  maxHealth: 1
+  stun: 0
+  maxStun: 1
+  stunTimer: 5
   recoilLength: 0.5
   recoilFactor: 0.7
   isRecoiling: 0

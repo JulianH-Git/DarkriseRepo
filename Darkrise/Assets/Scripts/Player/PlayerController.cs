@@ -1039,6 +1039,27 @@ public class PlayerController : MonoBehaviour
                 }
                 AudioManager.instance.PlayOneShot(FMODEvents.instance.powerSelect, this.transform.position);
             }
+
+            switch(currentAttackType)
+            {
+                case AttackType.Neutral:
+                    animator.SetBool("darkMode", false);
+                    animator.SetBool("lightMode", false);
+                    animator.SetLayerWeight(0, 1);
+                    animator.SetLayerWeight(1, 0);
+                    break;
+                case AttackType.Light:
+                    animator.SetBool("darkMode", false);
+                    animator.SetBool("lightMode", true);
+                    break;
+                case AttackType.Dark:
+                    animator.SetBool("darkMode", true);
+                    animator.SetBool("lightMode", false);
+                    animator.SetLayerWeight(1, 1);
+                    animator.SetLayerWeight(0, 0);
+                    break;
+            }
+
         }
         else if (darkUnlocked && !lightUnlocked)
         {
@@ -1084,6 +1105,22 @@ public class PlayerController : MonoBehaviour
                 currentAttackType = AttackType.Dark;
             }
             AudioManager.instance.PlayOneShot(FMODEvents.instance.powerSelect, this.transform.position);
+        }
+
+        switch (currentAttackType)
+        {
+            case AttackType.Neutral:
+                animator.SetBool("darkMode", false);
+                animator.SetBool("lightMode", false);
+                break;
+            case AttackType.Light:
+                animator.SetBool("darkMode", false);
+                animator.SetBool("lightMode", true);
+                break;
+            case AttackType.Dark:
+                animator.SetBool("darkMode", true);
+                animator.SetBool("lightMode", false);
+                break;
         }
     }
 
