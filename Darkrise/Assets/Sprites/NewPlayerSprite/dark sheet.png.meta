@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 427e44cf8ecff4c4db5c3ffd0efef018
+guid: 7ad03e171e6c24123b7b72f1891e3b57
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sprite_sheet (6)_0
+      name: dark sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2522f14f073ff42f4bfd87cb344d5955
-      internalID: 537784493
+      spriteID: d064c73d167954802a2fd17d0bc22f9e
+      internalID: -1085336270
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (6)_1
+      name: dark sheet_1
       rect:
         serializedVersion: 2
         x: 449
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6fa57240ebd664a489b992a4c93ecef8
-      internalID: -2090400796
+      spriteID: e7a678ca9d733403a9520b70fd92c66f
+      internalID: -99190582
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (6)_2
+      name: dark sheet_2
       rect:
         serializedVersion: 2
         x: 898
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7862a96d6995b4e79bd27abaa285aedd
-      internalID: 1000198714
+      spriteID: 19798b75155cb4d3f84c9a91d6a4cd62
+      internalID: -1397147494
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (6)_3
+      name: dark sheet_3
       rect:
         serializedVersion: 2
         x: 1347
@@ -187,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 43faa34cc2df54e3cb98c353aa2135c6
-      internalID: 1473338862
+      spriteID: cf98248d350a94abcb9ece45610a3ad7
+      internalID: -1858816779
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (6)_4
+      name: dark sheet_4
       rect:
         serializedVersion: 2
         x: 1796
@@ -208,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ded97c3e8c100439792af2eaf7b09e26
-      internalID: 368599533
+      spriteID: 4d89ae041e6ae42aa9f9c48d4ba43572
+      internalID: -1277094005
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (6)_5
+      name: dark sheet_5
       rect:
         serializedVersion: 2
         x: 2245
@@ -229,14 +229,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 96e1ed6c4ec144ae2b277d21e06a908f
-      internalID: -640920179
+      spriteID: f80195ca8570f43b4b54f346844c3ee2
+      internalID: -775744729
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (6)_6
+      name: dark sheet_6
       rect:
         serializedVersion: 2
         x: 0
@@ -250,14 +250,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 72f47a4b678ff4228b31c9f3c4705d49
-      internalID: -805508207
+      spriteID: 02eaaea4ec90c4be8baf0e2b208df616
+      internalID: -282672812
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (6)_7
+      name: dark sheet_7
       rect:
         serializedVersion: 2
         x: 449
@@ -271,14 +271,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1a7241ca189d645549c1ff4f6ef6575f
-      internalID: 577539694
+      spriteID: e5bb79f088f114508af38abd3ac70b28
+      internalID: -2013218459
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (6)_8
+      name: dark sheet_8
       rect:
         serializedVersion: 2
         x: 898
@@ -292,14 +292,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 735b2b8a29b624d968ffdf3bbc89293a
-      internalID: -1670256020
+      spriteID: fd2974c4c59114ed3a8a8c62997396a1
+      internalID: 482252921
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (6)_9
+      name: dark sheet_9
       rect:
         serializedVersion: 2
         x: 1347
@@ -313,14 +313,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e252b4472a72a407fa0d4fd537253d4c
-      internalID: 67801532
+      spriteID: a36f99d6784bd4ba2a7a716feb194ddd
+      internalID: 1650931593
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (6)_10
+      name: dark sheet_10
       rect:
         serializedVersion: 2
         x: 1796
@@ -334,14 +334,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c7b6a6a4c3a34412bb6cb8de4bcec09a
-      internalID: 1819198907
+      spriteID: fe84683a2a9b34a51acf2187bb68185e
+      internalID: -798790009
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (6)_11
+      name: dark sheet_11
       rect:
         serializedVersion: 2
         x: 2245
@@ -355,14 +355,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 997ac7c6fd84a46c1856a3e1537bccab
-      internalID: 1995102338
+      spriteID: 159e69c55fb29496bb01922817e15adc
+      internalID: 1817135270
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (6)_12
+      name: dark sheet_12
       rect:
         serializedVersion: 2
         x: 0
@@ -376,14 +376,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d25e8aacbf2154aecbe4f96870126096
-      internalID: 1464887225
+      spriteID: 99768d42c20f6446c9a37d039b6d14ed
+      internalID: -768882804
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (6)_13
+      name: dark sheet_13
       rect:
         serializedVersion: 2
         x: 449
@@ -397,14 +397,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0e0d580011ee248e8b4de6c7f85e7c0b
-      internalID: -707737650
+      spriteID: c1dda432e5c394c15a3efc2d4838ed55
+      internalID: 865482087
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (6)_14
+      name: dark sheet_14
       rect:
         serializedVersion: 2
         x: 898
@@ -418,14 +418,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3da924ad0d7dd43599c07c7629796f84
-      internalID: -1013375832
+      spriteID: d86f4d04fdf30496493d7a0df680b61d
+      internalID: -291514867
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (6)_15
+      name: dark sheet_15
       rect:
         serializedVersion: 2
         x: 1347
@@ -439,14 +439,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da9dac7e8bef24fc9adca85e0fe9da8f
-      internalID: -496079116
+      spriteID: 110eb8ed18cde425592eefeba9398b73
+      internalID: -1845176193
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (6)_16
+      name: dark sheet_16
       rect:
         serializedVersion: 2
         x: 1796
@@ -460,14 +460,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0f6e8009521604309b3a33a40fe2ba38
-      internalID: 1458355448
+      spriteID: 572167e2350ac4786b289b52463758c6
+      internalID: 795853048
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (6)_17
+      name: dark sheet_17
       rect:
         serializedVersion: 2
         x: 2245
@@ -481,14 +481,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 13d26e6996b0b4a379ffd0b4d46bdab8
-      internalID: 1913474618
+      spriteID: 11f844015918244ceb6805628045a534
+      internalID: 2091100310
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (6)_18
+      name: dark sheet_18
       rect:
         serializedVersion: 2
         x: 0
@@ -502,14 +502,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5959a337b95842d0b250f6642774632
-      internalID: -819563280
+      spriteID: 85fff036ffef34696862ee15a735889e
+      internalID: 1944267203
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (6)_19
+      name: dark sheet_19
       rect:
         serializedVersion: 2
         x: 449
@@ -523,14 +523,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 63415402bd39a4be6a06640e03899a59
-      internalID: -24010005
+      spriteID: 1b4d0478fd511492292004bc1189568c
+      internalID: 1646623897
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (6)_20
+      name: dark sheet_20
       rect:
         serializedVersion: 2
         x: 898
@@ -544,14 +544,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0dcf8a7ec6b6d47d5a636dc4e51fc48a
-      internalID: 1407913611
+      spriteID: e2d48f676d6864baebfc9ae2fca3103b
+      internalID: -1575643671
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (6)_21
+      name: dark sheet_21
       rect:
         serializedVersion: 2
         x: 1347
@@ -565,14 +565,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d83ced43e38c46568f9c8eb2093f7d1
-      internalID: -639155052
+      spriteID: c33c7f033593347eab16553ba217a866
+      internalID: -470457473
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (6)_22
+      name: dark sheet_22
       rect:
         serializedVersion: 2
         x: 1796
@@ -586,14 +586,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 995f13fc211f44ebf81a14eb69970cfe
-      internalID: -801260926
+      spriteID: 720732e41a8df44b09c6e552938b9372
+      internalID: -1365498973
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (6)_23
+      name: dark sheet_23
       rect:
         serializedVersion: 2
         x: 2245
@@ -607,14 +607,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1faa329f1f5fe402db45a9061c932358
-      internalID: 649768108
+      spriteID: 03a432b9a86734bf5b270ba820d4f93f
+      internalID: 410314969
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (6)_24
+      name: dark sheet_24
       rect:
         serializedVersion: 2
         x: 0
@@ -628,14 +628,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d2b709eb5f1ab485f8bcbe58ff45b0aa
-      internalID: -2096830248
+      spriteID: fcd305f70c84f4aadaec05cccd6b0461
+      internalID: 754786718
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (6)_25
+      name: dark sheet_25
       rect:
         serializedVersion: 2
         x: 449
@@ -649,14 +649,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cf1a5c3b51fe240d5b5c6d0b25e8d236
-      internalID: -974347998
+      spriteID: 52a621533a5944a27a1b3dc73a528679
+      internalID: 1467506042
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (6)_26
+      name: dark sheet_26
       rect:
         serializedVersion: 2
         x: 898
@@ -670,14 +670,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 05166cc2efff44fd4a9dd15f453b02dd
-      internalID: 1185726814
+      spriteID: 2ebe44f6324ac4c40a9caf828ca12f21
+      internalID: 1928693545
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (6)_27
+      name: dark sheet_27
       rect:
         serializedVersion: 2
         x: 1347
@@ -691,14 +691,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c4ca174932394797b3c4bef06abab18
-      internalID: 217118799
+      spriteID: f70d0d0603577435193362f0e56c7ac6
+      internalID: -1425079520
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_sheet (6)_28
+      name: dark sheet_28
       rect:
         serializedVersion: 2
         x: 2245
@@ -712,8 +712,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a32312be6b4e44903b6274158a0b68e9
-      internalID: 1662098995
+      spriteID: 3f7c92c6e68a84cd5ade96ac320f1f75
+      internalID: 843735907
       vertices: []
       indices: 
       edges: []
@@ -729,35 +729,35 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      sprite_sheet (6)_0: 537784493
-      sprite_sheet (6)_1: -2090400796
-      sprite_sheet (6)_10: 1819198907
-      sprite_sheet (6)_11: 1995102338
-      sprite_sheet (6)_12: 1464887225
-      sprite_sheet (6)_13: -707737650
-      sprite_sheet (6)_14: -1013375832
-      sprite_sheet (6)_15: -496079116
-      sprite_sheet (6)_16: 1458355448
-      sprite_sheet (6)_17: 1913474618
-      sprite_sheet (6)_18: -819563280
-      sprite_sheet (6)_19: -24010005
-      sprite_sheet (6)_2: 1000198714
-      sprite_sheet (6)_20: 1407913611
-      sprite_sheet (6)_21: -639155052
-      sprite_sheet (6)_22: -801260926
-      sprite_sheet (6)_23: 649768108
-      sprite_sheet (6)_24: -2096830248
-      sprite_sheet (6)_25: -974347998
-      sprite_sheet (6)_26: 1185726814
-      sprite_sheet (6)_27: 217118799
-      sprite_sheet (6)_28: 1662098995
-      sprite_sheet (6)_3: 1473338862
-      sprite_sheet (6)_4: 368599533
-      sprite_sheet (6)_5: -640920179
-      sprite_sheet (6)_6: -805508207
-      sprite_sheet (6)_7: 577539694
-      sprite_sheet (6)_8: -1670256020
-      sprite_sheet (6)_9: 67801532
+      dark sheet_0: -1085336270
+      dark sheet_1: -99190582
+      dark sheet_10: -798790009
+      dark sheet_11: 1817135270
+      dark sheet_12: -768882804
+      dark sheet_13: 865482087
+      dark sheet_14: -291514867
+      dark sheet_15: -1845176193
+      dark sheet_16: 795853048
+      dark sheet_17: 2091100310
+      dark sheet_18: 1944267203
+      dark sheet_19: 1646623897
+      dark sheet_2: -1397147494
+      dark sheet_20: -1575643671
+      dark sheet_21: -470457473
+      dark sheet_22: -1365498973
+      dark sheet_23: 410314969
+      dark sheet_24: 754786718
+      dark sheet_25: 1467506042
+      dark sheet_26: 1928693545
+      dark sheet_27: -1425079520
+      dark sheet_28: 843735907
+      dark sheet_3: -1858816779
+      dark sheet_4: -1277094005
+      dark sheet_5: -775744729
+      dark sheet_6: -282672812
+      dark sheet_7: -2013218459
+      dark sheet_8: 482252921
+      dark sheet_9: 1650931593
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
