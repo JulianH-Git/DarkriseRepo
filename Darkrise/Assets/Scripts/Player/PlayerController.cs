@@ -1047,16 +1047,21 @@ public class PlayerController : MonoBehaviour
                     animator.SetBool("lightMode", false);
                     animator.SetLayerWeight(0, 1);
                     animator.SetLayerWeight(1, 0);
+                    animator.SetLayerWeight(2, 0);
                     break;
                 case AttackType.Light:
                     animator.SetBool("darkMode", false);
                     animator.SetBool("lightMode", true);
+                    animator.SetLayerWeight(0, 0);
+                    animator.SetLayerWeight(1, 0);
+                    animator.SetLayerWeight(2, 1);
                     break;
                 case AttackType.Dark:
                     animator.SetBool("darkMode", true);
                     animator.SetBool("lightMode", false);
-                    animator.SetLayerWeight(1, 1);
                     animator.SetLayerWeight(0, 0);
+                    animator.SetLayerWeight(1, 1);
+                    animator.SetLayerWeight(2, 0);
                     break;
             }
 

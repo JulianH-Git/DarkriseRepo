@@ -135,6 +135,7 @@ public class enemyBase : MonoBehaviour
 
     public virtual void EnemyHit(float _damageDone, Vector2 _hitDirection, float _hitForce, bool _damage)
     {
+        if(stunned) { return; }
         if (_damage) { health -= _damageDone; }
         else { stun += _damageDone; }
         
