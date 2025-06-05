@@ -98,7 +98,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float recoveryRate;
     float timeSinceSpellUsed = 0f;
     bool spellUsedRecently;
-
     int fireballCost;
     [SerializeField] float timeToCast;
     [SerializeField] private Transform fireballTransform;
@@ -107,6 +106,7 @@ public class PlayerController : MonoBehaviour
     float timeSinceCast;
     public bool lightUnlocked = false;
     public bool darkUnlocked = false;
+    public bool modeLocked = false;
     public delegate void OnEnergyChangedDelegate();
     [HideInInspector] public OnEnergyChangedDelegate onEnergyChangedCallback;
 
@@ -115,6 +115,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float hidingEnergyLossRate;
     [SerializeField] float bubbleEnergyLossRate;
     [SerializeField] SpriteMask lightModeBubble;
+    [SerializeField] float modeLockedTimer;
+    float modeLockedTimeToRelease;
     bool bubbleUp = false;
     public bool BubbleUp
     {
@@ -157,7 +159,7 @@ public class PlayerController : MonoBehaviour
             {
                 currentEnergy = Mathf.Clamp(value, 0, maxEnergy);
 
-                if(onEnergyChangedCallback != null)
+                if (onEnergyChangedCallback != null)
                 {
                     onEnergyChangedCallback.Invoke();
                 }
@@ -301,7 +303,7 @@ public class PlayerController : MonoBehaviour
 
         if (pState.hiding) { Hiding(); return; }
 
-        if(pState.shadowWalking) { ShadowBlockMovement(); return; }
+        if (pState.shadowWalking) { ShadowBlockMovement(); return; }
 
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle") && !idleGlancePlaying && countUptoGlance >= timeBetweenGlances)
         {
@@ -331,7 +333,7 @@ public class PlayerController : MonoBehaviour
             {
                 CurrentEnergy -= bubbleEnergyLossRate * Time.deltaTime;
             }
-            else if(CurrentEnergy == 0)
+            else if (CurrentEnergy == 0)
             {
                 bubbleUp = false;
                 lightModeBubble.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
@@ -339,10 +341,10 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if(spellUsedRecently)
+        if (spellUsedRecently)
         {
             timeSinceSpellUsed = timeSinceSpellUsed + Time.deltaTime;
-            if(timeSinceSpellUsed >= recoveryTimer)
+            if (timeSinceSpellUsed >= recoveryTimer)
             {
                 timeSinceSpellUsed = 0f;
                 spellUsedRecently = false;
@@ -350,10 +352,10 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if(pState.recovering)
+        if (pState.recovering)
         {
             currentEnergy += recoveryRate;
-            if(currentEnergy >= maxEnergy)
+            if (currentEnergy >= maxEnergy)
             {
                 pState.recovering = false;
             }
@@ -363,11 +365,12 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        
+
         Flip();
         Move();
         Jump();
-        SwitchAttackTypes();
+        if (!modeLocked) { SwitchAttackTypes(); }
+        else { ModeLockTimer(); }
         SwapSpell();
         Attack();
         CastSpell();
@@ -591,19 +594,19 @@ public class PlayerController : MonoBehaviour
             Hit(airAttackTransform, airAttackArea, ref pState.recoilingY, recoilSpeedY);
             SlashEffectAtAngle(slashEffect, 0, airAttackTransform);
         }
-    }   
+    }
 
     bool EnemyDirection(enemyBase _enemy)
     {
-        if(transform.localScale.x > 0 && _enemy.transform.localScale.x > 0)
+        if (transform.localScale.x > 0 && _enemy.transform.localScale.x > 0)
         {
             return true;
         }
-        else if(transform.localScale.x < 0 && _enemy.transform.localScale.x < 0)
+        else if (transform.localScale.x < 0 && _enemy.transform.localScale.x < 0)
         {
             return true;
         }
-        else if(_enemy.transform.localScale.x == 0)
+        else if (_enemy.transform.localScale.x == 0)
         {
             return true;
         }
@@ -657,7 +660,7 @@ public class PlayerController : MonoBehaviour
             {
                 enemy = ObjectsToHit[i].GetComponent<enemyBase>();
 
-                if(EnemyDirection(enemy))
+                if (EnemyDirection(enemy))
                 {
                     if (enemy.GetComponent<FootSolider>() != null)
                     {
@@ -674,7 +677,7 @@ public class PlayerController : MonoBehaviour
                     if (currentAttackType == AttackType.Light) { enemy.EnemyHit(_damage, (transform.position - ObjectsToHit[i].transform.position).normalized, _recoilStrength, false); }
                     else { enemy.EnemyHit(_damage, (transform.position - ObjectsToHit[i].transform.position).normalized, _recoilStrength, true); }
                 }
-                
+
             }
         }
 
@@ -718,14 +721,14 @@ public class PlayerController : MonoBehaviour
                     spellSwapPressed = false;
                     break;
                 case AttackType.Light:
-                    if (currentLightSpell == EquippedLightSpell.Fireball) 
-                    { 
-                        currentLightSpell = EquippedLightSpell.LightBubble; 
+                    if (currentLightSpell == EquippedLightSpell.Fireball)
+                    {
+                        currentLightSpell = EquippedLightSpell.LightBubble;
                         Debug.Log($"Current light spell - {currentLightSpell}");
                         spellSwapPressed = false;
                     }
-                    else 
-                    { 
+                    else
+                    {
                         currentLightSpell = EquippedLightSpell.Fireball;
                         bubbleUp = false;
                         lightModeBubble.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
@@ -750,7 +753,7 @@ public class PlayerController : MonoBehaviour
 
     void CastLightSpell()
     {
-        switch(currentLightSpell)
+        switch (currentLightSpell)
         {
             case EquippedLightSpell.Fireball:
                 FireballTime();
@@ -788,7 +791,7 @@ public class PlayerController : MonoBehaviour
 
     void LightBubbleTime()
     {
-        if(CurrentEnergy > 0 && !bubbleUp && castSpell)
+        if (CurrentEnergy > 0 && !bubbleUp && castSpell)
         {
             bubbleUp = true;
             timeSinceCast = 0;
@@ -1040,7 +1043,7 @@ public class PlayerController : MonoBehaviour
                 AudioManager.instance.PlayOneShot(FMODEvents.instance.powerSelect, this.transform.position);
             }
 
-            switch(currentAttackType)
+            switch (currentAttackType)
             {
                 case AttackType.Neutral:
                     animator.SetBool("darkMode", false);
@@ -1070,6 +1073,10 @@ public class PlayerController : MonoBehaviour
         {
             SwitchAttackTypesDarkOnly();
         }
+        else if(!darkUnlocked && lightUnlocked)
+        {
+            SwitchAttackTypesLightOnly();
+        }
         else
         {
             currentAttackType = AttackType.Neutral;
@@ -1078,6 +1085,41 @@ public class PlayerController : MonoBehaviour
             DarkRoomBubble();
             return;
         }
+    }
+
+    void SwitchAttackTypes(AttackType _at)
+    {
+        //determine if swapping "left" or "right" (basically are we going forward or back on the wheel)
+
+        currentAttackType = _at;
+
+        switch (currentAttackType)
+        {
+            case AttackType.Neutral:
+                animator.SetBool("darkMode", false);
+                animator.SetBool("lightMode", false);
+                animator.SetLayerWeight(0, 1);
+                animator.SetLayerWeight(1, 0);
+                animator.SetLayerWeight(2, 0);
+                break;
+            case AttackType.Light:
+                animator.SetBool("darkMode", false);
+                animator.SetBool("lightMode", true);
+                animator.SetLayerWeight(0, 0);
+                animator.SetLayerWeight(1, 0);
+                animator.SetLayerWeight(2, 1);
+                break;
+            case AttackType.Dark:
+                animator.SetBool("darkMode", true);
+                animator.SetBool("lightMode", false);
+                animator.SetLayerWeight(0, 0);
+                animator.SetLayerWeight(1, 1);
+                animator.SetLayerWeight(2, 0);
+                break;
+        }
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.powerSelect, this.transform.position);
+        onEnergyChangedCallback.Invoke();
+        DarkRoomBubble();
     }
 
     void SwitchAttackTypesDarkOnly()
@@ -1117,16 +1159,129 @@ public class PlayerController : MonoBehaviour
             case AttackType.Neutral:
                 animator.SetBool("darkMode", false);
                 animator.SetBool("lightMode", false);
+                animator.SetLayerWeight(0, 1);
+                animator.SetLayerWeight(1, 0);
+                animator.SetLayerWeight(2, 0);
                 break;
             case AttackType.Light:
                 animator.SetBool("darkMode", false);
                 animator.SetBool("lightMode", true);
+                animator.SetLayerWeight(0, 0);
+                animator.SetLayerWeight(1, 0);
+                animator.SetLayerWeight(2, 1);
                 break;
             case AttackType.Dark:
                 animator.SetBool("darkMode", true);
                 animator.SetBool("lightMode", false);
+                animator.SetLayerWeight(0, 0);
+                animator.SetLayerWeight(1, 1);
+                animator.SetLayerWeight(2, 0);
                 break;
         }
+    }
+
+    void SwitchAttackTypesLightOnly()
+    {
+        if (switchAttackTypeLeftPressed)
+        {
+            switchAttackTypeLeftPressed = false;
+
+            if (currentAttackType == AttackType.Neutral)
+            {
+                currentAttackType = AttackType.Light;
+            }
+            else
+            {
+                currentAttackType = AttackType.Neutral;
+            }
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.powerSelect, this.transform.position);
+        }
+
+        if (switchAttackTypeRightPressed)
+        {
+            switchAttackTypeRightPressed = false;
+
+            if (currentAttackType == AttackType.Light)
+            {
+                currentAttackType = AttackType.Neutral;
+            }
+            else
+            {
+                currentAttackType = AttackType.Light;
+            }
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.powerSelect, this.transform.position);
+        }
+
+        switch (currentAttackType)
+        {
+            case AttackType.Neutral:
+                animator.SetBool("darkMode", false);
+                animator.SetBool("lightMode", false);
+                animator.SetLayerWeight(0, 1);
+                animator.SetLayerWeight(1, 0);
+                animator.SetLayerWeight(2, 0);
+                break;
+            case AttackType.Light:
+                animator.SetBool("darkMode", false);
+                animator.SetBool("lightMode", true);
+                animator.SetLayerWeight(0, 0);
+                animator.SetLayerWeight(1, 0);
+                animator.SetLayerWeight(2, 1);
+                break;
+            case AttackType.Dark:
+                animator.SetBool("darkMode", true);
+                animator.SetBool("lightMode", false);
+                animator.SetLayerWeight(0, 0);
+                animator.SetLayerWeight(1, 1);
+                animator.SetLayerWeight(2, 0);
+                break;
+        }
+    }
+
+    private void ModeLockTimer()
+    {
+        modeLockedTimeToRelease += Time.deltaTime;
+        if(modeLockedTimeToRelease >= modeLockedTimer)
+        {
+            modeLockedTimeToRelease = 0;
+            modeLocked = false;
+            switch(currentAttackType)
+            {
+                case AttackType.Light:
+                    lightUnlocked = false;
+                    break;
+                case AttackType.Dark:
+                    darkUnlocked = false;
+                    break;
+            }
+            currentAttackType = AttackType.Neutral;
+            animator.SetBool("darkMode", false);
+            animator.SetBool("lightMode", false);
+            animator.SetLayerWeight(0, 1);
+            animator.SetLayerWeight(1, 0);
+            animator.SetLayerWeight(2, 0);
+        }
+    }
+
+    public void ResetModeLock()
+    {
+        modeLockedTimeToRelease = 0;
+        modeLocked = false;
+        switch (currentAttackType)
+        {
+            case AttackType.Light:
+                lightUnlocked = false;
+                break;
+            case AttackType.Dark:
+                darkUnlocked = false;
+                break;
+        }
+        currentAttackType = AttackType.Neutral;
+        animator.SetBool("darkMode", false);
+        animator.SetBool("lightMode", false);
+        animator.SetLayerWeight(0, 1);
+        animator.SetLayerWeight(1, 0);
+        animator.SetLayerWeight(2, 0);
     }
 
     public bool Interact()
@@ -1146,6 +1301,22 @@ public class PlayerController : MonoBehaviour
         CurrentEnergy = maxEnergy;
         onHealthChangedCallback.Invoke();
         //if we add anything else later we can add it here
+    }
+
+    public void StatueModeChange(AttackType _at)
+    {
+        if (_at == AttackType.Dark)
+        {
+            darkUnlocked = true;
+        }
+        else if (_at == AttackType.Light)
+        {
+            lightUnlocked = true;
+        }
+
+        SwitchAttackTypes(_at);
+        onEnergyChangedCallback.Invoke();
+        // start timer here!
     }
 
     IEnumerator WaitForIdleGlance()
