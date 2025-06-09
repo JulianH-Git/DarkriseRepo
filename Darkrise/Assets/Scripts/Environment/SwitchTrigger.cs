@@ -17,6 +17,8 @@ public class SwitchTrigger : MonoBehaviour
 
     [SerializeField] protected GameObject indicator;
 
+    private float duration = 0.1f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,10 +44,10 @@ public class SwitchTrigger : MonoBehaviour
                 indicator.SetActive(false);
                 foreach (GameObject sprite in affectedSprites)
                 {
-                    sprite.SetActive(false);
                     hasBeenUsed = true;
                     indicateColor.color = Color.white;
                     cutsceneManager.PlayCutscene();
+                    StartCoroutine(MoveGates(sprite, new Vector2(sprite.transform.localScale.x, 0)));
                 }
                 AudioManager.instance.PlayOneShot(FMODEvents.instance.pullLever, this.transform.position);
                 this.GetComponent<SpriteRenderer>().flipY = true;
@@ -58,6 +60,34 @@ public class SwitchTrigger : MonoBehaviour
         {
             indicator.SetActive(false);
             indicateColor.color = Color.white;
+        }
+    }
+
+    private IEnumerator MoveGates(GameObject gate, Vector2 spotSize)
+    {
+        yield return new WaitForSeconds(1);
+
+        Vector2 initialScale = gate.transform.localScale;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            if (gate != null) // Ensure the object is still valid
+            {
+                gate.transform.localScale = Vector2.Lerp(initialScale, spotSize, elapsedTime / duration);
+                elapsedTime += Time.deltaTime;
+                yield return null; // Wait for the next frame
+            }
+            else
+            {
+                yield break; // Exit the coroutine if the object is null
+            }
+        }
+
+        if (gate != null)
+        {
+            gate.transform.localScale = spotSize; // Ensure exact final size
+            gate.SetActive(false);
         }
     }
 }

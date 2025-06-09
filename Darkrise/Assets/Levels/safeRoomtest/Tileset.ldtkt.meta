@@ -24,7 +24,12 @@ ScriptedImporter:
       width: 60
       height: 60
     spriteID: 721fe30e26a937243aa59ce7f94cdb62
-    spriteOutline: []
+    spriteOutline:
+    - shape:
+      - {x: -30, y: 30}
+      - {x: -30, y: -30}
+      - {x: 30, y: -30}
+      - {x: 30, y: 30}
     tessellationDetail: 0
   - name: Tileset_1
     originalName: 
@@ -52,7 +57,12 @@ ScriptedImporter:
       width: 60
       height: 60
     spriteID: eb589198abd5a8b429a8744a88f2e790
-    spriteOutline: []
+    spriteOutline:
+    - shape:
+      - {x: -30, y: 30}
+      - {x: -30, y: -30}
+      - {x: 30, y: -30}
+      - {x: 30, y: 30}
     tessellationDetail: 0
   - name: Tileset_3
     originalName: 
@@ -923,4 +933,4 @@ ScriptedImporter:
     spriteOutline: []
     tessellationDetail: 0
   _secondaryTextures: []
-  _artifacts: {instanceID: 0}
+  _artifacts: {fileID: -2988177865379244337, guid: c33f77d1a9a6bf04fb6f12807af299ff, type: 3}
