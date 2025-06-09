@@ -9,6 +9,8 @@ public class SwitchTrigger : MonoBehaviour
 
     [SerializeField] protected List<GameObject> affectedSprites;
 
+    [SerializeField] protected CutsceneCamera cutsceneManager;
+
     private bool hasBeenUsed = false;
 
     [SerializeField] protected SpriteRenderer indicateColor;
@@ -43,6 +45,7 @@ public class SwitchTrigger : MonoBehaviour
                     sprite.SetActive(false);
                     hasBeenUsed = true;
                     indicateColor.color = Color.white;
+                    cutsceneManager.PlayCutscene();
                 }
                 AudioManager.instance.PlayOneShot(FMODEvents.instance.pullLever, this.transform.position);
                 this.GetComponent<SpriteRenderer>().flipY = true;
