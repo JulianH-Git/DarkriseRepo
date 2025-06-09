@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - GroundTile
   - Room Wide Effect
+  - VirtualCamera
   layers:
   - Default
   - TransparentFX
