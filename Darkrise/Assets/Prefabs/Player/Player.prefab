@@ -55,7 +55,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1035454517383889552}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.25, y: -1.25, z: 0}
+  m_LocalPosition: {x: 0.6, y: -1.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -104,7 +104,7 @@ Transform:
   - {fileID: 4768018162028532117}
   - {fileID: 5668866010763902944}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &343512142328514488
 SpriteRenderer:
@@ -258,15 +258,15 @@ MonoBehaviour:
   dashSpeed: 12
   dashTime: 0.3
   dashCooldown: 0.35
-  canDash: 0
+  canDash: 1
   timeBetweenNeutralAttacks: 0.3
   timeBetweenLightAttacks: 0.2
   timeBetweenDarkAttacks: 0.5
   damage: 2
   sideAttackTransform: {fileID: 4376388305088086530}
   airAttackTransform: {fileID: 486753328594881398}
-  sideAttackArea: {x: 2.75, y: 1}
-  airAttackArea: {x: 3.5, y: 1.75}
+  sideAttackArea: {x: 1.3, y: 1}
+  airAttackArea: {x: 1.3, y: 1}
   attackableLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -281,15 +281,18 @@ MonoBehaviour:
   currentEnergy: 20
   recoveryTimer: 3
   recoveryRate: 0.5
-  timeToCast: 0.1
+  fireballCooldown: 3
   fireballTransform: {fileID: 5488643421207372703}
   lightFireball: {fileID: 8231317321410085571, guid: be7f3867966df8b41817113e13fa8787, type: 3}
-  darkFireball: {fileID: 3628386444350592255, guid: 14ab0bd023fd0f14094e7b4771f35245, type: 3}
+  timeToCast: 0.1
   lightUnlocked: 0
   darkUnlocked: 0
-  hidingEnergyLossRate: 0.5
-  bubbleEnergyLossRate: 0.1
+  modeLocked: 0
+  hidingEnergyLossRate: 4
+  bubbleEnergyLossRate: 2
+  bubbleCooldown: 3
   lightModeBubble: {fileID: 50234727438445837}
+  modeLockedTimer: 999
   fade: {fileID: 0}
   timeBetweenGlances: 3
   playerArrowIndicator: {fileID: 5356311711110817950}
@@ -382,7 +385,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4485061638940355240}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.65, y: 0, z: 0}
+  m_LocalPosition: {x: 0.75, y: -0.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

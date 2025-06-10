@@ -6,6 +6,7 @@ public class ModeSwitchStatue : InteractTrigger
 {
     [SerializeField] bool giveLight;
     [SerializeField] bool giveDark;
+    [SerializeField] bool oneTimeUse;
     bool used;
     Color statueColor;
 
@@ -54,7 +55,9 @@ public class ModeSwitchStatue : InteractTrigger
                     controller.StatueModeChange(PlayerController.AttackType.Dark);
                 }
                 controller.modeLocked = true;
-                used = true;
+
+                if (oneTimeUse) { used = true; }
+                
             }
         }
     }

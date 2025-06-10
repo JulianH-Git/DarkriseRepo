@@ -98,11 +98,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float recoveryRate;
     float timeSinceSpellUsed = 0f;
     bool spellUsedRecently;
-    int fireballCost;
-    [SerializeField] float timeToCast;
+    [SerializeField] int fireballCooldown;
+    float timeTilFireball;
     [SerializeField] private Transform fireballTransform;
     [SerializeField] GameObject lightFireball;
-    [SerializeField] GameObject darkFireball;
+    [SerializeField] float timeToCast;
     float timeSinceCast;
     public bool lightUnlocked = false;
     public bool darkUnlocked = false;
@@ -114,6 +114,8 @@ public class PlayerController : MonoBehaviour
     [Header("Dark/Light Environment Settings")]
     [SerializeField] float hidingEnergyLossRate;
     [SerializeField] float bubbleEnergyLossRate;
+    [SerializeField] float bubbleCooldown;
+    float timeTilBubble;
     [SerializeField] SpriteMask lightModeBubble;
     [SerializeField] float modeLockedTimer;
     float modeLockedTimeToRelease;
@@ -209,10 +211,10 @@ public class PlayerController : MonoBehaviour
 
     public enum EquippedDarkSpell
     {
-        Fireball
+        Placeholder
     }
 
-    public EquippedDarkSpell currentDarkSpell = EquippedDarkSpell.Fireball;
+    public EquippedDarkSpell currentDarkSpell = EquippedDarkSpell.Placeholder;
 
     private void Awake()
     {
@@ -244,8 +246,6 @@ public class PlayerController : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
 
         playerFootsteps = AudioManager.instance.CreateInstance(FMODEvents.instance.playerFootsteps);
-
-        fireballCost = (int)maxEnergy;
     }
 
     private void Update()
@@ -393,7 +393,14 @@ public class PlayerController : MonoBehaviour
         }
 
         rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxVelocity);
+        DebugCooldownMessages();
 
+    }
+
+    void DebugCooldownMessages() //delete later
+    {
+        if(timeTilBubble >= bubbleCooldown) { Debug.Log("Bubble cooldown finished"); }
+        if(timeTilFireball >= fireballCooldown) { Debug.Log("Fireball cooldown finished"); }
     }
 
     void GetInput()
@@ -698,15 +705,18 @@ public class PlayerController : MonoBehaviour
                     break;
                 case AttackType.Neutral:
                     timeSinceCast += Time.deltaTime;
+                    timeTilFireball += Time.deltaTime;
+                    timeTilBubble += Time.deltaTime;
                     castSpell = false;
                     break;
             }
         }
-        else
-        {
-            timeSinceCast += Time.deltaTime;
-            castSpell = false;
-        }
+
+        timeSinceCast += Time.deltaTime;
+        timeTilFireball += Time.deltaTime;
+        timeTilBubble += Time.deltaTime;
+        castSpell = false;
+
     }
 
     void SwapSpell()
@@ -716,7 +726,7 @@ public class PlayerController : MonoBehaviour
             switch (currentAttackType)
             {
                 case AttackType.Dark:
-                    currentDarkSpell = EquippedDarkSpell.Fireball; // add others in later
+                    currentDarkSpell = EquippedDarkSpell.Placeholder; // add others in later
                     Debug.Log($"Current dark spell - {currentDarkSpell}");
                     spellSwapPressed = false;
                     break;
@@ -744,8 +754,8 @@ public class PlayerController : MonoBehaviour
     {
         switch (currentDarkSpell)
         {
-            case EquippedDarkSpell.Fireball:
-                FireballTime();
+            case EquippedDarkSpell.Placeholder:
+                Debug.Log("Placeholder");
                 break;
         }
 
@@ -766,22 +776,14 @@ public class PlayerController : MonoBehaviour
 
     void FireballTime()
     {
-        if (CurrentEnergy >= fireballCost)
+        if (timeTilFireball >= fireballCooldown)
         {
-            CurrentEnergy -= fireballCost;
+            timeTilFireball = 0;
             pState.casting = true;
             timeSinceCast = 0;
             StartCoroutine(CastFireball());
-            if (currentAttackType == AttackType.Dark)
-            {
-                AudioManager.instance.PlayOneShot(FMODEvents.instance.darkShot, this.transform.position);
-            }
-            else
-            {
-                AudioManager.instance.PlayOneShot(FMODEvents.instance.lightShot, this.transform.position);
-            }
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.lightShot, this.transform.position);
             spellUsedRecently = true;
-
         }
         else
         {
@@ -791,9 +793,10 @@ public class PlayerController : MonoBehaviour
 
     void LightBubbleTime()
     {
-        if (CurrentEnergy > 0 && !bubbleUp && castSpell)
+        if (CurrentEnergy > 0 && !bubbleUp && castSpell && timeTilBubble >= bubbleCooldown)
         {
             bubbleUp = true;
+            timeTilBubble = 0;
             timeSinceCast = 0;
             animator.SetTrigger("lightFireballShoot");
             castSpell = false;
@@ -815,21 +818,10 @@ public class PlayerController : MonoBehaviour
             GameObject fireball = null;
             pState.casting = true;
 
-            if (currentAttackType == AttackType.Light)
-            {
-                rb.velocity = new Vector2(0.0f, rb.velocity.y);
-                animator.SetTrigger("lightFireballShoot");
-                yield return new WaitForSeconds(timeToCast);
-                fireball = Instantiate(lightFireball, fireballTransform.position, Quaternion.identity);
-            }
-
-            else if (currentAttackType == AttackType.Dark)
-            {
-                rb.velocity = new Vector2(0.0f, rb.velocity.y);
-                animator.SetTrigger("darkFireballShoot");
-                yield return new WaitForSeconds(timeToCast);
-                fireball = Instantiate(darkFireball, fireballTransform.position, Quaternion.identity);
-            }
+            rb.velocity = new Vector2(0.0f, rb.velocity.y);
+            animator.SetTrigger("lightFireballShoot");
+            yield return new WaitForSeconds(timeToCast);
+            fireball = Instantiate(lightFireball, fireballTransform.position, Quaternion.identity);
 
             fireball.GetComponent<Fireball>().SetDirection(pState.lookingRight);
 
@@ -989,7 +981,6 @@ public class PlayerController : MonoBehaviour
     {
         _slashEffect = Instantiate(_slashEffect, _attackTransform);
         _slashEffect.transform.eulerAngles = new Vector3(0, 0, _effectAngle);
-        _slashEffect.transform.localScale = new Vector2(transform.localScale.x, transform.localScale.y);
     }
 
     public void TakeDamage(float _damage)
@@ -1073,7 +1064,7 @@ public class PlayerController : MonoBehaviour
         {
             SwitchAttackTypesDarkOnly();
         }
-        else if(!darkUnlocked && lightUnlocked)
+        else if (!darkUnlocked && lightUnlocked)
         {
             SwitchAttackTypesLightOnly();
         }
@@ -1241,11 +1232,11 @@ public class PlayerController : MonoBehaviour
     private void ModeLockTimer()
     {
         modeLockedTimeToRelease += Time.deltaTime;
-        if(modeLockedTimeToRelease >= modeLockedTimer)
+        if (modeLockedTimeToRelease >= modeLockedTimer)
         {
             modeLockedTimeToRelease = 0;
             modeLocked = false;
-            switch(currentAttackType)
+            switch (currentAttackType)
             {
                 case AttackType.Light:
                     lightUnlocked = false;
@@ -1472,13 +1463,21 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(walkSpeed * xAxis, walkSpeed * yAxis);
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(sideAttackTransform.position, sideAttackArea);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(airAttackTransform.position, airAttackArea);
+    }
+
     private void DebugModeUnlocks()
     {
         canDash = true;
         health = maxHealth;
         lightUnlocked = true;
         darkUnlocked = true;
-        fireballCost = 0;
+        fireballCooldown = 0;
         hidingEnergyLossRate = 0;
         bubbleEnergyLossRate = 0;
         onEnergyChangedCallback();
