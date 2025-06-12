@@ -3634,12 +3634,20 @@ PrefabInstance:
       value: 999
       objectReference: {fileID: 0}
     - target: {fileID: 931077289769193537, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
+      propertyPath: remoteFlashbang
+      value: 
+      objectReference: {fileID: 2714894762198226664, guid: 3dd21c36186a79f4ca66e802b9b941d1, type: 3}
+    - target: {fileID: 931077289769193537, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
       propertyPath: fireballCooldown
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 931077289769193537, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
       propertyPath: sideAttackArea.x
       value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 931077289769193537, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
+      propertyPath: flashbangCooldown
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 931077289769193537, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
       propertyPath: bubbleEnergyLossRate
@@ -3704,6 +3712,34 @@ PrefabInstance:
     - target: {fileID: 4376388305088086530, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5356311711110817950, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668866010763902944, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668866010763902944, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668866010763902944, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668866010763902944, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668866010763902944, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 8314323504331537735, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13743,8 +13779,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0, y: -0.00000011920929, z: 0}
-    m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
+    m_Center: {x: -0.00050002337, y: -0.0042000115, z: 0}
+    m_Extent: {x: 1.0062001, y: 0.99970007, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

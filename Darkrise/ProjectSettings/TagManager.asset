@@ -8,6 +8,7 @@ TagManager:
   - GroundTile
   - Room Wide Effect
   - VirtualCamera
+  - Technology
   layers:
   - Default
   - TransparentFX

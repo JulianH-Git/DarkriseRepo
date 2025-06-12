@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1512006052023549341}
   m_Layer: 0
   m_Name: ForcedEncounter_BreakerSwitch
-  m_TagString: Untagged
+  m_TagString: Technology
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

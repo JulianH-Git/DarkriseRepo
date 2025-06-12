@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5091659941541541753}
   m_Layer: 0
   m_Name: Alarm
-  m_TagString: Untagged
+  m_TagString: Technology
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,6 +105,8 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
+  flashbangDeactivationTimer: 3
+  flashbanged: 0
 --- !u!1 &8341599793569723788
 GameObject:
   m_ObjectHideFlags: 0

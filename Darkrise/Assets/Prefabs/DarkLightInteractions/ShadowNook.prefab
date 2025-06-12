@@ -186,6 +186,10 @@ MonoBehaviour:
   player: {fileID: 0}
   indicateColor: {fileID: 2086900721235615242}
   indicator: {fileID: 2378444725853250135}
+  playerHiding: 0
+  dashedInto: 0
+  leftHidingSpot: {fileID: 0}
+  rightHidingSpot: {fileID: 0}
 --- !u!61 &5889185691465669887
 BoxCollider2D:
   m_ObjectHideFlags: 0

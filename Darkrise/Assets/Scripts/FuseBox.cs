@@ -5,9 +5,12 @@ using UnityEngine;
 public class FuseBox : MonoBehaviour
 {
     [SerializeField] float overloadTimer;
+    [SerializeField] float flashbangDeactivationTimer;
+    float timeTilReactivated;
     float timeToOverload;
     public bool powered;
     public bool overloaded;
+    public bool flashbanged;
     SpriteRenderer sr;
 
     void Start()
@@ -26,11 +29,16 @@ public class FuseBox : MonoBehaviour
         {
             sr.color = Color.red;
         }
+        if(powered && overloaded && flashbanged)
+        {
+            sr.color = Color.red;
+
+        }
     }
 
     protected void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && collision.isTrigger && !powered)
+        if (collision.CompareTag("Player") && collision.isTrigger && !powered && PlayerController.Instance.currentAttackType == PlayerController.AttackType.Light)
         {
             powered = true;
             sr.color = Color.yellow;
@@ -56,6 +64,17 @@ public class FuseBox : MonoBehaviour
             {
                 timeToOverload -= Time.deltaTime;
             }
+        }
+    }
+
+    protected void Flashbanged()
+    {
+        timeTilReactivated += Time.deltaTime;
+
+        if (timeTilReactivated >= flashbangDeactivationTimer)
+        {
+            flashbanged = false;
+            overloaded = false;
         }
     }
 }

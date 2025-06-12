@@ -3,7 +3,6 @@ using Rewired;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static Rewired.Platforms.Custom.CustomInputSource;
 
 public class PlayerController : MonoBehaviour
 {
@@ -103,6 +102,10 @@ public class PlayerController : MonoBehaviour
     float timeTilFireball;
     [SerializeField] private Transform fireballTransform;
     [SerializeField] GameObject lightFireball;
+    [SerializeField] GameObject remoteFlashbang;
+    RemoteFlashbang currentFlashbang;
+    [SerializeField] float flashbangCooldown;
+    float timeTilFlashbang;
     [SerializeField] float timeToCast;
     float timeSinceCast;
     public bool lightUnlocked = false;
@@ -133,6 +136,7 @@ public class PlayerController : MonoBehaviour
     float alpha = 1.0f;
     [SerializeField] float timeBetweenGlances;
     [SerializeField] public GameObject playerArrowIndicator;
+    Quaternion defaultArrowRotation;
     float countUptoGlance = 0;
     float releaseStaleInputs = 0.1f;
     float releaseStateInputsIncrement = 0.0f;
@@ -206,7 +210,8 @@ public class PlayerController : MonoBehaviour
     public enum EquippedLightSpell
     {
         Fireball,
-        LightBubble
+        LightBubble,
+        RemoteFlashbang
     }
 
     public EquippedLightSpell currentLightSpell = EquippedLightSpell.Fireball;
@@ -248,6 +253,8 @@ public class PlayerController : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
 
         playerFootsteps = AudioManager.instance.CreateInstance(FMODEvents.instance.playerFootsteps);
+
+        defaultArrowRotation.eulerAngles = new Vector3(0f, 0f, 180f);
     }
 
     private void Update()
@@ -706,9 +713,6 @@ public class PlayerController : MonoBehaviour
                     CastLightSpell();
                     break;
                 case AttackType.Neutral:
-                    timeSinceCast += Time.deltaTime;
-                    timeTilFireball += Time.deltaTime;
-                    timeTilBubble += Time.deltaTime;
                     castSpell = false;
                     break;
             }
@@ -717,6 +721,7 @@ public class PlayerController : MonoBehaviour
         timeSinceCast += Time.deltaTime;
         timeTilFireball += Time.deltaTime;
         timeTilBubble += Time.deltaTime;
+        timeTilFlashbang += Time.deltaTime;
         castSpell = false;
 
     }
@@ -733,20 +738,22 @@ public class PlayerController : MonoBehaviour
                     spellSwapPressed = false;
                     break;
                 case AttackType.Light:
-                    if (currentLightSpell == EquippedLightSpell.Fireball)
+                    switch (currentLightSpell)
                     {
-                        currentLightSpell = EquippedLightSpell.LightBubble;
-                        Debug.Log($"Current light spell - {currentLightSpell}");
-                        spellSwapPressed = false;
+                        case EquippedLightSpell.Fireball:
+                            currentLightSpell = EquippedLightSpell.LightBubble;
+                            break;
+                        case EquippedLightSpell.LightBubble:
+                            currentLightSpell = EquippedLightSpell.RemoteFlashbang;
+                            break;
+                        case EquippedLightSpell.RemoteFlashbang:
+                            currentLightSpell = EquippedLightSpell.Fireball;
+                            bubbleUp = false;
+                            lightModeBubble.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
+                            break;
                     }
-                    else
-                    {
-                        currentLightSpell = EquippedLightSpell.Fireball;
-                        bubbleUp = false;
-                        lightModeBubble.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
-                        Debug.Log($"Current light spell - {currentLightSpell}");
-                        spellSwapPressed = false;
-                    }
+                    Debug.Log($"Current light spell - {currentLightSpell}");
+                    spellSwapPressed = false;
                     break;
             }
         }
@@ -772,6 +779,9 @@ public class PlayerController : MonoBehaviour
                 break;
             case EquippedLightSpell.LightBubble:
                 LightBubbleTime();
+                break;
+            case EquippedLightSpell.RemoteFlashbang:
+                RemoteFlashbangTime();
                 break;
         }
     }
@@ -810,6 +820,49 @@ public class PlayerController : MonoBehaviour
             lightModeBubble.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
             castSpell = false;
             spellUsedRecently = true;
+        }
+    }
+
+    void RemoteFlashbangTime()
+    {
+        if (timeTilFlashbang >= flashbangCooldown && currentFlashbang == null)
+        {
+            timeTilFlashbang = 0;
+            pState.casting = true;
+            timeSinceCast = 0;
+            StartCoroutine(CastFlashbang());
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.lightShot, this.transform.position);
+            spellUsedRecently = true;
+        }
+        else if (currentFlashbang != null && castSpell)
+        {
+            currentFlashbang.Detonated = true;
+            currentFlashbang = null;
+        }
+        else
+        {
+            castSpell = false;
+        }
+    }
+
+    IEnumerator CastFlashbang()
+    {
+        if (yAxis == 0 || yAxis < 0 && Grounded())
+        {
+            GameObject flashbang = null;
+            currentFlashbang = null;
+            pState.casting = true;
+
+            rb.velocity = new Vector2(0.0f, rb.velocity.y);
+            animator.SetTrigger("lightFireballShoot");
+            yield return new WaitForSeconds(timeToCast);
+            flashbang = Instantiate(remoteFlashbang, fireballTransform.position, Quaternion.identity);
+
+            currentFlashbang = flashbang.GetComponent<RemoteFlashbang>();
+            //currentFlashbang.GetComponent<RemoteFlashbang>().SetDirection(pState.lookingRight);
+
+            pState.casting = false;
+            castSpell = false;
         }
     }
 
@@ -1308,7 +1361,7 @@ public class PlayerController : MonoBehaviour
                     break;
             }
 
-            if(currentAttackType == AttackType.Dark)
+            if (currentAttackType == AttackType.Dark)
             {
                 ShadowDash();
                 dashPressed = false;
@@ -1329,17 +1382,43 @@ public class PlayerController : MonoBehaviour
     void ShadowDash()
     {
         ShadowNook nextNook = currentNook.GetNextNook(Mathf.Sign(xAxis));
-        if(nextNook != null)
+        if (nextNook != null)
         {
-            if(xAxis != 0)
+            if (xAxis != 0)
             {
-                if (dashPressed && Mathf.Sign(xAxis) == Mathf.Sign(nextNook.transform.position.x - transform.position.x))
+                float playerSign = Mathf.Sign(xAxis);
+                float nookSign = Mathf.Sign(nextNook.transform.position.x - transform.position.x);
+
+                if (playerSign == nookSign)
                 {
-                    dashPressed = false;
-                    currentNook.dashedInto = true;
-                    StartCoroutine(StartShadowDash(nextNook));
-                    currentNook = nextNook;
+                    // activate arrow for held direction
+                    playerArrowIndicator.SetActive(true);
+                    Quaternion arrowRotation = Quaternion.identity;
+                    if (playerSign == 1)
+                    {
+                        arrowRotation.eulerAngles = new Vector3(0, 0, 90f);
+                        playerArrowIndicator.transform.rotation = arrowRotation;
+                    }
+                    else
+                    {
+                        arrowRotation.eulerAngles = new Vector3(0, 0, 270f);
+                        playerArrowIndicator.transform.rotation = arrowRotation;
+                    }
+
+
+                    if (dashPressed)
+                    {
+                        dashPressed = false;
+                        currentNook.dashedInto = true;
+                        StartCoroutine(StartShadowDash(nextNook));
+                        currentNook = nextNook;
+                    }
                 }
+            }
+            else
+            {
+                playerArrowIndicator.SetActive(false);
+                playerArrowIndicator.transform.rotation = defaultArrowRotation;
             }
         }
     }
@@ -1348,10 +1427,12 @@ public class PlayerController : MonoBehaviour
     {
         float travelTime = Vector2.Distance(transform.position, _nextNook.transform.position) / dashSpeed;
         float elapsedTime = 0f;
+        playerArrowIndicator.SetActive(false);
+        playerArrowIndicator.transform.rotation = defaultArrowRotation;
         canDash = false;
         pState.dashing = true;
         Vector2 start = transform.position;
-        Vector2 end = new Vector2(_nextNook.transform.position.x,transform.position.y);
+        Vector2 end = new Vector2(_nextNook.transform.position.x, transform.position.y);
 
         while (elapsedTime < travelTime)
         {

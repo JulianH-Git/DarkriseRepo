@@ -10,6 +10,9 @@ public class Alarm : MonoBehaviour
     [SerializeField] Vector2 enemyAlertRadius;
     [SerializeField] LayerMask enemyLayer;
     SpriteRenderer sr;
+    [SerializeField] float flashbangDeactivationTimer;
+    float timeTilReactivated;
+    public bool flashbanged;
      
     // Start is called before the first frame update
     void Start()
@@ -20,6 +23,12 @@ public class Alarm : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(flashbanged)
+        {
+            sr.color = Color.grey;
+            Flashbanged();
+            return;
+        }
         if (fb != null && fb.powered && !fb.overloaded)
         {
             sr.color = Color.red;
@@ -34,7 +43,7 @@ public class Alarm : MonoBehaviour
                 }
             }
         }
-        if(fb != null && fb.overloaded)
+        if (fb != null && fb.overloaded)
         {
             sr.color = Color.grey;
         }
@@ -75,5 +84,15 @@ public class Alarm : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(enemyAlertTransform.position, enemyAlertRadius);
+    }
+
+    void Flashbanged()
+    {
+        timeTilReactivated += Time.deltaTime;
+
+        if (timeTilReactivated >= flashbangDeactivationTimer)
+        {
+            flashbanged = false;
+        }
     }
 }
