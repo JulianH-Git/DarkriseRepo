@@ -81,7 +81,7 @@ public class RemoteFlashbang : MonoBehaviour
 
     List<Collider2D> CheckForEnemies(Transform _roomTransform, Vector2 _roomArea)
     {
-        Collider2D[] ObjectsToHit = Physics2D.OverlapBoxAll(_roomTransform.position, _roomArea, 0, 0);
+        Collider2D[] ObjectsToHit = Physics2D.OverlapBoxAll(_roomTransform.position, _roomArea, 0, enemyLayer);
         List<Collider2D> enemiesInRange = new List<Collider2D>();
 
         for (int i = 0; i < ObjectsToHit.Length; i++)

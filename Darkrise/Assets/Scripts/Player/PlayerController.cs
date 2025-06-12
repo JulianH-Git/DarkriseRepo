@@ -1456,6 +1456,8 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("hiding", false);
         pState.hiding = false;
         spellUsedRecently = true;
+        playerArrowIndicator.SetActive(false);
+        playerArrowIndicator.transform.rotation = defaultArrowRotation;
     }
 
     private void DarkRoomBubble()
