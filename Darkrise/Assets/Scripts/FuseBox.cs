@@ -21,6 +21,11 @@ public class FuseBox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(flashbanged)
+        {
+            sr.color = Color.red;
+            Flashbanged();
+        }
         if(powered && !overloaded)
         {
             sr.color = Color.yellow;
@@ -28,11 +33,6 @@ public class FuseBox : MonoBehaviour
         if(powered && overloaded)
         {
             sr.color = Color.red;
-        }
-        if(powered && overloaded && flashbanged)
-        {
-            sr.color = Color.red;
-
         }
     }
 
@@ -70,6 +70,7 @@ public class FuseBox : MonoBehaviour
     protected void Flashbanged()
     {
         timeTilReactivated += Time.deltaTime;
+        overloaded = true;
 
         if (timeTilReactivated >= flashbangDeactivationTimer)
         {

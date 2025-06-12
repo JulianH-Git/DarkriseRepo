@@ -8,8 +8,17 @@ public class RemoteFlashbang : MonoBehaviour
     [SerializeField] Vector2 areaOfEffect;
     [SerializeField] GameObject areaOfEffectTransform;
     [SerializeField] LayerMask enemyLayer;
+    [SerializeField] LayerMask techLayer;
+    [SerializeField] LayerMask groundLayer;
     PlayerController player;
+    Rigidbody2D rb;
+    [SerializeField] private float speed;
     bool detonated;
+    Vector3 direction;
+    float currentLifetime;
+    [SerializeField] float maxLifeTime;
+    ContactFilter2D ctf;
+
 
     public bool Detonated
     {
@@ -20,13 +29,19 @@ public class RemoteFlashbang : MonoBehaviour
     void Start()
     {
         player = PlayerController.Instance;
+        rb = GetComponent<Rigidbody2D>();
+        rb.velocity = new Vector2(speed * direction.x, rb.velocity.y);
+        Physics2D.IgnoreLayerCollision(0, 6, true);
+        Physics2D.IgnoreLayerCollision(0, 0, true);
+        ctf.useTriggers = true;
+        ctf.SetLayerMask(techLayer);
     }
 
     // Update is called once per frame
     void Update()
     {
         // check if detonated
-        if (Detonated)
+        if (Detonated || currentLifetime >= maxLifeTime)
         {
             ActivateFlashbang();
         }
@@ -34,8 +49,12 @@ public class RemoteFlashbang : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // move
-
+        // check if grounded
+        if (Physics2D.Raycast(transform.position, Vector2.down, 0.1f, groundLayer))
+        {
+            rb.velocity = new Vector2(0.0f, rb.velocity.y);
+        }
+        currentLifetime += Time.deltaTime;
     }
 
     private void OnDrawGizmos()
@@ -54,6 +73,7 @@ public class RemoteFlashbang : MonoBehaviour
         }
 
         // and check for tech and disable it
+        CheckForTech(areaOfEffectTransform.transform, areaOfEffect);
 
         // then destroy myself
         Destroy(gameObject);
@@ -61,7 +81,7 @@ public class RemoteFlashbang : MonoBehaviour
 
     List<Collider2D> CheckForEnemies(Transform _roomTransform, Vector2 _roomArea)
     {
-        Collider2D[] ObjectsToHit = Physics2D.OverlapBoxAll(_roomTransform.position, _roomArea, 0, enemyLayer);
+        Collider2D[] ObjectsToHit = Physics2D.OverlapBoxAll(_roomTransform.position, _roomArea, 0, 0);
         List<Collider2D> enemiesInRange = new List<Collider2D>();
 
         for (int i = 0; i < ObjectsToHit.Length; i++)
@@ -84,14 +104,18 @@ public class RemoteFlashbang : MonoBehaviour
 
     void CheckForTech(Transform _roomTransform, Vector2 _roomArea)
     {
-        Collider2D[] ObjectsToHit = Physics2D.OverlapBoxAll(_roomTransform.position, _roomArea, 0, 0);
+        Collider2D[] ObjectsToHit = new Collider2D[5];
+        Physics2D.OverlapBox(_roomTransform.position, _roomArea, 0, ctf, ObjectsToHit);
         List<Collider2D> techInRange = new List<Collider2D>();
 
         for (int i = 0; i < ObjectsToHit.Length; i++)
         {
-            if (ObjectsToHit[i].CompareTag("Technology"))
+            if (ObjectsToHit[i] != null)
             {
-                techInRange.Add(ObjectsToHit[i]);
+                if (ObjectsToHit[i].CompareTag("Technology"))
+                {
+                    techInRange.Add(ObjectsToHit[i]);
+                }
             }
         }
 
@@ -110,5 +134,14 @@ public class RemoteFlashbang : MonoBehaviour
                 obj.GetComponent<FuseBox>().flashbanged = true;
             }
         }
+    }
+    public void SetDirection(bool isFacingRight)
+    {
+        direction = isFacingRight ? Vector3.right : Vector3.left;
+        transform.localScale = new Vector3(
+            isFacingRight ? Mathf.Abs(transform.localScale.x) : -Mathf.Abs(transform.localScale.x),
+            transform.localScale.y,
+            transform.localScale.z
+        );
     }
 }

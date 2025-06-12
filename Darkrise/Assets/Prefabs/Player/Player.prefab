@@ -284,6 +284,8 @@ MonoBehaviour:
   fireballCooldown: 3
   fireballTransform: {fileID: 5488643421207372703}
   lightFireball: {fileID: 8231317321410085571, guid: be7f3867966df8b41817113e13fa8787, type: 3}
+  remoteFlashbang: {fileID: 0}
+  flashbangCooldown: 0
   timeToCast: 0.1
   lightUnlocked: 0
   darkUnlocked: 0
@@ -409,7 +411,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5668866010763902944
 Transform:
   m_ObjectHideFlags: 0

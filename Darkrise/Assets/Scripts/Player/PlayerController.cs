@@ -859,7 +859,7 @@ public class PlayerController : MonoBehaviour
             flashbang = Instantiate(remoteFlashbang, fireballTransform.position, Quaternion.identity);
 
             currentFlashbang = flashbang.GetComponent<RemoteFlashbang>();
-            //currentFlashbang.GetComponent<RemoteFlashbang>().SetDirection(pState.lookingRight);
+            currentFlashbang.GetComponent<RemoteFlashbang>().SetDirection(pState.lookingRight);
 
             pState.casting = false;
             castSpell = false;
