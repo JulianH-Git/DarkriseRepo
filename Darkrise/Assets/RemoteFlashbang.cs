@@ -31,8 +31,8 @@ public class RemoteFlashbang : MonoBehaviour
         player = PlayerController.Instance;
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = new Vector2(speed * direction.x, rb.velocity.y);
-        Physics2D.IgnoreLayerCollision(0, 6, true);
-        Physics2D.IgnoreLayerCollision(0, 0, true);
+        Physics2D.IgnoreLayerCollision(10, 6, true);
+        Physics2D.IgnoreLayerCollision(10, 0, true);
         ctf.useTriggers = true;
         ctf.SetLayerMask(techLayer);
     }
