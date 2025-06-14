@@ -57,6 +57,7 @@ public class PauseMenu : MonoBehaviour
         mapper.Close(true);
         settingsMenuUI.SetActive(false);
         //resume music here!
+        AudioManager.instance.musicVolume = 1.0f;
         Time.timeScale = 1.0f;
 
         //enable the jump bind for controllers
@@ -74,6 +75,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0.0f;
         //pause music here!
+        AudioManager.instance.musicVolume = 0.25f;
         GamePaused = true;
         EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
         EventSystem.current.SetSelectedGameObject(pauseFirstButton);
@@ -98,6 +100,7 @@ public class PauseMenu : MonoBehaviour
 
     public void SettingsMenu()
     {
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.pauseSelect, this.transform.position);
         Debug.Log("Loading settings menu...");
         settingsMenuUI.SetActive(true);
         EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
@@ -106,6 +109,7 @@ public class PauseMenu : MonoBehaviour
 
     public void ControlsMenu()
     {
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.pauseSelect, this.transform.position);
         Debug.Log("Loading controls menu...");
         mapper.Open();
     }
@@ -123,6 +127,7 @@ public class PauseMenu : MonoBehaviour
     public IEnumerator ExitControlsMenu()
     {
         Debug.Log("Exiting controls menu...");
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.pauseBack, this.transform.position);
         yield return new WaitForSecondsRealtime(0.3f);
         mapper.Close(true);
         EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
@@ -133,6 +138,7 @@ public class PauseMenu : MonoBehaviour
     public IEnumerator ExitSettingsMenu()
     {
         Debug.Log("Exiting settings menu...");
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.pauseBack, this.transform.position);
         yield return new WaitForSecondsRealtime(0.3f);
         EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
         EventSystem.current.SetSelectedGameObject(optionsClosedButton);

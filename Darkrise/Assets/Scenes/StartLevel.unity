@@ -5142,8 +5142,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 15.584299, y: 17.775002, z: 0}
-    m_Extent: {x: 65.0743, y: 31.1791, z: 0}
+    m_Center: {x: 15.58795, y: 17.776249, z: 0}
+    m_Extent: {x: 65.07835, y: 31.17215, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -57929,8 +57929,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 2.69915, y: -10.59735, z: 0}
-    m_Extent: {x: 67.50285, y: 15.50685, z: 0}
+    m_Center: {x: 2.700901, y: -10.5934, z: 0}
+    m_Extent: {x: 67.4998, y: 15.5017, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -65995,8 +65995,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.6977501, y: 3.5217, z: 0}
-    m_Extent: {x: 26.96175, y: 8.5928, z: 0}
+    m_Center: {x: 0.70359993, y: 3.5165, z: 0}
+    m_Extent: {x: 26.9655, y: 8.6015, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -70230,6 +70230,27 @@ MonoBehaviour:
       Data3: -689340760
       Data4: 1222016252
     Path: event:/Music/Level1Music
+  <pauseNavigate>k__BackingField:
+    Guid:
+      Data1: 802519338
+      Data2: 1220822418
+      Data3: -437045368
+      Data4: -580547240
+    Path: event:/SFX/Menus/Pause/PauseNavigate
+  <pauseSelect>k__BackingField:
+    Guid:
+      Data1: -659451592
+      Data2: 1231697704
+      Data3: -2024354634
+      Data4: 2092710140
+    Path: event:/SFX/Menus/Pause/PauseSelect
+  <pauseBack>k__BackingField:
+    Guid:
+      Data1: -2091808970
+      Data2: 1276146286
+      Data3: -1633156711
+      Data4: 1578748371
+    Path: event:/SFX/Menus/Pause/PauseBack
   <dash>k__BackingField:
     Guid:
       Data1: 1505767641
