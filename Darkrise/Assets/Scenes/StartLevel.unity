@@ -5142,8 +5142,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 15.584299, y: 17.775002, z: 0}
-    m_Extent: {x: 65.0743, y: 31.1791, z: 0}
+    m_Center: {x: 15.577099, y: 17.77525, z: 0}
+    m_Extent: {x: 65.077194, y: 31.175049, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -53653,6 +53653,26 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: 0
   m_LayoutPriority: 1
+--- !u!1 &616287564 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 349015454522322687, guid: 6d73c65f201164e4eb883d76ccdd472a, type: 3}
+  m_PrefabInstance: {fileID: 2005594095431424421}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &616287568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 616287564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fe1bbe05ed4a18459d092b37ee33415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cutsceneCamera: {fileID: 1431444305}
+  cutsceneDuration: 3
+  cutsceneCameraManager: {fileID: 653185828}
 --- !u!1 &621031707
 GameObject:
   m_ObjectHideFlags: 0
@@ -54463,8 +54483,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab9d6a4466cb9b94c9a9f14d4189bf04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cutsceneVirtualCamera: {fileID: 1431444305}
-  cutsceneDuration: 2
 --- !u!4 &653185829
 Transform:
   m_ObjectHideFlags: 0
@@ -57929,8 +57947,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 2.69915, y: -10.59735, z: 0}
-    m_Extent: {x: 67.50285, y: 15.50685, z: 0}
+    m_Center: {x: 2.69495, y: -10.594601, z: 0}
+    m_Extent: {x: 67.50365, y: 15.4979, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -63793,7 +63811,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 1965844146}
+  m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 4.5
@@ -65995,8 +66013,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.6977501, y: 3.5217, z: 0}
-    m_Extent: {x: 26.96175, y: 8.5928, z: 0}
+    m_Center: {x: 0.7045498, y: 3.5205, z: 0}
+    m_Extent: {x: 26.96405, y: 8.596, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -70980,7 +70998,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 349015454522322687, guid: 6d73c65f201164e4eb883d76ccdd472a, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 616287568}
   m_SourcePrefab: {fileID: 100100000, guid: 6d73c65f201164e4eb883d76ccdd472a, type: 3}
 --- !u!1001 &3647998568995763406
 PrefabInstance:

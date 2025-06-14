@@ -46,7 +46,7 @@ public class SwitchTrigger : MonoBehaviour
                 {
                     hasBeenUsed = true;
                     indicateColor.color = Color.white;
-                    cutsceneManager.PlayCutscene();
+                    GetComponent<CutsceneTrigger>()?.StartCutscene();
                     StartCoroutine(MoveGates(sprite, new Vector2(sprite.transform.localScale.x, 0)));
                 }
                 AudioManager.instance.PlayOneShot(FMODEvents.instance.pullLever, this.transform.position);

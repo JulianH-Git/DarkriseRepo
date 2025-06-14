@@ -3,13 +3,16 @@ using UnityEngine;
 
 public class CutsceneCamera : MonoBehaviour
 {
-    public GameObject cutsceneVirtualCamera;
-    public float cutsceneDuration = 3f;
-
+    private PlayerController player;
     private GameObject[] allVirtualCameras;
     private GameObject previouslyActiveCamera;
 
-    public void PlayCutscene()
+    /// <summary>
+    /// Cuts to the specified virtual camera for a period of time.
+    /// </summary>
+    /// <param name="targetCutsceneCamera">Camera to switch to.</param>
+    /// <param name="duration">Time in seconds before switching the camera back.</param>
+    public void PlayCutscene(GameObject targetCutsceneCamera, float duration)
     {
         // Store all active cameras and deactivate them
         allVirtualCameras = GameObject.FindGameObjectsWithTag("VirtualCamera");
@@ -23,23 +26,30 @@ public class CutsceneCamera : MonoBehaviour
             cam.SetActive(false);
         }
 
-        // Activate the cutscene camera
-        cutsceneVirtualCamera.SetActive(true);
+        // Disable player controller
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        player.enabled = false;
 
-        // Start coroutine to end the cutscene after a delay
-        StartCoroutine(EndCutsceneAfterDelay());
+        // Activate the target cutscene camera
+        targetCutsceneCamera.SetActive(true);
+
+        // Start coroutine with target camera and duration
+        StartCoroutine(EndCutsceneAfterDelay(targetCutsceneCamera, duration));
     }
 
-    private IEnumerator EndCutsceneAfterDelay()
+    private IEnumerator EndCutsceneAfterDelay(GameObject targetCamera, float duration)
     {
-        yield return new WaitForSeconds(cutsceneDuration);
+        yield return new WaitForSeconds(duration);
 
         // End cutscene: deactivate cutscene cam, reactivate the last active one
-        cutsceneVirtualCamera.SetActive(false);
+        targetCamera.SetActive(false);
 
         if (previouslyActiveCamera != null)
         {
             previouslyActiveCamera.SetActive(true);
         }
+
+        // Enable player controller
+        player.enabled = true;
     }
 }
