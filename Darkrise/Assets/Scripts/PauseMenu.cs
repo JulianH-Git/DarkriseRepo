@@ -94,6 +94,15 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         GamePaused = false;
+
+        //enable the jump bind for controllers
+        player.controllers.maps.GetButtonMapsWithAction(ControllerType.Joystick, 1, false, controllerActionID);
+        controllerActionID.ForEach(m => m.enabled = true);
+
+        //enable the jump bind for keyboards
+        player.controllers.maps.GetButtonMapsWithAction(ControllerType.Keyboard, 1, false, keyboardActionID);
+        keyboardActionID.ForEach(m => m.enabled = true);
+
         Debug.Log($"Loading {menuName}...");
         SceneManager.LoadScene(menuName);
     }
