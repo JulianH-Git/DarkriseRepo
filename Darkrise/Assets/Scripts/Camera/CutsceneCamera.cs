@@ -28,6 +28,7 @@ public class CutsceneCamera : MonoBehaviour
 
         // Disable player controller
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         player.enabled = false;
 
         // Activate the target cutscene camera
