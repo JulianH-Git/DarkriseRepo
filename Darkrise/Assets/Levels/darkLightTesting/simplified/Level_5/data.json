@@ -1,10 +1,10 @@
 {
 	"identifier": "Level_5",
 	"uniqueIdentifer": "913ebbb0-3740-11f0-84ea-0df15ac599fd",
-	"x": 3332,
+	"x": 3360,
 	"y": -4980,
-	"width": 2596,
-	"height": 1996,
+	"width": 2640,
+	"height": 1980,
 	"bgColor": "#292A3C",
 	"neighbourLevels": [
 		{

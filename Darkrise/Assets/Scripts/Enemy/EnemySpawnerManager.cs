@@ -14,6 +14,7 @@ public class EnemySpawnerManager : MonoBehaviour
     [SerializeField] float respawnTimer;
     [SerializeField] Vector2 enemySpawnOffset;
     [SerializeField] float patrolRadius;
+    [SerializeField] bool isFacingRight = true;
     GameObject spawnedEnemyRef;
     enemyBase spawnedEnemyRefMethods;
 
@@ -24,6 +25,14 @@ public class EnemySpawnerManager : MonoBehaviour
     {
         spawnedEnemyRef = Instantiate(enemy, new Vector3(roomTransform.position.x + enemySpawnOffset.x,roomTransform.position.y + enemySpawnOffset.y,-1.0f), Quaternion.identity);
         spawnedEnemyRef.transform.parent = roomTransform;
+
+        if (!isFacingRight) 
+        {
+            Vector3 scale = spawnedEnemyRef.transform.localScale;
+            scale.x *= -1;
+            spawnedEnemyRef.transform.localScale = scale;
+        }
+
         enemySpawned = true;
         spawnedEnemyRefMethods = spawnedEnemyRef.GetComponent<enemyBase>();
         if(patrolRadius != 0)

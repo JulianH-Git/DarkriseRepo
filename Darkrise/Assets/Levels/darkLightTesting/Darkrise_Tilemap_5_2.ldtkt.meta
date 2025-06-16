@@ -1,0 +1,1946 @@
+fileFormatVersion: 2
+guid: 9656e8162297b0346a9d2cb54eec1fb8
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: f3268c876daf4890b6af6cd462063137, type: 3}
+  _reimportOnDependencyChange: 1
+  _pixelsPerUnit: 16
+  _overrideTexture: {instanceID: 0}
+  _sprites:
+  - name: Darkrise_Tilemap_5_2_0
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 840
+      width: 60
+      height: 60
+    spriteID: bb9c81c1c9a11874e9b521ee25ed04f1
+    spriteOutline:
+    - shape:
+      - {x: -30, y: 30}
+      - {x: -30, y: -30}
+      - {x: 30, y: -30}
+      - {x: 30, y: 30}
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 60
+      y: 840
+      width: 60
+      height: 60
+    spriteID: 8b7594fe1811b014482252c46555d613
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 120
+      y: 840
+      width: 60
+      height: 60
+    spriteID: 6aec27e6678894b4a864247d97b86184
+    spriteOutline:
+    - shape:
+      - {x: -30, y: 30}
+      - {x: -30, y: -30}
+      - {x: 30, y: -30}
+      - {x: 30, y: 30}
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_3
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 180
+      y: 840
+      width: 60
+      height: 60
+    spriteID: de14964d262fbea468d8d03aa9a0c4f4
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_4
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 240
+      y: 840
+      width: 60
+      height: 60
+    spriteID: ad2cceb50ff86944a9615e42f3d568be
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_5
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 300
+      y: 840
+      width: 60
+      height: 60
+    spriteID: 9b61757e5d1b6ad408df0bc8ee293bb9
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_6
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 360
+      y: 840
+      width: 60
+      height: 60
+    spriteID: 9ffdd970df76ae14382f4a833068f0b6
+    spriteOutline:
+    - shape:
+      - {x: -30, y: 30}
+      - {x: -30, y: -30}
+      - {x: 30, y: -30}
+      - {x: 30, y: 30}
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_7
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 420
+      y: 840
+      width: 60
+      height: 60
+    spriteID: 7362680a4a52f9144a85d29bd1c69844
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_8
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 480
+      y: 840
+      width: 60
+      height: 60
+    spriteID: 7a2f3a8d8f6e71b48b18fa3e2cbed86a
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_9
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 780
+      width: 60
+      height: 60
+    spriteID: 223a91f4bb0d30e4b8c84356142a353b
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_10
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 60
+      y: 780
+      width: 60
+      height: 60
+    spriteID: 1f2515bca44b9964bb264e3c8e870e51
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_11
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 120
+      y: 780
+      width: 60
+      height: 60
+    spriteID: ba084abec33db324b92c3231f8f3370a
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_12
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 180
+      y: 780
+      width: 60
+      height: 60
+    spriteID: 0fe23b7a727d8e24bb71f61e3f9c3a56
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_13
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 240
+      y: 780
+      width: 60
+      height: 60
+    spriteID: 16c77430d9c6b1045a3e8855df469e4f
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_14
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 300
+      y: 780
+      width: 60
+      height: 60
+    spriteID: cfa8873867cf9ab48978cb578c13e722
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_15
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 360
+      y: 780
+      width: 60
+      height: 60
+    spriteID: ec170d60194bd8a4c9133775142162ec
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_16
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 420
+      y: 780
+      width: 60
+      height: 60
+    spriteID: 04736fd8662312445a1097556f8c54eb
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_17
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 480
+      y: 780
+      width: 60
+      height: 60
+    spriteID: bd3635d2dfa3dad46b5b41c70bde2c66
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_18
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 720
+      width: 60
+      height: 60
+    spriteID: bd765664fb5362a49baedc6f72bc0aba
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_19
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 60
+      y: 720
+      width: 60
+      height: 60
+    spriteID: c924c3f99878dc2408b8090f89feed96
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_20
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 120
+      y: 720
+      width: 60
+      height: 60
+    spriteID: caf6502d5dca4e547a798a1af0235b4c
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_21
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 180
+      y: 720
+      width: 60
+      height: 60
+    spriteID: 5f9f8cd916f381243936e3e15a10435b
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_22
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 240
+      y: 720
+      width: 60
+      height: 60
+    spriteID: 36b5ed11e7ea96b409e35717003182f9
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_23
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 300
+      y: 720
+      width: 60
+      height: 60
+    spriteID: cc00a8c59a7e4d44cb4c006db6b59e0a
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_24
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 360
+      y: 720
+      width: 60
+      height: 60
+    spriteID: 251cd48bb7cb3fb4bbee677ef08bce58
+    spriteOutline:
+    - shape:
+      - {x: -30, y: 30}
+      - {x: -30, y: -30}
+      - {x: 30, y: -30}
+      - {x: 30, y: 30}
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_25
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 420
+      y: 720
+      width: 60
+      height: 60
+    spriteID: f3c5eeb4ed3a99140af3d8ddb8a61250
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_26
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 480
+      y: 720
+      width: 60
+      height: 60
+    spriteID: cda8bbb6b75542947a23f5fed1b80639
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_27
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 660
+      width: 60
+      height: 60
+    spriteID: 9fbd5a8ac7de8374e942ad8fc15d822e
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_28
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 60
+      y: 660
+      width: 60
+      height: 60
+    spriteID: 31fdf3c43670db54ea414cf53ea880e7
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_29
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 120
+      y: 660
+      width: 60
+      height: 60
+    spriteID: 9b154046c01ec2748b980be2112b5d73
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_30
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 180
+      y: 660
+      width: 60
+      height: 60
+    spriteID: e05020242caad7e4288fb89ace97959f
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_31
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 240
+      y: 660
+      width: 60
+      height: 60
+    spriteID: 6791057944e6d6041b251ec41393b6bb
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_32
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 300
+      y: 660
+      width: 60
+      height: 60
+    spriteID: 7063038fceb99c64389a992c9399eb49
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_33
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 360
+      y: 660
+      width: 60
+      height: 60
+    spriteID: 65231c5b21331b74f821f43c11724b55
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_34
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 420
+      y: 660
+      width: 60
+      height: 60
+    spriteID: 05758fed6e1830f419ed322052679369
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_35
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 480
+      y: 660
+      width: 60
+      height: 60
+    spriteID: 9af549568192f8d4d8acfc9cfaa93030
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_36
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 600
+      width: 60
+      height: 60
+    spriteID: 47d7530be2db77e47b0a3c17a5913a8e
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_37
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 60
+      y: 600
+      width: 60
+      height: 60
+    spriteID: 61a154356fd95af4494e21f7179c8ec1
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_38
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 120
+      y: 600
+      width: 60
+      height: 60
+    spriteID: 22d495b53100c154e9d354bfc4779b00
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_39
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 180
+      y: 600
+      width: 60
+      height: 60
+    spriteID: c9699cad4510ee04fad3c32354360019
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_40
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 240
+      y: 600
+      width: 60
+      height: 60
+    spriteID: b86ab354ead3aee4d9024d6ac3955e19
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_41
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 300
+      y: 600
+      width: 60
+      height: 60
+    spriteID: 46db411b1ac79f84c9c7d6b7ea1259f1
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_42
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 360
+      y: 600
+      width: 60
+      height: 60
+    spriteID: 6b758e3dc4b77744aa466b64196d7c92
+    spriteOutline:
+    - shape:
+      - {x: -30, y: 30}
+      - {x: -30, y: -30}
+      - {x: 30, y: -30}
+      - {x: 30, y: 30}
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_43
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 420
+      y: 600
+      width: 60
+      height: 60
+    spriteID: 3aae5eb510d0d7a4489e720fa1b16771
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_44
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 480
+      y: 600
+      width: 60
+      height: 60
+    spriteID: 8664b9c6e6f0aa646a6fca93e0959da7
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_45
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 540
+      width: 60
+      height: 60
+    spriteID: aa9249d3d4d458c448c52c279fb0af9d
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_46
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 60
+      y: 540
+      width: 60
+      height: 60
+    spriteID: f95ed4569fb4e56469279ae31baee040
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_47
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 120
+      y: 540
+      width: 60
+      height: 60
+    spriteID: de2aee5fb32b7f9449beaf6287ddd6fc
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_48
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 180
+      y: 540
+      width: 60
+      height: 60
+    spriteID: b58fb3182f88dbb4882c277931fa1e08
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_49
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 240
+      y: 540
+      width: 60
+      height: 60
+    spriteID: 8ea530641b775ad44b2db3bd6ebeebdb
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_50
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 300
+      y: 540
+      width: 60
+      height: 60
+    spriteID: 4e300a06d24b65942b89cc65f4511287
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_51
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 360
+      y: 540
+      width: 60
+      height: 60
+    spriteID: d4fbce3c9bb8d264680092c9e8869a69
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_52
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 420
+      y: 540
+      width: 60
+      height: 60
+    spriteID: 050ce65a4672fb64e9e01d67849eafe4
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_53
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 480
+      y: 540
+      width: 60
+      height: 60
+    spriteID: 489c4703d1a5e5c4bb94c4cdb354d434
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_54
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 480
+      width: 60
+      height: 60
+    spriteID: a7eb76b6f9b50c54da00a36d8ffe34db
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_55
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 60
+      y: 480
+      width: 60
+      height: 60
+    spriteID: cd15827b4f78940419c48765f17fc8ef
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_56
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 120
+      y: 480
+      width: 60
+      height: 60
+    spriteID: da1679adc9fb97642945178b25eb2937
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_57
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 180
+      y: 480
+      width: 60
+      height: 60
+    spriteID: 9f9e5f6e4e0f1f24fa35d6b2f34ea2ca
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_58
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 240
+      y: 480
+      width: 60
+      height: 60
+    spriteID: 4b068805583e733418da8f6288a1d1be
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_59
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 300
+      y: 480
+      width: 60
+      height: 60
+    spriteID: 297bdb69a707beb42b8bc00d460a2cd4
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_60
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 360
+      y: 480
+      width: 60
+      height: 60
+    spriteID: 4212ef5bf4866fe4a950088614797f6e
+    spriteOutline:
+    - shape:
+      - {x: -30, y: 30}
+      - {x: -30, y: -30}
+      - {x: 30, y: -30}
+      - {x: 30, y: 30}
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_61
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 420
+      y: 480
+      width: 60
+      height: 60
+    spriteID: a693a1682119ecb4db10170d6fce5237
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_62
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 480
+      y: 480
+      width: 60
+      height: 60
+    spriteID: fa8cb073a90219841870e79f76768627
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_63
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 420
+      width: 60
+      height: 60
+    spriteID: 0bb07f43fb63c754aa6bcb72bbd5d047
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_64
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 60
+      y: 420
+      width: 60
+      height: 60
+    spriteID: 2293550000427cc4cb31255b3135eef4
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_65
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 120
+      y: 420
+      width: 60
+      height: 60
+    spriteID: fa9ebc7d2cce19b4dbca2ed111ec2286
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_66
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 180
+      y: 420
+      width: 60
+      height: 60
+    spriteID: 9c46cfa82ce6a324bac37988fa5776f9
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_67
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 240
+      y: 420
+      width: 60
+      height: 60
+    spriteID: 444bb5ecf104af244bef95653aa00ca8
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_68
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 300
+      y: 420
+      width: 60
+      height: 60
+    spriteID: e237010c0072158438d986c9e940f558
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_69
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 360
+      y: 420
+      width: 60
+      height: 60
+    spriteID: cdd362fb155080f42a57b0c5cac832c0
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_70
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 420
+      y: 420
+      width: 60
+      height: 60
+    spriteID: ab99df07daf6bd14fb84ffdd72b00354
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_71
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 480
+      y: 420
+      width: 60
+      height: 60
+    spriteID: e8abd028ea4d48044b2773e38001c71a
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_72
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 360
+      width: 60
+      height: 60
+    spriteID: 46f01581df1346f4eb9a5da40ad0ea98
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_73
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 60
+      y: 360
+      width: 60
+      height: 60
+    spriteID: f3dac978456cdf545b932b573d3ae362
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_74
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 120
+      y: 360
+      width: 60
+      height: 60
+    spriteID: a0579befb7fb4f84a9f3879149e9e993
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_75
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 180
+      y: 360
+      width: 60
+      height: 60
+    spriteID: 299a177409711b64e9c7019f1f9381b3
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_76
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 240
+      y: 360
+      width: 60
+      height: 60
+    spriteID: 5cb44f82643229d4c9cd9aedb9ca1727
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_77
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 300
+      y: 360
+      width: 60
+      height: 60
+    spriteID: 00a26cb3c94dbfd4c9ad33f2c958da07
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_78
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 360
+      y: 360
+      width: 60
+      height: 60
+    spriteID: 3135ca08c46b8ed4b96da9a597a91927
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_79
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 420
+      y: 360
+      width: 60
+      height: 60
+    spriteID: f24ba2e0ee9c49b49a8865f716ac4b5d
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_80
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 480
+      y: 360
+      width: 60
+      height: 60
+    spriteID: bfa25c180087cda4d94645865fe904d5
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_81
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 300
+      width: 60
+      height: 60
+    spriteID: 20e7b3bbec35bba49bbc6a27f5353491
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_82
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 60
+      y: 300
+      width: 60
+      height: 60
+    spriteID: cbd7a4ab0b4abbb4998397647de7ec3a
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_83
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 120
+      y: 300
+      width: 60
+      height: 60
+    spriteID: 8c0f08b6f6722c640be2ff7db79d0ab9
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_84
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 180
+      y: 300
+      width: 60
+      height: 60
+    spriteID: 1782cea5afc64824dacce84b7a20943f
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_85
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 240
+      y: 300
+      width: 60
+      height: 60
+    spriteID: 9750eb88af497504c8e62f06be117810
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_86
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 300
+      y: 300
+      width: 60
+      height: 60
+    spriteID: b8f1c583c40eb334fa1df3b17885c478
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_87
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 360
+      y: 300
+      width: 60
+      height: 60
+    spriteID: 6813b430382faec4da72025f5c50b3ba
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_88
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 420
+      y: 300
+      width: 60
+      height: 60
+    spriteID: 63898f54ee742964c8efd433a10cd3dd
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_89
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 480
+      y: 300
+      width: 60
+      height: 60
+    spriteID: e557efc912b372f4388d40d17a24c84b
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_90
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 240
+      width: 60
+      height: 60
+    spriteID: 2539d0f60de6fa641ad71e328b86d2ff
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_91
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 60
+      y: 240
+      width: 60
+      height: 60
+    spriteID: 6b3287cf3e6e18d45bc307ed3d776537
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_92
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 120
+      y: 240
+      width: 60
+      height: 60
+    spriteID: 61c7629342adc5f4ba99004c555cacda
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_93
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 180
+      y: 240
+      width: 60
+      height: 60
+    spriteID: 24cef6dfa0ce0b846887d872ddc7480d
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_94
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 240
+      y: 240
+      width: 60
+      height: 60
+    spriteID: 23c0aeb2f9f1f4b4bab2dfa9fa273218
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_95
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 300
+      y: 240
+      width: 60
+      height: 60
+    spriteID: 1f4d4636ae39d004da382a20beef44b7
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_96
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 360
+      y: 240
+      width: 60
+      height: 60
+    spriteID: 778b3def66989294bb6225c7061d43bf
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_97
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 420
+      y: 240
+      width: 60
+      height: 60
+    spriteID: 2709908acbf16ed4fb4737bf1f7fcf6e
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_98
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 480
+      y: 240
+      width: 60
+      height: 60
+    spriteID: 256bc4b01c0f4c64fa0ba99a58bb1248
+    spriteOutline:
+    - shape:
+      - {x: -30, y: 30}
+      - {x: -30, y: -30}
+      - {x: 30, y: -30}
+      - {x: 30, y: 30}
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_99
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 180
+      width: 60
+      height: 60
+    spriteID: 3cfaab0c1a2ce7b46a0c3dee447165b5
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_100
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 60
+      y: 180
+      width: 60
+      height: 60
+    spriteID: f2301b3aff84eb043a379cd4a56850cc
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_101
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 120
+      y: 180
+      width: 60
+      height: 60
+    spriteID: 473434eda0e368e4399c8c4c8fc1ccbf
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_102
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 180
+      y: 180
+      width: 60
+      height: 60
+    spriteID: ce6c9b411dd89714086027cca50c7e51
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_103
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 240
+      y: 180
+      width: 60
+      height: 60
+    spriteID: 5027fb13bfabb134d9da5fc17974bd54
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_104
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 300
+      y: 180
+      width: 60
+      height: 60
+    spriteID: 8762ed3030baaa248992c5c4c8007603
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_105
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 360
+      y: 180
+      width: 60
+      height: 60
+    spriteID: 02aa815cf82664d4ca27e2a26cd4a5f0
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_106
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 420
+      y: 180
+      width: 60
+      height: 60
+    spriteID: 757cca93159a0814282649e5edd09407
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_107
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 480
+      y: 180
+      width: 60
+      height: 60
+    spriteID: f304a26d613cd9a4f92e303597cb6010
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_108
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 120
+      width: 60
+      height: 60
+    spriteID: 6c30d74f232172e4e96d4222d0512c5f
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_109
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 60
+      y: 120
+      width: 60
+      height: 60
+    spriteID: 30b5502cbbd2c714ea31efeaaa0c97f3
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_110
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 120
+      y: 120
+      width: 60
+      height: 60
+    spriteID: e328a342be06aae428514f10ad78c424
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_111
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 180
+      y: 120
+      width: 60
+      height: 60
+    spriteID: 8b28046b03117ab488c3dfb4f306cf44
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_112
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 240
+      y: 120
+      width: 60
+      height: 60
+    spriteID: 9ad73b3e792b1f14794d0d1ebc1bc802
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_113
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 300
+      y: 120
+      width: 60
+      height: 60
+    spriteID: 63261ac3e67ee754da5c9cb6ca618ca9
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_114
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 360
+      y: 120
+      width: 60
+      height: 60
+    spriteID: f38c644afe5ece241b9ba47d503d4802
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_115
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 420
+      y: 120
+      width: 60
+      height: 60
+    spriteID: bd63f0678267ea041b4bdf9a6297da85
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_116
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 480
+      y: 120
+      width: 60
+      height: 60
+    spriteID: b53257d47b2a69e48b27ee01a29c23ee
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_117
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 60
+      width: 60
+      height: 60
+    spriteID: 5918c971cfa0cc54cad1a54313e0dd23
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_118
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 60
+      y: 60
+      width: 60
+      height: 60
+    spriteID: 5a9ac9adb6471c1468d203391813f3bb
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_119
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 120
+      y: 60
+      width: 60
+      height: 60
+    spriteID: 99a027b775e57814391fd7d9f1186fb6
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_120
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 180
+      y: 60
+      width: 60
+      height: 60
+    spriteID: 056229a716d0fa344bfed12a6fefc32c
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_121
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 240
+      y: 60
+      width: 60
+      height: 60
+    spriteID: 62a236ec60f5d54469cde724fafdef94
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_122
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 300
+      y: 60
+      width: 60
+      height: 60
+    spriteID: 14655434df36e724781cb3370efc50b5
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_123
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 360
+      y: 60
+      width: 60
+      height: 60
+    spriteID: e9d34f954f102644d952499cb49f51bc
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_124
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 420
+      y: 60
+      width: 60
+      height: 60
+    spriteID: cd0a62d1776084841bf8762337ca04e5
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_125
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 480
+      y: 60
+      width: 60
+      height: 60
+    spriteID: eddbff7e9df678f439c56ea03f068030
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_126
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 60
+      height: 60
+    spriteID: c97acd20d5a6ee5439bb91eedffe3b58
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_127
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 60
+      y: 0
+      width: 60
+      height: 60
+    spriteID: 7e93785474685104e8b65c9c7274a86e
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_128
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 120
+      y: 0
+      width: 60
+      height: 60
+    spriteID: 7379a5a83abb9a744b1ac46d947cd851
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_129
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 180
+      y: 0
+      width: 60
+      height: 60
+    spriteID: 4af990415d5e81d4f8e116fc860f9131
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_130
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 240
+      y: 0
+      width: 60
+      height: 60
+    spriteID: 008a2d9f9fbcdaf44b81fc7f206ec830
+    spriteOutline:
+    - shape:
+      - {x: -30, y: 30}
+      - {x: -30, y: -30}
+      - {x: 30, y: -30}
+      - {x: 30, y: 30}
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_131
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 300
+      y: 0
+      width: 60
+      height: 60
+    spriteID: 9edf1cf850b0cbc45b2583012bedb310
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_132
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 360
+      y: 0
+      width: 60
+      height: 60
+    spriteID: 53c7dabf7d956034ba0e51adc427c8e0
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_133
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 420
+      y: 0
+      width: 60
+      height: 60
+    spriteID: 0bc9948de2c00594f9d95bdf0473a21a
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Darkrise_Tilemap_5_2_134
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 480
+      y: 0
+      width: 60
+      height: 60
+    spriteID: 7ce5e6e206877714aaf3f571e0211807
+    spriteOutline: []
+    tessellationDetail: 0
+  _secondaryTextures: []
+  _artifacts: {fileID: -2988177865379244337, guid: 9656e8162297b0346a9d2cb54eec1fb8, type: 3}
