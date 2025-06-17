@@ -1,7 +1,6 @@
 using Rewired;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
@@ -43,6 +42,23 @@ public class PauseMenu : MonoBehaviour
             if (GamePaused && settingsMenuUI.activeSelf == false) { StartResume(); }
             else if(GamePaused && settingsMenuUI.activeSelf == true) { StartExitingSettingsMenu(); }
         }
+        if(GamePaused && player.GetButtonDown("UIVertical") && EventSystem.current.currentSelectedGameObject == null)
+        {
+            if(settingsMenuUI.activeSelf == true)
+            {
+                EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
+                EventSystem.current.SetSelectedGameObject(optionsFirstButton);
+            }
+            else
+            {
+                EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
+                EventSystem.current.SetSelectedGameObject(pauseFirstButton);
+            }
+        }
+        if(player.GetButtonDown("UISubmit"))
+        {
+            Debug.Log("button down");
+        }
     }
 
     public void StartResume()
@@ -61,12 +77,16 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1.0f;
 
         //enable the jump bind for controllers
-        player.controllers.maps.GetButtonMapsWithAction(ControllerType.Joystick, 1, false, controllerActionID);
+        player.controllers.maps.GetButtonMapsWithAction(ControllerType.Joystick, "Jump", false, controllerActionID);
         controllerActionID.ForEach(m => m.enabled = true);
 
         //enable the jump bind for keyboards
-        player.controllers.maps.GetButtonMapsWithAction(ControllerType.Keyboard, 1, false, keyboardActionID);
+        player.controllers.maps.GetButtonMapsWithAction(ControllerType.Keyboard, "Jump", false, keyboardActionID);
         keyboardActionID.ForEach(m => m.enabled = true);
+
+        player.controllers.maps.SetMapsEnabled(true, "Gameplay");
+        player.controllers.maps.SetMapsEnabled(false, "UI");
+
         GamePaused = false;
     }
 
@@ -81,12 +101,15 @@ public class PauseMenu : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(pauseFirstButton);
 
         //disable the jump bind for controllers
-        player.controllers.maps.GetButtonMapsWithAction(ControllerType.Joystick, 1, true, controllerActionID);
+        player.controllers.maps.GetButtonMapsWithAction(ControllerType.Joystick, "Jump", true, controllerActionID);
         controllerActionID.ForEach(m => m.enabled = false);
 
         //disable the jump bind for keyboards
-        player.controllers.maps.GetButtonMapsWithAction(ControllerType.Keyboard, 1, true, keyboardActionID);
+        player.controllers.maps.GetButtonMapsWithAction(ControllerType.Keyboard, "Jump", true, keyboardActionID);
         keyboardActionID.ForEach(m => m.enabled = false);
+
+        player.controllers.maps.SetMapsEnabled(false, "Gameplay");
+        player.controllers.maps.SetMapsEnabled(true, "UI");
 
     }
 
@@ -96,12 +119,16 @@ public class PauseMenu : MonoBehaviour
         GamePaused = false;
 
         //enable the jump bind for controllers
-        player.controllers.maps.GetButtonMapsWithAction(ControllerType.Joystick, 1, false, controllerActionID);
+        player.controllers.maps.GetButtonMapsWithAction(ControllerType.Joystick, "Jump", false, controllerActionID);
         controllerActionID.ForEach(m => m.enabled = true);
 
         //enable the jump bind for keyboards
-        player.controllers.maps.GetButtonMapsWithAction(ControllerType.Keyboard, 1, false, keyboardActionID);
+        player.controllers.maps.GetButtonMapsWithAction(ControllerType.Keyboard, "Jump", false, keyboardActionID);
         keyboardActionID.ForEach(m => m.enabled = true);
+
+        player.controllers.maps.SetMapsEnabled(true, "Gameplay");
+        player.controllers.maps.SetMapsEnabled(false, "UI");
+
 
         Debug.Log($"Loading {menuName}...");
         SceneManager.LoadScene(menuName);

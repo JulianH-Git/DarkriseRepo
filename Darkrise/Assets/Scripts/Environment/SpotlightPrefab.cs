@@ -171,7 +171,7 @@ public class SpotlightPrefab : MonoBehaviour
                 sr.color = Color.white;
                 break;
             case SpotlightStates.Laser:
-                lamp.GetComponent<SpriteRenderer>().sprite = lampSprites[2];
+                lamp.GetComponent<SpriteRenderer>().sprite = lampSprites[3];
                 this.GetComponent<BoxCollider2D>().enabled = true;
                 sr.enabled = true;
                 break;

@@ -1,19 +1,15 @@
 {
-	"identifier": "Level_5",
-	"uniqueIdentifer": "5c3015a0-3740-11f0-8e4d-23e08440ec24",
-	"x": 6000,
+	"identifier": "Level_6",
+	"uniqueIdentifer": "ee7a4fe0-3740-11f0-8e4d-737943d5478d",
+	"x": 9616,
 	"y": -5040,
 	"width": 1200,
 	"height": 1080,
 	"bgColor": "#696A79",
 	"neighbourLevels": [
 		{
-			"levelIid": "913ebbb0-3740-11f0-84ea-0df15ac599fd",
-			"dir": "w"
-		},
-		{
 			"levelIid": "9c51c750-3740-11f0-8e4d-51c4e35fd6ae",
-			"dir": "e"
+			"dir": "w"
 		}
 	],
 	"customFields" : {},

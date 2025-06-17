@@ -57,6 +57,7 @@ public class ModeSwitchStatue : InteractTrigger
                 controller.modeLocked = true;
 
                 if (oneTimeUse) { used = true; }
+                if(this.GetComponent<ActivateOtherObjects>() != null) { this.GetComponent<ActivateOtherObjects>().Activate(); }
                 
             }
         }

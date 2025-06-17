@@ -1,0 +1,24 @@
+{
+	"identifier": "Level_7",
+	"uniqueIdentifer": "913ebbb0-3740-11f0-84ea-0df15ac599fd",
+	"x": 3360,
+	"y": -5040,
+	"width": 2640,
+	"height": 2040,
+	"bgColor": "#292A3C",
+	"neighbourLevels": [
+		{
+			"levelIid": "ff714b30-3740-11f0-84ea-b1cebd668de3",
+			"dir": "w"
+		},
+		{
+			"levelIid": "5c3015a0-3740-11f0-8e4d-23e08440ec24",
+			"dir": "e"
+		}
+	],
+	"customFields" : {},
+	"layers": [
+		"Tiles.png"
+	],
+	"entities" : {}
+}
