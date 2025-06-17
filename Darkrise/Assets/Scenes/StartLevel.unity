@@ -1817,10 +1817,10 @@ MonoBehaviour:
   lightModePrefab: {fileID: 1005811963858110907, guid: 68585577fa4950144abd2d8d18283bee, type: 3}
   neutralModeDarkOnlyPrefab: {fileID: 7640129269678696865, guid: d93aa58a1ca223d4bac30f14b792df04, type: 3}
   darkModeDarkOnlyPrefab: {fileID: 2107022776023966531, guid: 28c069dcc45d45f4b9ce80e82226d0ba, type: 3}
-  lightModeLightOnlyPrefab: {fileID: 0}
-  neutralModeLightOnlyPrefab: {fileID: 0}
-  darkOnlyPrefab: {fileID: 0}
-  lightOnlyPrefab: {fileID: 0}
+  lightModeLightOnlyPrefab: {fileID: 1005811963858110907, guid: 81f5e208a29b10745942cb46dda88cac, type: 3}
+  neutralModeLightOnlyPrefab: {fileID: 7640129269678696865, guid: 6b7625eb45c53fb4d8eab21a54e11dce, type: 3}
+  darkOnlyPrefab: {fileID: 2107022776023966531, guid: e0f3c0c3065fbbc4b91383b0914e9cfc, type: 3}
+  lightOnlyPrefab: {fileID: 1005811963858110907, guid: 122453abdce9ca845b73df8c08dccfb0, type: 3}
   text: {fileID: 653301561}
   neutralText: {fileID: 21300000, guid: 1d18b25c491054c0fa64a17670cd4fcc, type: 3}
   lightText: {fileID: 21300000, guid: bc243a2993c8d427daaf0d0d25aa1bc3, type: 3}
@@ -5142,8 +5142,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 15.5798, y: 17.7814, z: 0}
-    m_Extent: {x: 65.076996, y: 31.177, z: 0}
+    m_Center: {x: 15.5809, y: 17.78005, z: 0}
+    m_Extent: {x: 65.0823, y: 31.184351, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -57497,8 +57497,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 2.69915, y: -10.601399, z: 0}
-    m_Extent: {x: 67.50505, y: 15.5064, z: 0}
+    m_Center: {x: 2.6953506, y: -10.601749, z: 0}
+    m_Extent: {x: 67.50365, y: 15.50605, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -65391,8 +65391,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.7091999, y: 3.52345, z: 0}
-    m_Extent: {x: 26.9616, y: 8.60145, z: 0}
+    m_Center: {x: 0.7106495, y: 3.5121498, z: 0}
+    m_Extent: {x: 26.95915, y: 8.59855, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
