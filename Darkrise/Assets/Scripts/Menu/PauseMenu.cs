@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using Unity.VisualScripting;
 
 public class PauseMenu : MonoBehaviour
 {
     public static bool GamePaused = false;
+    public static bool inSettings = false;
     [SerializeField] public GameObject pauseMenuUI;
     [SerializeField] public GameObject settingsMenuUI;
     [SerializeField] private Rewired.UI.ControlMapper.ControlMapper mapper = null;
@@ -79,8 +81,6 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(false);
         mapper.Close(true);
         settingsMenuUI.SetActive(false);
-        //resume music here!
-        AudioManager.instance.musicVolume = 1.0f;
         Time.timeScale = 1.0f;
 
         //enable the jump bind for controllers
@@ -101,8 +101,6 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0.0f;
-        //pause music here!
-        AudioManager.instance.musicVolume = 0.25f;
         GamePaused = true;
         EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
         EventSystem.current.SetSelectedGameObject(pauseFirstButton);
@@ -143,6 +141,7 @@ public class PauseMenu : MonoBehaviour
 
     public void SettingsMenu()
     {
+        inSettings = true;
         AudioManager.instance.PlayOneShot(FMODEvents.instance.pauseSelect, this.transform.position);
         Debug.Log("Loading settings menu...");
         settingsMenuUI.SetActive(true);
@@ -160,6 +159,7 @@ public class PauseMenu : MonoBehaviour
     public void StartExitingSettingsMenu()
     {
         StartCoroutine(ExitSettingsMenu());
+        inSettings = false;
     }
 
     public void StartExitingControlsMenu()

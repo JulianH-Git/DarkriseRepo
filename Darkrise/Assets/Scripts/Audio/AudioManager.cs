@@ -51,6 +51,15 @@ public class AudioManager : MonoBehaviour
         masterBus.setVolume(masterVolume);
         musicBus.setVolume(musicVolume);
         sfxBus.setVolume(sfxVolume);
+        
+        //If the game is paused and not in settings, don't play music
+        if (PauseMenu.GamePaused && !PauseMenu.inSettings) musicEventInstance.setPaused(true);
+
+        //If the game is paused and in settings, play music
+        else if (PauseMenu.GamePaused && PauseMenu.inSettings) musicEventInstance.setPaused(false);
+
+        //If the game is not paused and not in settings, play music
+        else if (!PauseMenu.GamePaused && !PauseMenu.inSettings) musicEventInstance.setPaused(false);
     }
     private void InitializeMusic(EventReference musicEventReference)
     {
