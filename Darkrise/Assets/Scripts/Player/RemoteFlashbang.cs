@@ -121,11 +121,15 @@ public class RemoteFlashbang : MonoBehaviour
 
         foreach(Collider2D obj in techInRange)
         {
-            if(obj.GetComponent<BreakerSwitch>() != null)
+            if (obj.GetComponent<StandardBreakerSwitch>() != null)
             {
-                obj.GetComponent<BreakerSwitch>().flashbanged = true;
+                obj.GetComponent<StandardBreakerSwitch>().flashbanged = true;
             }
-            if(obj.GetComponent<Alarm>() != null)
+            if (obj.GetComponent<ForcedEncounterBreakerSwitch>() != null)
+            {
+                obj.GetComponent<ForcedEncounterBreakerSwitch>().flashbanged = true;
+            }
+            if (obj.GetComponent<Alarm>() != null)
             {
                 obj.GetComponent<Alarm>().flashbanged = true;
             }

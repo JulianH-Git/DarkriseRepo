@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ForcedEncounterManager : MonoBehaviour
 {
-    [SerializeField] BreakerSwitch breaker;
+    [SerializeField] ForcedEncounterBreakerSwitch breaker;
     [SerializeField] List<GameObject> feSpotlights = new List<GameObject>();
     [SerializeField] List<GameObject> lasers = new List<GameObject>();
     [SerializeField] List<GameObject> forcedEncounterWalls = new List<GameObject>();
