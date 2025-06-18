@@ -90,7 +90,11 @@ ScriptedImporter:
       width: 60
       height: 60
     spriteID: ad2cceb50ff86944a9615e42f3d568be
-    spriteOutline: []
+    spriteOutline:
+    - shape:
+      - {x: -30, y: -30}
+      - {x: 30, y: -30}
+      - {x: 30, y: 30}
     tessellationDetail: 0
   - name: Darkrise_Tilemap_5_2_5
     originalName: 

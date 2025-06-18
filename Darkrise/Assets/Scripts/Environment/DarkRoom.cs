@@ -50,9 +50,13 @@ public class DarkRoom : MonoBehaviour
     {
         if(fb != null)
         {
-            if(fb.overloaded == true)
+            if(fb.overloaded == true || fb.flashbanged == true)
             {
                 gameObject.SetActive(false);
+            }
+            else
+            {
+                gameObject.SetActive(true);
             }
         }
     }
