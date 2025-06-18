@@ -27,6 +27,13 @@ public class PauseMenu : MonoBehaviour
         player = ReInput.players.GetPlayer(playerId);
         pauseAnim = pauseMenuUI.GetComponent<Animator>();
         settingsAnim = settingsMenuUI.GetComponent<Animator>();
+        //enable the jump bind for controllers
+        player.controllers.maps.GetButtonMapsWithAction(ControllerType.Joystick, "Jump", false, controllerActionID);
+        controllerActionID.ForEach(m => m.enabled = true);
+
+        //enable the jump bind for keyboards
+        player.controllers.maps.GetButtonMapsWithAction(ControllerType.Keyboard, "Jump", false, keyboardActionID);
+        keyboardActionID.ForEach(m => m.enabled = true);
     }
 
     // Update is called once per frame
