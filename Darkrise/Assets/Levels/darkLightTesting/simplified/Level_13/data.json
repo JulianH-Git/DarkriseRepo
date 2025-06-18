@@ -1,0 +1,20 @@
+{
+	"identifier": "Level_13",
+	"uniqueIdentifer": "318e1dc0-3740-11f0-91c2-670646237f1f",
+	"x": 19020,
+	"y": -5700,
+	"width": 4080,
+	"height": 1440,
+	"bgColor": "#292A3C",
+	"neighbourLevels": [
+		{
+			"levelIid": "63400630-3740-11f0-a00a-25b5083e4aab",
+			"dir": "w"
+		}
+	],
+	"customFields" : {},
+	"layers": [
+		"Tiles.png"
+	],
+	"entities" : {}
+}

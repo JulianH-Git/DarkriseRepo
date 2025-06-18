@@ -11,6 +11,7 @@ public class StandardBreakerSwitch : InteractTrigger
     BoxCollider2D trigger;
     [SerializeField] float flashbangDeactivationTimer;
     float timeTilReactivate;
+    [SerializeField] FuseBox fb;
 
     [SerializeField] protected List<GameObject> affectedSprites;
 
@@ -25,6 +26,16 @@ public class StandardBreakerSwitch : InteractTrigger
     {
         if (deactivated == true) { trigger.enabled = false; }
         if (flashbanged == true) { FlashbangDeactivation(); }
+        if (fb != null && fb.overloaded)
+        {
+            deactivated = true;
+            animator.SetBool("turnedOff", true);
+
+            foreach (GameObject sprite in affectedSprites)
+            {
+                sprite.SetActive(true);
+            }
+        }
     }
     protected override void OnTriggerStay2D(Collider2D collision)
     {
