@@ -1325,6 +1325,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void StartHiding()
+    {
+        pState.hiding = true;
+        animator.SetBool("hiding", true);
+    }
+
     private void Hiding()
     {
         if (currentAttackType == AttackType.Light || CurrentEnergy <= 0)
@@ -1343,7 +1349,6 @@ public class PlayerController : MonoBehaviour
             rb.velocity = Vector2.zero;
             Physics2D.IgnoreLayerCollision(0, 6, true);
             sr.sortingOrder = -1;
-            animator.SetBool("hiding", true);
             switch (currentAttackType)
             {
                 case (AttackType.Neutral):
@@ -1389,20 +1394,24 @@ public class PlayerController : MonoBehaviour
                     Quaternion arrowRotation = Quaternion.identity;
                     if (playerSign == 1)
                     {
+                        transform.localScale = new Vector2((Mathf.Abs(transform.localScale.x)), transform.localScale.y);
                         arrowRotation.eulerAngles = new Vector3(0, 0, 90f);
                         playerArrowIndicator.transform.rotation = arrowRotation;
                     }
                     else
                     {
+                        transform.localScale = new Vector2(-(Mathf.Abs(transform.localScale.x)), transform.localScale.y);
                         arrowRotation.eulerAngles = new Vector3(0, 0, 270f);
                         playerArrowIndicator.transform.rotation = arrowRotation;
                     }
 
+                    animator.SetBool("darkDashGlance", true);
 
                     if (dashPressed)
                     {
                         dashPressed = false;
                         currentNook.dashedInto = true;
+                        animator.SetBool("darkDashGlance", false);
                         StartCoroutine(StartShadowDash(nextNook));
                         currentNook = nextNook;
                     }
@@ -1412,6 +1421,7 @@ public class PlayerController : MonoBehaviour
             {
                 playerArrowIndicator.SetActive(false);
                 playerArrowIndicator.transform.rotation = defaultArrowRotation;
+                animator.SetBool("darkDashGlance", false);
             }
         }
     }
@@ -1426,6 +1436,7 @@ public class PlayerController : MonoBehaviour
         pState.dashing = true;
         Vector2 start = transform.position;
         Vector2 end = new Vector2(_nextNook.transform.position.x, transform.position.y);
+        animator.SetBool("hiding", false);
 
         while (elapsedTime < travelTime)
         {

@@ -65,7 +65,7 @@ public class ShadowNook : InteractTrigger
         indicator.SetActive(false);
         controller.currentNook = this;
         playerHiding = true;
-        controller.pState.hiding = true;
+        controller.StartHiding();
         if (controller.currentAttackType != PlayerController.AttackType.Light && playerHiding)
         {
             controller.transform.position = new Vector2(transform.position.x, controller.transform.position.y); // this might not work if the player is on a slope, so keep that in mind
