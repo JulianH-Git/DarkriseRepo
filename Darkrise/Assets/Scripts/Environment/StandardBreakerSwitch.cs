@@ -12,6 +12,7 @@ public class StandardBreakerSwitch : InteractTrigger
     [SerializeField] float flashbangDeactivationTimer;
     float timeTilReactivate;
     [SerializeField] FuseBox fb;
+    private bool hasBeenCalled = false;
 
     [SerializeField] protected List<GameObject> affectedSprites;
 
@@ -20,21 +21,19 @@ public class StandardBreakerSwitch : InteractTrigger
         base.Start();
         animator = this.GetComponent<Animator>();
         trigger = this.GetComponent<BoxCollider2D>();
+        hasBeenCalled = false;
     }
 
     private void Update()
     {
         if (deactivated == true) { trigger.enabled = false; }
-        if (flashbanged == true) { FlashbangDeactivation(); }
-        if (fb != null && fb.overloaded)
+        if (flashbanged == true || (fb != null && fb.flashbanged)) { FlashbangDeactivation(); }
+        if (fb != null && fb.overloaded && !fb.flashbanged)
         {
             deactivated = true;
             animator.SetBool("turnedOff", true);
 
-            foreach (GameObject sprite in affectedSprites)
-            {
-                sprite.SetActive(true);
-            }
+            FlipAffectedSprites();
         }
     }
     protected override void OnTriggerStay2D(Collider2D collision)
@@ -62,6 +61,8 @@ public class StandardBreakerSwitch : InteractTrigger
         deactivated = true;
         animator.SetBool("turnedOff", true);
 
+        FlipAffectedSprites();
+
         timeTilReactivate += Time.deltaTime;
 
         if (timeTilReactivate >= flashbangDeactivationTimer)
@@ -70,8 +71,26 @@ public class StandardBreakerSwitch : InteractTrigger
             flashbanged = false;
             animator.SetBool("turnedOff", true);
             trigger.enabled = true;
+
+            foreach (GameObject sprite in affectedSprites)
+            {
+                sprite.SetActive(!sprite.activeSelf);
+            }
+            hasBeenCalled = false;
         }
 
+    }
+
+    public void FlipAffectedSprites() 
+    {
+        if (!hasBeenCalled)
+        {
+            foreach (GameObject sprite in affectedSprites)
+            {
+                sprite.SetActive(!sprite.activeSelf);
+                hasBeenCalled = true;
+            }
+        }
     }
 
     private IEnumerator MoveGates(GameObject gate, Vector2 spotSize)

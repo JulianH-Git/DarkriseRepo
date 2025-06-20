@@ -39,6 +39,16 @@ public class DarkRoom : MonoBehaviour
                             damageTimer = 0;
                         }
                     }
+                    else if (PlayerController.Instance.currentAttackType == PlayerController.AttackType.Neutral) 
+                    {
+                        damageTimer += Time.deltaTime;
+
+                        if (damageTimer >= timeTillDamage + 2)
+                        {
+                            PlayerController.Instance.TakeDamage(damage);
+                            damageTimer = 0;
+                        }
+                    }
                     break;
             }
             
@@ -52,11 +62,13 @@ public class DarkRoom : MonoBehaviour
         {
             if(fb.overloaded == true || fb.flashbanged == true)
             {
-                gameObject.SetActive(false);
+                gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                gameObject.GetComponent<SpriteRenderer>().enabled = false;
             }
             else
             {
-                gameObject.SetActive(true);
+                gameObject.GetComponent<BoxCollider2D>().enabled = true;
+                gameObject.GetComponent<SpriteRenderer>().enabled = true;
             }
         }
     }

@@ -76,6 +76,7 @@ public class FuseBox : MonoBehaviour
         {
             flashbanged = false;
             overloaded = false;
+            timeTilReactivated = 0;
         }
     }
 }

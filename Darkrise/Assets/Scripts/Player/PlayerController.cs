@@ -1216,15 +1216,8 @@ public class PlayerController : MonoBehaviour
     {
         modeLockedTimeToRelease = 0;
         modeLocked = false;
-        switch (currentAttackType)
-        {
-            case AttackType.Light:
-                lightUnlocked = false;
-                break;
-            case AttackType.Dark:
-                darkUnlocked = false;
-                break;
-        }
+        lightUnlocked = false;
+        darkUnlocked = false;
         currentAttackType = AttackType.Neutral;
         ModeSwitchAnimationUpdate(currentAttackType);
     }
