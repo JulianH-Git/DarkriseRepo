@@ -186,6 +186,12 @@ public class PlayerController : MonoBehaviour
 
     public GhostEffect ghost;
 
+    private bool canMove = true;
+    public bool CanMove
+    {
+        get => canMove;
+        set => canMove = value;
+    }
 
     private bool dashPressed;
     private bool jumpPressed;
@@ -415,6 +421,24 @@ public class PlayerController : MonoBehaviour
     void GetInput()
     {
         if (PauseMenu.GamePaused == true) { return; }
+
+        if (!canMove)
+        {
+            // Zero out inputs
+            xAxis = 0;
+            yAxis = 0;
+            attack = false;
+            castSpell = false;
+            dashPressed = false;
+            jumpPressed = false;
+            doubleJumpPressed = false;
+            switchAttackTypeLeftPressed = false;
+            switchAttackTypeRightPressed = false;
+            interactPressed = false;
+            spellSwapPressed = false;
+
+            return;
+        }
 
         xAxis = player.GetAxis("Move Horizontal");
         yAxis = player.GetAxis("Move Vertical");
