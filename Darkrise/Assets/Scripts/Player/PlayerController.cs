@@ -719,6 +719,16 @@ public class PlayerController : MonoBehaviour
                 }
 
             }
+            else if (ObjectsToHit[i].GetComponent<MirrorPlate>() != null)
+            {
+                MirrorPlate mp = ObjectsToHit[i].GetComponent<MirrorPlate>();
+                if(currentAttackType == AttackType.Dark) { mp.ChangeState(); }
+                else
+                {
+                    mp.Rotate();
+                }
+                
+            }
         }
 
     }
@@ -1556,6 +1566,18 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(walkSpeed * xAxis, walkSpeed * yAxis);
     }
 
+    public void AddForce(float _force)
+    {
+        rb.AddForce(new Vector2(rb.velocity.x, _force));
+    }
+    public void AddXForce(float _force)
+    {
+        rb.AddForce(new Vector2(_force, rb.velocity.y));
+    }
+    public void AddForce(Vector2 _force)
+    {
+        rb.AddForce(_force);
+    }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

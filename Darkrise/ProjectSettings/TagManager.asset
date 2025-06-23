@@ -9,6 +9,7 @@ TagManager:
   - Room Wide Effect
   - VirtualCamera
   - Technology
+  - Laser
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Room Wide Effect
   - Map
   - Flashbang
-  - 
+  - Laser
   - 
   - 
   - 
