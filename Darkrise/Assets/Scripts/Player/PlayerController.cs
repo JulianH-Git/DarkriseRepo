@@ -1303,6 +1303,11 @@ public class PlayerController : MonoBehaviour
         {
             lightUnlocked = true;
         }
+        else if (_at == AttackType.Neutral)
+        {
+            darkUnlocked = false;
+            lightUnlocked = false;
+        }
 
         SwitchAttackTypes(_at);
         onEnergyChangedCallback.Invoke();

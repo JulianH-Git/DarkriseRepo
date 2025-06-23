@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class ModeSwitchStatue : InteractTrigger
 {
-    [SerializeField] bool giveLight;
-    [SerializeField] bool giveDark;
+    enum ModeGiven
+    {
+        Neutral,
+        Dark,
+        Light
+    }
+    [SerializeField] ModeGiven modeGiven;
     [SerializeField] bool oneTimeUse;
     bool used;
     Color statueColor;
@@ -15,15 +20,18 @@ public class ModeSwitchStatue : InteractTrigger
     {
         base.Start();
 
-        if(giveLight)
+        switch(modeGiven)
         {
-            ColorUtility.TryParseHtmlString("#FFFFBE", out statueColor);
-            indicateColor.color = statueColor;
-        }
-        else if(giveDark)
-        {
-            ColorUtility.TryParseHtmlString("#6F2828", out statueColor);
-            indicateColor.color = statueColor;
+            case ModeGiven.Neutral:
+                break;
+            case ModeGiven.Dark:
+                ColorUtility.TryParseHtmlString("#6F2828", out statueColor);
+                indicateColor.color = statueColor;
+                break;
+            case ModeGiven.Light:
+                ColorUtility.TryParseHtmlString("#FFFFBE", out statueColor);
+                indicateColor.color = statueColor;
+                break;
         }
     }
     protected override void OnTriggerExit2D(Collider2D collision)
@@ -46,13 +54,17 @@ public class ModeSwitchStatue : InteractTrigger
                 indicator.SetActive(false);
                 indicateColor.color = statueColor;
 
-                if (giveLight)
+                switch (modeGiven)
                 {
-                    controller.StatueModeChange(PlayerController.AttackType.Light);
-                }
-                if (giveDark)
-                {
-                    controller.StatueModeChange(PlayerController.AttackType.Dark);
+                    case ModeGiven.Neutral:
+                        controller.StatueModeChange(PlayerController.AttackType.Neutral);
+                        break;
+                    case ModeGiven.Dark:
+                        controller.StatueModeChange(PlayerController.AttackType.Dark);
+                        break;
+                    case ModeGiven.Light:
+                        controller.StatueModeChange(PlayerController.AttackType.Light);
+                        break;
                 }
                 controller.modeLocked = true;
 
