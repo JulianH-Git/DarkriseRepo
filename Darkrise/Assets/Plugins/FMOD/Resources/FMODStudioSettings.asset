@@ -260,6 +260,7 @@ MonoBehaviour:
   - Desktop/Master
   Banks:
   - Desktop/Level1
+  - Desktop/Pause
   - Desktop/SFX
   BanksToLoad: []
   LiveUpdatePort: 9264

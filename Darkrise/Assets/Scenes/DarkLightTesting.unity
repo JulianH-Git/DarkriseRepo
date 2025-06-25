@@ -37380,6 +37380,7 @@ MonoBehaviour:
   masterVolume: 1
   musicVolume: 1
   sfxVolume: 1
+  pauseVolume: 1
 --- !u!1001 &776568145
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51970,25 +51971,25 @@ MonoBehaviour:
     Path: event:/Music/Level1Music
   <pauseNavigate>k__BackingField:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 802519338
+      Data2: 1220822418
+      Data3: -437045368
+      Data4: -580547240
+    Path: event:/SFX/Menus/Pause/PauseNavigate
   <pauseSelect>k__BackingField:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -659451592
+      Data2: 1231697704
+      Data3: -2024354634
+      Data4: 2092710140
+    Path: event:/SFX/Menus/Pause/PauseSelect
   <pauseBack>k__BackingField:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -2091808970
+      Data2: 1276146286
+      Data3: -1633156711
+      Data4: 1578748371
+    Path: event:/SFX/Menus/Pause/PauseBack
   <dash>k__BackingField:
     Guid:
       Data1: 1505767641
