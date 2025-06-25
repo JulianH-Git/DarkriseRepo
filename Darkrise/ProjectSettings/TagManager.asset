@@ -10,6 +10,8 @@ TagManager:
   - VirtualCamera
   - Technology
   - Laser
+  - Mirror
+  - Receiver
   layers:
   - Default
   - TransparentFX

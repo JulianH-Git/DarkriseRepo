@@ -1074,6 +1074,7 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(float _damage)
     {
+        if(pState.invincible || DebugMode) { return; }
         CamShake.Instance.Shake();
         if (!DebugMode)
         {

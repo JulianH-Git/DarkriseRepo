@@ -5,13 +5,13 @@ public class MirrorPlate : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] Sprite mirror;
     [SerializeField] Sprite bounce;
+    [SerializeField] PlateState currentState;
     [SerializeField] float bounciness;
-    [SerializeField] float horizontalBounciness;
+    [SerializeField] GameObject reflectionSurface;
     PlayerController player;
     SpriteRenderer sr;
     float rotation = 0f;
 
-    PlateState currentState;
     enum PlateState
     {
         Reflect,
@@ -27,43 +27,14 @@ public class MirrorPlate : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Laser") && currentState == PlateState.Reflect) // mirror needs to reflect lasers that touch it
+        if (collision.collider.CompareTag("Player") && currentState == PlateState.Bounce) // mirror needs to become bouncy on contact
         {
-
-        }
-        else if (collision.collider.CompareTag("Player") && currentState == PlateState.Bounce) // mirror needs to become bouncy on contact
-        {
-            switch(rotation)
+            if (!player.Grounded())
             {
-                case 0:
-                    player.AddForce(bounciness);
-                    break;
-                case 45:
-                    player.AddForce(new Vector2(-horizontalBounciness, bounciness));
-                    break;
-                case 90:
-                    player.AddXForce(-horizontalBounciness);
-                    break;
-                case 135:
-                    player.AddForce(new Vector2(-horizontalBounciness, -bounciness));
-                    break;
-                case 180:
-                    player.AddForce(-bounciness);
-                    break;
-                case 225:
-                    player.AddForce(new Vector2(horizontalBounciness, -bounciness));
-                    break;
-                case 270:
-                    player.AddXForce(horizontalBounciness);
-                    break;
-                case 315:
-                    player.AddForce(new Vector2(horizontalBounciness, bounciness));
-                    break;
-                case 360:
-                    player.AddForce(bounciness);
-                    break;
-            }
+                Vector2 bounceDirection = transform.up;
+                player.AddForce(bounceDirection * bounciness);
 
+            }
         }
     }
     public void ChangeState()
@@ -74,18 +45,20 @@ public class MirrorPlate : MonoBehaviour
         if (currentState == PlateState.Reflect)
         {
             sr.sprite = mirror;
+            reflectionSurface.SetActive(true);
         }
         else
         {
             sr.sprite = bounce;
+            reflectionSurface.SetActive(false);
         }
     }
 
     public void Rotate()
     {
 
-        rotation += 45f;
-        if (rotation >= 360f)
+        rotation -= 45f;
+        if (rotation <= -360f)
         {
             rotation = 0f;
         }
