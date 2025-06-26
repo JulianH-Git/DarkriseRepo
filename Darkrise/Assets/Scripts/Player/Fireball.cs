@@ -10,16 +10,20 @@ public class Fireball : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float maxLifetime = 1.0f;
     [SerializeField] LayerMask groundLayer;
+    [SerializeField] private LayerMask mirrorLayer;
     [SerializeField] bool isDark;
+    [SerializeField] float reflectionCooldown;
     Vector3 direction;
 
     private float currentLifetime = 0f;
     public Animator animator;
     private bool isExploding = false;
+    float reflectionCooldownTimer = 0f;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        reflectionCooldownTimer = reflectionCooldown;
     }
 
     void FixedUpdate()
@@ -30,6 +34,8 @@ public class Fireball : MonoBehaviour
 
         transform.position += speed * Time.deltaTime * direction;
 
+        reflectionCooldownTimer += Time.deltaTime;
+
         if (currentLifetime >= maxLifetime)
         {
             Explode();
@@ -39,6 +45,16 @@ public class Fireball : MonoBehaviour
         if (Physics2D.Raycast(transform.position, new Vector2(direction.x,direction.y), 0.3f, groundLayer))
         {
             Explode();
+        }
+
+        RaycastHit2D mirrorCheck = Physics2D.Raycast(transform.position, new Vector2(direction.x, direction.y), 0.35f, mirrorLayer);
+
+        if (mirrorCheck.collider != null && mirrorCheck.collider.CompareTag("Mirror") && reflectionCooldownTimer >= reflectionCooldown)
+        {
+            reflectionCooldownTimer = 0f;
+            MirrorPlate _mp = mirrorCheck.collider.GetComponentInParent<MirrorPlate>();
+            if(_mp.currentState == MirrorPlate.PlateState.Reflect) { ReflectFireball(_mp.Rotation); }
+
         }
     }
 
@@ -91,5 +107,15 @@ public class Fireball : MonoBehaviour
             AudioManager.instance.PlayOneShot(FMODEvents.instance.lightExplode, this.transform.position);
         }
         Destroy(gameObject, explosionDuration);
+    }
+
+    void ReflectFireball(float _reflection)
+    {
+        Vector2 currentDir = direction;
+        Vector2 normal = new Vector2(Mathf.Sin(-_reflection * Mathf.Deg2Rad), Mathf.Cos(_reflection * Mathf.Deg2Rad));
+        Vector2 reflected = Vector2.Reflect(currentDir, normal).normalized;
+        direction = new Vector3(reflected.x, reflected.y, 0);
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.eulerAngles = new Vector3(0, 0, angle);
     }
 }

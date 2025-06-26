@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4837688321155255534}
   - component: {fileID: 7774766558129047270}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: ReflectionSurface
   m_TagString: Mirror
   m_Icon: {fileID: 0}
@@ -110,7 +110,7 @@ Transform:
   m_Children:
   - {fileID: 4837688321155255534}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4393842505336201045
 SpriteRenderer:
@@ -178,6 +178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mirror: {fileID: 21300000, guid: e94f4e03fdd49494f8716170fb439a3f, type: 3}
   bounce: {fileID: 21300000, guid: e0cb2e7da1512fa4fba6a2d90c0027e4, type: 3}
+  currentState: 0
   bounciness: 1000
   reflectionSurface: {fileID: 5694523318656324500}
 --- !u!61 &1699868006631763540

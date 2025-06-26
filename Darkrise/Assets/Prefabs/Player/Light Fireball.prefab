@@ -172,5 +172,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  mirrorLayer:
+    serializedVersion: 2
+    m_Bits: 64
   isDark: 0
+  reflectionCooldown: 3
   animator: {fileID: 776574511026502199}

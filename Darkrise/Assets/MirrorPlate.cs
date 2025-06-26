@@ -5,14 +5,19 @@ public class MirrorPlate : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] Sprite mirror;
     [SerializeField] Sprite bounce;
-    [SerializeField] PlateState currentState;
+    [SerializeField] public PlateState currentState;
     [SerializeField] float bounciness;
     [SerializeField] GameObject reflectionSurface;
     PlayerController player;
     SpriteRenderer sr;
     float rotation = 0f;
+    public float Rotation
+    {
+        get { return rotation; }
+    }
+            
 
-    enum PlateState
+    public enum PlateState
     {
         Reflect,
         Bounce
