@@ -15,9 +15,9 @@ public class AudioManager : MonoBehaviour
     [Range(0, 1)]
 
     public float sfxVolume = 1;
-    [Range(0, 1)]
+    
 
-    public float pauseVolume = 1;
+    
 
     private Bus masterBus;
 
@@ -25,7 +25,7 @@ public class AudioManager : MonoBehaviour
 
     private Bus sfxBus;
 
-    private Bus pauseBus;
+    
 
     private List<EventInstance> eventInstances;
 
@@ -44,7 +44,7 @@ public class AudioManager : MonoBehaviour
         masterBus = RuntimeManager.GetBus("bus:/");
         musicBus = RuntimeManager.GetBus("bus:/Music");
         sfxBus = RuntimeManager.GetBus("bus:/SFX");
-        pauseBus = RuntimeManager.GetBus("bus:/Pause");
+        
     }
 
     private void Start()
@@ -57,27 +57,27 @@ public class AudioManager : MonoBehaviour
         masterBus.setVolume(masterVolume);
         musicBus.setVolume(musicVolume);
         sfxBus.setVolume(sfxVolume);
-        pauseBus.setVolume(pauseVolume);
+        
 
         //If the game is paused and not in settings, don't play music
         if (PauseMenu.GamePaused && !PauseMenu.inSettings)
         {
             musicEventInstance.setPaused(true);
-            sfxBus.setPaused(true);
+            sfxBus.setMute(true);
         }
 
         //If the game is paused and in settings, play music and sfx
         else if (PauseMenu.GamePaused && PauseMenu.inSettings)
         {
             musicEventInstance.setPaused(false);
-            sfxBus.setPaused(false);
+            sfxBus.setMute(false);
         }
 
         //If the game is not paused and not in settings, play music
         else if (!PauseMenu.GamePaused && !PauseMenu.inSettings) 
         {
             musicEventInstance.setPaused(false);
-            sfxBus.setPaused(false);
+            sfxBus.setMute(false);
         }
     }
     private void InitializeMusic(EventReference musicEventReference)

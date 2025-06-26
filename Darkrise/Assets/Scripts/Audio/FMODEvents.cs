@@ -7,7 +7,7 @@ public class FMODEvents : MonoBehaviour
     [field: Header("Music")]
     [field: SerializeField] public EventReference music { get; private set; }
 
-    [field: Header("Menu SFX")]
+    [field: Header("Pause")]
     [field: SerializeField] public EventReference pauseNavigate { get; private set; }
     [field: SerializeField] public EventReference pauseSelect { get; private set; }
     [field: SerializeField] public EventReference pauseBack { get; private set; }
