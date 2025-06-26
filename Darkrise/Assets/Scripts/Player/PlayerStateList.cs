@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerStateList : MonoBehaviour
@@ -14,4 +12,17 @@ public class PlayerStateList : MonoBehaviour
     public bool hiding = false;
     public bool recovering = false;
     public bool shadowWalking = false;
+
+    public void PrepForDeath()
+    {
+        jumping = false;
+        dashing = false;
+        recoilingX = false;
+        recoilingY = false;
+        invincible = true;
+        casting = false;
+        hiding = false;
+        recovering = false;
+        shadowWalking = false;
+    }
 }

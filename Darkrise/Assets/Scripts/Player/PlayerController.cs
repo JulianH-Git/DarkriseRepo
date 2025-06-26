@@ -295,7 +295,7 @@ public class PlayerController : MonoBehaviour
     private IEnumerator WaitTillEnd()
     {
         animator.SetBool("isDead", true);
-        pState.invincible = true;
+        pState.PrepForDeath();
         rb.gravityScale = 0;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         sr.sortingOrder = 10; // render above everything
