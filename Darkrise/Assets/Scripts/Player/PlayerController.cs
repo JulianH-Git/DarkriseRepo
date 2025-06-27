@@ -1,10 +1,15 @@
 using FMOD.Studio;
 using Rewired;
+using Rewired.Utils.Classes.Data;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static Rewired.Platforms.Custom.CustomPlatformUnifiedKeyboardSource.KeyPropertyMap;
+using static UnityEngine.Rendering.DebugUI;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDataPersistence
 {
     private Rigidbody2D rb; // player rigid body
     private Animator animator;
@@ -136,6 +141,7 @@ public class PlayerController : MonoBehaviour
     float alpha = 1.0f;
     [SerializeField] float timeBetweenGlances;
     [SerializeField] public GameObject playerArrowIndicator;
+    public GameObject lastStatue = null;
     Quaternion defaultArrowRotation;
     float countUptoGlance = 0;
     float releaseStaleInputs = 0.1f;
@@ -244,6 +250,24 @@ public class PlayerController : MonoBehaviour
         }
         Health = maxHealth;
     }
+
+    public void LoadData(GameData data)
+    {
+        transform.position = data.position;
+        maxEnergy = data.maxEnergy;
+        maxHealth = data.maxHealth;
+        data.upgradeStatus.TryGetValue("DASH", out canDash);
+        data.upgradeStatus.TryGetValue("DARK", out darkUnlocked);
+        data.upgradeStatus.TryGetValue("LIGHT", out lightUnlocked);
+
+    }
+    public void SaveData(GameData data)
+    {
+        data.position = lastStatue.transform.position;
+        data.maxHealth = maxHealth;
+        data.maxEnergy = maxEnergy;
+    }
+
 
     // Start is called before the first frame update
     void Start()

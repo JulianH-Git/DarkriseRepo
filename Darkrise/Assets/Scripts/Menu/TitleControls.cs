@@ -35,6 +35,7 @@ public class TitleControls : MonoBehaviour
         if (alpha >= 2) 
         {
             SceneManager.LoadScene("StartLevel");
+            DataPersistenceManager.Instance.LoadGame(); // doesn't work as it is, i need to set this up to exist between scenes. but after i do that this should work
         }
     }
 }

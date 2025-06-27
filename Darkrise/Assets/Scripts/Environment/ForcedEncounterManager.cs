@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using UnityEngine;
 
-public class ForcedEncounterManager : MonoBehaviour
+public class ForcedEncounterManager : MonoBehaviour, IDataPersistence
 {
     [SerializeField] ForcedEncounterBreakerSwitch breaker;
     [SerializeField] List<GameObject> feSpotlights = new List<GameObject>();
@@ -15,6 +15,32 @@ public class ForcedEncounterManager : MonoBehaviour
     [SerializeField] private enemyBase enemy;
     [Header("Audio Settings")]
     [SerializeField] private bool deactivateOnce = false;
+
+    [SerializeField] private string id;
+    [ContextMenu("Generate new GUID")]
+
+    private void GenerateGUID()
+    {
+        id = System.Guid.NewGuid().ToString();
+    }
+
+    public void SaveData(GameData data)
+    {
+        if (data.FEMStatus.ContainsKey(id))
+        {
+            data.FEMStatus.Remove(id);
+        }
+        data.FEMStatus.Add(id, deactivateOnce);
+    }
+
+    public void LoadData(GameData data)
+    {
+        data.FEMStatus.TryGetValue(id, out deactivateOnce);
+        if(deactivateOnce)
+        {
+            DeactivateForcedEncounter();
+        }
+    }
 
 
     // Start is called before the first frame update

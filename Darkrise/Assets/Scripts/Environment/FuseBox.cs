@@ -1,8 +1,9 @@
+using Rewired.Utils.Classes.Data;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FuseBox : MonoBehaviour
+public class FuseBox : MonoBehaviour, IDataPersistence
 {
     [SerializeField] float overloadTimer;
     [SerializeField] float flashbangDeactivationTimer;
@@ -12,6 +13,27 @@ public class FuseBox : MonoBehaviour
     public bool overloaded;
     public bool flashbanged;
     SpriteRenderer sr;
+    [SerializeField] private string id;
+    [ContextMenu("Generate new GUID")]
+
+    private void GenerateGUID()
+    {
+        id = System.Guid.NewGuid().ToString();
+    }
+
+    public void SaveData(GameData data)
+    {
+        if (data.fbStatus.ContainsKey(id))
+        {
+            data.fbStatus.Remove(id);
+        }
+        data.fbStatus.Add(id, powered);
+    }
+
+    public void LoadData(GameData data)
+    {
+        data.fbStatus.TryGetValue(id, out powered);
+    }
 
     void Start()
     {

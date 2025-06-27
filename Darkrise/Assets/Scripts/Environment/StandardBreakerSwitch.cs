@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D;
 
-public class StandardBreakerSwitch : InteractTrigger
+public class StandardBreakerSwitch : InteractTrigger, IDataPersistence
 {
     public bool deactivated;
     public bool flashbanged;
@@ -13,8 +14,29 @@ public class StandardBreakerSwitch : InteractTrigger
     float timeTilReactivate;
     [SerializeField] FuseBox fb;
     private bool hasBeenCalled = false;
-
     [SerializeField] protected List<GameObject> affectedSprites;
+    [SerializeField] private string id;
+    [ContextMenu("Generate new GUID")]
+
+    private void GenerateGUID()
+    {
+        id = System.Guid.NewGuid().ToString();
+    }
+
+
+    public void SaveData(GameData data)
+    {
+        if (data.fbStatus.ContainsKey(id))
+        {
+            data.fbStatus.Remove(id);
+        }
+        data.fbStatus.Add(id, deactivated);
+    }
+
+    public void LoadData(GameData data)
+    {
+        data.fbStatus.TryGetValue(id, out deactivated);
+    }
 
     protected override void Start()
     {

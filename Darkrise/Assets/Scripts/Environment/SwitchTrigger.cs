@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwitchTrigger : MonoBehaviour
+public class SwitchTrigger : MonoBehaviour, IDataPersistence
 {
     [SerializeField] protected GameObject player;
     protected PlayerController controller;
@@ -19,17 +19,38 @@ public class SwitchTrigger : MonoBehaviour
 
     private float duration = 0.1f;
 
+    [SerializeField] private string id;
+    [ContextMenu("Generate new GUID")]
+
+    private void GenerateGUID()
+    {
+        id = System.Guid.NewGuid().ToString();
+    }
+
+    public void SaveData(GameData data)
+    {
+        if (data.switchTriggerStatus.ContainsKey(id))
+        {
+            data.switchTriggerStatus.Remove(id);
+        }
+        data.switchTriggerStatus.Add(id, hasBeenUsed);
+    }
+
+    public void LoadData(GameData data)
+    {
+        data.switchTriggerStatus.TryGetValue(id, out hasBeenUsed);
+        if(hasBeenUsed)
+        {
+            SwitchActivated(false);
+        }
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
         controller = player.GetComponent<PlayerController>();
         indicator.SetActive(false);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     protected virtual void OnTriggerStay2D(Collider2D collision)
@@ -41,16 +62,7 @@ public class SwitchTrigger : MonoBehaviour
 
             if (controller.Interact())
             {
-                indicator.SetActive(false);
-                foreach (GameObject sprite in affectedSprites)
-                {
-                    hasBeenUsed = true;
-                    indicateColor.color = Color.white;
-                    GetComponent<CutsceneTrigger>()?.StartCutscene();
-                    StartCoroutine(MoveGates(sprite, new Vector2(sprite.transform.localScale.x, 0)));
-                }
-                AudioManager.instance.PlayOneShot(FMODEvents.instance.pullLever, this.transform.position);
-                this.GetComponent<SpriteRenderer>().flipY = true;
+                SwitchActivated();
             }
         }
     }
@@ -62,6 +74,21 @@ public class SwitchTrigger : MonoBehaviour
             indicateColor.color = Color.white;
         }
     }
+
+    private void SwitchActivated(bool playSound = true)
+    {
+        indicator.SetActive(false);
+        foreach (GameObject sprite in affectedSprites)
+        {
+            hasBeenUsed = true;
+            indicateColor.color = Color.white;
+            GetComponent<CutsceneTrigger>()?.StartCutscene();
+            StartCoroutine(MoveGates(sprite, new Vector2(sprite.transform.localScale.x, 0)));
+        }
+        if(playSound) { AudioManager.instance.PlayOneShot(FMODEvents.instance.pullLever, this.transform.position); }
+        this.GetComponent<SpriteRenderer>().flipY = true;
+    }
+
 
     private IEnumerator MoveGates(GameObject gate, Vector2 spotSize)
     {

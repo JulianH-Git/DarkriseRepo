@@ -189,6 +189,12 @@ public class PauseMenu : MonoBehaviour
         Debug.Log("Settings off");
     }
 
+    public void RestartFromCheckpoint()
+    {
+        DataPersistenceManager.Instance.LoadGame();
+        StartCoroutine(Resume());
+    }
+
     public void QuitGame()
     {
         Application.Quit();

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using TMPro;
 using UnityEngine;
 
@@ -36,6 +37,7 @@ public class StatueInteraction : InteractTrigger
             hintText.SetActive(false);
         }
     }
+
     protected override void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") && !collision.isTrigger)
@@ -51,6 +53,8 @@ public class StatueInteraction : InteractTrigger
                 fadeTimer = 3f;
                 alphaValue = 1f;
                 hintText.SetActive(true);
+                controller.lastStatue = this.gameObject;
+                DataPersistenceManager.Instance.SaveGame();
             }
         }
     }
