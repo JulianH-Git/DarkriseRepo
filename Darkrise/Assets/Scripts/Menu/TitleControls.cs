@@ -1,8 +1,11 @@
+using Rewired;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TitleControls : MonoBehaviour
 {
@@ -13,29 +16,133 @@ public class TitleControls : MonoBehaviour
 
     float alpha = 0.0f;
 
+    private Player player;
+    private int playerId = 0;
+    [SerializeField] public GameObject settingsMenuUI;
+    [SerializeField] GameObject LoadGameButton;
+    [SerializeField] private Rewired.UI.ControlMapper.ControlMapper mapper = null;
+    public GameObject pauseFirstButton, //button that's highlighted when you pause
+    optionsFirstButton, //button that's highlighted when you first open the options menu
+    optionsClosedButton;
+    bool newGame;
+    bool runOnce = false;
+
+
     private void Start()
     {
         Screen.SetResolution(1920, 1080, true);
+        player = ReInput.players.GetPlayer(playerId);
+        EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
+        EventSystem.current.SetSelectedGameObject(pauseFirstButton);
+
+        if(DataPersistenceManager.Instance.HasGameData() == false)
+        {
+            LoadGameButton.GetComponent<Button>().interactable = false;
+            LoadGameButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.gray;
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.anyKeyDown && !hasPressed) 
+        if (player.GetButtonDown("UICancel"))
         {
-            hasPressed = true;
+            if (settingsMenuUI.activeSelf == true) { StartExitingSettingsMenu(); }
         }
 
-        if (hasPressed) 
+        if (hasPressed)
         {
+            pauseFirstButton.SetActive(false);
+            LoadGameButton.SetActive(false);
+            optionsClosedButton.SetActive(false);
             fade.color = new Color(fade.color.r, fade.color.g, fade.color.b, alpha);
             alpha += 0.05f;
         }
 
-        if (alpha >= 2) 
+
+        if (alpha >= 2 && !runOnce)
         {
-            SceneManager.LoadScene("StartLevel");
-            DataPersistenceManager.Instance.LoadGame(); // doesn't work as it is, i need to set this up to exist between scenes. but after i do that this should work
+            runOnce = true;
+            StartGame();
         }
+    }
+
+    private void StartGame()
+    {
+        if (newGame)
+        {
+            DataPersistenceManager.Instance.NewGame();
+        }
+        else
+        {
+            DataPersistenceManager.Instance.LoadGame();
+        }
+
+        SceneManager.LoadSceneAsync("StartLevel");
+    }
+
+    public void OnNewGameClicked()
+    {
+        if (hasPressed) { return; }
+        hasPressed = true;
+        newGame = true;
+    }
+
+    public void OnLoadGameClicked()
+    {
+        if(hasPressed) { return; }
+        hasPressed = true;
+        newGame = false;
+    }
+
+    public void SettingsMenu()
+    {
+        if (hasPressed) { return; }
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.pauseSelect, this.transform.position);
+        Debug.Log("Loading settings menu...");
+        settingsMenuUI.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
+        EventSystem.current.SetSelectedGameObject(optionsFirstButton);
+    }
+
+    public void ControlsMenu()
+    {
+        if (hasPressed) { return; }
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.pauseSelect, this.transform.position);
+        Debug.Log("Loading controls menu...");
+        mapper.Open();
+    }
+
+    public void StartExitingSettingsMenu()
+    {
+        StartCoroutine(ExitSettingsMenu());
+    }
+
+    public void StartExitingControlsMenu()
+    {
+        StartCoroutine(ExitControlsMenu());
+    }
+
+    public IEnumerator ExitControlsMenu()
+    {
+        Debug.Log("Exiting controls menu...");
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.pauseBack, this.transform.position);
+        yield return new WaitForSecondsRealtime(0.3f);
+        mapper.Close(true);
+        EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
+        EventSystem.current.SetSelectedGameObject(optionsFirstButton);
+        Debug.Log("Controls off");
+    }
+
+    public IEnumerator ExitSettingsMenu()
+    {
+        Debug.Log("Exiting settings menu...");
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.pauseBack, this.transform.position);
+        yield return new WaitForSecondsRealtime(0.3f);
+        EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
+        EventSystem.current.SetSelectedGameObject(optionsClosedButton);
+        settingsMenuUI.SetActive(false);
+        Debug.Log("Settings off");
     }
 }

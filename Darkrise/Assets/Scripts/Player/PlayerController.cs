@@ -264,7 +264,8 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     }
     public void SaveData(GameData data)
     {
-        data.position = lastStatue.transform.position;
+        if (lastStatue != null) { data.position = lastStatue.transform.position; }
+        else { data.position = new Vector3(-5f, 3.55f, 0f); }
         data.maxHealth = maxHealth;
         data.maxEnergy = maxEnergy;
     }
