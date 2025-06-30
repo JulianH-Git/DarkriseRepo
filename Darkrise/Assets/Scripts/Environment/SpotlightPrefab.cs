@@ -2,6 +2,7 @@ using Rewired;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using static PlayerController;
 //using static UnityEditor.Experimental.GraphView.GraphView;
 
@@ -20,6 +21,13 @@ public class SpotlightPrefab : MonoBehaviour
     [SerializeField] GameObject lamp;
     [SerializeField] List<Sprite> lampSprites;
     [SerializeField] List<Sprite> spotlightSprites;
+    [SerializeField] ParticleSystem spotlightParticles;
+    ParticleSystem.ColorOverLifetimeModule colorOverLifetime;
+    ParticleSystem.EmissionModule emission;
+    [SerializeField] List<Gradient> spotlightParticleColors;
+    [SerializeField] Light2D lampLight;
+    [SerializeField] Light2D spotlightLight;
+
 
     PlayerController controller;
 
@@ -61,6 +69,8 @@ public class SpotlightPrefab : MonoBehaviour
     void Start()
     {
         controller = PlayerController.Instance;
+        colorOverLifetime = spotlightParticles.colorOverLifetime;
+        emission = spotlightParticles.emission;
         sr = GetComponent<SpriteRenderer>();
 
         if(gates != null && gates.Count > 0)
@@ -154,6 +164,9 @@ public class SpotlightPrefab : MonoBehaviour
                 lamp.GetComponent<SpriteRenderer>().sprite = lampSprites[0];
                 this.GetComponent<BoxCollider2D>().enabled = false;
                 sr.enabled = false;
+                if(spotlightParticles != null) { emission.enabled = false; }
+                if(lampLight != null) { lampLight.enabled = false; }
+                if(spotlightLight != null) { spotlightLight.enabled = false; }
                 break;
 
             case SpotlightStates.Red:
@@ -161,6 +174,15 @@ public class SpotlightPrefab : MonoBehaviour
                 this.GetComponent<BoxCollider2D>().enabled = true;
                 sr.enabled = true;
                 sr.sprite = spotlightSprites[0];
+
+                emission.enabled = true;
+                lampLight.enabled = true;
+                lampLight.color = Color.red;
+                spotlightLight.enabled = true;
+                spotlightLight.color = Color.red;
+
+                emission.enabled = true;
+                colorOverLifetime.color = spotlightParticleColors[0];
                 break;
 
             case SpotlightStates.Yellow:
@@ -168,7 +190,15 @@ public class SpotlightPrefab : MonoBehaviour
                 this.GetComponent<BoxCollider2D>().enabled = true;
                 sr.enabled = true;
                 sr.sprite = spotlightSprites[1];
+
+                lampLight.enabled = true;
+                lampLight.color = Color.white;
+                spotlightLight.enabled = true;
+                spotlightLight.color = Color.white;
+
                 sr.color = Color.white;
+                emission.enabled = true;
+                colorOverLifetime.color = spotlightParticleColors[1];
                 break;
             case SpotlightStates.Laser:
                 lamp.GetComponent<SpriteRenderer>().sprite = lampSprites[3];
@@ -180,7 +210,15 @@ public class SpotlightPrefab : MonoBehaviour
                 this.GetComponent<BoxCollider2D>().enabled = true;
                 sr.enabled = true;
                 sr.sprite = spotlightSprites[1];
+
+                lampLight.enabled = true;
+                lampLight.color = Color.blue;
+                spotlightLight.enabled = true;
+                spotlightLight.color = Color.blue;
+
                 sr.color = Color.blue;
+                emission.enabled = true;
+                colorOverLifetime.color = spotlightParticleColors[2];
                 break;
         }
 

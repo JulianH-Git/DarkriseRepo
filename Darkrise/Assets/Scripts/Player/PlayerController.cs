@@ -146,6 +146,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     float countUptoGlance = 0;
     float releaseStaleInputs = 0.1f;
     float releaseStateInputsIncrement = 0.0f;
+    [SerializeField] GameObject gotHitParticles;
     public int Health
     {
         get { return health; }
@@ -1360,6 +1361,8 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     IEnumerator StopTakingDamage()
     {
         pState.invincible = true;
+        GameObject _gotHitParticles = Instantiate(gotHitParticles, transform.position, Quaternion.identity);
+        Destroy(_gotHitParticles, 1.5f);
         animator.SetTrigger("TakeDamage");
         pState.recoilingX = true;
         yield return new WaitForSeconds(1f);

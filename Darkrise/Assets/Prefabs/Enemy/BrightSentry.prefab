@@ -113,13 +113,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6865270240363746789}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25.889, y: -2.94, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1275520380293191002}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3791609669757159587
 SpriteRenderer:
@@ -227,6 +227,7 @@ MonoBehaviour:
   anchorPos: {x: 0, y: 0}
   alertedPatrolDistance: 0
   alertedTimer: 3
+  gotHitParticles: {fileID: 6662845823214048819, guid: 4ceecee55468b5f41854594114256074, type: 3}
 --- !u!61 &5455838492603354234
 BoxCollider2D:
   m_ObjectHideFlags: 0

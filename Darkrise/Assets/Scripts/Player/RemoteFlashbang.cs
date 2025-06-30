@@ -10,7 +10,10 @@ public class RemoteFlashbang : MonoBehaviour
     [SerializeField] LayerMask enemyLayer;
     [SerializeField] LayerMask techLayer;
     [SerializeField] LayerMask groundLayer;
+    [SerializeField] GameObject explodeParticles;
+    GameObject _explodeParticles;
     PlayerController player;
+    Animator anim;
     Rigidbody2D rb;
     [SerializeField] private float speed;
     bool detonated;
@@ -30,11 +33,13 @@ public class RemoteFlashbang : MonoBehaviour
     {
         player = PlayerController.Instance;
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
         rb.velocity = new Vector2(speed * direction.x, rb.velocity.y);
         Physics2D.IgnoreLayerCollision(10, 6, true);
         Physics2D.IgnoreLayerCollision(10, 0, true);
         ctf.useTriggers = true;
         ctf.SetLayerMask(techLayer);
+        _explodeParticles = Instantiate(explodeParticles, transform.position, Quaternion.identity);
     }
 
     // Update is called once per frame
@@ -43,7 +48,7 @@ public class RemoteFlashbang : MonoBehaviour
         // check if detonated
         if (Detonated || currentLifetime >= maxLifeTime)
         {
-            ActivateFlashbang();
+            StartCoroutine(ActivateFlashbang());
         }
     }
 
@@ -55,6 +60,8 @@ public class RemoteFlashbang : MonoBehaviour
             rb.velocity = new Vector2(0.0f, rb.velocity.y);
         }
         currentLifetime += Time.deltaTime;
+        if(_explodeParticles != null) { _explodeParticles.transform.position = transform.position; }
+
     }
 
     private void OnDrawGizmos()
@@ -63,20 +70,24 @@ public class RemoteFlashbang : MonoBehaviour
         Gizmos.DrawWireCube(areaOfEffectTransform.transform.position, areaOfEffect);
     }
 
-    private void ActivateFlashbang()
+    IEnumerator ActivateFlashbang()
     {
+        rb.gravityScale = 0.0f;
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        Destroy(_explodeParticles);
+        anim.SetTrigger("explode");
         // if so, check for enemies and stun them
         List<Collider2D> enemiesInRange = CheckForEnemies(areaOfEffectTransform.transform, areaOfEffect);
         if (enemiesInRange != null && enemiesInRange.Count > 0)
         {
             StunEnemies(enemiesInRange);
         }
-
         // and check for tech and disable it
         CheckForTech(areaOfEffectTransform.transform, areaOfEffect);
-
+        yield return new WaitForSeconds(0.25f);
         // then destroy myself
         Destroy(gameObject);
+
     }
 
     List<Collider2D> CheckForEnemies(Transform _roomTransform, Vector2 _roomArea)

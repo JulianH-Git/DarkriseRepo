@@ -52,6 +52,9 @@ public class enemyBase : MonoBehaviour
     [Header("Audio Settings")]
     protected bool dieOnce = false;
 
+    [Header("Other Settings")]
+    [SerializeField] protected GameObject gotHitParticles;
+
 
     protected Rigidbody2D rb;
 
@@ -94,6 +97,8 @@ public class enemyBase : MonoBehaviour
             //dieOnce makes sure that the death noise doesn't loop forever since its in update
             if (!dieOnce)
             {
+                GameObject _gotHitParticles = Instantiate(gotHitParticles, transform.position, Quaternion.identity);
+                Destroy(_gotHitParticles, 1.5f);
                 if (damage == 1)
                 {
                     AudioManager.instance.PlayOneShot(FMODEvents.instance.sentryDestroyed, this.transform.position);

@@ -75,17 +75,20 @@ public class SwitchTrigger : MonoBehaviour, IDataPersistence
         }
     }
 
-    private void SwitchActivated(bool playSound = true)
+    private void SwitchActivated(bool playCutscene = true)
     {
         indicator.SetActive(false);
         foreach (GameObject sprite in affectedSprites)
         {
             hasBeenUsed = true;
             indicateColor.color = Color.white;
-            GetComponent<CutsceneTrigger>()?.StartCutscene();
+            if(playCutscene) { GetComponent<CutsceneTrigger>()?.StartCutscene(); }
             StartCoroutine(MoveGates(sprite, new Vector2(sprite.transform.localScale.x, 0)));
         }
-        if(playSound) { AudioManager.instance.PlayOneShot(FMODEvents.instance.pullLever, this.transform.position); }
+        if(playCutscene) 
+        { 
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.pullLever, this.transform.position); 
+        }
         this.GetComponent<SpriteRenderer>().flipY = true;
     }
 
