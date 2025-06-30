@@ -64,10 +64,6 @@ public class PauseMenu : MonoBehaviour
                 EventSystem.current.SetSelectedGameObject(pauseFirstButton);
             }
         }
-        if(player.GetButtonDown("UISubmit"))
-        {
-            Debug.Log("button down");
-        }
     }
 
     public void StartResume()
@@ -191,8 +187,14 @@ public class PauseMenu : MonoBehaviour
 
     public void RestartFromCheckpoint()
     {
-        DataPersistenceManager.Instance.LoadGame();
-        StartCoroutine(Resume());
+        pauseMenuUI.SetActive(false);
+        mapper.Close(true);
+        settingsMenuUI.SetActive(false);
+        Time.timeScale = 1.0f;
+        player.controllers.maps.SetMapsEnabled(true, "Gameplay");
+        player.controllers.maps.SetMapsEnabled(false, "UI");
+        GamePaused = false;
+        SceneManager.LoadScene("StartLevel");
     }
 
     public void QuitGame()
