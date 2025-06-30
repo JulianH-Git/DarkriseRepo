@@ -37597,7 +37597,6 @@ MonoBehaviour:
   masterVolume: 1
   musicVolume: 1
   sfxVolume: 1
-  pauseVolume: 1
 --- !u!1001 &776568145
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41915,7 +41914,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5323632172227398349, guid: f9eff9cc8cbff9346b97ba483735f33d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.97
+      value: 7.37
       objectReference: {fileID: 0}
     - target: {fileID: 5323632172227398349, guid: f9eff9cc8cbff9346b97ba483735f33d, type: 3}
       propertyPath: m_LocalPosition.y

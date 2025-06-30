@@ -284,7 +284,7 @@ MonoBehaviour:
   fireballCooldown: 3
   fireballTransform: {fileID: 5488643421207372703}
   lightFireball: {fileID: 8231317321410085571, guid: be7f3867966df8b41817113e13fa8787, type: 3}
-  remoteFlashbang: {fileID: 0}
+  remoteFlashbang: {fileID: 2714894762198226664, guid: 3dd21c36186a79f4ca66e802b9b941d1, type: 3}
   flashbangCooldown: 0
   timeToCast: 0.1
   lightUnlocked: 0
@@ -299,6 +299,8 @@ MonoBehaviour:
   fade: {fileID: 0}
   timeBetweenGlances: 3
   playerArrowIndicator: {fileID: 5356311711110817950}
+  lastStatue: {fileID: 0}
+  gotHitParticles: {fileID: 2675063168314756090, guid: c8202d5a214143b45bbb6034ac110348, type: 3}
   pState: {fileID: 0}
   playerId: 0
   ghost: {fileID: 8978005622312566279}

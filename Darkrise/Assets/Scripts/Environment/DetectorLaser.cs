@@ -6,11 +6,12 @@ public class DetectorLaser : MonoBehaviour
     [SerializeField] float downedCooldown;
     SpriteRenderer sr;
     float downedCooldownTimer;
+    float pushForce = 100f;
     bool hurtPlayer = true;
-    PushPlayer pushPlayer = PushPlayer.NoPush;
-    PushPlayer initialEntry = PushPlayer.NoPush;
+    public PushPlayer pushPlayer = PushPlayer.NoPush;
+    public PushPlayer initialEntry = PushPlayer.NoPush;
 
-    enum PushPlayer
+    public enum PushPlayer
     {
         PushLeft,
         PushRight,
@@ -35,19 +36,12 @@ public class DetectorLaser : MonoBehaviour
             hurtPlayer = true;
             pushPlayer = initialEntry;
         }
-        
-        switch (pushPlayer)
-        {
-            case PushPlayer.PushLeft:
-                controller.AddXForce(-100f);
-                break;
-            case PushPlayer.PushRight:
-                controller.AddXForce(100f);
-                break;
-            case PushPlayer.NoPush:
-                break;
-        }
 
+        if (pushPlayer != PushPlayer.NoPush && hurtPlayer)
+        {
+            float force = pushPlayer == PushPlayer.PushLeft ? -pushForce : pushForce;
+            controller.AddXForce(force);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
