@@ -505,7 +505,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
 
         if (jumpPressed)
         {
-            if (Grounded() || !doubleJumpPressed)
+            if (Grounded() && !pState.dashing || !doubleJumpPressed && !pState.dashing)
             {
                 animator.SetTrigger("jumpSquat");
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
@@ -1080,7 +1080,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
             coyoteTimeCounter = Mathf.Max(0, coyoteTimeCounter - Time.deltaTime);
         }
 
-        // buffer for the jump button
+        // buffer for the jumpjump button
         if (player.GetButtonDown("Jump"))
         {
             jumpBufferCounter = jumpBuffer;
