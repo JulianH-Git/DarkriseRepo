@@ -1,6 +1,5 @@
 using Rewired;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -24,6 +23,7 @@ public class TitleControls : MonoBehaviour
     public GameObject pauseFirstButton, //button that's highlighted when you pause
     optionsFirstButton, //button that's highlighted when you first open the options menu
     optionsClosedButton;
+    [SerializeField] private ConfirmationPopupMenu popup;
     bool newGame;
     bool runOnce = false;
 
@@ -35,7 +35,7 @@ public class TitleControls : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
         EventSystem.current.SetSelectedGameObject(pauseFirstButton);
 
-        if(DataPersistenceManager.Instance.HasGameData() == false)
+        if (DataPersistenceManager.Instance.HasGameData() == false)
         {
             LoadGameButton.GetComponent<Button>().interactable = false;
             LoadGameButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.gray;
@@ -53,9 +53,9 @@ public class TitleControls : MonoBehaviour
 
         if (hasPressed)
         {
-            pauseFirstButton.SetActive(false);
-            LoadGameButton.SetActive(false);
-            optionsClosedButton.SetActive(false);
+            pauseFirstButton.GetComponent<Button>().interactable = false;
+            LoadGameButton.GetComponent<Button>().interactable = false;
+            optionsClosedButton.GetComponent<Button>().interactable = false;
             fade.color = new Color(fade.color.r, fade.color.g, fade.color.b, alpha);
             alpha += 0.05f;
         }
@@ -73,6 +73,7 @@ public class TitleControls : MonoBehaviour
         if (newGame)
         {
             DataPersistenceManager.Instance.NewGame();
+            DataPersistenceManager.Instance.SaveGame();
         }
         else
         {
@@ -85,13 +86,40 @@ public class TitleControls : MonoBehaviour
     public void OnNewGameClicked()
     {
         if (hasPressed) { return; }
-        hasPressed = true;
-        newGame = true;
+
+        if (DataPersistenceManager.Instance.HasGameData() == true)
+        {
+            pauseFirstButton.GetComponent<Button>().interactable = false;
+            LoadGameButton.GetComponent<Button>().interactable = false;
+            optionsClosedButton.GetComponent<Button>().interactable = false;
+            popup.ActivateMenu(
+                "Are you sure you want to make a new game? Any existing save data will be lost.",
+                () => // if the player chooses yes
+                {
+                    hasPressed = true;
+                    newGame = true;
+                },
+                () => // if the player chooses no
+                {
+                    pauseFirstButton.GetComponent<Button>().interactable = true;
+                    LoadGameButton.GetComponent<Button>().interactable = true;
+                    optionsClosedButton.GetComponent<Button>().interactable = true;
+                    hasPressed = false;
+                    EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
+                    EventSystem.current.SetSelectedGameObject(pauseFirstButton);
+                });
+        }
+        else
+        {
+            hasPressed = true;
+            newGame = true;
+        }
+
     }
 
     public void OnLoadGameClicked()
     {
-        if(hasPressed) { return; }
+        if (hasPressed) { return; }
         hasPressed = true;
         newGame = false;
     }

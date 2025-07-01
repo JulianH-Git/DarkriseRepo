@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using Unity.VisualScripting;
+using Rewired.UI.ControlMapper;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -22,6 +24,8 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseFirstButton, //button that's highlighted when you pause
         optionsFirstButton, //button that's highlighted when you first open the options menu
         optionsClosedButton;
+    [SerializeField] private ConfirmationPopupMenu popup;
+    [SerializeField] List<Button> buttonsToDeactivate = new List<Button>();
 
     private void Awake()
     {
@@ -116,23 +120,36 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadMenu(string menuName)
     {
-        Time.timeScale = 1.0f;
-        GamePaused = false;
+        foreach (Button b in buttonsToDeactivate) { b.interactable = false; }
+        popup.ActivateMenu(
+               "Are you sure you want to return to the main menu? Any unsaved progress will be lost.",
+               () => // if the player chooses yes
+               {
+                   Time.timeScale = 1.0f;
+                   GamePaused = false;
 
-        //enable the jump bind for controllers
-        player.controllers.maps.GetButtonMapsWithAction(ControllerType.Joystick, "Jump", false, controllerActionID);
-        controllerActionID.ForEach(m => m.enabled = true);
+                   //enable the jump bind for controllers
+                   player.controllers.maps.GetButtonMapsWithAction(ControllerType.Joystick, "Jump", false, controllerActionID);
+                   controllerActionID.ForEach(m => m.enabled = true);
 
-        //enable the jump bind for keyboards
-        player.controllers.maps.GetButtonMapsWithAction(ControllerType.Keyboard, "Jump", false, keyboardActionID);
-        keyboardActionID.ForEach(m => m.enabled = true);
+                   //enable the jump bind for keyboards
+                   player.controllers.maps.GetButtonMapsWithAction(ControllerType.Keyboard, "Jump", false, keyboardActionID);
+                   keyboardActionID.ForEach(m => m.enabled = true);
 
-        player.controllers.maps.SetMapsEnabled(true, "Gameplay");
-        player.controllers.maps.SetMapsEnabled(false, "UI");
+                   player.controllers.maps.SetMapsEnabled(true, "Gameplay");
+                   player.controllers.maps.SetMapsEnabled(false, "UI");
 
 
-        Debug.Log($"Loading {menuName}...");
-        SceneManager.LoadScene(menuName);
+                   Debug.Log($"Loading {menuName}...");
+                   SceneManager.LoadScene(menuName);
+               },
+               () => // if the player chooses no
+               {
+                   foreach (Button b in buttonsToDeactivate) { b.interactable = true; }
+                   EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
+                   EventSystem.current.SetSelectedGameObject(pauseFirstButton);
+               });
+        
     }
 
     public void SettingsMenu()
@@ -185,20 +202,46 @@ public class PauseMenu : MonoBehaviour
         Debug.Log("Settings off");
     }
 
-    public void RestartFromCheckpoint()
+    public void RestartFromCheckpoint(string currentLevel)
     {
-        pauseMenuUI.SetActive(false);
-        mapper.Close(true);
-        settingsMenuUI.SetActive(false);
-        Time.timeScale = 1.0f;
-        player.controllers.maps.SetMapsEnabled(true, "Gameplay");
-        player.controllers.maps.SetMapsEnabled(false, "UI");
-        GamePaused = false;
-        SceneManager.LoadScene("StartLevel");
+        foreach(Button b in buttonsToDeactivate) { b.interactable = false; }
+        popup.ActivateMenu(
+               "Are you sure you want to restart from the last checkpoint? Any unsaved progress will be lost.",
+               () => // if the player chooses yes
+               {
+                   pauseMenuUI.SetActive(false);
+                   mapper.Close(true);
+                   settingsMenuUI.SetActive(false);
+                   Time.timeScale = 1.0f;
+                   player.controllers.maps.SetMapsEnabled(true, "Gameplay");
+                   player.controllers.maps.SetMapsEnabled(false, "UI");
+                   GamePaused = false;
+                   SceneManager.LoadScene(currentLevel);
+               },
+               () => // if the player chooses no
+               {
+                   foreach (Button b in buttonsToDeactivate) { b.interactable = true; }
+                   EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
+                   EventSystem.current.SetSelectedGameObject(pauseFirstButton);
+               });
+
     }
 
     public void QuitGame()
     {
-        Application.Quit();
+        foreach (Button b in buttonsToDeactivate) { b.interactable = false; }
+        popup.ActivateMenu(
+               "Are you sure you want to quit? Any unsaved progress will be lost.",
+               () => // if the player chooses yes
+               {
+                   Application.Quit();
+               },
+               () => // if the player chooses no
+               {
+                   foreach (Button b in buttonsToDeactivate) { b.interactable = true; }
+                   EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
+                   EventSystem.current.SetSelectedGameObject(pauseFirstButton);
+               });
+        
     }
 }
