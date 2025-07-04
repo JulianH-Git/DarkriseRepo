@@ -1936,6 +1936,7 @@ GameObject:
   - component: {fileID: 100175389}
   - component: {fileID: 100175388}
   - component: {fileID: 100175387}
+  - component: {fileID: 100175390}
   m_Layer: 2
   m_Name: Room 6
   m_TagString: Untagged
@@ -2021,6 +2022,21 @@ Transform:
   m_Father: {fileID: 1823995122}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &100175390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100175386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3947f9aa3aca47347a6994d53f1f27cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawners:
+  - {fileID: 768299247}
+  - {fileID: 1800780339}
 --- !u!1 &100854122
 GameObject:
   m_ObjectHideFlags: 0
@@ -5306,8 +5322,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 15.5798, y: 17.77695, z: 0}
-    m_Extent: {x: 65.076096, y: 31.182549, z: 0}
+    m_Center: {x: 15.58275, y: 17.776701, z: 0}
+    m_Extent: {x: 65.08595, y: 31.1802, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -5693,6 +5709,7 @@ GameObject:
   - component: {fileID: 376717346}
   - component: {fileID: 376717347}
   - component: {fileID: 376717348}
+  - component: {fileID: 376717349}
   m_Layer: 2
   m_Name: Room 11
   m_TagString: Untagged
@@ -5778,6 +5795,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 781332468}
+--- !u!114 &376717349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376717345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3947f9aa3aca47347a6994d53f1f27cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawners: []
 --- !u!4 &396263844 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6818854264137443386, guid: db2a1c1114c8fdd4fa5b3deec047c0b1, type: 3}
@@ -6250,6 +6280,7 @@ GameObject:
   - component: {fileID: 432765033}
   - component: {fileID: 432765032}
   - component: {fileID: 432765031}
+  - component: {fileID: 432765034}
   m_Layer: 2
   m_Name: Room 5
   m_TagString: Untagged
@@ -6335,6 +6366,19 @@ Transform:
   m_Father: {fileID: 1823995122}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &432765034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 432765030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3947f9aa3aca47347a6994d53f1f27cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawners: []
 --- !u!1 &434796436
 GameObject:
   m_ObjectHideFlags: 0
@@ -54085,6 +54129,7 @@ GameObject:
   - component: {fileID: 647399214}
   - component: {fileID: 647399215}
   - component: {fileID: 647399216}
+  - component: {fileID: 647399217}
   m_Layer: 2
   m_Name: Room 14
   m_TagString: Untagged
@@ -54170,6 +54215,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 2128627541}
+--- !u!114 &647399217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 647399213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3947f9aa3aca47347a6994d53f1f27cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawners: []
 --- !u!1 &650103939
 GameObject:
   m_ObjectHideFlags: 0
@@ -54319,6 +54377,17 @@ Transform:
   m_Father: {fileID: 1159413203}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &650174005 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1553066297793239972, guid: db2a1c1114c8fdd4fa5b3deec047c0b1, type: 3}
+  m_PrefabInstance: {fileID: 1711331268}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bcc973b98a4a144f853ce44a23dcff7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &653185827
 GameObject:
   m_ObjectHideFlags: 0
@@ -55416,6 +55485,7 @@ GameObject:
   - component: {fileID: 716906465}
   - component: {fileID: 716906466}
   - component: {fileID: 716906467}
+  - component: {fileID: 716906468}
   m_Layer: 2
   m_Name: Room 9
   m_TagString: Untagged
@@ -55501,6 +55571,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 1188519115}
+--- !u!114 &716906468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716906464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3947f9aa3aca47347a6994d53f1f27cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawners:
+  - {fileID: 1668306307}
+  - {fileID: 2060234383}
 --- !u!1 &730071497
 GameObject:
   m_ObjectHideFlags: 0
@@ -55711,6 +55796,7 @@ GameObject:
   - component: {fileID: 748083544}
   - component: {fileID: 748083543}
   - component: {fileID: 748083545}
+  - component: {fileID: 748083546}
   m_Layer: 2
   m_Name: Room 1
   m_TagString: Untagged
@@ -55796,6 +55882,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 1492068501}
+--- !u!114 &748083546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 748083541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3947f9aa3aca47347a6994d53f1f27cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawners: []
 --- !u!1 &755568405
 GameObject:
   m_ObjectHideFlags: 0
@@ -55914,6 +56013,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6818854264137443386, guid: db2a1c1114c8fdd4fa5b3deec047c0b1, type: 3}
   m_PrefabInstance: {fileID: 89601861}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &768299247 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1553066297793239972, guid: db2a1c1114c8fdd4fa5b3deec047c0b1, type: 3}
+  m_PrefabInstance: {fileID: 89601861}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89601862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bcc973b98a4a144f853ce44a23dcff7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &780756852
 GameObject:
   m_ObjectHideFlags: 0
@@ -56535,6 +56645,7 @@ GameObject:
   - component: {fileID: 805294339}
   - component: {fileID: 805294340}
   - component: {fileID: 805294341}
+  - component: {fileID: 805294342}
   m_Layer: 2
   m_Name: Room 12
   m_TagString: Untagged
@@ -56620,6 +56731,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 1161800755}
+--- !u!114 &805294342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805294338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3947f9aa3aca47347a6994d53f1f27cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawners:
+  - {fileID: 1612494449}
+  - {fileID: 650174005}
+  - {fileID: 961177235}
 --- !u!1 &817086024
 GameObject:
   m_ObjectHideFlags: 0
@@ -57687,8 +57814,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 2.7036514, y: -10.59775, z: 0}
-    m_Extent: {x: 67.49785, y: 15.50515, z: 0}
+    m_Center: {x: 2.7008514, y: -10.601101, z: 0}
+    m_Extent: {x: 67.50685, y: 15.5077, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -58091,6 +58218,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &961177235 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1553066297793239972, guid: db2a1c1114c8fdd4fa5b3deec047c0b1, type: 3}
+  m_PrefabInstance: {fileID: 1693644738}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bcc973b98a4a144f853ce44a23dcff7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &985475324
 GameObject:
   m_ObjectHideFlags: 0
@@ -61763,6 +61901,7 @@ GameObject:
   - component: {fileID: 1281041962}
   - component: {fileID: 1281041963}
   - component: {fileID: 1281041964}
+  - component: {fileID: 1281041965}
   m_Layer: 2
   m_Name: Room 10
   m_TagString: Untagged
@@ -61848,6 +61987,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 73206698}
+--- !u!114 &1281041965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281041961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3947f9aa3aca47347a6994d53f1f27cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawners:
+  - {fileID: 1798492708}
 --- !u!1001 &1282467932
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64057,6 +64210,7 @@ GameObject:
   - component: {fileID: 1461162022}
   - component: {fileID: 1461162021}
   - component: {fileID: 1461162020}
+  - component: {fileID: 1461162023}
   m_Layer: 2
   m_Name: Room 2
   m_TagString: Untagged
@@ -64142,6 +64296,21 @@ Transform:
   m_Father: {fileID: 1823995122}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1461162023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1461162019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3947f9aa3aca47347a6994d53f1f27cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawners:
+  - {fileID: 2001473579}
+  - {fileID: 1651960594}
 --- !u!1 &1492068501
 GameObject:
   m_ObjectHideFlags: 0
@@ -65035,6 +65204,7 @@ GameObject:
   - component: {fileID: 1600952683}
   - component: {fileID: 1600952682}
   - component: {fileID: 1600952681}
+  - component: {fileID: 1600952684}
   m_Layer: 2
   m_Name: Room 7
   m_TagString: Untagged
@@ -65120,6 +65290,30 @@ Transform:
   m_Father: {fileID: 1823995122}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1600952684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600952680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3947f9aa3aca47347a6994d53f1f27cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawners: []
+--- !u!114 &1612494449 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1553066297793239972, guid: db2a1c1114c8fdd4fa5b3deec047c0b1, type: 3}
+  m_PrefabInstance: {fileID: 1282467932}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bcc973b98a4a144f853ce44a23dcff7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1622284596
 GameObject:
   m_ObjectHideFlags: 0
@@ -65577,6 +65771,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6818854264137443386, guid: db2a1c1114c8fdd4fa5b3deec047c0b1, type: 3}
   m_PrefabInstance: {fileID: 940123760}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1651960594 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1553066297793239972, guid: db2a1c1114c8fdd4fa5b3deec047c0b1, type: 3}
+  m_PrefabInstance: {fileID: 940123760}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bcc973b98a4a144f853ce44a23dcff7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1652745186
 GameObject:
   m_ObjectHideFlags: 0
@@ -65799,6 +66004,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6818854264137443386, guid: db2a1c1114c8fdd4fa5b3deec047c0b1, type: 3}
   m_PrefabInstance: {fileID: 1580543076}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1668306307 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1553066297793239972, guid: db2a1c1114c8fdd4fa5b3deec047c0b1, type: 3}
+  m_PrefabInstance: {fileID: 1580543076}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bcc973b98a4a144f853ce44a23dcff7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1668698214
 GameObject:
   m_ObjectHideFlags: 0
@@ -65850,8 +66066,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.7006998, y: 3.521, z: 0}
-    m_Extent: {x: 26.963001, y: 8.5921, z: 0}
+    m_Center: {x: 0.70549965, y: 3.5148501, z: 0}
+    m_Extent: {x: 26.9589, y: 8.60405, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -66151,6 +66367,7 @@ GameObject:
   - component: {fileID: 1698763016}
   - component: {fileID: 1698763017}
   - component: {fileID: 1698763018}
+  - component: {fileID: 1698763019}
   m_Layer: 2
   m_Name: Room 13
   m_TagString: Untagged
@@ -66236,6 +66453,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 1251219401}
+--- !u!114 &1698763019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1698763015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3947f9aa3aca47347a6994d53f1f27cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawners: []
 --- !u!1 &1708396765
 GameObject:
   m_ObjectHideFlags: 0
@@ -67275,6 +67505,17 @@ Transform:
   m_Father: {fileID: 1159413203}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1798492708 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1553066297793239972, guid: db2a1c1114c8fdd4fa5b3deec047c0b1, type: 3}
+  m_PrefabInstance: {fileID: 332998725}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bcc973b98a4a144f853ce44a23dcff7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1800780337
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -67357,6 +67598,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6707659142965435415, guid: db2a1c1114c8fdd4fa5b3deec047c0b1, type: 3}
   m_PrefabInstance: {fileID: 1800780337}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1800780339 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1553066297793239972, guid: db2a1c1114c8fdd4fa5b3deec047c0b1, type: 3}
+  m_PrefabInstance: {fileID: 1800780337}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800780338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bcc973b98a4a144f853ce44a23dcff7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1823047850
 GameObject:
   m_ObjectHideFlags: 0
@@ -68385,6 +68637,7 @@ GameObject:
   - component: {fileID: 1934180125}
   - component: {fileID: 1934180124}
   - component: {fileID: 1934180123}
+  - component: {fileID: 1934180126}
   m_Layer: 2
   m_Name: Room 3
   m_TagString: Untagged
@@ -68470,6 +68723,19 @@ Transform:
   m_Father: {fileID: 1823995122}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1934180126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934180122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3947f9aa3aca47347a6994d53f1f27cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawners: []
 --- !u!1 &1955930332
 GameObject:
   m_ObjectHideFlags: 0
@@ -68968,6 +69234,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6818854264137443386, guid: db2a1c1114c8fdd4fa5b3deec047c0b1, type: 3}
   m_PrefabInstance: {fileID: 9076918384125723323}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2001473579 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1553066297793239972, guid: db2a1c1114c8fdd4fa5b3deec047c0b1, type: 3}
+  m_PrefabInstance: {fileID: 9076918384125723323}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bcc973b98a4a144f853ce44a23dcff7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2010182043
 GameObject:
   m_ObjectHideFlags: 0
@@ -69581,6 +69858,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6818854264137443386, guid: db2a1c1114c8fdd4fa5b3deec047c0b1, type: 3}
   m_PrefabInstance: {fileID: 1206114562}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2060234383 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1553066297793239972, guid: db2a1c1114c8fdd4fa5b3deec047c0b1, type: 3}
+  m_PrefabInstance: {fileID: 1206114562}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bcc973b98a4a144f853ce44a23dcff7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2064172554
 GameObject:
   m_ObjectHideFlags: 0
@@ -69592,6 +69880,7 @@ GameObject:
   - component: {fileID: 2064172557}
   - component: {fileID: 2064172556}
   - component: {fileID: 2064172555}
+  - component: {fileID: 2064172558}
   m_Layer: 2
   m_Name: Room 8
   m_TagString: Untagged
@@ -69677,6 +69966,19 @@ Transform:
   m_Father: {fileID: 1823995122}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2064172558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2064172554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3947f9aa3aca47347a6994d53f1f27cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawners: []
 --- !u!1 &2079294068
 GameObject:
   m_ObjectHideFlags: 0

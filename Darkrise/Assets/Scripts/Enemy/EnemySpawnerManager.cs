@@ -114,4 +114,14 @@ void Update()
         spawnedEnemyRefMethods.Die();
         this.gameObject.SetActive(false);
     }
+
+    public void RespawnEnemy()
+    {
+        if (spawnedEnemyRefMethods != null)
+        {
+            spawnedEnemyRefMethods.Respawn();
+            enemySpawned = true;
+        }
+    }
+
 }
