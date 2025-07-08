@@ -43,6 +43,10 @@ public class GameData
     public SerializableDictionary<string, bool> switchTriggerStatus;
 
 
+    // Cutscene Triggers
+
+    public SerializableDictionary<string, bool> cutsceneTriggerStatus;
+
     public GameData()
     {
         this.position = new Vector3(-4.48f, 4.2f, 0); // start of level 1
@@ -56,6 +60,7 @@ public class GameData
         fbStatus = new SerializableDictionary<string, bool>();
         laserRecieverStatus = new SerializableDictionary<string, bool>();
         switchTriggerStatus = new SerializableDictionary<string, bool>();
+        cutsceneTriggerStatus = new SerializableDictionary<string, bool>();
     }
 
 }

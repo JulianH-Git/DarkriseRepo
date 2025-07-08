@@ -7,7 +7,7 @@ using UnityEngine.Playables;
 public class DashUpgrade : MonoBehaviour, IDataPersistence
 {
     [SerializeField] private PlayerController controller;
-    [SerializeField] private ForcedEncounterManager FEM;
+    //[SerializeField] private ForcedEncounterManager FEM;
     [SerializeField] List<GameObject> onboarding = new List<GameObject>();
     [SerializeField] private string id;
     bool activated = false;
@@ -47,7 +47,7 @@ public class DashUpgrade : MonoBehaviour, IDataPersistence
     public void ActivateDash()
     {
         controller.canDash = true;
-        FEM.ActivateForcedEncounterTutorial();
+        //FEM.ActivateForcedEncounterTutorial();
 
         foreach (GameObject instruct in onboarding)
         {

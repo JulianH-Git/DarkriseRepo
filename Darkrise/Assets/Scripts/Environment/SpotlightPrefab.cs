@@ -27,6 +27,7 @@ public class SpotlightPrefab : MonoBehaviour
     [SerializeField] List<Gradient> spotlightParticleColors;
     [SerializeField] Light2D lampLight;
     [SerializeField] Light2D spotlightLight;
+    [SerializeField] bool isLaser;
 
 
     PlayerController controller;
@@ -59,6 +60,8 @@ public class SpotlightPrefab : MonoBehaviour
     [SerializeField] private float cooldown = 2f; // 2 seconds
     private float cooldownTimer = 0f;
     private float duration = 0.1f;
+    private float enemyAlertCooldown = 2f;
+    private float enemyAlertCooldownTimer;
 
 
     // temporary stuff until laser gets implemented
@@ -105,13 +108,14 @@ public class SpotlightPrefab : MonoBehaviour
                         }
                         break;
                     case SpotlightStates.Yellow:
-                        if (!controller.pState.invincible)
+                        if (!controller.pState.invincible && enemyAlertCooldownTimer >= enemyAlertCooldown)
                         {
                             List<Collider2D> enemiesInRange = CheckForEnemies(enemyAlertTransform, enemyAlertRadius);
                             if (enemiesInRange != null && enemiesInRange.Count > 0)
                             {
                                 SignalEnemies(enemiesInRange);
                             }
+                            enemyAlertCooldownTimer = 0f;
                         }
                         break;
                     case SpotlightStates.Laser:
@@ -134,12 +138,6 @@ public class SpotlightPrefab : MonoBehaviour
 
                             startEncounter = true;
 
-                            List<Collider2D> enemiesinRange = CheckForEnemies(enemyAlertTransform, enemyAlertRadius);
-                            if(enemiesinRange != null && enemiesinRange.Count > 0)
-                            {
-                                SignalEnemies(enemiesinRange);
-                            }
-
                             List<Collider2D> wallsInRange = CheckForWalls(enemyAlertTransform, enemyAlertRadius);
                             if(wallsInRange != null && wallsInRange.Count > 0)
                             {
@@ -148,6 +146,16 @@ public class SpotlightPrefab : MonoBehaviour
                                     wall.GetComponent<ForcedEncounterRoomLock>().ActivateLock();
                                 }
                             }
+                            if (enemyAlertCooldownTimer >= enemyAlertCooldown)
+                            {
+                                List<Collider2D> enemiesinRange = CheckForEnemies(enemyAlertTransform, enemyAlertRadius);
+                                if (enemiesinRange != null && enemiesinRange.Count > 0)
+                                {
+                                    SignalEnemies(enemiesinRange);
+                                }
+                                enemyAlertCooldownTimer = 0f;
+                            }
+
                         }
                         break;
                 }
@@ -161,7 +169,9 @@ public class SpotlightPrefab : MonoBehaviour
         switch (state) 
         {
             case SpotlightStates.Off:
-                lamp.GetComponent<SpriteRenderer>().sprite = lampSprites[0];
+                if(isLaser) { lamp.GetComponent<SpriteRenderer>().sprite = lampSprites[3]; }
+                else { lamp.GetComponent<SpriteRenderer>().sprite = lampSprites[0]; }
+                
                 this.GetComponent<BoxCollider2D>().enabled = false;
                 sr.enabled = false;
                 if(spotlightParticles != null) { emission.enabled = false; }
@@ -221,6 +231,8 @@ public class SpotlightPrefab : MonoBehaviour
                 colorOverLifetime.color = spotlightParticleColors[2];
                 break;
         }
+
+        enemyAlertCooldownTimer += Time.deltaTime;
 
         if (cooldownTimer > 0)
         {

@@ -167,6 +167,7 @@ public class ForcedEncounterManager : MonoBehaviour, IDataPersistence
         foreach(GameObject psm in permanentEnemySpawns)
         {
             psm.SetActive(true);
+            psm.GetComponent<EnemySpawnerManager>().ChangeBehavior(FootSolider.SoldierBehavior.Patrol);
         }
     }
 

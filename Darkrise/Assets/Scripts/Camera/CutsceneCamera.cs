@@ -32,6 +32,10 @@ public class CutsceneCamera : MonoBehaviour
 
     private IEnumerator CutsceneSequence(GameObject targetCamera, float duration)
     {
+        // Disable player controller
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        player.CanMove = false;
+
         // Fade out
         yield return StartCoroutine(Fade(0f, 1f));
 
@@ -49,10 +53,6 @@ public class CutsceneCamera : MonoBehaviour
             }
             cam.SetActive(false);
         }
-
-        // Disable player controller
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        player.CanMove = false;
 
         // Activate the target cutscene camera
         targetCamera.SetActive(true);

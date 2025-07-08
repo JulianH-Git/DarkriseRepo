@@ -124,4 +124,12 @@ void Update()
         }
     }
 
+    public void ChangeBehavior(FootSolider.SoldierBehavior b)
+    {
+        if (spawnedEnemyRef.GetComponent<FootSolider>() != null)
+        {
+            spawnedEnemyRef.GetComponent<FootSolider>().behavior = b;
+        }
+    }
+
 }

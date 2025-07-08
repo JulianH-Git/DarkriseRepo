@@ -151,8 +151,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.00485003, y: -0.005499989, z: 0}
-    m_Extent: {x: 1.00475, y: 0.7975, z: 0}
+    m_Center: {x: 0.0033000112, y: -0.0036999881, z: 0}
+    m_Extent: {x: 1.0034001, y: 0.7973, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -326,6 +326,7 @@ MonoBehaviour:
   spotlightParticleColors: []
   lampLight: {fileID: 0}
   spotlightLight: {fileID: 4691249888532444242}
+  isLaser: 1
   gates: []
   spottedSizes:
   - {x: 0, y: 1}

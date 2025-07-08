@@ -69,6 +69,7 @@ public class StandardBreakerSwitch : InteractTrigger, IDataPersistence
             {
                 deactivated = true;
                 animator.SetBool("turnedOff", true);
+                ActivateCutscene();
 
                 foreach (GameObject sprite in affectedSprites)
                 {
@@ -141,5 +142,11 @@ public class StandardBreakerSwitch : InteractTrigger, IDataPersistence
             gate.transform.localScale = spotSize; // Ensure exact final size
             gate.SetActive(false);
         }
+    }
+
+    void ActivateCutscene(bool playCutscene = true)
+    {
+        if (playCutscene) { GetComponent<CutsceneTrigger>()?.StartCutscene(); }
+        if (GetComponent<ActivateCutsceneObjects>() != null) { GetComponent<ActivateCutsceneObjects>().StartActivate(); }
     }
 }

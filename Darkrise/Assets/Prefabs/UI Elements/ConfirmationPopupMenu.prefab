@@ -460,6 +460,7 @@ MonoBehaviour:
   confirmButton: {fileID: 5214929593088442728}
   cancelButton: {fileID: 9057024723973402224}
   menuBG: {fileID: 0}
+  cancelFirstSelected: {fileID: 1701136018858012535}
 --- !u!1 &5475399219013410314
 GameObject:
   m_ObjectHideFlags: 0

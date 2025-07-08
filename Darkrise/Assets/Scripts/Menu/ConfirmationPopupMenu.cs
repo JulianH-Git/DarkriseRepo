@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class ConfirmationPopupMenu : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class ConfirmationPopupMenu : MonoBehaviour
     [SerializeField] private Button confirmButton;
     [SerializeField] private Button cancelButton;
     [SerializeField] private GameObject menuBG;
+    [SerializeField] private GameObject cancelFirstSelected;
 
     public void ActivateMenu(string questionText, UnityAction confirmAction, UnityAction cancelAction)
     {
@@ -33,7 +35,8 @@ public class ConfirmationPopupMenu : MonoBehaviour
             DeactivateMenu();
             cancelAction();
         });
-
+        EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
+        EventSystem.current.SetSelectedGameObject(cancelFirstSelected);
     }
 
     public void DeactivateMenu()

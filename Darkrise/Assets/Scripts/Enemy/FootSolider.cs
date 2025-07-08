@@ -1,13 +1,14 @@
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class FootSolider : enemyBase
 {
-    public enum Behavior
+    public enum SoldierBehavior
     {
         Patrol,
         Guard
     }
-    [SerializeField] public Behavior behavior;
+    [SerializeField] public SoldierBehavior behavior;
     [Header("Foot Soldier Attack Settings")]
     [SerializeField] private Transform footSoldierAttackTransform;
     [SerializeField] private Vector2 footSoldierAttackArea;
@@ -16,7 +17,6 @@ public class FootSolider : enemyBase
     [SerializeField] public LayerMask layer;
     [SerializeField] float timeBetweenAttacks;
     [SerializeField] float aggressionTimer;
-
     float timeSinceAttack;
     public bool aggressive;
     float currentAggroTimer;
@@ -41,6 +41,7 @@ public class FootSolider : enemyBase
     {
         base.Update();
         timeSinceAttack += Time.deltaTime;
+
     }
 
     protected void FixedUpdate()
@@ -50,7 +51,7 @@ public class FootSolider : enemyBase
 
         switch (behavior)
         {
-            case Behavior.Patrol:
+            case SoldierBehavior.Patrol:
                 if (aggressive)
                 {
                     Chase(playerInRange);
@@ -79,7 +80,7 @@ public class FootSolider : enemyBase
                     Patrol(playerInRange);
                 }
             break;
-            case Behavior.Guard:
+            case SoldierBehavior.Guard:
                 if (aggressive)
                 {
                     Chase(playerInRange);
@@ -101,7 +102,6 @@ public class FootSolider : enemyBase
                     Guard(playerInRange);
                 }
                 break;
-
         }
 
     }
@@ -113,9 +113,7 @@ public class FootSolider : enemyBase
 
         if (playerInRange != null && playerInRange.CompareTag("Player"))
         {
-            aggressive = true;
-            currentAggroTimer = aggressionTimer;
-            anim.SetBool("aggresive", true);
+            SetAggressive(true);
         }
     }
 
@@ -126,16 +124,14 @@ public class FootSolider : enemyBase
 
         if (playerInRange != null && playerInRange.CompareTag("Player"))
         {
-            anim.SetBool("idle", false);
-            aggressive = true;
-            currentAggroTimer = aggressionTimer;
-            anim.SetBool("aggresive", true);
+            SetAggressive(true);
         }
     }
 
     protected virtual void Chase(Collider2D playerInRange)
     {
         currentAggroTimer -= Time.deltaTime;
+        retreating = false;
         if (playerInRange != null)
         {
             currentAggroTimer = aggressionTimer;
@@ -159,10 +155,8 @@ public class FootSolider : enemyBase
         {
             if (!retreating)
             {
-                aggressive = false;
-                currentAggroTimer = aggressionTimer;
-                anim.SetBool("aggresive", false);
-                retreating = true;
+                SetAggressive(false);
+                chaseOnce = false;
             }
         }
     }
@@ -196,9 +190,7 @@ public class FootSolider : enemyBase
 
         if (_playerInRange != null && _playerInRange.CompareTag("Player"))
         {
-            aggressive = true;
-            currentAggroTimer = aggressionTimer;
-            anim.SetBool("aggresive", true);
+            SetAggressive(true);
             
         }
 
@@ -229,7 +221,6 @@ public class FootSolider : enemyBase
                     {
                         return playerInRange[i];
                     }
-                    
                 }
             }
         }
@@ -238,6 +229,11 @@ public class FootSolider : enemyBase
 
     public void GuardRetreat(Collider2D playerInRange)
     {
+        if (aggressive)
+        {
+            retreating = false;
+            return;
+        }
         anim.SetBool("idle", false);
         direction = (anchorPos - (Vector2)transform.position).normalized;
 
@@ -260,10 +256,7 @@ public class FootSolider : enemyBase
 
         if (playerInRange != null && playerInRange.CompareTag("Player"))
         {
-            anim.SetBool("idle", false);
-            aggressive = true;
-            currentAggroTimer = aggressionTimer;
-            anim.SetBool("aggresive", true);
+            SetAggressive(true);
         }
     }
 
@@ -273,22 +266,34 @@ public class FootSolider : enemyBase
 
         if (_playerInRange != null && _playerInRange.CompareTag("Player"))
         {
-            anim.SetBool("idle", false);
-            aggressive = true;
-            currentAggroTimer = aggressionTimer;
-            anim.SetBool("aggresive", true);
+            SetAggressive(true);
         }
     }
 
     protected void Retreat(Collider2D _playerInRange)
     {
+        if (aggressive)
+        {
+            retreating = false;
+            return;
+        }
+        anim.SetBool("idle", false);
         base.Retreat();
         if (_playerInRange != null && _playerInRange.CompareTag("Player"))
         {
-            anim.SetBool("idle", false);
-            aggressive = true;
+            SetAggressive(true);
+        }
+    }
+
+    void SetAggressive(bool value)
+    {
+        aggressive = value;
+        anim.SetBool("aggresive", value);
+        anim.SetBool("idle", !value);
+        if (value)
+        {
             currentAggroTimer = aggressionTimer;
-            anim.SetBool("aggresive", true);
+            retreating = false;
         }
     }
 }
