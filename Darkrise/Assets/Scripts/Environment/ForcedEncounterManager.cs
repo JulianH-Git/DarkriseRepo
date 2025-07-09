@@ -6,13 +6,17 @@ using UnityEngine;
 public class ForcedEncounterManager : MonoBehaviour, IDataPersistence
 {
     [SerializeField] ForcedEncounterBreakerSwitch breaker;
+    [SerializeField] bool turnSpotlightsToLasers;
     [SerializeField] List<GameObject> feSpotlights = new List<GameObject>();
     [SerializeField] List<GameObject> lasers = new List<GameObject>();
     [SerializeField] List<GameObject> forcedEncounterWalls = new List<GameObject>();
     [SerializeField] List<GameObject> extraEnemySpawns = new List<GameObject>();
     [SerializeField] List<GameObject> permanentEnemySpawns = new List<GameObject>();
     [SerializeField] ForcedEncounterManager chainNextEncounter;
-    [SerializeField] private enemyBase enemy;
+    [SerializeField] GameObject laserPrefab;
+    [SerializeField] GameObject extraLasersParent;
+    List<GameObject> extraLasers = new List<GameObject>();
+    bool runOnce = false;
     [Header("Audio Settings")]
     [SerializeField] private bool deactivateOnce = false;
 
@@ -42,13 +46,6 @@ public class ForcedEncounterManager : MonoBehaviour, IDataPersistence
         }
     }
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -62,8 +59,9 @@ public class ForcedEncounterManager : MonoBehaviour, IDataPersistence
         }
         foreach(GameObject obj in feSpotlights)
         {
-            if (obj.GetComponent<SpotlightPrefab>() != null && obj.GetComponent<SpotlightPrefab>().startEncounter == true)
+            if (obj.GetComponentInChildren<SpotlightPrefab>() != null && obj.GetComponentInChildren<SpotlightPrefab>().startEncounter == true && !runOnce)
             {
+                runOnce = true;
                 ActivateForcedEncounter();
                 break;
             }
@@ -74,7 +72,8 @@ public class ForcedEncounterManager : MonoBehaviour, IDataPersistence
     {
         breaker.gameObject.SetActive(true);
         ActivateWalls();
-        ActivateSpotlights();
+        if (turnSpotlightsToLasers) { SpotlightsToLasers(); }
+        else { ActivateSpotlights(); }
         ActivateLasers();
         ActivateSpawners();
     }
@@ -111,9 +110,7 @@ public class ForcedEncounterManager : MonoBehaviour, IDataPersistence
             AudioManager.instance.SetMusicArea(MusicArea.DarkArea);
             deactivateOnce = true;
         }
-            
-        
-
+          
         foreach (GameObject obj in forcedEncounterWalls)
         {
             if (obj.activeSelf == true && obj.GetComponent<ForcedEncounterRoomLock>() != null)
@@ -134,8 +131,8 @@ public class ForcedEncounterManager : MonoBehaviour, IDataPersistence
         {
             if(spot.activeSelf == true)
             {
-                spot.GetComponent<SpotlightPrefab>().startEncounter = false;
-                spot.GetComponent<SpotlightPrefab>().state = SpotlightStates.Off;
+                spot.GetComponentInChildren<SpotlightPrefab>().startEncounter = false;
+                spot.GetComponentInChildren<SpotlightPrefab>().state = SpotlightStates.Off;
             }
         }
 
@@ -143,10 +140,23 @@ public class ForcedEncounterManager : MonoBehaviour, IDataPersistence
         {
             if (laser.activeSelf == true)
             {
-                laser.GetComponent<SpotlightPrefab>().startEncounter = false;
-                laser.GetComponent<SpotlightPrefab>().state = SpotlightStates.Off;
+                laser.GetComponentInChildren<SpotlightPrefab>().startEncounter = false;
+                laser.GetComponentInChildren<SpotlightPrefab>().state = SpotlightStates.Off;
             }
         }
+
+        if(extraLasers.Count > 0)
+        {
+            foreach (GameObject laser in extraLasers)
+            {
+                if (laser.activeSelf == true)
+                {
+                    laser.GetComponentInChildren<SpotlightPrefab>().startEncounter = false;
+                    laser.GetComponentInChildren<SpotlightPrefab>().state = SpotlightStates.Off;
+                }
+            }
+        }
+
     }
 
     void ActivateWalls()
@@ -175,7 +185,20 @@ public class ForcedEncounterManager : MonoBehaviour, IDataPersistence
     {
         foreach(GameObject spot in feSpotlights)
         {
-            spot.GetComponent<SpotlightPrefab>().state = SpotlightStates.ForcedEncounter;
+            spot.GetComponentInChildren<SpotlightPrefab>().state = SpotlightStates.ForcedEncounter;
+        }
+    }
+
+    void SpotlightsToLasers()
+    {
+        int loopCount = feSpotlights.Count;
+        for(int i = 0; i < loopCount; i++)
+        {
+            feSpotlights[i].SetActive(false);
+            GameObject newLaser = Instantiate(laserPrefab, new Vector3(feSpotlights[i].transform.position.x, feSpotlights[i].transform.position.y - 0.15f),Quaternion.identity,extraLasersParent.transform);
+            extraLasers.Add(newLaser);
+            newLaser.SetActive(true);
+            newLaser.transform.localScale = new Vector3(0.21f, 0.24f);
         }
     }
 
@@ -183,7 +206,7 @@ public class ForcedEncounterManager : MonoBehaviour, IDataPersistence
     {
         foreach(GameObject laser in lasers)
         {
-            laser.GetComponent<SpotlightPrefab>().state = SpotlightStates.Laser;
+            laser.GetComponentInChildren<SpotlightPrefab>().state = SpotlightStates.Laser;
         }
     }
 }

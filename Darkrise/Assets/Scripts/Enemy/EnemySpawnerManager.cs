@@ -94,6 +94,7 @@ void Update()
         Gizmos.color = gizmoColor;
         Gizmos.DrawWireCube(roomTransform.position, roomArea);
         Gizmos.DrawSphere(new Vector3(roomTransform.position.x + enemySpawnOffset.x, roomTransform.position.y + enemySpawnOffset.y, 0.0f), 0.1f);
+        Gizmos.DrawLine(new Vector3(roomTransform.position.x + patrolRadius, roomTransform.position.y), new Vector3(roomTransform.position.x - patrolRadius, roomTransform.position.y));
     }
 
     void OnTriggerExit2D(Collider2D other)

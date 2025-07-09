@@ -213,6 +213,7 @@ public class SpotlightPrefab : MonoBehaviour
             case SpotlightStates.Laser:
                 lamp.GetComponent<SpriteRenderer>().sprite = lampSprites[3];
                 this.GetComponent<BoxCollider2D>().enabled = true;
+                if (spotlightLight != null) { spotlightLight.enabled = true; }
                 sr.enabled = true;
                 break;
             case SpotlightStates.ForcedEncounter:
@@ -303,8 +304,11 @@ public class SpotlightPrefab : MonoBehaviour
 
     void OnDrawGizmos() // comment this out when we're done placing things to keep everything visible
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(enemyAlertTransform.position, enemyAlertRadius);
+        if(state == SpotlightStates.Yellow || state == SpotlightStates.ForcedEncounter)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireCube(enemyAlertTransform.position, enemyAlertRadius);
+        }
     }
 
     List<Collider2D> CheckForEnemies(Transform _roomTransform, Vector2 _roomArea)
