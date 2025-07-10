@@ -1,16 +1,33 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class DetectorLaser : MonoBehaviour
 {
-    PlayerController controller;
-    [SerializeField] float downedCooldown;
+    public DetectorLaserState state;
+    [SerializeField] float pushForce = 100f;
+    [SerializeField] Light2D lampLight;
+    [SerializeField] Light2D detectorLight;
+    ParticleSystem spotlightParticles;
+    ParticleSystem.EmissionModule emission;
     SpriteRenderer sr;
-    float downedCooldownTimer;
-    float pushForce = 100f;
+    PlayerController controller;
     bool hurtPlayer = true;
-    public PushPlayer pushPlayer = PushPlayer.NoPush;
-    public PushPlayer initialEntry = PushPlayer.NoPush;
+    PushPlayer pushPlayer = PushPlayer.NoPush;
+    PushPlayer initialEntry = PushPlayer.NoPush;
 
+    [Header("Detect Settings")]
+    [SerializeField] float downedCooldown;
+    float downedCooldownTimer;
+
+    [Header("Explicit Settings")]
+    [SerializeField] public bool turnedOn;
+
+
+    public enum DetectorLaserState
+    {
+        Detect,
+        Explicit
+    }
     public enum PushPlayer
     {
         PushLeft,
@@ -23,6 +40,9 @@ public class DetectorLaser : MonoBehaviour
     {
         controller = PlayerController.Instance;
         sr = GetComponent<SpriteRenderer>();
+
+        spotlightParticles = GetComponentInChildren<ParticleSystem>();
+        emission = spotlightParticles.emission;
     }
 
     // Update is called once per frame
@@ -30,18 +50,25 @@ public class DetectorLaser : MonoBehaviour
     {
         downedCooldownTimer += Time.deltaTime;
         Debug.Log(downedCooldownTimer);
-        if(downedCooldownTimer >= downedCooldown)
+
+        if(state == DetectorLaserState.Detect || state == DetectorLaserState.Explicit && turnedOn)
         {
-            sr.color = new Color(0.512991f, 0f, 1f, 1f);
-            hurtPlayer = true;
-            pushPlayer = initialEntry;
+            if (downedCooldownTimer >= downedCooldown)
+            {
+                TurnOn();
+            }
+
+            if (pushPlayer != PushPlayer.NoPush && hurtPlayer)
+            {
+                float force = pushPlayer == PushPlayer.PushLeft ? -pushForce : pushForce;
+                controller.AddXForce(force);
+            }
+        }
+        else
+        {
+            TurnOff();
         }
 
-        if (pushPlayer != PushPlayer.NoPush && hurtPlayer)
-        {
-            float force = pushPlayer == PushPlayer.PushLeft ? -pushForce : pushForce;
-            controller.AddXForce(force);
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -70,12 +97,9 @@ public class DetectorLaser : MonoBehaviour
                 if (!controller.pState.invincible) { controller.TakeDamage(1); }
             }
         }
-        if (collision.CompareTag("Enemy") && !collision.isTrigger)
+        if (state == DetectorLaserState.Detect && collision.CompareTag("Enemy") && !collision.isTrigger)
         {
-            sr.color = new Color(0.512991f, 0f, 1f, 0.1f);
-            downedCooldownTimer = 0f;
-            hurtPlayer = false;
-            pushPlayer = PushPlayer.NoPush;
+            TurnOff();
         }
     }
 
@@ -88,5 +112,26 @@ public class DetectorLaser : MonoBehaviour
             hurtPlayer = true;
         }
 
+    }
+
+    void TurnOff()
+    {
+        sr.color = new Color(0.512991f, 0f, 1f, 0.1f);
+        downedCooldownTimer = 0f;
+        hurtPlayer = false;
+        pushPlayer = PushPlayer.NoPush;
+        detectorLight.enabled = false;
+        lampLight.enabled = false;
+        emission.enabled = false;
+    }
+
+    void TurnOn()
+    {
+        sr.color = new Color(0.512991f, 0f, 1f, 1f);
+        hurtPlayer = true;
+        pushPlayer = initialEntry;
+        detectorLight.enabled = true;
+        lampLight.enabled = true;
+        emission.enabled = true;
     }
 }

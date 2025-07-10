@@ -8,11 +8,14 @@ public class ActivateCutsceneObjects : MonoBehaviour
     [SerializeField] int cutsceneNumber;
 
     [Header("Cutscene 2 Settings")]
-    [SerializeField] SpotlightPrefab[] spotlightPrefabs;
+    [SerializeField] DetectorLaser dl;
     [SerializeField] BoxCollider2D door;
 
     [Header("Cutscene 3 Settings")]
     [SerializeField] GameObject onboarding;
+
+    [Header("Cutscene 4 Settings")]
+    [SerializeField] SpotlightPrefab redSpotlight;
 
     public void StartActivate()
     {
@@ -26,16 +29,15 @@ public class ActivateCutsceneObjects : MonoBehaviour
         switch (cutsceneNumber)
         {
             case 2:
-                spotlightPrefabs[0].state = SpotlightStates.Red;
-                spotlightPrefabs[1].state = SpotlightStates.Laser;
+                dl.turnedOn = true;
                 door.enabled = true;
                 break;
             case 3:
                 onboarding.SetActive(true);
                 break;
             case 4:
-                spotlightPrefabs[0].state = SpotlightStates.Off;
-                spotlightPrefabs[1].state = SpotlightStates.Off;
+                dl.turnedOn = false;
+                redSpotlight.state = SpotlightStates.Off;
                 break;
         }
     }
