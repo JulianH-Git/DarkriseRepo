@@ -10,7 +10,7 @@ public class MirrorPlate : MonoBehaviour
     [SerializeField] GameObject reflectionSurface;
     PlayerController player;
     SpriteRenderer sr;
-    float rotation = 0f;
+    [SerializeField] float rotation = 0f;
     public float Rotation
     {
         get { return rotation; }
@@ -28,6 +28,7 @@ public class MirrorPlate : MonoBehaviour
     {
         player = PlayerController.Instance;
         sr = GetComponent<SpriteRenderer>();
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, rotation);
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -61,7 +62,6 @@ public class MirrorPlate : MonoBehaviour
 
     public void Rotate()
     {
-
         rotation -= 45f;
         if (rotation <= -360f)
         {

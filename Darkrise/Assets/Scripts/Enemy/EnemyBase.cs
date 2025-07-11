@@ -63,7 +63,7 @@ public class enemyBase : MonoBehaviour
     protected bool isDying = false;
 
 
-    protected BoxCollider2D boxCollider;
+    protected BoxCollider2D[] boxCollider;
 
     // Start is called before the first frame update
     void Start()
@@ -77,7 +77,7 @@ public class enemyBase : MonoBehaviour
         player = PlayerController.Instance;
         anim = GetComponent<Animator>();
         anchorPos = rb.position;
-        boxCollider = GetComponent<BoxCollider2D>();
+        boxCollider = GetComponents<BoxCollider2D>();
         alertedTimerCountdown = alertedTimer;
     }
 
@@ -88,7 +88,11 @@ public class enemyBase : MonoBehaviour
         {
             isDying = true;
             rb.simulated = false;
-            boxCollider.enabled = false;
+            for (int i = 0; i < boxCollider.Length; i++)
+            {
+                boxCollider[i].enabled = false;
+            }
+            Physics2D.IgnoreCollision(this.GetComponent<BoxCollider2D>(), PlayerController.Instance.GetComponent<Collider2D>(),  true);
             anim.SetTrigger("death");
 
             //Temporary solution for differentiating between enemy death sounds
@@ -110,8 +114,6 @@ public class enemyBase : MonoBehaviour
                 
                 dieOnce = true;
             }
-            
-
 
         }
         if (isRecoiling)
@@ -155,7 +157,12 @@ public class enemyBase : MonoBehaviour
 
     protected virtual void OnCollisionStay2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player") && !PlayerController.Instance.pState.invincible && !PlayerController.Instance.pState.hiding && !isDying && !stunned)
+        if (other.gameObject.CompareTag("Player") 
+            && !PlayerController.Instance.pState.invincible 
+            && !PlayerController.Instance.pState.hiding 
+            && !isDying 
+            && !stunned
+            && health > 0)
         {
             Attack();
         }
@@ -172,7 +179,10 @@ public class enemyBase : MonoBehaviour
     {
         health = maxHealth;
         rb.simulated = true;
-        boxCollider.enabled = true;
+        for (int i = 0; i < boxCollider.Length; i++)
+        {
+            boxCollider[i].enabled = true;
+        }
         gameObject.SetActive(true);
         isDying = false;
         anim.ResetTrigger("death");
@@ -212,13 +222,13 @@ public class enemyBase : MonoBehaviour
         stunned = true;
         anim.SetBool("isStunned", true);
         timeToReleaseStun += Time.deltaTime;
-        Physics2D.IgnoreCollision(boxCollider, PlayerController.Instance.GetComponent<Collider2D>(), true);
+        Physics2D.IgnoreCollision(boxCollider[0], PlayerController.Instance.GetComponent<Collider2D>(), true);
 
         if (timeToReleaseStun >= stunTimer)
         {
             stunned = false;
             anim.SetBool("isStunned", false);
-            Physics2D.IgnoreCollision(boxCollider, PlayerController.Instance.GetComponent<Collider2D>(), false);
+            Physics2D.IgnoreCollision(boxCollider[0], PlayerController.Instance.GetComponent<Collider2D>(), false);
             timeToReleaseStun = 0;
             stun = 0;
         }

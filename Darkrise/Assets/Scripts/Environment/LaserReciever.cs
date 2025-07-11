@@ -1,6 +1,8 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D;
 
 public class LaserReciever : MonoBehaviour, IDataPersistence
 {
@@ -53,7 +55,33 @@ public class LaserReciever : MonoBehaviour, IDataPersistence
     {
         foreach (GameObject obj in objectsToPower)
         {
-            obj.SetActive(true); // this can be expanded later 
+            StartCoroutine(MoveGates(obj, new Vector2(obj.transform.localScale.x, 0)));
+        }
+    }
+
+    private IEnumerator MoveGates(GameObject gate, Vector2 spotSize)
+    {
+        Vector2 initialScale = gate.transform.localScale;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < 0.1f)
+        {
+            if (gate != null) // Ensure the object is still valid
+            {
+                gate.transform.localScale = Vector2.Lerp(initialScale, spotSize, elapsedTime / 0.1f);
+                elapsedTime += Time.deltaTime;
+                yield return null; // Wait for the next frame
+            }
+            else
+            {
+                yield break; // Exit the coroutine if the object is null
+            }
+        }
+
+        if (gate != null)
+        {
+            gate.transform.localScale = spotSize; // Ensure exact final size
+            gate.SetActive(false);
         }
     }
 

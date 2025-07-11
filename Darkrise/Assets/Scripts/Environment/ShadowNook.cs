@@ -34,11 +34,11 @@ public class ShadowNook : InteractTrigger
     }
     protected override void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Room Wide Effect") && collision.isTrigger)
+ /*       if (collision.CompareTag("Room Wide Effect") && collision.isTrigger)
         {
             active = false;
-        }
-        else if (collision.CompareTag("Player") && !collision.isTrigger)
+        }*/
+        if (collision.CompareTag("Player") && !collision.isTrigger)
         {
             controller.currentNook = this;
             TriggerActivated();

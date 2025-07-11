@@ -66,8 +66,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.0021000206, y: 0.14509997, z: 0}
-    m_Extent: {x: 0.9973, y: 0.95449996, z: 0}
+    m_Center: {x: -0.0042999983, y: 0.1557, z: 0}
+    m_Extent: {x: 1.0045, y: 0.95070004, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -113,7 +113,7 @@ Transform:
   m_Children:
   - {fileID: 4493488333999426567}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!212 &6901308285029877677
 SpriteRenderer:
@@ -216,7 +216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layersToHit:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 72
   laserLength: 10
   maxReflections: 5
 --- !u!61 &3332227909510069520
