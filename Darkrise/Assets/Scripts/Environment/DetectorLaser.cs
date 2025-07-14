@@ -49,7 +49,6 @@ public class DetectorLaser : MonoBehaviour
     void Update()
     {
         downedCooldownTimer += Time.deltaTime;
-        Debug.Log(downedCooldownTimer);
 
         if(state == DetectorLaserState.Detect || state == DetectorLaserState.Explicit && turnedOn)
         {

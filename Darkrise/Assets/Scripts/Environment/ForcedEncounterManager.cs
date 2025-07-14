@@ -72,10 +72,10 @@ public class ForcedEncounterManager : MonoBehaviour, IDataPersistence
     {
         breaker.gameObject.SetActive(true);
         ActivateWalls();
-        if (turnSpotlightsToLasers) { SpotlightsToLasers(); }
-        else { ActivateSpotlights(); }
         ActivateLasers();
         ActivateSpawners();
+        if (turnSpotlightsToLasers) { SpotlightsToLasers(); }
+        else { ActivateSpotlights(); }
     }
 
     public void ActivateForcedEncounterMidSecurity()

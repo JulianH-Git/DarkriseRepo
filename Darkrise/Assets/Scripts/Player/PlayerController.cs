@@ -801,6 +801,8 @@ public class PlayerController : MonoBehaviour, IDataPersistence
                     {
                         case EquippedLightSpell.Fireball:
                             currentLightSpell = EquippedLightSpell.LightBubble;
+                            bubbleUp = false;
+                            lightModeBubble.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
                             break;
                         case EquippedLightSpell.LightBubble:
                             currentLightSpell = EquippedLightSpell.RemoteFlashbang;
@@ -1172,8 +1174,6 @@ public class PlayerController : MonoBehaviour, IDataPersistence
 
     void SwitchAttackTypes(AttackType _at)
     {
-        //determine if swapping "left" or "right" (basically are we going forward or back on the wheel)
-
         currentAttackType = _at;
         ModeSwitchAnimationUpdate(currentAttackType);
         AudioManager.instance.PlayOneShot(FMODEvents.instance.powerSelect, this.transform.position);
@@ -1406,6 +1406,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
             sr.sortingOrder = 1;
             pState.hiding = false;
             animator.SetBool("hiding", false);
+            animator.SetBool("darkDashGlance", false);
             return;
         }
 
@@ -1525,6 +1526,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         dashPressed = false;
         sr.sortingOrder = 1;
         animator.SetBool("hiding", false);
+        animator.SetBool("darkDashGlance", false);
         pState.hiding = false;
         spellUsedRecently = true;
         playerArrowIndicator.SetActive(false);
@@ -1552,10 +1554,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     {
         if (currentAttackType == AttackType.Light || CurrentEnergy == 0)
         {
-            Physics2D.IgnoreLayerCollision(0, 6, false);
-            sr.sortingOrder = 1;
-            rb.gravityScale = gravity;
-            pState.shadowWalking = false;
+            StopShadowWalk(false);
             return;
         }
 
@@ -1571,32 +1570,30 @@ public class PlayerController : MonoBehaviour, IDataPersistence
 
             if (CurrentEnergy == 0)
             {
-                Physics2D.IgnoreLayerCollision(0, 6, false);
-                sr.sortingOrder = 1;
-                rb.gravityScale = gravity;
-                pState.shadowWalking = false;
-                spellUsedRecently = true;
+                StopShadowWalk();
             }
         }
 
         if (dashPressed || jumpPressed)
         {
-            Physics2D.IgnoreLayerCollision(0, 6, false);
-            sr.sortingOrder = 1;
-            rb.gravityScale = gravity;
-            pState.shadowWalking = false;
-            spellUsedRecently = true;
+            StopShadowWalk();
         }
+    }
+
+    private void StopShadowWalk(bool checkSpellUsedRecently = true)
+    {
+        Physics2D.IgnoreLayerCollision(0, 6, false);
+        sr.sortingOrder = 1;
+        rb.gravityScale = gravity;
+        pState.shadowWalking = false;
+        if(!checkSpellUsedRecently) { spellUsedRecently = false; }
+        else { spellUsedRecently = true; }
+
     }
 
     private void ShadowWalk()
     {
         rb.velocity = new Vector2(walkSpeed * xAxis, walkSpeed * yAxis);
-    }
-
-    public void AddForce(float _force)
-    {
-        rb.AddForce(new Vector2(rb.velocity.x, _force));
     }
     public void AddXForce(float _force)
     {
@@ -1608,10 +1605,10 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     }
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(sideAttackTransform.position, sideAttackArea);
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(airAttackTransform.position, airAttackArea);
+        //Gizmos.color = Color.red;
+        //Gizmos.DrawWireCube(sideAttackTransform.position, sideAttackArea);
+        //Gizmos.color = Color.yellow;
+        //Gizmos.DrawWireCube(airAttackTransform.position, airAttackArea);
     }
 
     private void DebugModeUnlocks()

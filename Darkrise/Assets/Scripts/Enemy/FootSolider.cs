@@ -41,14 +41,12 @@ public class FootSolider : enemyBase
     {
         base.Update();
         timeSinceAttack += Time.deltaTime;
-
     }
 
     protected void FixedUpdate()
     {
         if (isRecoiling || stunned || isDying) return;
         Collider2D playerInRange = PlayerCheck();
-
         switch (behavior)
         {
             case SoldierBehavior.Patrol:
@@ -61,7 +59,6 @@ public class FootSolider : enemyBase
                         AudioManager.instance.PlayOneShot(FMODEvents.instance.soldierDetected, this.transform.position);
                         chaseOnce = true;
                     }
-                    
                 }
                 if (alerted && !aggressive)
                 {

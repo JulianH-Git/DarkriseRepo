@@ -6,10 +6,17 @@ using UnityEngine.U2D;
 
 public class LaserReciever : MonoBehaviour, IDataPersistence
 {
+    public enum LaserRecieverBehavior
+    {
+        PoweredToActivate,
+        OffToActivate
+    }
     // Start is called before the first frame update
+    [SerializeField] LaserRecieverBehavior behavior;
     [SerializeField] List<GameObject> objectsToPower;
     SpriteRenderer sr;
     bool powered = false;
+    bool active = true;
     [SerializeField] private string id;
     [ContextMenu("Generate new GUID")]
 
@@ -25,16 +32,23 @@ public class LaserReciever : MonoBehaviour, IDataPersistence
 
     private void Update()
     {
-        if (powered)
+        if (powered && behavior == LaserRecieverBehavior.PoweredToActivate)
         {
             sr.color = Color.blue;
             PowerObjects();
         }
+        else if(!active && behavior == LaserRecieverBehavior.OffToActivate)
+        {
+            sr.color = Color.blue;
+            PowerObjects();
+        }
+        active = false;
     }
 
     public void ReceiveLaser()
     {
-        powered = true;
+        if (behavior == LaserRecieverBehavior.PoweredToActivate) { powered = true; }
+        active = true;
     }
 
     public void SaveData(GameData data)
@@ -84,5 +98,4 @@ public class LaserReciever : MonoBehaviour, IDataPersistence
             gate.SetActive(false);
         }
     }
-
 }

@@ -62,14 +62,10 @@ public class enemyBase : MonoBehaviour
     protected bool retreating;
     protected bool isDying = false;
 
-
     protected BoxCollider2D[] boxCollider;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
+    protected const float RELEASEALERT = 2.0f;
+    protected float releaseAlertTimer;
 
     protected virtual void Awake()
     {
@@ -79,6 +75,7 @@ public class enemyBase : MonoBehaviour
         anchorPos = rb.position;
         boxCollider = GetComponents<BoxCollider2D>();
         alertedTimerCountdown = alertedTimer;
+        releaseAlertTimer = RELEASEALERT;
     }
 
     // Update is called once per frame
@@ -134,6 +131,7 @@ public class enemyBase : MonoBehaviour
         {
             alertedTimerCountdown -= Time.deltaTime;
         }
+        if(alerted) { releaseAlertTimer -= Time.deltaTime; }
         if(stun >= maxStun)
         {
             Stunned();
@@ -315,12 +313,22 @@ public class enemyBase : MonoBehaviour
 
         float test = Vector2.Distance(transform.position, _alertPos);
 
-        if (test <= 0.89f)
+        if (test <= 0.89f || releaseAlertTimer <= 0)
         {
+            releaseAlertTimer = RELEASEALERT;
             alerted = false;
             alertedPatrol = true;
             Patrol(alertPos);
         }
+    }
+
+    public void CancelAlert()
+    {
+        alertedTimerCountdown = alertedTimer;
+        alertedPatrol = false;
+        retreating = true;
+        alertedFlip = false;
+        Retreat();
     }
 
 }
