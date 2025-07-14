@@ -144,5 +144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   overloadTimer: 5
+  flashbangDeactivationTimer: 10
   powered: 0
   overloaded: 0
+  flashbanged: 0
+  id: 
