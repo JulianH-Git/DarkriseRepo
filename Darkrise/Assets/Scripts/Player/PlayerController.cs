@@ -1502,6 +1502,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         playerArrowIndicator.transform.rotation = defaultArrowRotation;
         canDash = false;
         pState.dashing = true;
+        pState.invincible = true;
         Vector2 start = transform.position;
         Vector2 end = new Vector2(_nextNook.transform.position.x, transform.position.y);
         animator.SetBool("hiding", false);
@@ -1516,6 +1517,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         transform.position = new Vector2(end.x, transform.position.y);
         _nextNook.HidePlayer();
         pState.dashing = false;
+        pState.invincible = false;
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
         dashPressed = false;
