@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class FuseBox : MonoBehaviour, IDataPersistence
 {
+    [SerializeField] bool selfContained;
     [SerializeField] float overloadTimer;
     [SerializeField] float flashbangDeactivationTimer;
     float timeTilReactivated;
@@ -12,7 +13,12 @@ public class FuseBox : MonoBehaviour, IDataPersistence
     public bool powered;
     public bool overloaded;
     public bool flashbanged;
+    private List<Vector2> originalSizes = new List<Vector2>();
+    bool playerIsNear;
+    bool runOnce = false;
     SpriteRenderer sr;
+    Color lerpedColor;
+    [SerializeField] List<GameObject> objectsToPower;
     [SerializeField] private string id;
     [ContextMenu("Generate new GUID")]
 
@@ -38,23 +44,45 @@ public class FuseBox : MonoBehaviour, IDataPersistence
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
+        foreach (GameObject obj in objectsToPower)
+        {
+            originalSizes.Add(obj.transform.localScale);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(!playerIsNear)
+        {
+            timeToOverload -= Time.deltaTime;
+            LerpColors();
+        }
         if(flashbanged)
         {
-            sr.color = Color.red;
+            sr.color = Color.magenta;
             Flashbanged();
+
         }
         if(powered && !overloaded)
         {
-            sr.color = Color.yellow;
+            if (selfContained)
+            {
+                for (int i = 0; i < objectsToPower.Count; i++)
+                {
+                    StartCoroutine(MoveGates(objectsToPower[i], new Vector2(objectsToPower[i].transform.localScale.x,0)));
+                }
+            }
         }
         if(powered && overloaded)
         {
-            sr.color = Color.red;
+            if (selfContained)
+            {
+                for (int i = 0; i < objectsToPower.Count; i++)
+                {
+                    StartCoroutine(RevertGates(objectsToPower[i], originalSizes[i]));
+                }
+            }
         }
     }
 
@@ -62,14 +90,17 @@ public class FuseBox : MonoBehaviour, IDataPersistence
     {
         if (collision.CompareTag("Player") && collision.isTrigger && !powered && PlayerController.Instance.currentAttackType == PlayerController.AttackType.Light)
         {
+            playerIsNear = true;
             powered = true;
             sr.color = Color.yellow;
             Debug.Log("Powered");
         }
         if(collision.CompareTag("Player") && collision.isTrigger && powered && PlayerController.Instance.BubbleUp)
         {
+            playerIsNear = true;
             timeToOverload = timeToOverload + Time.deltaTime;
-            if(timeToOverload >= overloadTimer)
+            LerpColors();
+            if (timeToOverload >= overloadTimer)
             {
                 sr.color = Color.red;
                 overloaded = true;
@@ -84,7 +115,8 @@ public class FuseBox : MonoBehaviour, IDataPersistence
         {
             if(powered && !overloaded)
             {
-                timeToOverload -= Time.deltaTime;
+                playerIsNear = false;
+
             }
         }
     }
@@ -98,7 +130,87 @@ public class FuseBox : MonoBehaviour, IDataPersistence
         {
             flashbanged = false;
             overloaded = false;
+            runOnce = false;
             timeTilReactivated = 0;
+            if (selfContained)
+            {
+                for (int i = 0; i < objectsToPower.Count; i++)
+                {
+                    StartCoroutine(RevertGates(objectsToPower[i], originalSizes[i]));
+                }
+            }
+            return;
+        }
+
+        if (selfContained && !runOnce)
+        {
+            runOnce = true;
+            foreach (GameObject obj in objectsToPower)
+            {
+                StartCoroutine(MoveGates(obj, new Vector2(obj.transform.localScale.x, 0)));
+            }
+        }
+
+
+    }
+
+    protected void LerpColors()
+    {
+        
+        lerpedColor = Color.Lerp(Color.yellow, Color.red, timeToOverload / overloadTimer);
+        sr.color = lerpedColor;
+    }
+
+    private IEnumerator MoveGates(GameObject gate, Vector2 spotSize)
+    {
+        Vector2 initialScale = gate.transform.localScale;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < 0.1f)
+        {
+            if (gate != null) // Ensure the object is still valid
+            {
+                gate.transform.localScale = Vector2.Lerp(initialScale, spotSize, elapsedTime / 0.1f);
+                elapsedTime += Time.deltaTime;
+                yield return null; // Wait for the next frame
+            }
+            else
+            {
+                yield break; // Exit the coroutine if the object is null
+            }
+        }
+
+        if (gate != null)
+        {
+            gate.transform.localScale = spotSize; // Ensure exact final size
+            gate.SetActive(false);
+        }
+    }
+
+    private IEnumerator RevertGates(GameObject gate, Vector2 originalSize)
+    {
+        gate.SetActive(true);
+        Vector2 initialScale = gate.transform.localScale;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < 0.1f)
+        {
+            if (gate != null) // Ensure the object is still valid
+            {
+                gate.transform.localScale = Vector2.Lerp(initialScale, originalSize, elapsedTime / 0.1f);
+                elapsedTime += Time.deltaTime;
+                yield return null; // Wait for the next frame
+            }
+            else
+            {
+                yield break; // Exit the coroutine if the object is null
+            }
+        }
+
+        if (gate != null)
+        {
+            gate.transform.localScale = originalSize; // Ensure exact final size
+            
         }
     }
 }

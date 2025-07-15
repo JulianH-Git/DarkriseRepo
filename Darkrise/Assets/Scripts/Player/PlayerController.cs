@@ -1,13 +1,8 @@
 using FMOD.Studio;
 using Rewired;
-using Rewired.Utils.Classes.Data;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static Rewired.Platforms.Custom.CustomPlatformUnifiedKeyboardSource.KeyPropertyMap;
-using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerController : MonoBehaviour, IDataPersistence
 {
@@ -24,6 +19,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
 
     [Header("Debug Settings")]
     [SerializeField] private bool DebugMode;
+    [SerializeField] private bool enableGizmos;
     private bool debugran = false;
 
     [Header("Horizontal Movement Settings")]
@@ -373,7 +369,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
             {
                 CurrentEnergy -= bubbleEnergyLossRate * Time.deltaTime;
             }
-            else if (CurrentEnergy == 0)
+            else if (CurrentEnergy == 0 || currentAttackType != AttackType.Light)
             {
                 bubbleUp = false;
                 lightModeBubble.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
@@ -397,6 +393,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
             currentEnergy += recoveryRate;
             if (currentEnergy >= maxEnergy)
             {
+                currentEnergy = maxEnergy;
                 pState.recovering = false;
             }
         }
@@ -433,14 +430,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         }
 
         rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxVelocity);
-        DebugCooldownMessages();
 
-    }
-
-    void DebugCooldownMessages() //delete later
-    {
-        if (timeTilBubble == bubbleCooldown + 0.1f) { Debug.Log("Bubble cooldown finished"); }
-        if (timeTilFireball == fireballCooldown + 0.1f) { Debug.Log("Fireball cooldown finished"); }
     }
 
     void GetInput()
@@ -648,7 +638,6 @@ public class PlayerController : MonoBehaviour, IDataPersistence
             AudioManager.instance.PlayOneShot(FMODEvents.instance.lightSlash, this.transform.position);
         }
 
-
         if (Grounded())
         {
             Hit(sideAttackTransform, sideAttackArea, ref pState.recoilingX, recoilSpeedX);
@@ -747,12 +736,12 @@ public class PlayerController : MonoBehaviour, IDataPersistence
             else if (ObjectsToHit[i].GetComponent<MirrorPlate>() != null)
             {
                 MirrorPlate mp = ObjectsToHit[i].GetComponent<MirrorPlate>();
-                if(currentAttackType == AttackType.Dark) { mp.ChangeState(); }
+                if (currentAttackType == AttackType.Dark) { mp.ChangeState(); }
                 else
                 {
                     mp.Rotate();
                 }
-                
+
             }
         }
 
@@ -1101,7 +1090,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
 
     public void TakeDamage(float _damage)
     {
-        if(pState.invincible || DebugMode) { return; }
+        if (pState.invincible || DebugMode) { return; }
         CamShake.Instance.Shake();
         if (!DebugMode)
         {
@@ -1588,7 +1577,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         sr.sortingOrder = 1;
         rb.gravityScale = gravity;
         pState.shadowWalking = false;
-        if(!checkSpellUsedRecently) { spellUsedRecently = false; }
+        if (!checkSpellUsedRecently) { spellUsedRecently = false; }
         else { spellUsedRecently = true; }
 
     }
@@ -1607,10 +1596,13 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     }
     private void OnDrawGizmos()
     {
-        //Gizmos.color = Color.red;
-        //Gizmos.DrawWireCube(sideAttackTransform.position, sideAttackArea);
-        //Gizmos.color = Color.yellow;
-        //Gizmos.DrawWireCube(airAttackTransform.position, airAttackArea);
+        if(enableGizmos)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(sideAttackTransform.position, sideAttackArea);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireCube(airAttackTransform.position, airAttackArea);
+        }
     }
 
     private void DebugModeUnlocks()

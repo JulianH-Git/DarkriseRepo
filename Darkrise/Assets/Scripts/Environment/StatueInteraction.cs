@@ -14,6 +14,7 @@ public class StatueInteraction : InteractTrigger
     float fadeTimer = 3f;
     float fadeAwayPerSecond;
     float alphaValue;
+    [SerializeField] bool saveGame = true;
     protected override void Start()
     {
         base.Start();
@@ -54,7 +55,7 @@ public class StatueInteraction : InteractTrigger
                 alphaValue = 1f;
                 hintText.SetActive(true);
                 controller.lastStatue = this.gameObject;
-                DataPersistenceManager.Instance.SaveGame();
+                if (saveGame) { DataPersistenceManager.Instance.SaveGame(); }
             }
         }
     }

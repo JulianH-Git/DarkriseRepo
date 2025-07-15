@@ -8,11 +8,12 @@ public class StandardBreakerSwitch : InteractTrigger, IDataPersistence
 {
     public bool deactivated;
     public bool flashbanged;
+    [SerializeField] bool multipleFbs;
     Animator animator;
     BoxCollider2D trigger;
     [SerializeField] float flashbangDeactivationTimer;
     float timeTilReactivate;
-    [SerializeField] FuseBox fb;
+    [SerializeField] List<FuseBox> fb;
     private bool hasBeenCalled = false;
     [SerializeField] protected List<GameObject> affectedSprites;
     [SerializeField] private string id;
@@ -36,6 +37,13 @@ public class StandardBreakerSwitch : InteractTrigger, IDataPersistence
     public void LoadData(GameData data)
     {
         data.fbStatus.TryGetValue(id, out deactivated);
+        if(deactivated)
+        {
+            deactivated = true;
+            animator.SetBool("turnedOff", true);
+            ActivateCutscene(false);
+            FlipAffectedSprites();
+        }
     }
 
     protected override void Start()
@@ -49,14 +57,30 @@ public class StandardBreakerSwitch : InteractTrigger, IDataPersistence
     private void Update()
     {
         if (deactivated == true) { trigger.enabled = false; }
-        if (flashbanged == true || (fb != null && fb.flashbanged)) { FlashbangDeactivation(); }
-        if (fb != null && fb.overloaded && !fb.flashbanged)
-        {
-            deactivated = true;
-            animator.SetBool("turnedOff", true);
 
-            FlipAffectedSprites();
+        if (!multipleFbs)
+        {
+            if (flashbanged == true || (fb.Count != 0 && fb[0].flashbanged)) { FlashbangDeactivation(); }
+            if (fb.Count != 0 && fb[0].overloaded && !fb[0].flashbanged)
+            {
+                deactivated = true;
+                animator.SetBool("turnedOff", true);
+
+                FlipAffectedSprites();
+            }
         }
+        else
+        {
+            if(CheckIfAllTrue(0)) { FlashbangDeactivation(); }
+            if(CheckIfAllTrue(1)) 
+            {
+                deactivated = true;
+                animator.SetBool("turnedOff", true);
+                ActivateCutscene();
+                FlipAffectedSprites(); 
+            }
+        }
+
     }
     protected override void OnTriggerStay2D(Collider2D collision)
     {
@@ -77,6 +101,56 @@ public class StandardBreakerSwitch : InteractTrigger, IDataPersistence
                 }
             }
         }
+    }
+
+    protected bool CheckIfAllTrue(int check)
+    {
+        bool[] flashbangedStatus = new bool[fb.Count];
+
+        for (int i = 0; i > fb.Count; i++)
+        {
+            switch(check)
+            {
+                case 0:
+                    if (fb[i].flashbanged)
+                    {
+                        flashbangedStatus[i] = true;
+                    }
+                    else
+                    {
+                        flashbangedStatus[i] = false;
+                    }
+                    break;
+                case 1:
+                    if (fb[i].overloaded)
+                    {
+                        flashbangedStatus[i] = true;
+                    }
+                    else
+                    {
+                        flashbangedStatus[i] = false;
+                    }
+                    break;
+                case 2:
+                    if (fb[i].powered)
+                    {
+                        flashbangedStatus[i] = true;
+                    }
+                    else
+                    {
+                        flashbangedStatus[i] = false;
+                    }
+                    break;
+            }
+
+        }
+
+        if (Array.TrueForAll(flashbangedStatus, x => x))
+        {
+            return true;
+        }
+
+        return false;
     }
 
     public void FlashbangDeactivation()
@@ -143,6 +217,8 @@ public class StandardBreakerSwitch : InteractTrigger, IDataPersistence
             gate.SetActive(false);
         }
     }
+
+
 
     void ActivateCutscene(bool playCutscene = true)
     {
