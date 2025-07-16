@@ -86,7 +86,7 @@ public class SwitchTrigger : MonoBehaviour, IDataPersistence
             if(playCutscene) { GetComponent<CutsceneTrigger>()?.StartCutscene(); }
             StartCoroutine(MoveGates(sprite, new Vector2(sprite.transform.localScale.x, 0)));
         }
-        foreach (GameObject obj in affectedGates)
+        foreach (GameObject obj in affectedObjects)
         {
             StartCoroutine(ActivateObjects(obj));
         }

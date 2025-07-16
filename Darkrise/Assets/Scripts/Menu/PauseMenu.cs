@@ -122,7 +122,7 @@ public class PauseMenu : MonoBehaviour
     {
         foreach (Button b in buttonsToDeactivate) { b.interactable = false; }
         popup.ActivateMenu(
-               "Are you sure you want to return to the main menu? Any unsaved progress will be lost.",
+               "Are you sure? Any unsaved progress will be lost.",
                () => // if the player chooses yes
                {
                    Time.timeScale = 1.0f;
@@ -206,7 +206,7 @@ public class PauseMenu : MonoBehaviour
     {
         foreach(Button b in buttonsToDeactivate) { b.interactable = false; }
         popup.ActivateMenu(
-               "Are you sure you want to restart from the last checkpoint? Any unsaved progress will be lost.",
+               "Are you sure? Any unsaved progress will be lost.",
                () => // if the player chooses yes
                {
                    pauseMenuUI.SetActive(false);
@@ -231,7 +231,7 @@ public class PauseMenu : MonoBehaviour
     {
         foreach (Button b in buttonsToDeactivate) { b.interactable = false; }
         popup.ActivateMenu(
-               "Are you sure you want to quit? Any unsaved progress will be lost.",
+               "Are you sure? Any unsaved progress will be lost.",
                () => // if the player chooses yes
                {
                    Application.Quit();

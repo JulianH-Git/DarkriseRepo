@@ -69,7 +69,8 @@ public class LaserReciever : MonoBehaviour, IDataPersistence
     {
         foreach (GameObject obj in objectsToPower)
         {
-            StartCoroutine(MoveGates(obj, new Vector2(obj.transform.localScale.x, 0)));
+            if(obj.GetComponent<DarkRoom>() != null) { obj.SetActive(false); }
+            else { StartCoroutine(MoveGates(obj, new Vector2(obj.transform.localScale.x, 0))); } 
         }
     }
 

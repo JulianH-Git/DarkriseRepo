@@ -178,6 +178,16 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         }
     }
 
+    public float RemoteFlashbangCooldown
+    {
+        get { return timeTilFlashbang / flashbangCooldown; }
+    }
+
+    public float LightBubbleCooldown
+    {
+        get { return timeTilBubble / bubbleCooldown; }
+    }
+
     [Space(5)]
     public PlayerStateList pState;
 
@@ -218,12 +228,11 @@ public class PlayerController : MonoBehaviour, IDataPersistence
 
     public enum EquippedLightSpell
     {
-        Fireball,
         LightBubble,
         RemoteFlashbang
     }
 
-    public EquippedLightSpell currentLightSpell = EquippedLightSpell.Fireball;
+    public EquippedLightSpell currentLightSpell = EquippedLightSpell.LightBubble;
 
     public enum EquippedDarkSpell
     {
@@ -793,16 +802,13 @@ public class PlayerController : MonoBehaviour, IDataPersistence
                 case AttackType.Light:
                     switch (currentLightSpell)
                     {
-                        case EquippedLightSpell.Fireball:
-                            currentLightSpell = EquippedLightSpell.LightBubble;
+                        case EquippedLightSpell.LightBubble:
+                            currentLightSpell = EquippedLightSpell.RemoteFlashbang;
                             bubbleUp = false;
                             lightModeBubble.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
                             break;
-                        case EquippedLightSpell.LightBubble:
-                            currentLightSpell = EquippedLightSpell.RemoteFlashbang;
-                            break;
                         case EquippedLightSpell.RemoteFlashbang:
-                            currentLightSpell = EquippedLightSpell.Fireball;
+                            currentLightSpell = EquippedLightSpell.LightBubble;
                             bubbleUp = false;
                             lightModeBubble.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
                             break;
@@ -829,9 +835,6 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     {
         switch (currentLightSpell)
         {
-            case EquippedLightSpell.Fireball:
-                FireballTime();
-                break;
             case EquippedLightSpell.LightBubble:
                 LightBubbleTime();
                 break;
@@ -1096,7 +1099,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     public void TakeDamage(float _damage)
     {
         if (pState.invincible || DebugMode) { return; }
-        if(_damage == 0) { return; }
+        if (_damage == 0) { return; }
         CamShake.Instance.Shake();
         if (!DebugMode)
         {
@@ -1602,7 +1605,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     }
     private void OnDrawGizmos()
     {
-        if(enableGizmos)
+        if (enableGizmos)
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireCube(sideAttackTransform.position, sideAttackArea);

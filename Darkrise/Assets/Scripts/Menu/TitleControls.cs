@@ -80,7 +80,7 @@ public class TitleControls : MonoBehaviour
             DataPersistenceManager.Instance.LoadGame();
         }
 
-        SceneManager.LoadSceneAsync("StartLevel");
+        SceneManager.LoadSceneAsync("DemoLevel");
     }
 
     public void OnNewGameClicked()

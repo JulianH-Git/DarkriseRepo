@@ -100,11 +100,11 @@ public class enemyBase : MonoBehaviour
             {
                 GameObject _gotHitParticles = Instantiate(gotHitParticles, transform.position, Quaternion.identity);
                 Destroy(_gotHitParticles, 1.5f);
-                if (damage == 1)
+                if (this.GetComponent<GroundSentry>())
                 {
                     AudioManager.instance.PlayOneShot(FMODEvents.instance.sentryDestroyed, this.transform.position);
                 }
-                else if (damage == 2) 
+                else if (this.GetComponent<FootSolider>()) 
                 {
                     AudioManager.instance.PlayOneShot(FMODEvents.instance.soldierDestroyed, this.transform.position);
                 }
@@ -187,6 +187,11 @@ public class enemyBase : MonoBehaviour
         anim.Play("idle");
         SetPosition(anchorPos);
         dieOnce = false;
+        if(this.GetComponent<FootSolider>() != null)
+        {
+            this.GetComponent<FootSolider>().aggressive = false;
+            this.GetComponent<FootSolider>().alerted = false;
+        }
     }
 
     public virtual void SetPosition(Vector2 pos)
