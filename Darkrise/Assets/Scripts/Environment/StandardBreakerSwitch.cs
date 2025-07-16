@@ -107,7 +107,7 @@ public class StandardBreakerSwitch : InteractTrigger, IDataPersistence
     {
         bool[] flashbangedStatus = new bool[fb.Count];
 
-        for (int i = 0; i > fb.Count; i++)
+        for (int i = 0; i < fb.Count; i++)
         {
             switch(check)
             {
@@ -122,7 +122,7 @@ public class StandardBreakerSwitch : InteractTrigger, IDataPersistence
                     }
                     break;
                 case 1:
-                    if (fb[i].overloaded)
+                    if (fb[i].powered)
                     {
                         flashbangedStatus[i] = true;
                     }
@@ -132,7 +132,7 @@ public class StandardBreakerSwitch : InteractTrigger, IDataPersistence
                     }
                     break;
                 case 2:
-                    if (fb[i].powered)
+                    if (fb[i].overloaded)
                     {
                         flashbangedStatus[i] = true;
                     }

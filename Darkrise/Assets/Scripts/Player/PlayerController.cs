@@ -1096,6 +1096,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     public void TakeDamage(float _damage)
     {
         if (pState.invincible || DebugMode) { return; }
+        if(_damage == 0) { return; }
         CamShake.Instance.Shake();
         if (!DebugMode)
         {
