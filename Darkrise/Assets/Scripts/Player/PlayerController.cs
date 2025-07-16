@@ -316,6 +316,11 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     private IEnumerator WaitTillEnd()
     {
         animator.SetBool("isDead", true);
+        // disable all other bools
+        animator.SetBool("isWalking", false);
+        animator.SetBool("isDashing", false);
+        animator.SetBool("hiding", false);
+        animator.SetBool("darkDashGlance", false);
         pState.PrepForDeath();
         rb.gravityScale = 0;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;

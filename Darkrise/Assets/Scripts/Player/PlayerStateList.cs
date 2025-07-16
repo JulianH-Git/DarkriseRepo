@@ -12,6 +12,7 @@ public class PlayerStateList : MonoBehaviour
     public bool hiding = false;
     public bool recovering = false;
     public bool shadowWalking = false;
+    public bool safeFromRoomwide = false;
 
     public void PrepForDeath()
     {
@@ -24,5 +25,6 @@ public class PlayerStateList : MonoBehaviour
         hiding = false;
         recovering = false;
         shadowWalking = false;
+        safeFromRoomwide = false;
     }
 }

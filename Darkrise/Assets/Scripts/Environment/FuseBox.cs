@@ -156,7 +156,7 @@ public class FuseBox : MonoBehaviour, IDataPersistence
 
     protected void LerpColors()
     {
-        
+        if(!powered) { sr.color = Color.white; return; }
         lerpedColor = Color.Lerp(Color.yellow, Color.red, timeToOverload / overloadTimer);
         sr.color = lerpedColor;
     }

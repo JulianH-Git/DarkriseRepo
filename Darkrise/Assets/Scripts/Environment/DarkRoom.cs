@@ -17,7 +17,9 @@ public class DarkRoom : MonoBehaviour
             switch(darkOrLight)
             {
                 case false:
-                    if (PlayerController.Instance.currentAttackType == PlayerController.AttackType.Light && PlayerController.Instance.BubbleUp == false)
+                    if (PlayerController.Instance.currentAttackType == PlayerController.AttackType.Light 
+                        && PlayerController.Instance.BubbleUp == false
+                        && !PlayerController.Instance.pState.safeFromRoomwide)
                     {
                         damageTimer += Time.deltaTime;
 
@@ -27,9 +29,14 @@ public class DarkRoom : MonoBehaviour
                             damageTimer = 0;
                         }
                     }
-                    break;
+                    else
+                    {
+                        damageTimer = 0;
+                    }
+                        break;
                 case true:
-                    if (PlayerController.Instance.currentAttackType == PlayerController.AttackType.Dark)
+                    if (PlayerController.Instance.currentAttackType == PlayerController.AttackType.Dark
+                        && !PlayerController.Instance.pState.safeFromRoomwide)
                     {
                         damageTimer += Time.deltaTime;
 
@@ -39,7 +46,7 @@ public class DarkRoom : MonoBehaviour
                             damageTimer = 0;
                         }
                     }
-                    else if (PlayerController.Instance.currentAttackType == PlayerController.AttackType.Neutral) 
+                    else if (PlayerController.Instance.currentAttackType == PlayerController.AttackType.Neutral && !PlayerController.Instance.pState.safeFromRoomwide) 
                     {
                         damageTimer += Time.deltaTime;
 
@@ -48,6 +55,10 @@ public class DarkRoom : MonoBehaviour
                             PlayerController.Instance.TakeDamage(damage);
                             damageTimer = 0;
                         }
+                    }
+                    else
+                    {
+                        damageTimer = 0;
                     }
                     break;
             }

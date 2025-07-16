@@ -7,7 +7,8 @@ public class SwitchTrigger : MonoBehaviour, IDataPersistence
     [SerializeField] protected GameObject player;
     protected PlayerController controller;
 
-    [SerializeField] protected List<GameObject> affectedSprites;
+    [SerializeField] protected List<GameObject> affectedGates;
+    [SerializeField] protected List<GameObject> affectedObjects;
 
     [SerializeField] protected CutsceneCamera cutsceneManager;
 
@@ -78,14 +79,18 @@ public class SwitchTrigger : MonoBehaviour, IDataPersistence
     private void SwitchActivated(bool playCutscene = true)
     {
         indicator.SetActive(false);
-        foreach (GameObject sprite in affectedSprites)
+        hasBeenUsed = true;
+        indicateColor.color = Color.white;
+        foreach (GameObject sprite in affectedGates)
         {
-            hasBeenUsed = true;
-            indicateColor.color = Color.white;
             if(playCutscene) { GetComponent<CutsceneTrigger>()?.StartCutscene(); }
             StartCoroutine(MoveGates(sprite, new Vector2(sprite.transform.localScale.x, 0)));
         }
-        if(playCutscene) 
+        foreach (GameObject obj in affectedGates)
+        {
+            StartCoroutine(ActivateObjects(obj));
+        }
+        if (playCutscene) 
         { 
             AudioManager.instance.PlayOneShot(FMODEvents.instance.pullLever, this.transform.position); 
         }
@@ -119,5 +124,11 @@ public class SwitchTrigger : MonoBehaviour, IDataPersistence
             gate.transform.localScale = spotSize; // Ensure exact final size
             gate.SetActive(false);
         }
+    }
+
+    private IEnumerator ActivateObjects(GameObject obj)
+    {
+        yield return new WaitForSeconds(1);
+        obj.SetActive(true);
     }
 }
