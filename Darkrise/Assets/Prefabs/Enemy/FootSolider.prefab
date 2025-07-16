@@ -155,7 +155,7 @@ MonoBehaviour:
   footSoldierAttackTransform: {fileID: 208688081813466140}
   footSoldierAttackArea: {x: 1, y: 2}
   attackRangeTransform: {fileID: 7721110764756153808}
-  attackRange: 3
+  attackRange: 1
   layer:
     serializedVersion: 2
     m_Bits: 1
@@ -163,7 +163,7 @@ MonoBehaviour:
   aggressionTimer: 10
   aggressive: 0
   detectionRangeTransform: {fileID: 2377881673545313823}
-  detectionRangeArea: {x: 3.5, y: 2}
+  detectionRangeArea: {x: 2.5, y: 2}
 --- !u!61 &8123595661152672319
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -289,7 +289,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.8632785, y: -0.60249627}
+  m_Offset: {x: -0.6, y: -0.6}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -326,7 +326,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1367825090724088187}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.35, y: -0.6, z: 0}
+  m_LocalPosition: {x: 3, y: -0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -357,7 +357,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3703417610613885146}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 0, z: 0}
+  m_LocalPosition: {x: 1.766, y: -0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

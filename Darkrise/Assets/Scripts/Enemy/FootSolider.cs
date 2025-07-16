@@ -212,7 +212,7 @@ public class FootSolider : enemyBase
         {
             for (int i = 0; i < playerInRange.Length; i++)
             {
-                if (playerInRange[i].CompareTag("Player"))
+                if (playerInRange[i].CompareTag("Player") && !playerInRange[i].isTrigger)
                 {
                     if(!PlayerController.Instance.pState.hiding)
                     {
