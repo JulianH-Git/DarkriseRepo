@@ -1,7 +1,7 @@
 using Rewired;
 using UnityEngine;
 
-public class StartCutsceneOnEnter : MonoBehaviour
+public class StartCutsceneOnEnter : MonoBehaviour, IDataPersistence
 {
     private bool hasBeenUsed = false;
     [SerializeField] private string id;

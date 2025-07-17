@@ -11,10 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TitleScreen.unity
     guid: f85e9216338af4c4f845c19dd10d7065
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/StartLevel.unity
     guid: 7e6d832a743bcc94bb8881b7c89e8f19
   - enabled: 1
     path: Assets/Scenes/GameOverScreen.unity
     guid: 0af940c5f56fd4842853d8e6f9562c7b
+  - enabled: 1
+    path: Assets/Scenes/DemoLevel.unity
+    guid: 6ed24e322e338c44db40ab44712c8c03
   m_configObjects: {}
