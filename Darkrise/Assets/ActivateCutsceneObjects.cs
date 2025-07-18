@@ -16,6 +16,7 @@ public class ActivateCutsceneObjects : MonoBehaviour
 
     [Header("Cutscene 4 Settings")]
     [SerializeField] SpotlightPrefab redSpotlight;
+    [SerializeField] GameObject cutsceneTrigger;
 
     public void StartActivate()
     {
@@ -38,6 +39,7 @@ public class ActivateCutsceneObjects : MonoBehaviour
             case 4:
                 dl.turnedOn = false;
                 redSpotlight.state = SpotlightStates.Off;
+                cutsceneTrigger.SetActive(false);
                 break;
         }
     }

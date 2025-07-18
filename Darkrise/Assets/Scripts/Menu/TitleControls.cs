@@ -93,7 +93,7 @@ public class TitleControls : MonoBehaviour
             LoadGameButton.GetComponent<Button>().interactable = false;
             optionsClosedButton.GetComponent<Button>().interactable = false;
             popup.ActivateMenu(
-                "Are you sure you want to make a new game? Any existing save data will be lost.",
+                "Are you sure? Any existing save data will be lost.",
                 () => // if the player chooses yes
                 {
                     hasPressed = true;

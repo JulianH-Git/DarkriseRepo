@@ -15,6 +15,7 @@ public class ForcedEncounterManager : MonoBehaviour, IDataPersistence
     [SerializeField] ForcedEncounterManager chainNextEncounter;
     [SerializeField] GameObject laserPrefab;
     [SerializeField] GameObject extraLasersParent;
+    [SerializeField] bool changeSoldierBehavior;
     List<GameObject> extraLasers = new List<GameObject>();
     bool runOnce = false;
     [Header("Audio Settings")]
@@ -55,6 +56,13 @@ public class ForcedEncounterManager : MonoBehaviour, IDataPersistence
             if (chainNextEncounter != null)
             {
                 chainNextEncounter.ActivateForcedEncounterMidSecurity();
+            }
+            if (changeSoldierBehavior)
+            {
+                foreach (GameObject psm in permanentEnemySpawns)
+                {
+                    psm.GetComponent<EnemySpawnerManager>().ChangeBehavior(FootSolider.SoldierBehavior.Patrol);
+                }
             }
         }
         foreach(GameObject obj in feSpotlights)
@@ -105,7 +113,6 @@ public class ForcedEncounterManager : MonoBehaviour, IDataPersistence
     {
         if (!deactivateOnce)
         {
-            
             AudioManager.instance.PlayOneShot(FMODEvents.instance.encounterPanel, this.transform.position);
             AudioManager.instance.SetMusicArea(MusicArea.DarkArea);
             deactivateOnce = true;
@@ -157,6 +164,10 @@ public class ForcedEncounterManager : MonoBehaviour, IDataPersistence
             }
         }
 
+        if(!breaker.deactivated)
+        {
+            breaker.DisableBreaker();
+        }
     }
 
     void ActivateWalls()

@@ -4,6 +4,7 @@ public class ForcedEncounterBreakerSwitch : InteractTrigger
 {
     public bool deactivated;
     public bool flashbanged;
+    bool disableAnim = false;
     Animator animator;
     BoxCollider2D trigger;
     [SerializeField] float flashbangDeactivationTimer;
@@ -20,6 +21,7 @@ public class ForcedEncounterBreakerSwitch : InteractTrigger
     {
         if (deactivated == true) { trigger.enabled = false; }
         if (flashbanged == true) { FlashbangDeactivation(); }
+        if(disableAnim) { animator.SetBool("turnedOff", true); trigger.enabled = false; }
     }
     protected override void OnTriggerStay2D(Collider2D collision)
     {
@@ -51,5 +53,11 @@ public class ForcedEncounterBreakerSwitch : InteractTrigger
             trigger.enabled = true;
         }
 
+    }
+
+    public void DisableBreaker()
+    {
+        deactivated = true;
+        disableAnim = true;
     }
 }

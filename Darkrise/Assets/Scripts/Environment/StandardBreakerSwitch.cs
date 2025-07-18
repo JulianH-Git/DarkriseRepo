@@ -37,13 +37,7 @@ public class StandardBreakerSwitch : InteractTrigger, IDataPersistence
     public void LoadData(GameData data)
     {
         data.fbStatus.TryGetValue(id, out deactivated);
-        if(deactivated)
-        {
-            deactivated = true;
-            animator.SetBool("turnedOff", true);
-            ActivateCutscene(false);
-            FlipAffectedSprites();
-        }
+
     }
 
     protected override void Start()
@@ -52,6 +46,13 @@ public class StandardBreakerSwitch : InteractTrigger, IDataPersistence
         animator = this.GetComponent<Animator>();
         trigger = this.GetComponent<BoxCollider2D>();
         hasBeenCalled = false;
+        if (deactivated)
+        {
+            deactivated = true;
+            animator.SetBool("turnedOff", true);
+            ActivateCutscene(false);
+            FlipAffectedSprites();
+        }
     }
 
     private void Update()
