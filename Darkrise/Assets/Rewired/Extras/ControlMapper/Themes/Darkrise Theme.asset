@@ -333,7 +333,7 @@ MonoBehaviour:
     _fillOrigin: 0
   _textSettings:
     _color: {r: 1, g: 1, b: 1, a: 1}
-    _font: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    _font: {fileID: 11400000, guid: 18799d532c873f84d96b4f99c54213b1, type: 2}
     _style: 0
     _sizeMultiplier: 1
     _lineSpacing: 1
@@ -341,7 +341,7 @@ MonoBehaviour:
     _wordSpacing: 1
   _buttonTextSettings:
     _color: {r: 1, g: 1, b: 1, a: 1}
-    _font: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    _font: {fileID: 11400000, guid: 18799d532c873f84d96b4f99c54213b1, type: 2}
     _style: 0
     _sizeMultiplier: 1
     _lineSpacing: 1
@@ -349,7 +349,7 @@ MonoBehaviour:
     _wordSpacing: 1
   _inputGridFieldTextSettings:
     _color: {r: 1, g: 1, b: 1, a: 1}
-    _font: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    _font: {fileID: 11400000, guid: 18799d532c873f84d96b4f99c54213b1, type: 2}
     _style: 0
     _sizeMultiplier: 1
     _lineSpacing: 1
