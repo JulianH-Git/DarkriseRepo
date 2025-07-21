@@ -110,7 +110,7 @@ Transform:
   m_Children:
   - {fileID: 4837688321155255534}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4393842505336201045
 SpriteRenderer:
@@ -181,6 +181,8 @@ MonoBehaviour:
   currentState: 0
   bounciness: 1000
   reflectionSurface: {fileID: 5694523318656324500}
+  rotatable: 1
+  rotation: 0
 --- !u!61 &1699868006631763540
 BoxCollider2D:
   m_ObjectHideFlags: 0

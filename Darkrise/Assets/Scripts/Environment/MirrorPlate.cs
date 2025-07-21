@@ -8,6 +8,7 @@ public class MirrorPlate : MonoBehaviour
     [SerializeField] public PlateState currentState;
     [SerializeField] float bounciness;
     [SerializeField] GameObject reflectionSurface;
+    [SerializeField] bool rotatable;
     PlayerController player;
     SpriteRenderer sr;
     [SerializeField] float rotation = 0f;
@@ -62,11 +63,14 @@ public class MirrorPlate : MonoBehaviour
 
     public void Rotate()
     {
-        rotation -= 45f;
-        if (rotation <= -360f)
+        if(rotatable)
         {
-            rotation = 0f;
+            rotation -= 45f;
+            if (rotation <= -360f)
+            {
+                rotation = 0f;
+            }
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, rotation);
         }
-        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, rotation);
     }
 }

@@ -126,6 +126,8 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     [SerializeField] float modeLockedTimer;
     float modeLockedTimeToRelease;
     bool bubbleUp = false;
+    public bool dashedIntoShadowBlock = false;
+    bool checkForDashedIntoShadowBlock = false;
     public bool BubbleUp
     {
         get { return bubbleUp; }
@@ -216,6 +218,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     private bool spellSwapPressed;
 
     private bool stopFading = false;
+    private bool loadedMode = false;
 
     public enum AttackType
     {
@@ -224,7 +227,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         Dark
     }
 
-    public AttackType currentAttackType = AttackType.Neutral;
+    public AttackType currentAttackType;
 
     public enum EquippedLightSpell
     {
@@ -262,16 +265,20 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         transform.position = data.position;
         maxEnergy = data.maxEnergy;
         maxHealth = data.maxHealth;
+        darkUnlocked = data.darkUnlocked;
+        lightUnlocked = data.lightUnlocked;
+        currentAttackType = data.currentAttackType;
+        if(data.currentAttackType != AttackType.Neutral) { modeLocked = true; loadedMode = true; }
         data.upgradeStatus.TryGetValue("DASH", out canDash);
-        data.upgradeStatus.TryGetValue("DARK", out darkUnlocked);
-        data.upgradeStatus.TryGetValue("LIGHT", out lightUnlocked);
-
     }
     public void SaveData(GameData data)
     {
         if (lastStatue != null) { data.position = lastStatue.transform.position; }
         data.maxHealth = maxHealth;
         data.maxEnergy = maxEnergy;
+        data.lightUnlocked = lightUnlocked;
+        data.darkUnlocked = darkUnlocked;
+        data.currentAttackType = currentAttackType;
     }
 
 
@@ -347,6 +354,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
 
     void FixedUpdate()
     {
+        if(loadedMode) { SwitchAttackTypes(currentAttackType); loadedMode = false; }
         if (health <= 0) { return; }
 
         countUptoGlance += Time.deltaTime;
@@ -581,6 +589,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         rb.velocity = new Vector2(transform.localScale.x * dashSpeed, 0);
         //Physics2D.IgnoreLayerCollision(0, 6, true); this line is what activates passing through enemies
         yield return new WaitForSeconds(dashTime);
+        checkForDashedIntoShadowBlock = false;
         rb.gravityScale = gravity;
         pState.dashing = false;
         //Physics2D.IgnoreLayerCollision(0, 6, false); this line is what deactivates passing through enemies
@@ -1574,8 +1583,13 @@ public class PlayerController : MonoBehaviour, IDataPersistence
             }
         }
 
-        if (dashPressed || jumpPressed)
+        if (jumpPressed)
         {
+            StopShadowWalk();
+        }
+        if(dashPressed)
+        {
+            checkForDashedIntoShadowBlock = true;
             StopShadowWalk();
         }
     }
@@ -1611,6 +1625,15 @@ public class PlayerController : MonoBehaviour, IDataPersistence
             Gizmos.DrawWireCube(sideAttackTransform.position, sideAttackArea);
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireCube(airAttackTransform.position, airAttackArea);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<ShadowBlock>() != null && pState.dashing && checkForDashedIntoShadowBlock)
+        {
+            dashedIntoShadowBlock = true;
+            checkForDashedIntoShadowBlock = false;
         }
     }
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -67,9 +68,10 @@ public class ShadowBlock : MonoBehaviour
             {
                 if (!PlayerController.Instance.pState.shadowWalking) { PlayerController.Instance.playerArrowIndicator.SetActive(true); }
   
-                if (PlayerController.Instance.Interact())
-                {
+                if (PlayerController.Instance.Interact() || PlayerController.Instance.dashedIntoShadowBlock)
+                {    
                     PlayerController.Instance.pState.shadowWalking = true;
+                    PlayerController.Instance.dashedIntoShadowBlock = false;
                     PlayerController.Instance.playerArrowIndicator.SetActive(false);
                 }
                 

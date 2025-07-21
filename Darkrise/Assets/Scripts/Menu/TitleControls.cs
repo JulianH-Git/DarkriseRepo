@@ -48,7 +48,8 @@ public class TitleControls : MonoBehaviour
     {
         if (player.GetButtonDown("UICancel"))
         {
-            if (settingsMenuUI.activeSelf == true) { StartExitingSettingsMenu(); }
+            if (settingsMenuUI.activeSelf == true && mapper.enabled != true) { StartExitingSettingsMenu(); }
+            else if(settingsMenuUI.activeSelf == true && mapper.enabled == true) { StartExitingControlsMenu(); }
         }
 
         if (hasPressed)
@@ -139,6 +140,7 @@ public class TitleControls : MonoBehaviour
         if (hasPressed) { return; }
         AudioManager.instance.PlayOneShot(FMODEvents.instance.pauseSelect, this.transform.position);
         Debug.Log("Loading controls menu...");
+        EventSystem.current.SetSelectedGameObject(null);
         mapper.Open();
     }
 
@@ -149,14 +151,8 @@ public class TitleControls : MonoBehaviour
 
     public void StartExitingControlsMenu()
     {
-        StartCoroutine(ExitControlsMenu());
-    }
-
-    public IEnumerator ExitControlsMenu()
-    {
         Debug.Log("Exiting controls menu...");
         AudioManager.instance.PlayOneShot(FMODEvents.instance.pauseBack, this.transform.position);
-        yield return new WaitForSecondsRealtime(0.3f);
         mapper.Close(true);
         EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
         EventSystem.current.SetSelectedGameObject(optionsFirstButton);

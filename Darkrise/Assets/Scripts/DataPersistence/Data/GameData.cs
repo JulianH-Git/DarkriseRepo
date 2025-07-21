@@ -20,6 +20,10 @@ public class GameData
     public bool darkUnlocked;
     public bool lightUnlocked;
 
+    // current attack state
+
+    public PlayerController.AttackType currentAttackType;
+
     // location name will be added later for save file screen
 
     // one time use objects
@@ -55,6 +59,7 @@ public class GameData
         canDash = false;
         darkUnlocked = false;
         lightUnlocked = false;
+        currentAttackType = PlayerController.AttackType.Neutral;
         upgradeStatus = new SerializableDictionary<string, bool>();
         FEMStatus = new SerializableDictionary<string, bool>();
         fbStatus = new SerializableDictionary<string, bool>();
