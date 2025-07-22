@@ -127,7 +127,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     float modeLockedTimeToRelease;
     bool bubbleUp = false;
     public bool dashedIntoShadowBlock = false;
-    bool checkForDashedIntoShadowBlock = false;
+    public bool checkForDashedIntoShadowBlock = false;
     public bool BubbleUp
     {
         get { return bubbleUp; }
@@ -337,6 +337,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         animator.SetBool("isDashing", false);
         animator.SetBool("hiding", false);
         animator.SetBool("darkDashGlance", false);
+        animator.SetBool("shadowWalking", false);
         pState.PrepForDeath();
         rb.gravityScale = 0;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
@@ -373,7 +374,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
 
         if (pState.hiding) { Hiding(); return; }
 
-        if (pState.shadowWalking) { ShadowBlockMovement(); return; }
+        if (pState.shadowWalking) { ShadowBlockMovement(); Flip(); return; }
 
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle") && !idleGlancePlaying && countUptoGlance >= timeBetweenGlances)
         {
@@ -561,7 +562,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
 
     }
 
-    void Flip() // this will be useful for animation stuff later
+    void Flip()
     {
         if (xAxis < 0)
         {
@@ -584,18 +585,18 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     {
         canDash = false;
         pState.dashing = true;
-        //trigger dash animation
         rb.gravityScale = 0; // this allows the dash to keep the player from falling if they do so in the air
         rb.velocity = new Vector2(transform.localScale.x * dashSpeed, 0);
         //Physics2D.IgnoreLayerCollision(0, 6, true); this line is what activates passing through enemies
+        if(currentAttackType == AttackType.Dark) { checkForDashedIntoShadowBlock = true; }
         yield return new WaitForSeconds(dashTime);
-        checkForDashedIntoShadowBlock = false;
         rb.gravityScale = gravity;
         pState.dashing = false;
         //Physics2D.IgnoreLayerCollision(0, 6, false); this line is what deactivates passing through enemies
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
         dashPressed = false;
+        if(pState.shadowWalking) { dashed = false; }
     }
 
     void StartDash()
@@ -1536,10 +1537,12 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         sr.sortingOrder = 1;
         animator.SetBool("hiding", false);
         animator.SetBool("darkDashGlance", false);
+        animator.SetBool("shadowWalking", false);
         pState.hiding = false;
         spellUsedRecently = true;
         playerArrowIndicator.SetActive(false);
         playerArrowIndicator.transform.rotation = defaultArrowRotation;
+        dashedIntoShadowBlock = false;
     }
 
     private void DarkRoomBubble()
@@ -1574,6 +1577,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
             rb.gravityScale = 0;
             Physics2D.IgnoreLayerCollision(0, 6, true);
             sr.sortingOrder = -1;
+            SetShadowWalkAnimation();
             ShadowWalk();
             CurrentEnergy -= hidingEnergyLossRate * Time.deltaTime;
 
@@ -1581,16 +1585,16 @@ public class PlayerController : MonoBehaviour, IDataPersistence
             {
                 StopShadowWalk();
             }
-        }
-
-        if (jumpPressed)
-        {
-            StopShadowWalk();
-        }
-        if(dashPressed)
-        {
-            checkForDashedIntoShadowBlock = true;
-            StopShadowWalk();
+            if (jumpPressed)
+            {
+                StopShadowWalk();
+                Jump();
+            }
+            if (dashPressed)
+            {
+                checkForDashedIntoShadowBlock = true;
+                StartDash();
+            }
         }
     }
 
@@ -1600,14 +1604,25 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         sr.sortingOrder = 1;
         rb.gravityScale = gravity;
         pState.shadowWalking = false;
+        animator.SetBool("shadowWalking", false);
         if (!checkSpellUsedRecently) { spellUsedRecently = false; }
         else { spellUsedRecently = true; }
 
     }
 
+    private void SetShadowWalkAnimation()
+    {
+        animator.SetBool("isWalking", false);
+        animator.SetBool("isDashing", false);
+        animator.SetBool("hiding", false);
+        animator.SetBool("darkDashGlance", false);
+        animator.SetBool("shadowWalking", true);
+    }
+
     private void ShadowWalk()
     {
         rb.velocity = new Vector2(walkSpeed * xAxis, walkSpeed * yAxis);
+        animator.SetFloat("yVel", rb.velocity.y);
     }
     public void AddXForce(float _force)
     {
@@ -1633,7 +1648,6 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         if (collision.gameObject.GetComponent<ShadowBlock>() != null && pState.dashing && checkForDashedIntoShadowBlock)
         {
             dashedIntoShadowBlock = true;
-            checkForDashedIntoShadowBlock = false;
         }
     }
 

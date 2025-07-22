@@ -1,3 +1,4 @@
+using Rewired;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -10,7 +11,7 @@ public class ShadowBlock : MonoBehaviour
     SpriteRenderer sr;
     BoxCollider2D bx;
     [SerializeField] Transform center;
-    bool[] connected = { false, false, false, false }; // 0 = down, 1 = up, 2 = left, 3 = right
+    [SerializeField] bool[] connected = { false, false, false, false }; // 0 = down, 1 = up, 2 = left, 3 = right
     [SerializeField] LayerMask ShadowBlockLayer;
     [SerializeField] float horizontalConnectionLength;
     [SerializeField] float verticalConnectionLength;
@@ -30,7 +31,7 @@ public class ShadowBlock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     protected void OnTriggerExit2D(Collider2D collision)
     {
@@ -57,6 +58,7 @@ public class ShadowBlock : MonoBehaviour
                 PlayerController.Instance.pState.shadowWalking = false;
                 PlayerController.Instance.SR.sortingOrder = 1;
                 PlayerController.Instance.ExitShadowWalk();
+
             }
         }
     }
@@ -67,14 +69,18 @@ public class ShadowBlock : MonoBehaviour
             if(PlayerController.Instance.currentAttackType == PlayerController.AttackType.Dark)
             {
                 if (!PlayerController.Instance.pState.shadowWalking) { PlayerController.Instance.playerArrowIndicator.SetActive(true); }
-  
+
                 if (PlayerController.Instance.Interact() || PlayerController.Instance.dashedIntoShadowBlock)
-                {    
+                {
                     PlayerController.Instance.pState.shadowWalking = true;
-                    PlayerController.Instance.dashedIntoShadowBlock = false;
                     PlayerController.Instance.playerArrowIndicator.SetActive(false);
+                    if(PlayerController.Instance.pState.shadowWalking && !PlayerController.Instance.pState.dashing)
+                    {
+                        PlayerController.Instance.dashedIntoShadowBlock = false;
+                        PlayerController.Instance.checkForDashedIntoShadowBlock = false;
+                    }
                 }
-                
+
             }
             else
             {
@@ -95,7 +101,7 @@ public class ShadowBlock : MonoBehaviour
 
     private void CheckForShadowBlocks()
     {
-        int[] hits = new int[4]; // 0 = up, 1 = down, 2 = left, 3 = right
+        int[] hits = new int[4]; // 0 = down, 1 = up, 2 = left, 3 = right
 
         List<RaycastHit2D> results1 = new List<RaycastHit2D>();
         List<RaycastHit2D> results2 = new List<RaycastHit2D>();
