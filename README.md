@@ -1,3 +1,3 @@
 # Darkrise - Fear the Light
 
-The official GitHub repository for **Darkrise**, our 2D stealth-action game now in development.
+The official GitHub repository for **Darkrise**, our stealth-driven, puzzle-solving game currently in development.
