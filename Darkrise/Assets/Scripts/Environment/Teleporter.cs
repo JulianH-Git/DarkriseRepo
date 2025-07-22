@@ -35,9 +35,9 @@ public class Teleporter : InteractTrigger
 
         yield return new WaitForSeconds(0.3f);
 
-        playerController.CanMove = true;
-
         yield return StartCoroutine(Fade(1.0f, 0.0f));
+
+        playerController.CanMove = true;
     }
 
     private IEnumerator Fade(float startAlpha, float endAlpha)
