@@ -145,6 +145,13 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     float releaseStaleInputs = 0.1f;
     float releaseStateInputsIncrement = 0.0f;
     [SerializeField] GameObject gotHitParticles;
+    [SerializeField] GameObject hurtTrail;
+    [SerializeField] GameObject lightModeParticles;
+    [SerializeField] GameObject darkModeParticles;
+    [SerializeField] GameObject darkModeParticlesTransform;
+
+    GameObject _lightModeParticles;
+    GameObject _darkModeParticles;
     public int Health
     {
         get { return health; }
@@ -1300,6 +1307,8 @@ public class PlayerController : MonoBehaviour, IDataPersistence
                 animator.SetLayerWeight(0, 1);
                 animator.SetLayerWeight(1, 0);
                 animator.SetLayerWeight(2, 0);
+                if (_darkModeParticles != null) { Destroy(_darkModeParticles); }
+                if (_lightModeParticles != null) { Destroy(_lightModeParticles); }
                 break;
             case AttackType.Light:
                 animator.SetBool("darkMode", false);
@@ -1307,6 +1316,8 @@ public class PlayerController : MonoBehaviour, IDataPersistence
                 animator.SetLayerWeight(0, 0);
                 animator.SetLayerWeight(1, 0);
                 animator.SetLayerWeight(2, 1);
+                if (_darkModeParticles != null) { Destroy(_darkModeParticles); }
+                _lightModeParticles = Instantiate(lightModeParticles, transform.position, Quaternion.identity,this.transform);
                 break;
             case AttackType.Dark:
                 animator.SetBool("darkMode", true);
@@ -1314,6 +1325,8 @@ public class PlayerController : MonoBehaviour, IDataPersistence
                 animator.SetLayerWeight(0, 0);
                 animator.SetLayerWeight(1, 1);
                 animator.SetLayerWeight(2, 0);
+                if (_lightModeParticles != null) { Destroy(_lightModeParticles); }
+                _darkModeParticles = Instantiate(darkModeParticles, darkModeParticlesTransform.transform.position, Quaternion.identity,darkModeParticlesTransform.transform);
                 break;
         }
     }
@@ -1371,9 +1384,11 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         pState.invincible = true;
         GameObject _gotHitParticles = Instantiate(gotHitParticles, transform.position, Quaternion.identity);
         Destroy(_gotHitParticles, 1.5f);
+        GameObject _hurtTrail = Instantiate(hurtTrail, transform.position, Quaternion.identity,this.transform);;
         animator.SetTrigger("TakeDamage");
         pState.recoilingX = true;
         yield return new WaitForSeconds(1f);
+        _hurtTrail.GetComponent<ParticleSystem>().Stop();
         pState.invincible = false;
         if (health <= 0)
         {

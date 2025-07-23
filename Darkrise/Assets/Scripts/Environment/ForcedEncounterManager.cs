@@ -9,6 +9,8 @@ public class ForcedEncounterManager : MonoBehaviour, IDataPersistence
     [SerializeField] bool turnSpotlightsToLasers;
     [SerializeField] List<GameObject> feSpotlights = new List<GameObject>();
     [SerializeField] List<GameObject> lasers = new List<GameObject>();
+    [SerializeField] List<GameObject> lasersToSpotlights = new List<GameObject>();
+    [SerializeField] List<GameObject> detectors = new List<GameObject>();
     [SerializeField] List<GameObject> forcedEncounterWalls = new List<GameObject>();
     [SerializeField] List<GameObject> extraEnemySpawns = new List<GameObject>();
     [SerializeField] List<GameObject> permanentEnemySpawns = new List<GameObject>();
@@ -84,6 +86,7 @@ public class ForcedEncounterManager : MonoBehaviour, IDataPersistence
         ActivateSpawners();
         if (turnSpotlightsToLasers) { SpotlightsToLasers(); }
         else { ActivateSpotlights(); }
+        ActivateDetectors();
     }
 
     public void ActivateForcedEncounterMidSecurity()
@@ -164,6 +167,11 @@ public class ForcedEncounterManager : MonoBehaviour, IDataPersistence
             }
         }
 
+        foreach(GameObject detector in detectors)
+        {
+            detector.SetActive(false);
+        }
+
         if(!breaker.deactivated)
         {
             breaker.DisableBreaker();
@@ -202,15 +210,37 @@ public class ForcedEncounterManager : MonoBehaviour, IDataPersistence
 
     void SpotlightsToLasers()
     {
-        int loopCount = feSpotlights.Count;
-        for(int i = 0; i < loopCount; i++)
+        if(lasersToSpotlights.Count != 0)
         {
-            feSpotlights[i].SetActive(false);
-            GameObject newLaser = Instantiate(laserPrefab, new Vector3(feSpotlights[i].transform.position.x, feSpotlights[i].transform.position.y - 0.15f),Quaternion.identity,extraLasersParent.transform);
-            extraLasers.Add(newLaser);
-            newLaser.SetActive(true);
-            newLaser.transform.localScale = new Vector3(0.21f, 0.24f);
+
+            int spotlightloopCount = feSpotlights.Count;
+            for (int i = 0; i < spotlightloopCount; i++)
+            {
+                feSpotlights[i].SetActive(false);
+            }
+
+            int loopCount = lasersToSpotlights.Count;
+            for (int i = 0; i < loopCount; i++)
+            {
+                GameObject newLaser = Instantiate(laserPrefab, new Vector3(lasersToSpotlights[i].transform.position.x, lasersToSpotlights[i].transform.position.y - 0.15f), Quaternion.identity, extraLasersParent.transform);
+                extraLasers.Add(newLaser);
+                newLaser.SetActive(true);
+                newLaser.transform.localScale = new Vector3(0.21f, 0.24f);
+            }
         }
+        else
+        {
+            int loopCount = feSpotlights.Count;
+            for (int i = 0; i < loopCount; i++)
+            {
+                feSpotlights[i].SetActive(false);
+                GameObject newLaser = Instantiate(laserPrefab, new Vector3(feSpotlights[i].transform.position.x, feSpotlights[i].transform.position.y - 0.15f), Quaternion.identity, extraLasersParent.transform);
+                extraLasers.Add(newLaser);
+                newLaser.SetActive(true);
+                newLaser.transform.localScale = new Vector3(0.21f, 0.24f);
+            }
+        }
+            
     }
 
     void ActivateLasers()
@@ -218,6 +248,14 @@ public class ForcedEncounterManager : MonoBehaviour, IDataPersistence
         foreach(GameObject laser in lasers)
         {
             laser.GetComponentInChildren<SpotlightPrefab>().state = SpotlightStates.Laser;
+        }
+    }
+
+    void ActivateDetectors()
+    {
+        foreach(GameObject detector in detectors)
+        {
+            detector.SetActive(true);
         }
     }
 }
