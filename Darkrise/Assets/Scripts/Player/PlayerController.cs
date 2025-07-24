@@ -522,19 +522,21 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         {
             interactPressed = player.GetButtonDown("Interact");
         }
-
-        if (jumpPressed)
+        if (canMove)
         {
-            if (Grounded() && !pState.dashing || !doubleJumpPressed && !pState.dashing)
+            if (jumpPressed)
             {
-                animator.SetTrigger("jumpSquat");
-                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-                doubleJumpPressed = !Grounded();
+                if (Grounded() && !pState.dashing || !doubleJumpPressed && !pState.dashing)
+                {
+                    animator.SetTrigger("jumpSquat");
+                    rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                    doubleJumpPressed = !Grounded();
+                }
             }
-        }
-        if (Grounded())
-        {
-            doubleJumpPressed = false;
+            if (Grounded())
+            {
+                doubleJumpPressed = false;
+            }
         }
 
         if (!spellSwapPressed)
@@ -1097,13 +1099,16 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         }
 
         // buffer for the jumpjump button
-        if (player.GetButtonDown("Jump"))
+        if(canMove)
         {
-            jumpBufferCounter = jumpBuffer;
-        }
-        else
-        {
-            jumpBufferCounter = Mathf.Max(0, jumpBufferCounter - Time.deltaTime);
+            if (player.GetButtonDown("Jump"))
+            {
+                jumpBufferCounter = jumpBuffer;
+            }
+            else
+            {
+                jumpBufferCounter = Mathf.Max(0, jumpBufferCounter - Time.deltaTime);
+            }
         }
     }
 
@@ -1384,7 +1389,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         pState.invincible = true;
         GameObject _gotHitParticles = Instantiate(gotHitParticles, transform.position, Quaternion.identity);
         Destroy(_gotHitParticles, 1.5f);
-        GameObject _hurtTrail = Instantiate(hurtTrail, transform.position, Quaternion.identity,this.transform);;
+        GameObject _hurtTrail = Instantiate(hurtTrail, transform.position, Quaternion.identity,this.transform);
         animator.SetTrigger("TakeDamage");
         pState.recoilingX = true;
         yield return new WaitForSeconds(1f);
