@@ -181,17 +181,17 @@ public class enemyBase : MonoBehaviour
         {
             boxCollider[i].enabled = true;
         }
-        gameObject.SetActive(true);
+        if (this.GetComponent<FootSolider>() != null)
+        {
+            this.GetComponent<FootSolider>().aggressive = false;
+            this.GetComponent<FootSolider>().alerted = false;
+        }
         isDying = false;
         anim.ResetTrigger("death");
         anim.Play("idle");
         SetPosition(anchorPos);
         dieOnce = false;
-        if(this.GetComponent<FootSolider>() != null)
-        {
-            this.GetComponent<FootSolider>().aggressive = false;
-            this.GetComponent<FootSolider>().alerted = false;
-        }
+        gameObject.SetActive(true);
     }
 
     public virtual void SetPosition(Vector2 pos)

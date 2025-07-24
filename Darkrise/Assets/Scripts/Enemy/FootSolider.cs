@@ -53,12 +53,7 @@ public class FootSolider : enemyBase
                 if (aggressive)
                 {
                     Chase(playerInRange);
-                    //Should probably be adjusted later to just trigger when the Soldier sees the player but the moment he detects you wasn't clear
-                    if(!chaseOnce)
-                    {
-                        AudioManager.instance.PlayOneShot(FMODEvents.instance.soldierDetected, this.transform.position);
-                        chaseOnce = true;
-                    }
+                    
                 }
                 if (alerted && !aggressive)
                 {
@@ -110,6 +105,11 @@ public class FootSolider : enemyBase
 
         if (playerInRange != null && playerInRange.CompareTag("Player"))
         {
+            if (!chaseOnce)
+            {
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.soldierDetected, this.transform.position);
+                chaseOnce = true;
+            }
             SetAggressive(true);
         }
     }
@@ -287,6 +287,15 @@ public class FootSolider : enemyBase
         aggressive = value;
         anim.SetBool("aggresive", value);
         anim.SetBool("idle", !value);
+        if (!chaseOnce && value)
+        {
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.soldierDetected, this.transform.position);
+            chaseOnce = true;
+        }
+        else if(!value && chaseOnce)
+        {
+            chaseOnce = false;
+        }
         if (value)
         {
             currentAggroTimer = aggressionTimer;

@@ -85,6 +85,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     [SerializeField] public int maxHealth;
     public delegate void OnHealthChangedDelegate();
     [HideInInspector] public OnHealthChangedDelegate onHealthChangedCallback;
+    [SerializeField] float hitFlashSpeed;
 
     [Space(5)]
     [Header("Audio Settings")]
@@ -445,6 +446,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         StartDash();
         UpdateSound();
         // animation update
+        FlashWhileInvul();
         animator.SetBool("isGrounded", Grounded());
         animator.SetFloat("yVel", rb.velocity.y);
         animator.SetFloat("xVel", rb.velocity.x);
@@ -1398,6 +1400,18 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         if (health <= 0)
         {
             maxVelocity = 0.0f;
+        }
+    }
+
+    void FlashWhileInvul()
+    {
+        if(pState.invincible)
+        {
+            sr.material.color = Color.Lerp(Color.white, Color.black, Mathf.PingPong(Time.time * hitFlashSpeed, 1.0f));
+        }
+        else
+        {
+            sr.material.color = Color.white;
         }
     }
     private void UpdateSound()
