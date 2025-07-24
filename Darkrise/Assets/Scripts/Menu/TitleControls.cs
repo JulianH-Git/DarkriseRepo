@@ -20,6 +20,7 @@ public class TitleControls : MonoBehaviour
     [SerializeField] public GameObject settingsMenuUI;
     [SerializeField] GameObject LoadGameButton;
     [SerializeField] private Rewired.UI.ControlMapper.ControlMapper mapper = null;
+    [SerializeField] Toggle hitStopCheck;
     public GameObject pauseFirstButton, //button that's highlighted when you pause
     optionsFirstButton, //button that's highlighted when you first open the options menu
     optionsClosedButton;
@@ -144,23 +145,16 @@ public class TitleControls : MonoBehaviour
         mapper.Open();
     }
 
-    public void ToggleHitStop()
-    {
-        if (PlayerController.Instance.doHitStop)
-        {
-            PlayerController.Instance.doHitStop = false;
-        }
-        else
-        {
-            PlayerController.Instance.doHitStop = true;
-        }
-    }
+  
 
     public void StartExitingSettingsMenu()
     {
         StartCoroutine(ExitSettingsMenu());
     }
-
+    public void ToggleHitStop()
+    {
+        DataPersistenceManager.Instance.ToggleHitStop(hitStopCheck.isOn);
+    }
     public void StartExitingControlsMenu()
     {
         Debug.Log("Exiting controls menu...");

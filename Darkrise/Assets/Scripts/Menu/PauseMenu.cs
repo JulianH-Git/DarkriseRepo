@@ -26,6 +26,7 @@ public class PauseMenu : MonoBehaviour
         optionsClosedButton;
     [SerializeField] private ConfirmationPopupMenu popup;
     [SerializeField] List<Button> buttonsToDeactivate = new List<Button>();
+    [SerializeField] Toggle hitStopToggle;
 
     private void Awake()
     {
@@ -229,14 +230,7 @@ public class PauseMenu : MonoBehaviour
 
     public void ToggleHitStop()
     {
-        if(PlayerController.Instance.doHitStop)
-        {
-            PlayerController.Instance.doHitStop = false;
-        }
-        else
-        {
-            PlayerController.Instance.doHitStop = true;
-        }
+        PlayerController.Instance.doHitStop = hitStopToggle.isOn;
     }
 
     public void QuitGame()

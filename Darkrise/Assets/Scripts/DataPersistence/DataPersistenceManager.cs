@@ -10,10 +10,12 @@ public class DataPersistenceManager : MonoBehaviour
     [SerializeField] bool useEncryption;
     [Header("Debugging Settings")]
     [SerializeField] bool initializeDataIfNull = false;
+
     public static DataPersistenceManager Instance { get; private set; }
     private GameData gameData;
     private List<IDataPersistence> dataPersistenceObjects;
     private FileDataHandler dataHandler;
+    bool startWithHitStop;
 
     private void Awake()
     {
@@ -31,6 +33,7 @@ public class DataPersistenceManager : MonoBehaviour
     public void NewGame()
     {
         this.gameData = new GameData();
+        if(startWithHitStop) { this.gameData.doHitStop = startWithHitStop; }
     }
 
     public void LoadGame()
@@ -104,5 +107,17 @@ public class DataPersistenceManager : MonoBehaviour
     public bool HasGameData()
     {
         return gameData != null;
+    }
+
+    public void ToggleHitStop(bool value)
+    {
+        if(gameData != null)
+        {
+            gameData.doHitStop = value;
+        }
+        else
+        {
+            startWithHitStop = value;
+        }
     }
 }

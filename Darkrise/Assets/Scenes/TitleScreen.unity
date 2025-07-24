@@ -7789,9 +7789,9 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2013635958}
-        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 2013635963}
+        m_TargetAssemblyTypeName: TitleControls, Assembly-CSharp
+        m_MethodName: ToggleHitStop
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9350,7 +9350,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2013635963}
         m_TargetAssemblyTypeName: TitleControls, Assembly-CSharp
-        m_MethodName: ToggleHitStop
+        m_MethodName: StartExitingSettingsMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9523,6 +9523,7 @@ MonoBehaviour:
   settingsMenuUI: {fileID: 539656304}
   LoadGameButton: {fileID: 2109457060}
   mapper: {fileID: 875037308}
+  hitStopCheck: {fileID: 1645734360}
   pauseFirstButton: {fileID: 782165716}
   optionsFirstButton: {fileID: 1993582731}
   optionsClosedButton: {fileID: 448142794}

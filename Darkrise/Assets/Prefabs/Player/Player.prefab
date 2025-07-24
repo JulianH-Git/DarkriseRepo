@@ -279,6 +279,8 @@ MonoBehaviour:
   recoilSpeedY: 3
   health: 0
   maxHealth: 8
+  hitFlashSpeed: 0
+  doHitStop: 1
   maxEnergy: 20
   currentEnergy: 20
   recoveryTimer: 2
