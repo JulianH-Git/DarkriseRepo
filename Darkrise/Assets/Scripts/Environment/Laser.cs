@@ -1,4 +1,7 @@
+using Cinemachine.Utility;
+using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 [RequireComponent(typeof(LineRenderer))]
 public class Laser : MonoBehaviour
@@ -6,9 +9,14 @@ public class Laser : MonoBehaviour
     public LayerMask layersToHit;
     [SerializeField] float laserLength = 10f;
     [SerializeField] int maxReflections = 5;
+    [SerializeField] GameObject reflectionParticles;
+    [SerializeField] GameObject reflectorsParticlesParent;
     private LineRenderer lineRenderer;
     private Vector2 dir;
     private PlayerController controller;
+    private List<GameObject> _reflectionParticles = new List<GameObject>();
+    private List<Vector2> hits = new List<Vector2>();
+    private List<Vector2> lastHits = new List<Vector2>();
 
     void Start()
     {
@@ -21,8 +29,9 @@ public class Laser : MonoBehaviour
     {
         float angle = transform.eulerAngles.z * Mathf.Deg2Rad;
         dir = new Vector2(-Mathf.Sin(angle), Mathf.Cos(angle));
-
         DrawLaser(transform.position, dir);
+        AddParticles(hits);
+        hits.Clear();
     }
 
     void DrawLaser(Vector2 startPosition, Vector2 direction)
@@ -53,21 +62,10 @@ public class Laser : MonoBehaviour
                 {
                     currentDir = Vector2.Reflect(currentDir, hit.normal);
                     currentPos = hitPoint + currentDir * 0.01f;
+                    hits.Add(currentPos);
                     Debug.DrawRay(hit.point, hit.normal, Color.green);
                     reflectionsRemaining--;
                 }
-                /*else if(hit.collider.CompareTag("Player"))
-                {
-                    if(!controller.pState.invincible && !controller.pState.dashing && controller.Health >= 1)
-                    {
-                        controller.TakeDamage(1);
-                        reflectionsRemaining--;
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }*/
                 else
                 {
                     if (hit.collider.CompareTag("Receiver"))
@@ -87,8 +85,30 @@ public class Laser : MonoBehaviour
                 lineRenderer.positionCount += 1;
                 lineRenderer.SetPosition(segmentIndex, endPoint);
                 Debug.DrawLine(currentPos, endPoint, Color.red);
-
                 break;
+            }
+        }
+    }
+
+    void AddParticles(List<Vector2> _hits)
+    {
+        if(lastHits.SequenceEqual(_hits)) return;
+        else
+        {
+            for (int i = 0; i < _hits.Count; i++)
+            {
+                if (i >= _reflectionParticles.Count)
+                {
+                    _reflectionParticles.Add(Instantiate(reflectionParticles, _hits[i], Quaternion.identity, reflectorsParticlesParent.transform));
+                }
+
+                _reflectionParticles[i].transform.position = _hits[i];
+                _reflectionParticles[i].SetActive(true);
+            }
+
+            for (int i = _hits.Count; i < _reflectionParticles.Count; i++)
+            {
+                _reflectionParticles[i].SetActive(false);
             }
         }
     }
