@@ -12,7 +12,7 @@ public class GameData
     public Vector3 position;
     public int maxHealth;
     public float maxEnergy;
-
+    public bool doHitStop;
 
     // upgrades
 
@@ -56,6 +56,7 @@ public class GameData
         this.position = new Vector3(-4.48f, 4.2f, 0); // start of level 1
         this.maxHealth = 8;
         this.maxEnergy = 20;
+        doHitStop = true;
         canDash = false;
         darkUnlocked = false;
         lightUnlocked = false;

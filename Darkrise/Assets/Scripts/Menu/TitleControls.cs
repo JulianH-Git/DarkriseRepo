@@ -144,6 +144,18 @@ public class TitleControls : MonoBehaviour
         mapper.Open();
     }
 
+    public void ToggleHitStop()
+    {
+        if (PlayerController.Instance.doHitStop)
+        {
+            PlayerController.Instance.doHitStop = false;
+        }
+        else
+        {
+            PlayerController.Instance.doHitStop = true;
+        }
+    }
+
     public void StartExitingSettingsMenu()
     {
         StartCoroutine(ExitSettingsMenu());

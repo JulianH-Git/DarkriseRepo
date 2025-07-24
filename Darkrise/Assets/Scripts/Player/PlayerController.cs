@@ -1,3 +1,4 @@
+using FMOD;
 using FMOD.Studio;
 using Rewired;
 using System.Collections;
@@ -86,6 +87,9 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     public delegate void OnHealthChangedDelegate();
     [HideInInspector] public OnHealthChangedDelegate onHealthChangedCallback;
     [SerializeField] float hitFlashSpeed;
+    bool restoreTime;
+    float restoreTimeSpeed;
+    [SerializeField] public bool doHitStop = false;
 
     [Space(5)]
     [Header("Audio Settings")]
@@ -276,6 +280,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         darkUnlocked = data.darkUnlocked;
         lightUnlocked = data.lightUnlocked;
         currentAttackType = data.currentAttackType;
+        doHitStop = data.doHitStop;
         if(data.currentAttackType != AttackType.Neutral) { modeLocked = true; loadedMode = true; }
         data.upgradeStatus.TryGetValue("DASH", out canDash);
     }
@@ -287,6 +292,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         data.lightUnlocked = lightUnlocked;
         data.darkUnlocked = darkUnlocked;
         data.currentAttackType = currentAttackType;
+        data.doHitStop = doHitStop;
     }
 
 
@@ -339,6 +345,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
 
     private IEnumerator WaitTillEnd()
     {
+        Time.timeScale = 1;
         animator.SetBool("isDead", true);
         // disable all other bools
         animator.SetBool("isWalking", false);
@@ -445,6 +452,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         Recoil();
         StartDash();
         UpdateSound();
+        RestoreTimeScale();
         // animation update
         FlashWhileInvul();
         animator.SetBool("isGrounded", Grounded());
@@ -817,7 +825,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
             {
                 case AttackType.Dark:
                     currentDarkSpell = EquippedDarkSpell.Placeholder; // add others in later
-                    Debug.Log($"Current dark spell - {currentDarkSpell}");
+                    UnityEngine.Debug.Log($"Current dark spell - {currentDarkSpell}");
                     spellSwapPressed = false;
                     break;
                 case AttackType.Light:
@@ -834,7 +842,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
                             lightModeBubble.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
                             break;
                     }
-                    Debug.Log($"Current light spell - {currentLightSpell}");
+                    UnityEngine.Debug.Log($"Current light spell - {currentLightSpell}");
                     spellSwapPressed = false;
                     break;
             }
@@ -846,7 +854,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         switch (currentDarkSpell)
         {
             case EquippedDarkSpell.Placeholder:
-                Debug.Log("Placeholder");
+                UnityEngine.Debug.Log("Placeholder");
                 break;
         }
 
@@ -1401,6 +1409,50 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         {
             maxVelocity = 0.0f;
         }
+    }
+
+    void RestoreTimeScale()
+    {
+        if(doHitStop)
+        {
+            if (restoreTime)
+            {
+                if (Time.timeScale < 1)
+                {
+                    Time.timeScale += Time.unscaledDeltaTime * restoreTimeSpeed;
+                }
+                else
+                {
+                    Time.timeScale = 1;
+                    restoreTime = true;
+                }
+            }
+        }
+    }
+
+    public void HitStopTime(float _newTimeScale,int _restoreSpeed, float _delay)
+    {
+        if(doHitStop)
+        {
+            restoreTimeSpeed = _restoreSpeed;
+            Time.timeScale = _newTimeScale;
+            if (_delay > 0)
+            {
+                StopCoroutine(StartTimeAgain(_delay));
+                StartCoroutine(StartTimeAgain(_delay));
+            }
+            else
+            {
+                restoreTime = true;
+            }
+        }
+
+    }
+
+    IEnumerator StartTimeAgain(float _delay)
+    {
+        yield return new WaitForSecondsRealtime(_delay);
+        restoreTime = true;
     }
 
     void FlashWhileInvul()

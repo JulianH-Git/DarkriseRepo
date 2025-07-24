@@ -227,6 +227,18 @@ public class PauseMenu : MonoBehaviour
 
     }
 
+    public void ToggleHitStop()
+    {
+        if(PlayerController.Instance.doHitStop)
+        {
+            PlayerController.Instance.doHitStop = false;
+        }
+        else
+        {
+            PlayerController.Instance.doHitStop = true;
+        }
+    }
+
     public void QuitGame()
     {
         foreach (Button b in buttonsToDeactivate) { b.interactable = false; }

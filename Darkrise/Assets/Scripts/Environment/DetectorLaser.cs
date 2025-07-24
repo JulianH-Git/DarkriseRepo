@@ -93,7 +93,7 @@ public class DetectorLaser : MonoBehaviour
         {
             if (hurtPlayer)
             {
-                if (!controller.pState.invincible) { controller.TakeDamage(1); }
+                if (!controller.pState.invincible) { controller.TakeDamage(1); controller.HitStopTime(0.1f, 2, 0.5f); }
             }
         }
         if (state == DetectorLaserState.Detect && collision.CompareTag("Enemy") && !collision.isTrigger)

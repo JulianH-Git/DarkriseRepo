@@ -122,6 +122,7 @@ public class SpotlightPrefab : MonoBehaviour
                         if (!controller.pState.invincible)
                         {
                             controller.TakeDamage(1);
+                            controller.HitStopTime(0.1f, 2, 0.5f);
                         }
                         break;
                     case SpotlightStates.ForcedEncounter:
