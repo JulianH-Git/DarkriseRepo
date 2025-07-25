@@ -71,7 +71,7 @@ MonoBehaviour:
       m_DisabledHighlightedTrigger: 
     _imageSettings:
       _color: {r: 1, g: 1, b: 1, a: 1}
-      _sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+      _sprite: {fileID: 21300000, guid: 5b7eaba7512907944869233655167a43, type: 3}
       _materal: {fileID: 0}
       _type: 1
       _preserveAspect: 0
@@ -87,7 +87,7 @@ MonoBehaviour:
       m_DisabledColor: {r: 0.14037678, g: 0.18981342, b: 0.21960784, a: 1}
       m_FadeDuration: 0.1
       m_HighlightedColor: {r: 0, g: 0.41992915, b: 0.6691177, a: 1}
-      m_NormalColor: {r: 0.30048442, g: 0.39928094, b: 0.45882353, a: 1}
+      m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
       m_PressedColor: {r: 0, g: 0.62758636, b: 1, a: 1}
       m_SelectedColor: {r: 0, g: 0.41992915, b: 0.6691177, a: 1}
       m_DisabledHighlightedColor: {r: 0, g: 0.41992915, b: 0.6691177, a: 0.49411765}
@@ -106,7 +106,7 @@ MonoBehaviour:
       m_DisabledHighlightedTrigger: 
     _imageSettings:
       _color: {r: 1, g: 1, b: 1, a: 1}
-      _sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+      _sprite: {fileID: 21300000, guid: 5b7eaba7512907944869233655167a43, type: 3}
       _materal: {fileID: 0}
       _type: 1
       _preserveAspect: 0
@@ -122,7 +122,7 @@ MonoBehaviour:
       m_DisabledColor: {r: 0.14037678, g: 0.18981342, b: 0.21960784, a: 1}
       m_FadeDuration: 0.1
       m_HighlightedColor: {r: 0, g: 0.41992915, b: 0.6691177, a: 1}
-      m_NormalColor: {r: 0.30048442, g: 0.39928094, b: 0.45882353, a: 1}
+      m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
       m_PressedColor: {r: 0, g: 0.62758636, b: 1, a: 1}
       m_SelectedColor: {r: 0, g: 0.41992915, b: 0.6691177, a: 1}
       m_DisabledHighlightedColor: {r: 0, g: 0.41992915, b: 0.6691177, a: 0.49411765}
@@ -141,7 +141,7 @@ MonoBehaviour:
       m_DisabledHighlightedTrigger: 
     _imageSettings:
       _color: {r: 1, g: 1, b: 1, a: 1}
-      _sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+      _sprite: {fileID: 21300000, guid: 5b7eaba7512907944869233655167a43, type: 3}
       _materal: {fileID: 0}
       _type: 1
       _preserveAspect: 0
