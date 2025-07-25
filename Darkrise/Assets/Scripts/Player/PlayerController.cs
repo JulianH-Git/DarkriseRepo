@@ -505,7 +505,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
 
         if (!castSpell)
         {
-            castSpell = player.GetButtonDown("Cast Spell");
+            castSpell = player.GetButtonDown("Use Ability");
         }
 
         if (!dashPressed && canDash)
@@ -551,7 +551,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
 
         if (!spellSwapPressed)
         {
-            spellSwapPressed = player.GetButtonDown("SpellSwap");
+            spellSwapPressed = player.GetButtonDown("Swap Abilities");
         }
 
 

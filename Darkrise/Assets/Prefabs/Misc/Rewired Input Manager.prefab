@@ -323,7 +323,7 @@ MonoBehaviour:
       _positiveKey: 
       _negativeKey: 
       _behaviorId: 0
-      _userAssignable: 1
+      _userAssignable: 0
       _categoryId: 0
     - _id: 7
       _name: Switch Attack Type R
@@ -335,10 +335,10 @@ MonoBehaviour:
       _positiveKey: 
       _negativeKey: 
       _behaviorId: 0
-      _userAssignable: 1
+      _userAssignable: 0
       _categoryId: 0
     - _id: 8
-      _name: Cast Spell
+      _name: Use Ability
       _type: 1
       _descriptiveName: Cast Spell
       _positiveDescriptiveName: 
@@ -410,7 +410,7 @@ MonoBehaviour:
       _userAssignable: 0
       _categoryId: 1
     - _id: 15
-      _name: SpellSwap
+      _name: Swap Abilities
       _type: 1
       _descriptiveName: Spell Swap
       _positiveDescriptiveName: 
@@ -437,7 +437,7 @@ MonoBehaviour:
     actionCategoryMap:
       list:
       - categoryId: 0
-        actionIds: 000000000400000001000000030000000200000005000000060000000700000008000000090000000f000000
+        actionIds: 000000000400000001000000030000000200000005000000090000000600000007000000080000000f000000
       - categoryId: 1
         actionIds: 0b0000000c0000000d0000000e000000
     inputBehaviors:

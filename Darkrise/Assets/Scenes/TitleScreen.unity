@@ -542,7 +542,7 @@ MonoBehaviour:
     m_Bottom: 0
   m_ChildAlignment: 0
   m_Spacing: 0
-  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
   m_ChildControlHeight: 1
@@ -2932,7 +2932,31 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7908579622631093191, guid: d7a9f4b6f2debbb40a0c8be76843353c, type: 3}
+      propertyPath: _userData.actions.Array.data[6]._name
+      value: Switch Abilities Left
+      objectReference: {fileID: 0}
+    - target: {fileID: 7908579622631093191, guid: d7a9f4b6f2debbb40a0c8be76843353c, type: 3}
+      propertyPath: _userData.actions.Array.data[7]._name
+      value: Switch Abilities Right
+      objectReference: {fileID: 0}
+    - target: {fileID: 7908579622631093191, guid: d7a9f4b6f2debbb40a0c8be76843353c, type: 3}
+      propertyPath: _userData.actions.Array.data[8]._name
+      value: Use Ability
+      objectReference: {fileID: 0}
+    - target: {fileID: 7908579622631093191, guid: d7a9f4b6f2debbb40a0c8be76843353c, type: 3}
+      propertyPath: _userData.actions.Array.data[14]._name
+      value: Swap Abilities
+      objectReference: {fileID: 0}
+    - target: {fileID: 7908579622631093191, guid: d7a9f4b6f2debbb40a0c8be76843353c, type: 3}
       propertyPath: _userData.actions.Array.data[0]._behaviorId
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7908579622631093191, guid: d7a9f4b6f2debbb40a0c8be76843353c, type: 3}
+      propertyPath: _userData.actions.Array.data[6]._userAssignable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7908579622631093191, guid: d7a9f4b6f2debbb40a0c8be76843353c, type: 3}
+      propertyPath: _userData.actions.Array.data[7]._userAssignable
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7908579622631093191, guid: d7a9f4b6f2debbb40a0c8be76843353c, type: 3}
@@ -3088,7 +3112,7 @@ MonoBehaviour:
     m_Bottom: 0
   m_ChildAlignment: 0
   m_Spacing: 40
-  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
   m_ChildControlHeight: 1
@@ -6788,7 +6812,7 @@ MonoBehaviour:
     m_Bottom: 0
   m_ChildAlignment: 0
   m_Spacing: 0
-  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
   m_ChildControlHeight: 1
