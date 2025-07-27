@@ -3684,8 +3684,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 15.584551, y: 17.773651, z: 0}
-    m_Extent: {x: 65.077354, y: 31.17725, z: 0}
+    m_Center: {x: 15.580399, y: 17.7782, z: 0}
+    m_Extent: {x: 65.0756, y: 31.1816, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -50718,6 +50718,8 @@ MonoBehaviour:
   feSpotlights:
   - {fileID: 193754942}
   lasers: []
+  lasersToSpotlights: []
+  detectors: []
   forcedEncounterWalls:
   - {fileID: 398928641}
   extraEnemySpawns:
@@ -50726,6 +50728,7 @@ MonoBehaviour:
   chainNextEncounter: {fileID: 1652745188}
   laserPrefab: {fileID: 0}
   extraLasersParent: {fileID: 0}
+  changeSoldierBehavior: 0
   deactivateOnce: 0
   id: b2b20073-3b57-4c39-b39d-86717c3068dd
 --- !u!1 &573112872
@@ -52251,6 +52254,7 @@ MonoBehaviour:
   indicateColor: {fileID: 657267493}
   indicator: {fileID: 1786406723}
   teleportPoint: {fileID: 2133725331}
+  fade: {fileID: 0}
 --- !u!1001 &659792759
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54339,8 +54343,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 2.7008018, y: -10.5997, z: 0}
-    m_Extent: {x: 67.5087, y: 15.505799, z: 0}
+    m_Center: {x: 2.7002487, y: -10.5975, z: 0}
+    m_Extent: {x: 67.50525, y: 15.507299, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -61016,6 +61020,8 @@ MonoBehaviour:
   - {fileID: 681318570}
   - {fileID: 1122285859}
   - {fileID: 5212517018604756877}
+  lasersToSpotlights: []
+  detectors: []
   forcedEncounterWalls:
   - {fileID: 74879627}
   - {fileID: 1165637576}
@@ -61028,6 +61034,7 @@ MonoBehaviour:
   chainNextEncounter: {fileID: 0}
   laserPrefab: {fileID: 0}
   extraLasersParent: {fileID: 0}
+  changeSoldierBehavior: 0
   deactivateOnce: 0
   id: 0460f32b-1fe9-44b3-b8c0-f548b93ef869
 --- !u!1 &1656518528
@@ -61178,6 +61185,7 @@ MonoBehaviour:
   indicateColor: {fileID: 1656518531}
   indicator: {fileID: 1867989186}
   teleportPoint: {fileID: 817086024}
+  fade: {fileID: 0}
 --- !u!4 &1668306306 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6818854264137443386, guid: db2a1c1114c8fdd4fa5b3deec047c0b1, type: 3}
@@ -61245,8 +61253,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.7036495, y: 3.5169, z: 0}
-    m_Extent: {x: 26.96315, y: 8.6074, z: 0}
+    m_Center: {x: 0.69710064, y: 3.5137, z: 0}
+    m_Extent: {x: 26.964901, y: 8.5966, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -64110,6 +64118,7 @@ MonoBehaviour:
   indicateColor: {fileID: 2012596526}
   indicator: {fileID: 898536359}
   teleportPoint: {fileID: 402645257}
+  fade: {fileID: 0}
 --- !u!1 &2016634000
 GameObject:
   m_ObjectHideFlags: 0
@@ -65286,6 +65295,7 @@ MonoBehaviour:
   indicateColor: {fileID: 2133725334}
   indicator: {fileID: 1596093196}
   teleportPoint: {fileID: 657267489}
+  fade: {fileID: 0}
 --- !u!1001 &726797992125358624
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -65395,6 +65405,10 @@ PrefabInstance:
       propertyPath: menuBG
       value: 
       objectReference: {fileID: 1034796957}
+    - target: {fileID: 2660785009761797622, guid: ff84a9f85f63b10409971253258128ab, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2670320557514781562, guid: ff84a9f85f63b10409971253258128ab, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -65491,6 +65505,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3719594257741643594, guid: ff84a9f85f63b10409971253258128ab, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4013998959156259480, guid: ff84a9f85f63b10409971253258128ab, type: 3}
       propertyPath: m_LocalPosition.z
       value: 1
@@ -65503,9 +65521,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5684858476968143285, guid: ff84a9f85f63b10409971253258128ab, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6602988754684661169, guid: ff84a9f85f63b10409971253258128ab, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6739348073853839880, guid: ff84a9f85f63b10409971253258128ab, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7019966981733486497, guid: ff84a9f85f63b10409971253258128ab, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7341433265248821956, guid: ff84a9f85f63b10409971253258128ab, type: 3}
       propertyPath: m_IsActive
@@ -65523,6 +65553,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 5b7eaba7512907944869233655167a43, type: 3}
+    - target: {fileID: 8131699543604336849, guid: ff84a9f85f63b10409971253258128ab, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8460684707076474559, guid: ff84a9f85f63b10409971253258128ab, type: 3}
       propertyPath: popup
       value: 

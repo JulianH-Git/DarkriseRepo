@@ -13,6 +13,12 @@ public class CutsceneTrigger : MonoBehaviour
     /// </summary>
     public void StartCutscene()
     {
-        cutsceneCameraManager.PlayCutscene(cutsceneCamera, cutsceneDuration);
+        cutsceneCameraManager.PlayCutscene(
+            targetCutsceneCamera: cutsceneCamera,
+            duration: 3f,
+            hideHUD: true,
+            newPlayerPosition: new Vector3(90, 15, 0),
+            onCutsceneTransition: () => Debug.Log("playing cutscene")
+        );
     }
 }

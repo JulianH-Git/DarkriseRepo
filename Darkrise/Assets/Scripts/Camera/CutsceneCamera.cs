@@ -10,6 +10,7 @@ public class CutsceneCamera : MonoBehaviour
 
     [SerializeField] private SpriteRenderer fade;
     private float fadeSpeed = 2f;
+    [SerializeField] private GameObject hud; // Reference to the HUD GameObject
 
     private CinemachineBrain cinemachineBrain;
     private CinemachineBlendDefinition originalBlend;
@@ -25,12 +26,27 @@ public class CutsceneCamera : MonoBehaviour
     /// </summary>
     /// <param name="targetCutsceneCamera">Camera to switch to.</param>
     /// <param name="duration">Time in seconds before switching the camera back.</param>
-    public void PlayCutscene(GameObject targetCutsceneCamera, float duration)
+    public void PlayCutscene(
+    GameObject targetCutsceneCamera,
+    float duration,
+    bool hideHUD = false,
+    Vector3? newPlayerPosition = null,
+    GameObject[] objectsToActivate = null,
+    GameObject[] objectsToDeactivate = null,
+    System.Action onCutsceneTransition = null)
     {
-        StartCoroutine(CutsceneSequence(targetCutsceneCamera, duration));
+        StartCoroutine(CutsceneSequence(targetCutsceneCamera, duration, hideHUD, newPlayerPosition, objectsToActivate, objectsToDeactivate, onCutsceneTransition));
     }
 
-    private IEnumerator CutsceneSequence(GameObject targetCamera, float duration)
+    private IEnumerator CutsceneSequence(
+    GameObject targetCamera,
+    float duration,
+    bool hideHUD,
+    Vector3? newPlayerPosition,
+    GameObject[] objectsToActivate,
+    GameObject[] objectsToDeactivate,
+    System.Action onCutsceneTransition
+    )
     {
         // Disable player controller
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
@@ -39,10 +55,37 @@ public class CutsceneCamera : MonoBehaviour
         // Fade out
         yield return StartCoroutine(Fade(0f, 1f));
 
-        // Force instant cut
-        cinemachineBrain.m_DefaultBlend.m_Style = CinemachineBlendDefinition.Style.Cut;
+        // Optional changes
+        if (hideHUD && hud != null)
+        {
+            hud.SetActive(false);
+        }
 
-        // Store all active cameras and deactivate them
+        if (newPlayerPosition.HasValue)
+        {
+            player.transform.position = newPlayerPosition.Value;
+        }
+
+        if (objectsToActivate != null)
+        {
+            foreach (GameObject go in objectsToActivate)
+            {
+                if (go != null) go.SetActive(true);
+            }
+        }
+
+        if (objectsToDeactivate != null)
+        {
+            foreach (GameObject go in objectsToDeactivate)
+            {
+                if (go != null) go.SetActive(false);
+            }
+        }
+
+        onCutsceneTransition?.Invoke();
+
+        // Camera transition
+        cinemachineBrain.m_DefaultBlend.m_Style = CinemachineBlendDefinition.Style.Cut;
         allVirtualCameras = GameObject.FindGameObjectsWithTag("VirtualCamera");
 
         foreach (GameObject cam in allVirtualCameras)
@@ -54,31 +97,20 @@ public class CutsceneCamera : MonoBehaviour
             cam.SetActive(false);
         }
 
-        // Activate the target cutscene camera
         targetCamera.SetActive(true);
-
-        // Force Cinemachine to update immediately
         cinemachineBrain.ManualUpdate();
-
-        // Short safety delay
         yield return new WaitForSeconds(0.05f);
-
-        // Restore original blending
         cinemachineBrain.m_DefaultBlend = originalBlend;
 
         // Fade in
         yield return StartCoroutine(Fade(1f, 0f));
 
-        // Wait for the cutscene duration
         yield return new WaitForSeconds(duration);
 
-        // Fade out again
-        yield return StartCoroutine(Fade(0f, 1f)); // Fully fade out
-
-        // Force instant cut
-        cinemachineBrain.m_DefaultBlend.m_Style = CinemachineBlendDefinition.Style.Cut;
+        yield return StartCoroutine(Fade(0f, 1f));
 
         // Switch back to previous camera
+        cinemachineBrain.m_DefaultBlend.m_Style = CinemachineBlendDefinition.Style.Cut;
         targetCamera.SetActive(false);
 
         if (previouslyActiveCamera != null)
@@ -86,14 +118,15 @@ public class CutsceneCamera : MonoBehaviour
             previouslyActiveCamera.SetActive(true);
         }
 
-        // Force Cinemachine to update immediately
         cinemachineBrain.ManualUpdate();
-
-        // Safety delay
         yield return new WaitForSeconds(0.05f);
-
-        // Restore blending
         cinemachineBrain.m_DefaultBlend = originalBlend;
+
+        // Activate HUD
+        if (hideHUD && hud != null)
+        {
+            hud.SetActive(true);
+        }
 
         // Enable player controller
         player.CanMove = true;
@@ -101,6 +134,7 @@ public class CutsceneCamera : MonoBehaviour
         // Fade back in to gameplay
         yield return StartCoroutine(Fade(1f, 0f));
     }
+
 
     private IEnumerator Fade(float startAlpha, float endAlpha)
     {
