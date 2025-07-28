@@ -117,7 +117,7 @@ public class ForcedEncounterManager : MonoBehaviour, IDataPersistence
         if (!deactivateOnce)
         {
             AudioManager.instance.PlayOneShot(FMODEvents.instance.encounterPanel, this.transform.position);
-            AudioManager.instance.SetMusicArea(MusicArea.DarkArea);
+            AudioManager.instance.SetMusicArea(MusicArea.NormalArea);
             deactivateOnce = true;
         }
           
