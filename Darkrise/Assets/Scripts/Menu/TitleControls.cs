@@ -57,8 +57,8 @@ public class TitleControls : MonoBehaviour
         }
         if (player.GetButtonDown("UICancel"))
         {
-            if (settingsMenuUI.activeSelf == true && mapper.isOpen != true) { StartExitingSettingsMenu(); }
-            else if(settingsMenuUI.activeSelf == true && mapper.isOpen == true) { StartExitingControlsMenu(); }
+            if (settingsMenuUI.activeSelf && !mapper.isOpen) { StartExitingSettingsMenu(); }
+            else if(settingsMenuUI.activeSelf && mapper.isOpen) { StartExitingControlsMenu(); }
         }
 
         if (hasPressed)

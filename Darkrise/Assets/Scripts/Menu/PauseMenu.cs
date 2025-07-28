@@ -53,8 +53,9 @@ public class PauseMenu : MonoBehaviour
         }
         if(player.GetButtonDown("UICancel"))
         {
-            if (GamePaused && settingsMenuUI.activeSelf == false) { StartResume(); }
-            else if(GamePaused && settingsMenuUI.activeSelf == true) { StartExitingSettingsMenu(); }
+            if (GamePaused && settingsMenuUI.activeSelf == false && !mapper.isOpen) { StartResume(); }
+            else if(GamePaused && settingsMenuUI.activeSelf == true && !mapper.isOpen) { StartExitingSettingsMenu(); }
+            else if (GamePaused && settingsMenuUI.activeSelf && mapper.isOpen) { StartExitingControlsMenu(); }
         }
         if(GamePaused && player.GetButtonDown("UIVertical") && EventSystem.current.currentSelectedGameObject == null)
         {
@@ -185,7 +186,7 @@ public class PauseMenu : MonoBehaviour
     {
         Debug.Log("Exiting controls menu...");
         AudioManager.instance.PlayOneShot(FMODEvents.instance.pauseBack, this.transform.position);
-        yield return new WaitForSecondsRealtime(0.3f);
+        yield return new WaitForSecondsRealtime(0.1f);
         mapper.Close(true);
         EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
         EventSystem.current.SetSelectedGameObject(optionsFirstButton);
