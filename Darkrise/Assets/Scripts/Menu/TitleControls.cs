@@ -18,6 +18,7 @@ public class TitleControls : MonoBehaviour
     private Player player;
     private int playerId = 0;
     [SerializeField] public GameObject settingsMenuUI;
+    private Animator settingsMenuAnim;
     [SerializeField] GameObject LoadGameButton;
     [SerializeField] private Rewired.UI.ControlMapper.ControlMapper mapper = null;
     [SerializeField] Toggle hitStopCheck;
@@ -33,6 +34,7 @@ public class TitleControls : MonoBehaviour
     {
         Screen.SetResolution(1920, 1080, true);
         player = ReInput.players.GetPlayer(playerId);
+        settingsMenuAnim = settingsMenuUI.GetComponent<Animator>();
         EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
         EventSystem.current.SetSelectedGameObject(pauseFirstButton);
 
@@ -47,10 +49,16 @@ public class TitleControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(settingsMenuUI.activeSelf != true && mapper.isOpen == true) 
+        { 
+            mapper.Close(true);
+            EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
+            EventSystem.current.SetSelectedGameObject(pauseFirstButton);
+        }
         if (player.GetButtonDown("UICancel"))
         {
-            if (settingsMenuUI.activeSelf == true && mapper.enabled != true) { StartExitingSettingsMenu(); }
-            else if(settingsMenuUI.activeSelf == true && mapper.enabled == true) { StartExitingControlsMenu(); }
+            if (settingsMenuUI.activeSelf == true && mapper.isOpen != true) { StartExitingSettingsMenu(); }
+            else if(settingsMenuUI.activeSelf == true && mapper.isOpen == true) { StartExitingControlsMenu(); }
         }
 
         if (hasPressed)
@@ -132,6 +140,7 @@ public class TitleControls : MonoBehaviour
         AudioManager.instance.PlayOneShot(FMODEvents.instance.pauseSelect, this.transform.position);
         Debug.Log("Loading settings menu...");
         settingsMenuUI.SetActive(true);
+        optionsFirstButton.GetComponent<Button>().interactable = true;
         EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
         EventSystem.current.SetSelectedGameObject(optionsFirstButton);
     }
@@ -169,7 +178,9 @@ public class TitleControls : MonoBehaviour
     {
         Debug.Log("Exiting settings menu...");
         AudioManager.instance.PlayOneShot(FMODEvents.instance.pauseBack, this.transform.position);
-        yield return new WaitForSecondsRealtime(0.3f);
+        optionsFirstButton.GetComponent<Button>().interactable = false;
+        settingsMenuAnim.SetTrigger("exitSettingsMenu");
+        yield return new WaitForSecondsRealtime(0.2f);
         EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
         EventSystem.current.SetSelectedGameObject(optionsClosedButton);
         settingsMenuUI.SetActive(false);

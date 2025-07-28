@@ -171,7 +171,7 @@ public class enemyBase : MonoBehaviour
         if(PlayerController.Instance.Health > 0)
         {
             PlayerController.Instance.TakeDamage(damage);
-            PlayerController.Instance.HitStopTime(0.1f,2,0.5f);
+            if(damage > 0) { PlayerController.Instance.HitStopTime(0.1f, 2, 0.5f); }
         }
     }
     public virtual void Respawn()
