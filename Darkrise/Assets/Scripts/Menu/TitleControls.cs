@@ -20,6 +20,7 @@ public class TitleControls : MonoBehaviour
     [SerializeField] public GameObject settingsMenuUI;
     private Animator settingsMenuAnim;
     [SerializeField] GameObject LoadGameButton;
+    [SerializeField] GameObject surveyButton;
     [SerializeField] private Rewired.UI.ControlMapper.ControlMapper mapper = null;
     [SerializeField] Toggle hitStopCheck;
     public GameObject pauseFirstButton, //button that's highlighted when you pause
@@ -28,6 +29,7 @@ public class TitleControls : MonoBehaviour
     [SerializeField] private ConfirmationPopupMenu popup;
     bool newGame;
     bool runOnce = false;
+    public string url = "https://forms.gle/XVdBWxntyq46MV456";
 
 
     private void Start()
@@ -35,8 +37,7 @@ public class TitleControls : MonoBehaviour
         Screen.SetResolution(1920, 1080, true);
         player = ReInput.players.GetPlayer(playerId);
         settingsMenuAnim = settingsMenuUI.GetComponent<Animator>();
-        EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
-        EventSystem.current.SetSelectedGameObject(pauseFirstButton);
+        SelectButton(pauseFirstButton);
 
         if (DataPersistenceManager.Instance.HasGameData() == false)
         {
@@ -52,8 +53,7 @@ public class TitleControls : MonoBehaviour
         if(settingsMenuUI.activeSelf != true && mapper.isOpen == true) 
         { 
             mapper.Close(true);
-            EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
-            EventSystem.current.SetSelectedGameObject(pauseFirstButton);
+            SelectButton(pauseFirstButton);
         }
         if (player.GetButtonDown("UICancel"))
         {
@@ -63,9 +63,7 @@ public class TitleControls : MonoBehaviour
 
         if (hasPressed)
         {
-            pauseFirstButton.GetComponent<Button>().interactable = false;
-            LoadGameButton.GetComponent<Button>().interactable = false;
-            optionsClosedButton.GetComponent<Button>().interactable = false;
+            ButtonStatus(false);
             fade.color = new Color(fade.color.r, fade.color.g, fade.color.b, alpha);
             alpha += 0.05f;
         }
@@ -99,9 +97,7 @@ public class TitleControls : MonoBehaviour
 
         if (DataPersistenceManager.Instance.HasGameData() == true)
         {
-            pauseFirstButton.GetComponent<Button>().interactable = false;
-            LoadGameButton.GetComponent<Button>().interactable = false;
-            optionsClosedButton.GetComponent<Button>().interactable = false;
+            ButtonStatus(false);
             popup.ActivateMenu(
                 "Are you sure? Any existing save data will be lost.",
                 () => // if the player chooses yes
@@ -111,12 +107,9 @@ public class TitleControls : MonoBehaviour
                 },
                 () => // if the player chooses no
                 {
-                    pauseFirstButton.GetComponent<Button>().interactable = true;
-                    LoadGameButton.GetComponent<Button>().interactable = true;
-                    optionsClosedButton.GetComponent<Button>().interactable = true;
+                    ButtonStatus(true);
                     hasPressed = false;
-                    EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
-                    EventSystem.current.SetSelectedGameObject(pauseFirstButton);
+                    SelectButton(pauseFirstButton);
                 });
         }
         else
@@ -141,8 +134,7 @@ public class TitleControls : MonoBehaviour
         Debug.Log("Loading settings menu...");
         settingsMenuUI.SetActive(true);
         optionsFirstButton.GetComponent<Button>().interactable = true;
-        EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
-        EventSystem.current.SetSelectedGameObject(optionsFirstButton);
+        SelectButton(optionsFirstButton);
     }
 
     public void ControlsMenu()
@@ -154,7 +146,24 @@ public class TitleControls : MonoBehaviour
         mapper.Open();
     }
 
-  
+    public void OnSurveyClick()
+    {
+        ButtonStatus(false);
+        popup.ActivateMenu(
+                "This will open the survey in your browser.",
+                () => // if the player chooses yes
+                {
+                    Application.OpenURL(url);
+                    ButtonStatus(true);
+                    SelectButton(surveyButton);
+                },
+                () => // if the player chooses no
+                {
+                    ButtonStatus(true);
+                    SelectButton(surveyButton);
+                });
+
+    }
 
     public void StartExitingSettingsMenu()
     {
@@ -169,8 +178,7 @@ public class TitleControls : MonoBehaviour
         Debug.Log("Exiting controls menu...");
         AudioManager.instance.PlayOneShot(FMODEvents.instance.pauseBack, this.transform.position);
         mapper.Close(true);
-        EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
-        EventSystem.current.SetSelectedGameObject(optionsFirstButton);
+        SelectButton(optionsFirstButton);
         Debug.Log("Controls off");
     }
 
@@ -181,9 +189,22 @@ public class TitleControls : MonoBehaviour
         optionsFirstButton.GetComponent<Button>().interactable = false;
         settingsMenuAnim.SetTrigger("exitSettingsMenu");
         yield return new WaitForSecondsRealtime(0.2f);
-        EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
-        EventSystem.current.SetSelectedGameObject(optionsClosedButton);
+        SelectButton(optionsClosedButton);
         settingsMenuUI.SetActive(false);
         Debug.Log("Settings off");
+    }
+
+    private void ButtonStatus(bool value)
+    {
+        pauseFirstButton.GetComponent<Button>().interactable = value;
+        LoadGameButton.GetComponent<Button>().interactable = value;
+        optionsClosedButton.GetComponent<Button>().interactable = value;
+        surveyButton.GetComponent<Button>().interactable = value;
+    }
+
+    private void SelectButton(GameObject obj)
+    {
+        EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
+        EventSystem.current.SetSelectedGameObject(obj);
     }
 }

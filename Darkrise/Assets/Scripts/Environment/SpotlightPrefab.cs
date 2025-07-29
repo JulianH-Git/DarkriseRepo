@@ -22,8 +22,10 @@ public class SpotlightPrefab : MonoBehaviour
     [SerializeField] List<Sprite> lampSprites;
     [SerializeField] List<Sprite> spotlightSprites;
     [SerializeField] ParticleSystem spotlightParticles;
+    [SerializeField] ParticleSystem laserParticles;
     ParticleSystem.ColorOverLifetimeModule colorOverLifetime;
     ParticleSystem.EmissionModule emission;
+    ParticleSystem.EmissionModule laserEmission;
     [SerializeField] List<Gradient> spotlightParticleColors;
     [SerializeField] Light2D lampLight;
     [SerializeField] Light2D spotlightLight;
@@ -74,6 +76,7 @@ public class SpotlightPrefab : MonoBehaviour
         controller = PlayerController.Instance;
         colorOverLifetime = spotlightParticles.colorOverLifetime;
         emission = spotlightParticles.emission;
+        laserEmission = laserParticles.emission;
         sr = GetComponent<SpriteRenderer>();
 
         if(gates != null && gates.Count > 0)
@@ -177,7 +180,8 @@ public class SpotlightPrefab : MonoBehaviour
                 sr.enabled = false;
                 if(spotlightParticles != null) { emission.enabled = false; }
                 if(lampLight != null) { lampLight.enabled = false; }
-                if(spotlightLight != null) { spotlightLight.enabled = false; }
+                if (spotlightLight != null) { spotlightLight.enabled = false; }
+                if(laserParticles != null) { laserEmission.enabled = false; }
                 break;
 
             case SpotlightStates.Red:
@@ -216,6 +220,7 @@ public class SpotlightPrefab : MonoBehaviour
                 this.GetComponent<BoxCollider2D>().enabled = true;
                 if (spotlightLight != null) { spotlightLight.enabled = true; }
                 sr.enabled = true;
+                laserEmission.enabled = true;
                 break;
             case SpotlightStates.ForcedEncounter:
                 lamp.GetComponent<SpriteRenderer>().sprite = lampSprites[2];
