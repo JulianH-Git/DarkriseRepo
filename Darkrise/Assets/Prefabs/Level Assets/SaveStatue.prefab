@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 2861212244408000493}
   m_Layer: 0
   m_Name: SaveStatue
-  m_TagString: Untagged
+  m_TagString: Statue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -188,6 +188,7 @@ MonoBehaviour:
   indicateColor: {fileID: 1329121733819235877}
   indicator: {fileID: 4036351062590172845}
   hintText: {fileID: 5960108574598256937}
+  saveGame: 1
 --- !u!61 &2861212244408000493
 BoxCollider2D:
   m_ObjectHideFlags: 0

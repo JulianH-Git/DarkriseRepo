@@ -12,6 +12,10 @@ public class ModeSwitchStatue : InteractTrigger
     }
     [SerializeField] ModeGiven modeGiven;
     [SerializeField] bool oneTimeUse;
+    [SerializeField] ParticleSystem effectParticles;
+    [SerializeField] List<Gradient> modeParticleColors;
+    ParticleSystem.ColorOverLifetimeModule colorOverLifetime;
+    ParticleSystem _createdParticles;
     bool used;
     Color statueColor;
 
@@ -27,10 +31,16 @@ public class ModeSwitchStatue : InteractTrigger
             case ModeGiven.Dark:
                 ColorUtility.TryParseHtmlString("#6F2828", out statueColor);
                 indicateColor.color = statueColor;
+                _createdParticles = Instantiate(effectParticles, transform.position, Quaternion.identity, this.transform);
+                colorOverLifetime = _createdParticles.colorOverLifetime;
+                colorOverLifetime.color = modeParticleColors[1];
                 break;
             case ModeGiven.Light:
                 ColorUtility.TryParseHtmlString("#FFFFBE", out statueColor);
                 indicateColor.color = statueColor;
+                _createdParticles = Instantiate(effectParticles, transform.position, Quaternion.identity, this.transform);
+                colorOverLifetime = _createdParticles.colorOverLifetime;
+                colorOverLifetime.color = modeParticleColors[0];
                 break;
         }
     }

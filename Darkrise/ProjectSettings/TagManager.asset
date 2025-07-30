@@ -12,6 +12,8 @@ TagManager:
   - Laser
   - Mirror
   - Receiver
+  - Statue
+  - Onboarding
   layers:
   - Default
   - TransparentFX

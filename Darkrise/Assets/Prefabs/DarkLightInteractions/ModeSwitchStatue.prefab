@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7587490475410781901}
   m_Layer: 0
   m_Name: ModeSwitchStatue
-  m_TagString: Untagged
+  m_TagString: Statue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 7171298193341489137}
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6887987042856477990
 SpriteRenderer:
@@ -102,8 +102,68 @@ MonoBehaviour:
   player: {fileID: 0}
   indicateColor: {fileID: 6887987042856477990}
   indicator: {fileID: 3535298340739452195}
-  giveLight: 0
-  giveDark: 0
+  modeGiven: 0
+  oneTimeUse: 0
+  effectParticles: {fileID: 8674758224035694518, guid: 16a1a37dd3e0ec841829c9858a4856c1, type: 3}
+  modeParticleColors:
+  - serializedVersion: 2
+    key0: {r: 0.990566, g: 0.9824752, b: 0.8098967, a: 0}
+    key1: {r: 0.99215686, g: 0.9843137, b: 0.8117647, a: 1}
+    key2: {r: 1, g: 1, b: 1, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 42598
+    ctime2: 65535
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 42598
+    atime2: 65535
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 3
+  - serializedVersion: 2
+    key0: {r: 0, g: 0, b: 0, a: 0}
+    key1: {r: 0, g: 0, b: 0, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 42598
+    ctime2: 65535
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 42598
+    atime2: 65535
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 3
 --- !u!61 &7587490475410781901
 BoxCollider2D:
   m_ObjectHideFlags: 0

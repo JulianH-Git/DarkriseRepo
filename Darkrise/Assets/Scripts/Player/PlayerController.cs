@@ -373,6 +373,8 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         if(loadedMode) { SwitchAttackTypes(currentAttackType); loadedMode = false; }
         if (health <= 0) { return; }
 
+        RestoreTimeScale();
+
         countUptoGlance += Time.deltaTime;
 
         if (pState.dashing)
@@ -452,7 +454,6 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         Recoil();
         StartDash();
         UpdateSound();
-        RestoreTimeScale();
         // animation update
         FlashWhileInvul();
         animator.SetBool("isGrounded", Grounded());
@@ -1417,14 +1418,14 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         {
             if (restoreTime)
             {
-                if (Time.timeScale < 1)
+                if (Time.timeScale < 0.99f)
                 {
                     Time.timeScale += Time.unscaledDeltaTime * restoreTimeSpeed;
                 }
                 else
                 {
                     Time.timeScale = 1;
-                    restoreTime = true;
+                    restoreTime = false;
                 }
             }
         }

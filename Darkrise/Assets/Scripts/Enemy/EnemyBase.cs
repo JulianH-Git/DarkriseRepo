@@ -37,6 +37,8 @@ public class enemyBase : MonoBehaviour
     [SerializeField] public float patrolDistance;
     public Vector2 anchorPos;
     protected Vector2 direction;
+    [SerializeField] float forceTurnTimer;
+    float timeTillForceTurn;
     [Space(5)]
 
     [Header("Alert Settings")]
@@ -81,7 +83,7 @@ public class enemyBase : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        if (health <= 0)
+        if (health <= 0 && !isDying)
         {
             isDying = true;
             rb.simulated = false;
@@ -89,13 +91,10 @@ public class enemyBase : MonoBehaviour
             {
                 boxCollider[i].enabled = false;
             }
+
             Physics2D.IgnoreCollision(this.GetComponent<BoxCollider2D>(), PlayerController.Instance.GetComponent<Collider2D>(),  true);
             anim.SetTrigger("death");
 
-            //Temporary solution for differentiating between enemy death sounds
-            //Currently based on how much damage an enemy is capable of doing to the player
-            //Could probably be refactored to just be based on what type of enemy it is
-            //dieOnce makes sure that the death noise doesn't loop forever since its in update
             if (!dieOnce)
             {
                 GameObject _gotHitParticles = Instantiate(gotHitParticles, transform.position, Quaternion.identity);
@@ -127,14 +126,18 @@ public class enemyBase : MonoBehaviour
         {
             retreatTimer -= Time.deltaTime;
         }
-        if(alertedPatrol)
+        if (alertedPatrol)
         {
             alertedTimerCountdown -= Time.deltaTime;
         }
-        if(alerted) { releaseAlertTimer -= Time.deltaTime; }
-        if(stun >= maxStun)
+        if (alerted) { releaseAlertTimer -= Time.deltaTime; }
+        if (stun >= maxStun)
         {
             Stunned();
+        }
+        if (!isRecoiling && !retreating && !alerted && !stunned && health >= 0)
+        {
+            timeTillForceTurn += Time.deltaTime;
         }
     }
 
@@ -163,6 +166,10 @@ public class enemyBase : MonoBehaviour
             && health > 0)
         {
             Attack();
+        }
+        if(other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Enemy"))
+        {
+            timeTillForceTurn += Time.deltaTime;
         }
     }
 
@@ -207,7 +214,7 @@ public class enemyBase : MonoBehaviour
         gameObject.SetActive(false);
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         Color color = sr.color;
-        color.a = 255;
+        color.a = 1.0f;
         sr.color = color;
     }
 
@@ -243,8 +250,9 @@ public class enemyBase : MonoBehaviour
         float distanceMoved = transform.position.x - anchorPos.x;
         float directionX = Mathf.Sign(transform.localScale.x);
 
-        if (Mathf.Abs(distanceMoved) >= patrolDistance + 0.34f)
+        if (Mathf.Abs(distanceMoved) >= patrolDistance + 0.34f || timeTillForceTurn >= forceTurnTimer)
         {
+            timeTillForceTurn = 0f;
             directionX = Mathf.Sign(anchorPos.x - transform.position.x);
             transform.localScale = new Vector2(directionX * Mathf.Abs(transform.localScale.x), transform.localScale.y);
         }

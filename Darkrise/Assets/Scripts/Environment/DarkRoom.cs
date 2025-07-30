@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DarkRoom : MonoBehaviour
@@ -9,24 +7,30 @@ public class DarkRoom : MonoBehaviour
     float damageTimer;
     [SerializeField] bool darkOrLight; // false is dark room, true is light room
     [SerializeField] FuseBox fb;
+    PlayerController controller;
+
+    void Start()
+    {
+        controller = PlayerController.Instance;
+    }
 
     protected virtual void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player") && !collision.isTrigger)
+        if (collision.CompareTag("Player") && !collision.isTrigger)
         {
-            switch(darkOrLight)
+            switch (darkOrLight)
             {
                 case false:
-                    if (PlayerController.Instance.currentAttackType == PlayerController.AttackType.Light 
-                        && PlayerController.Instance.BubbleUp == false
-                        && !PlayerController.Instance.pState.safeFromRoomwide)
+                    if (controller.currentAttackType == PlayerController.AttackType.Light
+                        && controller.BubbleUp == false
+                        && !controller.pState.safeFromRoomwide)
                     {
                         damageTimer += Time.deltaTime;
 
-                        if (damageTimer >= timeTillDamage)
+                        if (damageTimer >= (timeTillDamage))
                         {
-                            PlayerController.Instance.TakeDamage(damage);
-                            PlayerController.Instance.HitStopTime(0.1f, 2, 0.5f);
+                            controller.TakeDamage(damage);
+                            controller.HitStopTime(0.4f, 1, 0.5f);
                             damageTimer = 0;
                         }
                     }
@@ -34,28 +38,40 @@ public class DarkRoom : MonoBehaviour
                     {
                         damageTimer = 0;
                     }
-                        break;
+                    break;
                 case true:
-                    if (PlayerController.Instance.currentAttackType == PlayerController.AttackType.Dark
-                        && !PlayerController.Instance.pState.safeFromRoomwide)
+                    if (controller.currentAttackType == PlayerController.AttackType.Dark
+                        && !controller.pState.safeFromRoomwide)
                     {
                         damageTimer += Time.deltaTime;
 
-                        if (damageTimer >= timeTillDamage)
+                        if (controller.pState.hiding)
                         {
-                            PlayerController.Instance.TakeDamage(damage);
-                            PlayerController.Instance.HitStopTime(0.1f, 2, 0.5f);
-                            damageTimer = 0;
+                            if (damageTimer >= (timeTillDamage * 2))
+                            {
+                                controller.TakeDamage(damage);
+                                controller.HitStopTime(0.4f, 1, 0.5f);
+                                damageTimer = 0;
+                            }
+                        }
+                        else
+                        {
+                            if (damageTimer >= (timeTillDamage))
+                            {
+                                controller.TakeDamage(damage);
+                                controller.HitStopTime(0.4f, 1, 0.5f);
+                                damageTimer = 0;
+                            }
                         }
                     }
-                    else if (PlayerController.Instance.currentAttackType == PlayerController.AttackType.Neutral && !PlayerController.Instance.pState.safeFromRoomwide) 
+                    else if (controller.currentAttackType == PlayerController.AttackType.Neutral && !controller.pState.safeFromRoomwide)
                     {
                         damageTimer += Time.deltaTime;
 
-                        if (damageTimer >= timeTillDamage + 2)
+                        if (damageTimer >= timeTillDamage + 3)
                         {
-                            PlayerController.Instance.TakeDamage(damage);
-                            PlayerController.Instance.HitStopTime(0.1f, 2, 0.5f);
+                            controller.TakeDamage(damage);
+                            controller.HitStopTime(0.4f, 1, 0.5f);
                             damageTimer = 0;
                         }
                     }
@@ -65,16 +81,16 @@ public class DarkRoom : MonoBehaviour
                     }
                     break;
             }
-            
+
         }
 
     }
 
     void Update()
     {
-        if(fb != null)
+        if (fb != null)
         {
-            if(fb.overloaded == true || fb.flashbanged == true)
+            if (fb.overloaded == true || fb.flashbanged == true)
             {
                 gameObject.GetComponent<BoxCollider2D>().enabled = false;
                 gameObject.GetComponent<SpriteRenderer>().enabled = false;
