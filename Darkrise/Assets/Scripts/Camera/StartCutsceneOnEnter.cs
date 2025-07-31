@@ -35,7 +35,7 @@ public class StartCutsceneOnEnter : MonoBehaviour, IDataPersistence
         if (collision.CompareTag("Player") && !collision.isTrigger && !hasBeenUsed)
         {
             hasBeenUsed = true;
-            ActivateCutscene();
+            ActivateCutscene(true);
         }
     }
 

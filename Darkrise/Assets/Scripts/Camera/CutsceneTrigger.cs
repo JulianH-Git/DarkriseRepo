@@ -15,7 +15,7 @@ public class CutsceneTrigger : MonoBehaviour
     {
         cutsceneCameraManager.PlayCutscene(
             targetCutsceneCamera: cutsceneCamera,
-            duration: 3f,
+            duration: cutsceneDuration,
             hideHUD: true,
             newPlayerPosition: null,
             onCutsceneTransition: () => Debug.Log("playing cutscene")

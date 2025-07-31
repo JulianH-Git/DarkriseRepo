@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.U2D;
 
 public class ActivateCutsceneObjects : MonoBehaviour
@@ -17,6 +18,10 @@ public class ActivateCutsceneObjects : MonoBehaviour
     [Header("Cutscene 4 Settings")]
     [SerializeField] SpotlightPrefab redSpotlight;
     [SerializeField] GameObject cutsceneTrigger;
+
+    [Header("Cutscene 5 Settings")]
+    [SerializeField] PlayableDirector timeline;
+    public bool hasBeenPlayed;
 
     public void StartActivate()
     {
@@ -41,6 +46,18 @@ public class ActivateCutsceneObjects : MonoBehaviour
                 redSpotlight.state = SpotlightStates.Off;
                 cutsceneTrigger.SetActive(false);
                 break;
+            case 5:
+                TimelineActivate(hasBeenPlayed);
+                break;
+        }
+    }
+
+    public void TimelineActivate(bool hasBeenPlayed) 
+    {
+        if ((!hasBeenPlayed))
+        {
+            timeline.Play();
+            hasBeenPlayed = true;
         }
     }
 }
