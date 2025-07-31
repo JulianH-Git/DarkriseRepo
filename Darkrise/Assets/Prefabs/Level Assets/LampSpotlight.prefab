@@ -274,6 +274,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c820b01e4e8614b75b0ba2f21b7d4f71, type: 3}
   - {fileID: 21300000, guid: 5dc373a543e51424680aefcb82ab3072, type: 3}
   spotlightParticles: {fileID: 8239194170857095461}
+  laserParticles: {fileID: 0}
   spotlightParticleColors:
   - serializedVersion: 2
     key0: {r: 0.5568628, g: 0.13333334, b: 0.227451, a: 0}
@@ -526,8 +527,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.09820002, y: -0.56670004, z: 0}
-    m_Extent: {x: 1.1197, y: 1.7785001, z: 0}
+    m_Center: {x: -0.09715003, y: -0.568, z: 0}
+    m_Extent: {x: 1.12485, y: 1.7807, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

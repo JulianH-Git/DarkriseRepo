@@ -70,15 +70,18 @@ public class SpotlightPrefab : MonoBehaviour
 
     private SpriteRenderer sr;
 
+    private void Awake()
+    {
+        sr = GetComponent<SpriteRenderer>();
+        if (spotlightParticles != null) { colorOverLifetime = spotlightParticles.colorOverLifetime; }
+        if (spotlightParticles != null) { emission = spotlightParticles.emission; }
+        if (laserParticles != null) { laserEmission = laserParticles.emission; }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         controller = PlayerController.Instance;
-        colorOverLifetime = spotlightParticles.colorOverLifetime;
-        emission = spotlightParticles.emission;
-        laserEmission = laserParticles.emission;
-        sr = GetComponent<SpriteRenderer>();
-
         if(gates != null && gates.Count > 0)
         {
             foreach (GameObject gate in gates)
@@ -86,6 +89,7 @@ public class SpotlightPrefab : MonoBehaviour
                 originalSizes.Add(gate.transform.localScale);
             }
         }
+
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -193,8 +197,9 @@ public class SpotlightPrefab : MonoBehaviour
                 emission.enabled = true;
                 lampLight.enabled = true;
                 lampLight.color = Color.red;
-                spotlightLight.enabled = true;
                 spotlightLight.color = Color.red;
+                spotlightLight.enabled = false;
+                spotlightLight.enabled = true;
 
                 emission.enabled = true;
                 colorOverLifetime.color = spotlightParticleColors[0];
@@ -208,8 +213,9 @@ public class SpotlightPrefab : MonoBehaviour
 
                 lampLight.enabled = true;
                 lampLight.color = Color.white;
-                spotlightLight.enabled = true;
                 spotlightLight.color = Color.white;
+                spotlightLight.enabled = false;
+                spotlightLight.enabled = true;
 
                 sr.color = Color.white;
                 emission.enabled = true;
@@ -230,8 +236,9 @@ public class SpotlightPrefab : MonoBehaviour
 
                 lampLight.enabled = true;
                 lampLight.color = Color.blue;
-                spotlightLight.enabled = true;
                 spotlightLight.color = Color.blue;
+                spotlightLight.enabled = false;
+                spotlightLight.enabled = true;
 
                 sr.color = Color.blue;
                 emission.enabled = true;
