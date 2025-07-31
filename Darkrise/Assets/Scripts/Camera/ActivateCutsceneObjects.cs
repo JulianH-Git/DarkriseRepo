@@ -29,23 +29,28 @@ public class ActivateCutsceneObjects : MonoBehaviour
 
     private IEnumerator Activate()
     {
+        Debug.Log(cutsceneNumber);
         yield return new WaitForSeconds(1);
-
+        Debug.Log(cutsceneNumber);
         switch (cutsceneNumber)
         {
             case 2:
+                Debug.Log("Cutscene 2");
                 dl.turnedOn = true;
                 door.enabled = true;
                 break;
             case 3:
+                Debug.Log("Cutscene 3");
                 onboarding.SetActive(true);
                 break;
             case 4:
+                Debug.Log("Cutscene 4");
                 dl.turnedOn = false;
                 redSpotlight.state = SpotlightStates.Off;
                 cutsceneTrigger.SetActive(false);
                 break;
             case 5:
+                Debug.Log("Cutscene 5");
                 TimelineActivate();
                 break;
         }

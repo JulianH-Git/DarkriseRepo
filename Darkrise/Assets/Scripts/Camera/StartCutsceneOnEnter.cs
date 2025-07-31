@@ -4,11 +4,16 @@ using UnityEngine;
 public class StartCutsceneOnEnter : MonoBehaviour, IDataPersistence
 {
     private bool hasBeenUsed = false;
+    float cutsceneLength;
+    float timeTilCutsceneIsOver;
     bool runOnce = false;
     [SerializeField] int cutsceneNumber;
     [SerializeField] private string id;
     [ContextMenu("Generate new GUID")]
-
+    private void Start()
+    {
+        cutsceneLength = GetComponent<CutsceneTrigger>().cutsceneDuration;
+    }
     private void GenerateGUID()
     {
         id = System.Guid.NewGuid().ToString();
@@ -34,10 +39,14 @@ public class StartCutsceneOnEnter : MonoBehaviour, IDataPersistence
 
     private void Update()
     {
-        if (hasBeenUsed && !runOnce)
+        if (hasBeenUsed && !runOnce && timeTilCutsceneIsOver >= cutsceneLength)
         {
             this.gameObject.SetActive(false);
             runOnce = true;
+        }
+        else if(hasBeenUsed && !(timeTilCutsceneIsOver >= cutsceneLength))
+        {
+            timeTilCutsceneIsOver += Time.deltaTime;
         }
     }
 
@@ -61,6 +70,7 @@ public class StartCutsceneOnEnter : MonoBehaviour, IDataPersistence
             }
             else
             {
+                Debug.Log(cutsceneNumber);
                 GetComponent<ActivateCutsceneObjects>().StartActivate();
             }
         }
