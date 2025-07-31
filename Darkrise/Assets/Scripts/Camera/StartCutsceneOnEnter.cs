@@ -4,6 +4,8 @@ using UnityEngine;
 public class StartCutsceneOnEnter : MonoBehaviour, IDataPersistence
 {
     private bool hasBeenUsed = false;
+    bool runOnce = false;
+    [SerializeField] int cutsceneNumber;
     [SerializeField] private string id;
     [ContextMenu("Generate new GUID")]
 
@@ -30,6 +32,15 @@ public class StartCutsceneOnEnter : MonoBehaviour, IDataPersistence
         }
     }
 
+    private void Update()
+    {
+        if (hasBeenUsed && !runOnce)
+        {
+            this.gameObject.SetActive(false);
+            runOnce = true;
+        }
+    }
+
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") && !collision.isTrigger && !hasBeenUsed)
@@ -42,7 +53,17 @@ public class StartCutsceneOnEnter : MonoBehaviour, IDataPersistence
     void ActivateCutscene(bool playCutscene = true)
     {
         if (playCutscene) { GetComponent<CutsceneTrigger>()?.StartCutscene(); }
-        if (GetComponent<ActivateCutsceneObjects>() != null) { GetComponent<ActivateCutsceneObjects>().StartActivate(); }
+        if (GetComponent<ActivateCutsceneObjects>() != null) 
+        {
+            if(cutsceneNumber == 5)
+            {
+                GetComponent<ActivateCutsceneObjects>().TimelineActivate(playCutscene);
+            }
+            else
+            {
+                GetComponent<ActivateCutsceneObjects>().StartActivate();
+            }
+        }
     }
 
 }

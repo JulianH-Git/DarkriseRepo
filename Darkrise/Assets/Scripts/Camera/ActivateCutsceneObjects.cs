@@ -21,7 +21,6 @@ public class ActivateCutsceneObjects : MonoBehaviour
 
     [Header("Cutscene 5 Settings")]
     [SerializeField] PlayableDirector timeline;
-    public bool hasBeenPlayed;
 
     public void StartActivate()
     {
@@ -47,17 +46,16 @@ public class ActivateCutsceneObjects : MonoBehaviour
                 cutsceneTrigger.SetActive(false);
                 break;
             case 5:
-                TimelineActivate(hasBeenPlayed);
+                TimelineActivate();
                 break;
         }
     }
 
-    public void TimelineActivate(bool hasBeenPlayed) 
+    public void TimelineActivate(bool playCutscene = true) 
     {
-        if ((!hasBeenPlayed))
+        if ((playCutscene))
         {
             timeline.Play();
-            hasBeenPlayed = true;
         }
     }
 }

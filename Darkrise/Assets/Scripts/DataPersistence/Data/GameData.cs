@@ -51,6 +51,10 @@ public class GameData
 
     public SerializableDictionary<string, bool> cutsceneTriggerStatus;
 
+    // Cutscene Variable
+
+    public bool cutsceneHasBeenPlayed;
+
     public GameData()
     {
         this.position = new Vector3(-4.48f, 4.2f, 0); // start of level 1
@@ -60,6 +64,7 @@ public class GameData
         canDash = false;
         darkUnlocked = false;
         lightUnlocked = false;
+        cutsceneHasBeenPlayed = false;
         currentAttackType = PlayerController.AttackType.Neutral;
         upgradeStatus = new SerializableDictionary<string, bool>();
         FEMStatus = new SerializableDictionary<string, bool>();

@@ -207,4 +207,22 @@ public class TitleControls : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
         EventSystem.current.SetSelectedGameObject(obj);
     }
+
+    public void QuitGame()
+    {
+        ButtonStatus(false);
+        popup.ActivateMenu(
+               "Are you sure?",
+               () => // if the player chooses yes
+               {
+                   Application.Quit();
+               },
+               () => // if the player chooses no
+               {
+                   ButtonStatus(true);
+                   SelectButton(pauseFirstButton);
+               });
+
+    }
+
 }
