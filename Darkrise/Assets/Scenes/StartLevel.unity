@@ -3684,8 +3684,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 15.585598, y: 17.77885, z: 0}
-    m_Extent: {x: 65.0753, y: 31.18135, z: 0}
+    m_Center: {x: 15.58795, y: 17.7816, z: 0}
+    m_Extent: {x: 65.08175, y: 31.1795, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -51162,9 +51162,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fe1bbe05ed4a18459d092b37ee33415, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cutsceneCameraManager: {fileID: 653185828}
   cutsceneCamera: {fileID: 1431444305}
   cutsceneDuration: 3
-  cutsceneCameraManager: {fileID: 653185828}
+  hideHUD: 1
+  showFade: 1
+  teleportPlayer: 0
+  newPlayerPosition: {x: 0, y: 0, z: 0}
+  objectsToActivate: []
+  objectsToDeactivate: []
 --- !u!1 &621031707
 GameObject:
   m_ObjectHideFlags: 0
@@ -54344,8 +54350,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 2.6982002, y: -10.5989, z: 0}
-    m_Extent: {x: 67.500305, y: 15.507299, z: 0}
+    m_Center: {x: 2.7015991, y: -10.6005, z: 0}
+    m_Extent: {x: 67.5062, y: 15.5088005, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -61254,8 +61260,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.7090006, y: 3.5128002, z: 0}
-    m_Extent: {x: 26.9584, y: 8.5941, z: 0}
+    m_Center: {x: 0.7020502, y: 3.5141, z: 0}
+    m_Extent: {x: 26.967548, y: 8.5964, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

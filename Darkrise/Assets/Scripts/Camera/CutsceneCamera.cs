@@ -10,7 +10,7 @@ public class CutsceneCamera : MonoBehaviour
 
     [SerializeField] private SpriteRenderer fade;
     private float fadeSpeed = 2f;
-    [SerializeField] private GameObject hud; // Reference to the HUD GameObject
+    [SerializeField] private GameObject hud;
 
     private CinemachineBrain cinemachineBrain;
     private CinemachineBlendDefinition originalBlend;
@@ -18,76 +18,106 @@ public class CutsceneCamera : MonoBehaviour
     private void Start()
     {
         cinemachineBrain = Camera.main.GetComponent<CinemachineBrain>();
-        originalBlend = cinemachineBrain.m_DefaultBlend; // Save Cinemachine blending
+        originalBlend = cinemachineBrain.m_DefaultBlend;
     }
 
-    /// <summary>
-    /// Cuts to the specified virtual camera for a period of time.
-    /// </summary>
-    /// <param name="targetCutsceneCamera">Camera to switch to.</param>
-    /// <param name="duration">Time in seconds before switching the camera back.</param>
     public void PlayCutscene(
-    GameObject targetCutsceneCamera,
-    float duration,
-    bool hideHUD = false,
-    Vector3? newPlayerPosition = null,
-    GameObject[] objectsToActivate = null,
-    GameObject[] objectsToDeactivate = null,
-    System.Action onCutsceneTransition = null)
+        GameObject targetCutsceneCamera,
+        float duration,
+        bool hideHUD = true,
+        bool showFade = true,
+        Vector3? newPlayerPosition = null,
+        GameObject[] objectsToActivate = null,
+        GameObject[] objectsToDeactivate = null,
+        System.Action onCutsceneTransition = null)
     {
-        StartCoroutine(CutsceneSequence(targetCutsceneCamera, duration, hideHUD, newPlayerPosition, objectsToActivate, objectsToDeactivate, onCutsceneTransition));
+        StartCoroutine(CutsceneSequence(targetCutsceneCamera, duration, hideHUD, showFade, newPlayerPosition, objectsToActivate, objectsToDeactivate, onCutsceneTransition));
     }
 
     private IEnumerator CutsceneSequence(
-    GameObject targetCamera,
-    float duration,
-    bool hideHUD,
-    Vector3? newPlayerPosition,
-    GameObject[] objectsToActivate,
-    GameObject[] objectsToDeactivate,
-    System.Action onCutsceneTransition
-    )
+        GameObject targetCamera,
+        float duration,
+        bool hideHUD,
+        bool showFade,
+        Vector3? newPlayerPosition,
+        GameObject[] objectsToActivate,
+        GameObject[] objectsToDeactivate,
+        System.Action onCutsceneTransition)
     {
-        // Disable player controller
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         player.CanMove = false;
+
+        // Fast path: no fade, just switch cameras directly
+        if (!showFade)
+        {
+            // Switch cameras
+            allVirtualCameras = GameObject.FindGameObjectsWithTag("VirtualCamera");
+            foreach (GameObject cam in allVirtualCameras)
+            {
+                if (cam.activeInHierarchy)
+                {
+                    previouslyActiveCamera = cam;
+                }
+                cam.SetActive(false);
+            }
+
+            targetCamera.SetActive(true);
+            cinemachineBrain.ManualUpdate();
+
+            if (hideHUD && hud != null)
+                hud.SetActive(false);
+
+            if (newPlayerPosition.HasValue)
+                player.transform.position = newPlayerPosition.Value;
+
+            if (objectsToActivate != null)
+                foreach (GameObject go in objectsToActivate)
+                    if (go != null) go.SetActive(true);
+
+            if (objectsToDeactivate != null)
+                foreach (GameObject go in objectsToDeactivate)
+                    if (go != null) go.SetActive(false);
+
+            onCutsceneTransition?.Invoke();
+
+            yield return new WaitForSeconds(duration);
+
+            // Switch back
+            targetCamera.SetActive(false);
+            if (previouslyActiveCamera != null)
+                previouslyActiveCamera.SetActive(true);
+
+            cinemachineBrain.ManualUpdate();
+
+            if (hideHUD && hud != null)
+                hud.SetActive(true);
+
+            player.CanMove = true;
+            yield break;
+        }
 
         // Fade out
         yield return StartCoroutine(Fade(0f, 1f));
 
-        // Optional changes
         if (hideHUD && hud != null)
-        {
             hud.SetActive(false);
-        }
 
         if (newPlayerPosition.HasValue)
-        {
             player.transform.position = newPlayerPosition.Value;
-        }
 
         if (objectsToActivate != null)
-        {
             foreach (GameObject go in objectsToActivate)
-            {
                 if (go != null) go.SetActive(true);
-            }
-        }
 
         if (objectsToDeactivate != null)
-        {
             foreach (GameObject go in objectsToDeactivate)
-            {
                 if (go != null) go.SetActive(false);
-            }
-        }
 
         onCutsceneTransition?.Invoke();
 
         // Camera transition
         cinemachineBrain.m_DefaultBlend.m_Style = CinemachineBlendDefinition.Style.Cut;
         allVirtualCameras = GameObject.FindGameObjectsWithTag("VirtualCamera");
-
         foreach (GameObject cam in allVirtualCameras)
         {
             if (cam.activeInHierarchy)
@@ -109,32 +139,24 @@ public class CutsceneCamera : MonoBehaviour
 
         yield return StartCoroutine(Fade(0f, 1f));
 
-        // Switch back to previous camera
+        // Return camera
         cinemachineBrain.m_DefaultBlend.m_Style = CinemachineBlendDefinition.Style.Cut;
         targetCamera.SetActive(false);
 
         if (previouslyActiveCamera != null)
-        {
             previouslyActiveCamera.SetActive(true);
-        }
 
         cinemachineBrain.ManualUpdate();
         yield return new WaitForSeconds(0.05f);
         cinemachineBrain.m_DefaultBlend = originalBlend;
 
-        // Activate HUD
         if (hideHUD && hud != null)
-        {
             hud.SetActive(true);
-        }
 
-        // Enable player controller
         player.CanMove = true;
 
-        // Fade back in to gameplay
         yield return StartCoroutine(Fade(1f, 0f));
     }
-
 
     private IEnumerator Fade(float startAlpha, float endAlpha)
     {
