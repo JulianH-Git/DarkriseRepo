@@ -405,7 +405,6 @@ public class PlayerController : MonoBehaviour, IDataPersistence
 
         if (bubbleUp)
         {
-            AudioManager.instance.PlayOneShot(FMODEvents.instance.lightBubble, this.transform.position);
             if (CurrentEnergy > 0)
             {
                 CurrentEnergy -= bubbleEnergyLossRate * Time.deltaTime;
@@ -840,7 +839,6 @@ public class PlayerController : MonoBehaviour, IDataPersistence
                             break;
                         case EquippedLightSpell.RemoteFlashbang:
                             currentLightSpell = EquippedLightSpell.LightBubble;
-                            AudioManager.instance.PlayOneShot(FMODEvents.instance.lightBubble, this.transform.position);
                             bubbleUp = false;
                             lightModeBubble.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
                             break;
@@ -869,6 +867,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         {
             case EquippedLightSpell.LightBubble:
                 LightBubbleTime();
+                
                 break;
             case EquippedLightSpell.RemoteFlashbang:
                 RemoteFlashbangTime();
@@ -897,6 +896,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     {
         if (CurrentEnergy > 0 && !bubbleUp && castSpell && timeTilBubble >= bubbleCooldown)
         {
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.lightBubble, this.transform.position);
             bubbleUp = true;
             timeTilBubble = 0;
             timeSinceCast = 0;
