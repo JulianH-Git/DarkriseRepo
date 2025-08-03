@@ -94,6 +94,7 @@ public class StandardBreakerSwitch : InteractTrigger, IDataPersistence
             {
                 deactivated = true;
                 animator.SetBool("turnedOff", true);
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.encounterPanel, this.transform.position);
                 ActivateCutscene();
 
                 foreach (GameObject sprite in affectedSprites)
