@@ -405,6 +405,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
 
         if (bubbleUp)
         {
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.lightBubble, this.transform.position);
             if (CurrentEnergy > 0)
             {
                 CurrentEnergy -= bubbleEnergyLossRate * Time.deltaTime;
@@ -839,6 +840,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
                             break;
                         case EquippedLightSpell.RemoteFlashbang:
                             currentLightSpell = EquippedLightSpell.LightBubble;
+                            AudioManager.instance.PlayOneShot(FMODEvents.instance.lightBubble, this.transform.position);
                             bubbleUp = false;
                             lightModeBubble.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
                             break;
@@ -1491,6 +1493,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     {
         pState.hiding = true;
         animator.SetBool("hiding", true);
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.playerHide, this.transform.position);
     }
 
     private void Hiding()
@@ -1502,6 +1505,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
             pState.hiding = false;
             animator.SetBool("hiding", false);
             animator.SetBool("darkDashGlance", false);
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.playerUnhide, this.transform.position);
             return;
         }
 
@@ -1630,6 +1634,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         playerArrowIndicator.SetActive(false);
         playerArrowIndicator.transform.rotation = defaultArrowRotation;
         dashedIntoShadowBlock = false;
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.playerUnhide, this.transform.position);
     }
 
     private void DarkRoomBubble()

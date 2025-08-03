@@ -36,6 +36,11 @@ public class FMODEvents : MonoBehaviour
 
     [field: SerializeField] public EventReference powerSelect { get; private set; }
 
+    [field: SerializeField] public EventReference lightBubble { get; private set; }
+
+    [field: SerializeField] public EventReference playerHide { get; private set; }
+
+    [field: SerializeField] public EventReference playerUnhide { get; private set; }
 
     [field: Header("Enemy SFX")]
     [field: SerializeField] public EventReference soldierHurt { get; private set; }

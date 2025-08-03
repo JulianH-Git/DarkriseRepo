@@ -3684,8 +3684,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 15.58795, y: 17.7816, z: 0}
-    m_Extent: {x: 65.08175, y: 31.1795, z: 0}
+    m_Center: {x: 15.578749, y: 17.77895, z: 0}
+    m_Extent: {x: 65.07905, y: 31.179451, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -53344,11 +53344,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2308073590197729602, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 88.74
+      value: 89.7
       objectReference: {fileID: 0}
     - target: {fileID: 2308073590197729602, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 22.94
+      value: 22.5
       objectReference: {fileID: 0}
     - target: {fileID: 2308073590197729602, guid: 694ee4451fd13274aad62c068b46e4a9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -54350,8 +54350,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 2.7015991, y: -10.6005, z: 0}
-    m_Extent: {x: 67.5062, y: 15.5088005, z: 0}
+    m_Center: {x: 2.6996002, y: -10.5952, z: 0}
+    m_Extent: {x: 67.5043, y: 15.4984, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -61260,8 +61260,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.7020502, y: 3.5141, z: 0}
-    m_Extent: {x: 26.967548, y: 8.5964, z: 0}
+    m_Center: {x: 0.69865036, y: 3.5174, z: 0}
+    m_Extent: {x: 26.95735, y: 8.5971, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -64796,6 +64796,27 @@ MonoBehaviour:
       Data3: 220930223
       Data4: -834448491
     Path: event:/SFX/Player/PowerSelect
+  <lightBubble>k__BackingField:
+    Guid:
+      Data1: -1787788929
+      Data2: 1200237584
+      Data3: 2091666360
+      Data4: -1059271484
+    Path: event:/SFX/Player/LightShield
+  <playerHide>k__BackingField:
+    Guid:
+      Data1: 980445418
+      Data2: 1164219924
+      Data3: 1119256224
+      Data4: 1916333352
+    Path: event:/SFX/Player/Hiding
+  <playerUnhide>k__BackingField:
+    Guid:
+      Data1: -1478444052
+      Data2: 1293085680
+      Data3: -2006641765
+      Data4: 2111326489
+    Path: event:/SFX/Player/Unhiding
   <soldierHurt>k__BackingField:
     Guid:
       Data1: 869750778
