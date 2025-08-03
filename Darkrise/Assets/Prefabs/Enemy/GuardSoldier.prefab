@@ -148,7 +148,7 @@ MonoBehaviour:
   damage: 2
   patrolDistance: 3
   anchorPos: {x: 0, y: 0}
-  forceTurnTimer: 15
+  forceTurnTimer: 2
   alertedPatrolDistance: 0
   alertedTimer: 3
   gotHitParticles: {fileID: 6662845823214048819, guid: 4ceecee55468b5f41854594114256074, type: 3}

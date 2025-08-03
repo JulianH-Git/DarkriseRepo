@@ -752,6 +752,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3917497529577773111, guid: fbf827a511b1cd049be735542de2a361, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 518.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3917497529577773111, guid: fbf827a511b1cd049be735542de2a361, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 116.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 3917497529577773111, guid: fbf827a511b1cd049be735542de2a361, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -5.9677
+      objectReference: {fileID: 0}
+    - target: {fileID: 3917497529577773111, guid: fbf827a511b1cd049be735542de2a361, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.000068665
+      objectReference: {fileID: 0}
     - target: {fileID: 5035650282148496800, guid: fbf827a511b1cd049be735542de2a361, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -935,7 +951,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: hit stop
+  m_text: Freeze Time When taking damage
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 18799d532c873f84d96b4f99c54213b1, type: 2}
   m_sharedMaterial: {fileID: 2570772743400945468, guid: 18799d532c873f84d96b4f99c54213b1, type: 2}
@@ -962,8 +978,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -998,7 +1014,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 56.72107, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

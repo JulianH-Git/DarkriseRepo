@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class enemyBase : MonoBehaviour
@@ -22,7 +18,7 @@ public class enemyBase : MonoBehaviour
     [Header("Recoil Settings")]
     [SerializeField] protected float recoilLength;
     [SerializeField] protected float recoilFactor;
-    [SerializeField] protected bool isRecoiling;
+    [SerializeField] protected bool  isRecoiling;
     [Space(5)]
 
     [Header("Attack Settings")]
@@ -37,8 +33,9 @@ public class enemyBase : MonoBehaviour
     [SerializeField] public float patrolDistance;
     public Vector2 anchorPos;
     protected Vector2 direction;
-    [SerializeField] float forceTurnTimer;
-    float timeTillForceTurn;
+    [SerializeField] protected float forceTurnTimer;
+    protected float timeTillForceTurn;
+    protected bool shouldFlip = false;
     [Space(5)]
 
     [Header("Alert Settings")]
@@ -56,6 +53,8 @@ public class enemyBase : MonoBehaviour
 
     [Header("Other Settings")]
     [SerializeField] protected GameObject gotHitParticles;
+    [SerializeField] protected LayerMask obstacleMask;
+    [SerializeField] protected LayerMask groundLayer;
 
 
     protected Rigidbody2D rb;
@@ -92,7 +91,7 @@ public class enemyBase : MonoBehaviour
                 boxCollider[i].enabled = false;
             }
 
-            Physics2D.IgnoreCollision(this.GetComponent<BoxCollider2D>(), PlayerController.Instance.GetComponent<Collider2D>(),  true);
+            Physics2D.IgnoreCollision(this.GetComponent<BoxCollider2D>(), PlayerController.Instance.GetComponent<Collider2D>(), true);
             anim.SetTrigger("death");
 
             if (!dieOnce)
@@ -103,11 +102,11 @@ public class enemyBase : MonoBehaviour
                 {
                     AudioManager.instance.PlayOneShot(FMODEvents.instance.sentryDestroyed, this.transform.position);
                 }
-                else if (this.GetComponent<FootSolider>()) 
+                else if (this.GetComponent<FootSolider>())
                 {
                     AudioManager.instance.PlayOneShot(FMODEvents.instance.soldierDestroyed, this.transform.position);
                 }
-                
+
                 dieOnce = true;
             }
 
@@ -131,54 +130,58 @@ public class enemyBase : MonoBehaviour
             alertedTimerCountdown -= Time.deltaTime;
         }
         if (alerted) { releaseAlertTimer -= Time.deltaTime; }
-        if (stun >= maxStun)
+        if (stun >= maxStun && !stunned)
         {
             Stunned();
         }
-        if (!isRecoiling && !retreating && !alerted && !stunned && health >= 0)
+
+        if(stunned)
         {
-            timeTillForceTurn += Time.deltaTime;
+            timeToReleaseStun += Time.deltaTime;
+            StunnedCountdown();
         }
+
+        if (!isRecoiling && !retreating && !alerted && !stunned && !isDying && health > 0)
+        {
+            ObstacleCheck();
+        }
+
     }
 
     public virtual void EnemyHit(float _damageDone, Vector2 _hitDirection, float _hitForce, bool _damage)
     {
-        if(stunned) { return; }
+        if (stunned) { return; }
         if (_damage) { health -= _damageDone; }
         else { stun += _damageDone; }
-        
-        if (!isRecoiling)
+
+        if (!isRecoiling && health > 0)
         {
             anim.SetBool("isRecoiling", true);
             rb.AddForce(-_hitForce * recoilFactor * _hitDirection);
             isRecoiling = true;
         }
-        
+
     }
 
     protected virtual void OnCollisionStay2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player") 
-            && !PlayerController.Instance.pState.invincible 
-            && !PlayerController.Instance.pState.hiding 
-            && !isDying 
+        if (other.gameObject.CompareTag("Player")
+            && !PlayerController.Instance.pState.invincible
+            && !PlayerController.Instance.pState.hiding
+            && !isDying
             && !stunned
             && health > 0)
         {
             Attack();
         }
-        if(other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Enemy"))
-        {
-            timeTillForceTurn += Time.deltaTime;
-        }
     }
 
     protected virtual void Attack()
     {
-        if(PlayerController.Instance.Health > 0)
+        if (PlayerController.Instance.Health > 0)
         {
             PlayerController.Instance.TakeDamage(damage);
-            if(damage > 0) { PlayerController.Instance.HitStopTime(0.1f, 2, 0.5f); }
+            if (damage > 0) { PlayerController.Instance.HitStopTime(0.1f, 2, 0.5f); }
         }
     }
     public virtual void Respawn()
@@ -223,18 +226,15 @@ public class enemyBase : MonoBehaviour
         health = 0;
     }
 
-    public void DeathNoise()
-    {
-            
-    }
-
     protected virtual void Stunned()
     {
         stunned = true;
         anim.SetBool("isStunned", true);
-        timeToReleaseStun += Time.deltaTime;
         Physics2D.IgnoreCollision(boxCollider[0], PlayerController.Instance.GetComponent<Collider2D>(), true);
+    }
 
+    protected virtual void StunnedCountdown()
+    {
         if (timeToReleaseStun >= stunTimer)
         {
             stunned = false;
@@ -247,10 +247,17 @@ public class enemyBase : MonoBehaviour
 
     protected virtual void Patrol()
     {
+        if (shouldFlip)
+        {
+            float _directionX = Mathf.Sign(anchorPos.x - transform.position.x);
+            transform.localScale = new Vector2(_directionX * Mathf.Abs(transform.localScale.x), transform.localScale.y);
+            shouldFlip = false;
+            Debug.Log($"{gameObject.name} flipped due to raycast.");
+        }
         float distanceMoved = transform.position.x - anchorPos.x;
         float directionX = Mathf.Sign(transform.localScale.x);
 
-        if (Mathf.Abs(distanceMoved) >= patrolDistance + 0.34f || timeTillForceTurn >= forceTurnTimer)
+        if (Mathf.Abs(distanceMoved) >= patrolDistance + 0.34f)
         {
             timeTillForceTurn = 0f;
             directionX = Mathf.Sign(anchorPos.x - transform.position.x);
@@ -263,11 +270,11 @@ public class enemyBase : MonoBehaviour
     {
         float distanceMoved = transform.position.x - alertAnchor.x;
 
-        if (Mathf.Abs(distanceMoved) >= alertedPatrolDistance + 0.34f) 
+        if (Mathf.Abs(distanceMoved) >= alertedPatrolDistance + 0.34f)
         {
             rb.velocity = new Vector2(0.0f, rb.velocity.y);
 
-            if((alertedTimerCountdown <= alertedTimer / 2) && !alertedFlip) // turn halfway through
+            if ((alertedTimerCountdown <= alertedTimer / 2) && !alertedFlip) // turn halfway through
             {
                 transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
                 alertedFlip = true;
@@ -278,7 +285,7 @@ public class enemyBase : MonoBehaviour
             rb.velocity = new Vector2(speed * Mathf.Sign(transform.localScale.x), rb.velocity.y);
         }
 
-        if(alertedTimerCountdown <= 0)
+        if (alertedTimerCountdown <= 0)
         {
             alertedTimerCountdown = alertedTimer;
             alertedPatrol = false;
@@ -345,4 +352,35 @@ public class enemyBase : MonoBehaviour
         Retreat();
     }
 
+    protected virtual void ObstacleCheck()
+    {
+        Vector2 origin = (Vector2)transform.position + Vector2.right * Mathf.Sign(transform.localScale.x) * 0.75f;
+        Vector2 direction = Vector2.right * Mathf.Sign(transform.localScale.x);
+        float distance = 0.75f;
+
+        Debug.DrawLine(origin, origin + direction * distance, Color.blue);
+
+        RaycastHit2D hit = Physics2D.Raycast(origin, direction, distance, obstacleMask);
+
+        if (hit.collider != null && hit.collider.gameObject != gameObject)
+        {
+            if (hit.collider.CompareTag("Player") || hit.collider.CompareTag("Enemy") || Physics2D.Raycast(origin, direction, distance, groundLayer))
+            {
+                timeTillForceTurn += Time.deltaTime;
+                if (timeTillForceTurn >= forceTurnTimer)
+                {
+                    shouldFlip = true;
+                    timeTillForceTurn = 0f;
+                }
+            }
+            else
+            {
+                timeTillForceTurn = 0f;
+            }
+        }
+        else
+        {
+            timeTillForceTurn = 0f;
+        }
+    }
 }

@@ -24,7 +24,6 @@ public class HideUI : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision);
         for (int i = 0; i < tags.Length; i++)
         {
             if(collision.CompareTag(tags[i]))

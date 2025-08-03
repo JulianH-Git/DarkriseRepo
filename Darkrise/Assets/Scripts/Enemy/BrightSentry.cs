@@ -22,4 +22,37 @@ public class BrightSentry : GroundSentry
             PlayerController.Instance.pState.safeFromRoomwide = false;
         }
     }
+
+    protected override void ObstacleCheck()
+    {
+        Vector2 origin = (Vector2)transform.position + Vector2.right * Mathf.Sign(transform.localScale.x) * 0.75f;
+        Vector2 direction = Vector2.right * Mathf.Sign(transform.localScale.x);
+        float distance = 0.75f;
+
+        Debug.DrawLine(origin, origin + direction * distance, Color.blue);
+
+        RaycastHit2D hit = Physics2D.Raycast(origin, direction, distance, obstacleMask);
+
+        if (hit.collider != null && hit.collider.gameObject != gameObject && hit.collider != circleCollider)
+        {
+            if (hit.collider.CompareTag("Player") || hit.collider.CompareTag("Enemy") || Physics2D.Raycast(origin, direction, distance, groundLayer))
+            {
+                timeTillForceTurn += Time.deltaTime;
+                if (timeTillForceTurn >= forceTurnTimer)
+                {
+                    shouldFlip = true;
+                    timeTillForceTurn = 0f;
+                }
+            }
+            else
+            {
+                timeTillForceTurn = 0f;
+            }
+        }
+        else
+        {
+            timeTillForceTurn = 0f;
+        }
+    }
+
 }

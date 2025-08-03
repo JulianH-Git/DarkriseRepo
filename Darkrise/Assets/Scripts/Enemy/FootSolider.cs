@@ -163,14 +163,18 @@ public class FootSolider : enemyBase
         if (timeSinceAttack < timeBetweenAttacks) return;
 
         timeSinceAttack = 0;
+        anim.SetTrigger("attack");
 
+    }
+
+    public void AttackCheck()
+    {
         Collider2D[] objectsToHit = Physics2D.OverlapBoxAll(footSoldierAttackTransform.position, footSoldierAttackArea, 0, layer);
 
         foreach (var obj in objectsToHit)
         {
             if (obj.CompareTag("Player") && !PlayerController.Instance.pState.invincible)
             {
-                anim.SetTrigger("attack");
                 PlayerController.Instance.TakeDamage(damage);
                 PlayerController.Instance.HitStopTime(0.1f, 2, 0.5f);
             }

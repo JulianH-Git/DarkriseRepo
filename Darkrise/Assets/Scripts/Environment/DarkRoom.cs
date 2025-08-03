@@ -30,7 +30,6 @@ public class DarkRoom : MonoBehaviour
                         if (damageTimer >= (timeTillDamage))
                         {
                             controller.TakeDamage(damage);
-                            controller.HitStopTime(0.4f, 1, 0.5f);
                             damageTimer = 0;
                         }
                     }
@@ -50,7 +49,6 @@ public class DarkRoom : MonoBehaviour
                             if (damageTimer >= (timeTillDamage * 2))
                             {
                                 controller.TakeDamage(damage);
-                                controller.HitStopTime(0.4f, 1, 0.5f);
                                 damageTimer = 0;
                             }
                         }
@@ -59,7 +57,6 @@ public class DarkRoom : MonoBehaviour
                             if (damageTimer >= (timeTillDamage))
                             {
                                 controller.TakeDamage(damage);
-                                controller.HitStopTime(0.4f, 1, 0.5f);
                                 damageTimer = 0;
                             }
                         }
@@ -71,7 +68,6 @@ public class DarkRoom : MonoBehaviour
                         if (damageTimer >= timeTillDamage + 3)
                         {
                             controller.TakeDamage(damage);
-                            controller.HitStopTime(0.4f, 1, 0.5f);
                             damageTimer = 0;
                         }
                     }
