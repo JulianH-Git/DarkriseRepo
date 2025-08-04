@@ -3,8 +3,6 @@ using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static PlayerController;
-using static UnityEditorInternal.VersionControl.ListControl;
 public class AudioManager : MonoBehaviour, IDataPersistence
 {
     [Header("Volume")]

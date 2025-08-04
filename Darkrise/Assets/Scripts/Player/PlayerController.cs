@@ -155,6 +155,9 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     [SerializeField] GameObject darkModeParticles;
     [SerializeField] GameObject darkModeParticlesTransform;
 
+    ParticleSystem spotlightParticles;
+    ParticleSystem laserParticles;
+
     GameObject _lightModeParticles;
     GameObject _darkModeParticles;
     public int Health
@@ -378,7 +381,6 @@ public class PlayerController : MonoBehaviour, IDataPersistence
 
         RestoreTimeScale();
         FlashWhileInvul();
-        UpdateSound();
 
         countUptoGlance += Time.deltaTime;
 
@@ -462,6 +464,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         CastSpell();
         Recoil();
         StartDash();
+        UpdateSound();
 
         // animation update
         animator.SetBool("isGrounded", Grounded());
@@ -1336,8 +1339,8 @@ public class PlayerController : MonoBehaviour, IDataPersistence
                 animator.SetLayerWeight(0, 1);
                 animator.SetLayerWeight(1, 0);
                 animator.SetLayerWeight(2, 0);
-                if (_darkModeParticles != null) { Destroy(_darkModeParticles); }
-                if (_lightModeParticles != null) { Destroy(_lightModeParticles); }
+                if (_darkModeParticles != null) { _darkModeParticles.GetComponent<ParticleSystem>().Stop(); }
+                if (_lightModeParticles != null) { _lightModeParticles.GetComponent<ParticleSystem>().Stop(); }
                 break;
             case AttackType.Light:
                 animator.SetBool("darkMode", false);
@@ -1345,18 +1348,20 @@ public class PlayerController : MonoBehaviour, IDataPersistence
                 animator.SetLayerWeight(0, 0);
                 animator.SetLayerWeight(1, 0);
                 animator.SetLayerWeight(2, 1);
-                if (_darkModeParticles != null) { Destroy(_darkModeParticles); }
-                _lightModeParticles = Instantiate(lightModeParticles, transform.position, Quaternion.identity,this.transform);
-                break;
+                if (_darkModeParticles != null) { _darkModeParticles.GetComponent<ParticleSystem>().Stop(); }
+                if (_lightModeParticles == null) { _lightModeParticles = Instantiate(lightModeParticles, transform.position, Quaternion.identity, this.transform); }
+                else { _lightModeParticles.GetComponent<ParticleSystem>().Play(); }
+                    break;
             case AttackType.Dark:
                 animator.SetBool("darkMode", true);
                 animator.SetBool("lightMode", false);
                 animator.SetLayerWeight(0, 0);
                 animator.SetLayerWeight(1, 1);
                 animator.SetLayerWeight(2, 0);
-                if (_lightModeParticles != null) { Destroy(_lightModeParticles); }
-                _darkModeParticles = Instantiate(darkModeParticles, darkModeParticlesTransform.transform.position, Quaternion.identity,darkModeParticlesTransform.transform);
-                break;
+                if (_lightModeParticles != null) { _lightModeParticles.GetComponent<ParticleSystem>().Stop(); }
+                if (_darkModeParticles == null) { _darkModeParticles = Instantiate(darkModeParticles, darkModeParticlesTransform.transform.position, Quaternion.identity, darkModeParticlesTransform.transform); }
+                else { _darkModeParticles.GetComponent<ParticleSystem>().Play(); }
+                    break;
         }
     }
 
