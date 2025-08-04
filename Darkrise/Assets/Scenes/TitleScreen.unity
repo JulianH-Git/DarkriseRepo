@@ -6876,6 +6876,27 @@ MonoBehaviour:
       Data3: 220930223
       Data4: -834448491
     Path: event:/SFX/Player/PowerSelect
+  <lightBubble>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  <playerHide>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  <playerUnhide>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   <soldierHurt>k__BackingField:
     Guid:
       Data1: 869750778

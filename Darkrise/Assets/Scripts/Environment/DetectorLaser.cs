@@ -7,6 +7,7 @@ public class DetectorLaser : MonoBehaviour
     [SerializeField] float pushForce = 100f;
     [SerializeField] Light2D lampLight;
     [SerializeField] Light2D detectorLight;
+    [SerializeField] GameObject wall;
     ParticleSystem spotlightParticles;
     ParticleSystem.EmissionModule emission;
     SpriteRenderer sr;
@@ -50,7 +51,7 @@ public class DetectorLaser : MonoBehaviour
     {
         downedCooldownTimer += Time.deltaTime;
 
-        if(state == DetectorLaserState.Detect || state == DetectorLaserState.Explicit && turnedOn)
+        if (state == DetectorLaserState.Detect || state == DetectorLaserState.Explicit && turnedOn)
         {
             if (downedCooldownTimer >= downedCooldown)
             {
@@ -93,7 +94,7 @@ public class DetectorLaser : MonoBehaviour
         {
             if (hurtPlayer)
             {
-                if (!controller.pState.invincible) { controller.TakeDamage(1); controller.HitStopTime(0.1f, 2, 0.5f); }
+                if (!controller.pState.invincible) { controller.TakeDamage(1); }
             }
         }
         if (state == DetectorLaserState.Detect && collision.CompareTag("Enemy") && !collision.isTrigger)
@@ -116,6 +117,7 @@ public class DetectorLaser : MonoBehaviour
     void TurnOff()
     {
         sr.color = new Color(0.512991f, 0f, 1f, 0.1f);
+        wall.SetActive(false);
         downedCooldownTimer = 0f;
         hurtPlayer = false;
         pushPlayer = PushPlayer.NoPush;
@@ -127,6 +129,7 @@ public class DetectorLaser : MonoBehaviour
     void TurnOn()
     {
         sr.color = new Color(0.512991f, 0f, 1f, 1f);
+        wall.SetActive(true);
         hurtPlayer = true;
         pushPlayer = initialEntry;
         detectorLight.enabled = true;

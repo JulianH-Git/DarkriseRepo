@@ -1,9 +1,11 @@
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using FMODUnity;
-using FMOD.Studio;
-public class AudioManager : MonoBehaviour
+using static PlayerController;
+using static UnityEditorInternal.VersionControl.ListControl;
+public class AudioManager : MonoBehaviour, IDataPersistence
 {
     [Header("Volume")]
     [Range(0, 1)]
@@ -31,6 +33,19 @@ public class AudioManager : MonoBehaviour
 
     private EventInstance musicEventInstance;
     public static AudioManager instance {  get; private set; }
+
+    public void LoadData(GameData data)
+    {
+        sfxVolume = data.sfxSlider;
+        musicVolume = data.musicSlider;
+        masterVolume = data.masterSlider;
+    }
+    public void SaveData(GameData data)
+    {
+        data.sfxSlider = sfxVolume;
+        data.musicSlider = musicVolume;
+        data.masterSlider = masterVolume;
+    }
 
     private void Awake()
     {

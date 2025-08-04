@@ -364,6 +364,9 @@ public class PlayerController : MonoBehaviour, IDataPersistence
             alpha += 0.05f;
             yield return new WaitForSeconds(0.05f);
         }
+        player.controllers.maps.SetMapsEnabled(false, "Gameplay");
+        player.controllers.maps.SetMapsEnabled(false, "Default");
+        player.controllers.maps.SetMapsEnabled(true, "UI");
         yield return new WaitForSeconds(2);
         SceneManager.LoadScene("GameOverScreen");
     }
@@ -374,6 +377,8 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         if (health <= 0) { return; }
 
         RestoreTimeScale();
+        FlashWhileInvul();
+        UpdateSound();
 
         countUptoGlance += Time.deltaTime;
 
@@ -440,6 +445,10 @@ public class PlayerController : MonoBehaviour, IDataPersistence
 
         if (pState.casting)
         {
+            if(castSpell == false)
+            {
+                pState.casting = false;
+            }
             return;
         }
 
@@ -453,9 +462,8 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         CastSpell();
         Recoil();
         StartDash();
-        UpdateSound();
+
         // animation update
-        FlashWhileInvul();
         animator.SetBool("isGrounded", Grounded());
         animator.SetFloat("yVel", rb.velocity.y);
         animator.SetFloat("xVel", rb.velocity.x);
@@ -945,7 +953,10 @@ public class PlayerController : MonoBehaviour, IDataPersistence
 
             rb.velocity = new Vector2(0.0f, rb.velocity.y);
             animator.SetTrigger("lightFireballShoot");
-            yield return new WaitForSeconds(timeToCast);
+            if(Grounded())
+            {
+                yield return new WaitForSeconds(timeToCast);
+            }
             flashbang = Instantiate(remoteFlashbang, fireballTransform.position, Quaternion.identity);
 
             currentFlashbang = flashbang.GetComponent<RemoteFlashbang>();

@@ -160,7 +160,7 @@ MonoBehaviour:
       throttleCalibrationMode: 0
       activateActionButtonsOnNegativeValue: 0
       deferControllerConnectedEventsOnStart: 0
-      logLevel: 7
+      logLevel: -1
       editorSettings:
         exportConsts_useParentClass: 0
         exportConsts_parentClassName: RewiredConsts
@@ -214,19 +214,19 @@ MonoBehaviour:
       _key: 
       _startPlaying: 1
       _defaultJoystickMaps:
-      - _enabled: 1
+      - _enabled: 0
         _categoryId: 0
         _layoutId: 0
       - _enabled: 1
-        _categoryId: 0
+        _categoryId: 1
         _layoutId: 2
       _defaultMouseMaps: []
       _defaultKeyboardMaps:
       - _enabled: 1
         _categoryId: 0
         _layoutId: 0
-      - _enabled: 1
-        _categoryId: 0
+      - _enabled: 0
+        _categoryId: 1
         _layoutId: 1
       _defaultCustomControllerMaps: []
       _startingCustomControllers: []
@@ -433,7 +433,7 @@ MonoBehaviour:
       _key: 
       _tag: 
       _id: 1
-      _userAssignable: 1
+      _userAssignable: 0
     actionCategoryMap:
       list:
       - categoryId: 0
@@ -471,7 +471,15 @@ MonoBehaviour:
       _tag: 
       _id: 0
       _userAssignable: 1
-      _checkConflictsWithAllCategories: 1
+      _checkConflictsWithAllCategories: 0
+      _checkConflictsCategoryIds: 
+    - _name: UI
+      _descriptiveName: UI elements.
+      _key: 
+      _tag: 
+      _id: 1
+      _userAssignable: 0
+      _checkConflictsWithAllCategories: 0
       _checkConflictsCategoryIds: 
     joystickLayouts:
     - _name: Default
@@ -685,15 +693,15 @@ MonoBehaviour:
         _modifierKey1: 0
         _modifierKey2: 0
         _modifierKey3: 0
-    - id: 1
-      categoryId: 0
+    - id: 5
+      categoryId: 1
       layoutId: 2
       name: 
       hardwareGuidString: 83b427e4-086f-47f3-bb06-be266abd1ca5
       customControllerUid: 0
       actionElementMaps:
       - _actionCategoryId: 0
-        _actionId: 11
+        _actionId: 14
         _elementType: 0
         _elementIdentifierId: 0
         _axisRange: 0
@@ -1030,8 +1038,8 @@ MonoBehaviour:
         _modifierKey1: 0
         _modifierKey2: 0
         _modifierKey3: 0
-    - id: 1
-      categoryId: 0
+    - id: 6
+      categoryId: 1
       layoutId: 1
       name: 
       hardwareGuidString: 
@@ -1173,27 +1181,23 @@ MonoBehaviour:
     customControllerMaps: []
     customControllers: []
     controllerMapLayoutManagerRuleSets: []
-    controllerMapEnablerRuleSets:
-    - _id: 0
-      _name: RuleSet0
-      _tag: 
-      _rules: []
+    controllerMapEnablerRuleSets: []
     playerIdCounter: 2
     actionIdCounter: 16
     actionCategoryIdCounter: 2
     inputBehaviorIdCounter: 6
-    mapCategoryIdCounter: 1
+    mapCategoryIdCounter: 2
     joystickLayoutIdCounter: 3
     keyboardLayoutIdCounter: 2
     mouseLayoutIdCounter: 1
     customControllerLayoutIdCounter: 1
-    joystickMapIdCounter: 2
-    keyboardMapIdCounter: 2
+    joystickMapIdCounter: 6
+    keyboardMapIdCounter: 7
     mouseMapIdCounter: 1
     customControllerMapIdCounter: 0
     customControllerIdCounter: 0
-    controllerMapLayoutManagerSetIdCounter: 2
-    controllerMapEnablerSetIdCounter: 1
+    controllerMapLayoutManagerSetIdCounter: 3
+    controllerMapEnablerSetIdCounter: 2
   _controllerDataFiles: {fileID: 11400000, guid: d21d2b20df8369642b76aafbb2576ba7, type: 2}
 --- !u!114 &-1258643428850008373
 MonoBehaviour:

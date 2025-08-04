@@ -26,6 +26,12 @@ public class GameData
 
     // location name will be added later for save file screen
 
+    // sound info
+
+    public float masterSlider;
+    public float musicSlider;
+    public float sfxSlider;
+
     // one time use objects
 
     public SerializableDictionary<string, bool> upgradeStatus;
@@ -72,6 +78,9 @@ public class GameData
         laserRecieverStatus = new SerializableDictionary<string, bool>();
         switchTriggerStatus = new SerializableDictionary<string, bool>();
         cutsceneTriggerStatus = new SerializableDictionary<string, bool>();
+        sfxSlider = 1.0f;
+        masterSlider = 1.0f;
+        musicSlider = 1.0f;
     }
 
 }

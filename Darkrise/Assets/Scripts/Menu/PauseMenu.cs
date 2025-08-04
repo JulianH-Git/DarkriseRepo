@@ -43,6 +43,11 @@ public class PauseMenu : MonoBehaviour
         keyboardActionID.ForEach(m => m.enabled = true);
     }
 
+    private void Start()
+    {
+        hitStopToggle.isOn = PlayerController.Instance.doHitStop;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -55,7 +60,6 @@ public class PauseMenu : MonoBehaviour
         {
             if (GamePaused && settingsMenuUI.activeSelf == false && !mapper.isOpen) { StartResume(); }
             else if(GamePaused && settingsMenuUI.activeSelf == true && !mapper.isOpen) { StartExitingSettingsMenu(); }
-            else if (GamePaused && settingsMenuUI.activeSelf && mapper.isOpen) { StartExitingControlsMenu(); }
         }
         if(GamePaused && player.GetButtonDown("UIVertical") && EventSystem.current.currentSelectedGameObject == null)
         {
@@ -70,6 +74,7 @@ public class PauseMenu : MonoBehaviour
                 EventSystem.current.SetSelectedGameObject(pauseFirstButton);
             }
         }
+
     }
 
     public void StartResume()
@@ -78,11 +83,21 @@ public class PauseMenu : MonoBehaviour
     }
     public IEnumerator Resume()
     {
+        if(popup.isActiveAndEnabled)
+        {
+            foreach (Button b in buttonsToDeactivate) { b.interactable = true; }
+            EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
+            EventSystem.current.SetSelectedGameObject(pauseFirstButton);
+            popup.DeactivateMenu();
+        }
+        EventSystem.current.SetSelectedGameObject(null); // ALWAYS clear this before choosing a new object
+        EventSystem.current.SetSelectedGameObject(pauseFirstButton);
         pauseAnim.SetTrigger("exitMenu");
         yield return new WaitForSecondsRealtime(0.1f);
         pauseMenuUI.SetActive(false);
         mapper.Close(true);
         settingsMenuUI.SetActive(false);
+
         Time.timeScale = 1.0f;
 
         //enable the jump bind for controllers
@@ -94,6 +109,7 @@ public class PauseMenu : MonoBehaviour
         keyboardActionID.ForEach(m => m.enabled = true);
 
         player.controllers.maps.SetMapsEnabled(true, "Gameplay");
+        player.controllers.maps.SetMapsEnabled(true, "Default");
         player.controllers.maps.SetMapsEnabled(false, "UI");
 
         GamePaused = false;
@@ -116,6 +132,7 @@ public class PauseMenu : MonoBehaviour
         keyboardActionID.ForEach(m => m.enabled = false);
 
         player.controllers.maps.SetMapsEnabled(false, "Gameplay");
+        player.controllers.maps.SetMapsEnabled(false, "Default");
         player.controllers.maps.SetMapsEnabled(true, "UI");
 
     }
@@ -139,6 +156,7 @@ public class PauseMenu : MonoBehaviour
                    keyboardActionID.ForEach(m => m.enabled = true);
 
                    player.controllers.maps.SetMapsEnabled(true, "Gameplay");
+                   player.controllers.maps.SetMapsEnabled(true, "Default");
                    player.controllers.maps.SetMapsEnabled(false, "UI");
 
 
@@ -216,6 +234,7 @@ public class PauseMenu : MonoBehaviour
                    settingsMenuUI.SetActive(false);
                    Time.timeScale = 1.0f;
                    player.controllers.maps.SetMapsEnabled(true, "Gameplay");
+                   player.controllers.maps.SetMapsEnabled(true, "Default");
                    player.controllers.maps.SetMapsEnabled(false, "UI");
                    GamePaused = false;
                    SceneManager.LoadScene(currentLevel);

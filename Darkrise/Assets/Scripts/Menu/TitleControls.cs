@@ -45,6 +45,8 @@ public class TitleControls : MonoBehaviour
             LoadGameButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.gray;
         }
 
+        hitStopCheck.isOn = DataPersistenceManager.Instance.hitStop;
+
     }
 
     // Update is called once per frame
@@ -87,7 +89,9 @@ public class TitleControls : MonoBehaviour
         {
             DataPersistenceManager.Instance.LoadGame();
         }
-
+        player.controllers.maps.SetMapsEnabled(true, "Gameplay");
+        player.controllers.maps.SetMapsEnabled(true, "Default");
+        player.controllers.maps.SetMapsEnabled(false, "UI");
         SceneManager.LoadSceneAsync("DemoLevel");
     }
 

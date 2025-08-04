@@ -17,6 +17,11 @@ public class DataPersistenceManager : MonoBehaviour
     private FileDataHandler dataHandler;
     bool startWithHitStop;
 
+    public bool hitStop
+    {
+        get { return gameData.doHitStop; }
+    }
+
     private void Awake()
     {
         if(Instance != null)
