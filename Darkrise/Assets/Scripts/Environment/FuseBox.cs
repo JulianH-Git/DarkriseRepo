@@ -93,6 +93,7 @@ public class FuseBox : MonoBehaviour, IDataPersistence
             playerIsNear = true;
             powered = true;
             sr.color = Color.yellow;
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.encounterPanel, this.transform.position);
             Debug.Log("Powered");
         }
         if(collision.CompareTag("Player") && collision.isTrigger && powered && PlayerController.Instance.BubbleUp)
@@ -145,6 +146,7 @@ public class FuseBox : MonoBehaviour, IDataPersistence
         if (selfContained && !runOnce)
         {
             runOnce = true;
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.encounterPanel, this.transform.position);
             foreach (GameObject obj in objectsToPower)
             {
                 StartCoroutine(MoveGates(obj, new Vector2(obj.transform.localScale.x, 0)));

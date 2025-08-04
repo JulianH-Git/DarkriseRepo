@@ -3,10 +3,12 @@ using UnityEngine;
 public class GroundSentry : enemyBase
 {
     // Start is called before the first frame update
+    private GameObject head;
 
     protected override void Awake()
     {
         base.Awake();
+        head = transform.Find("Head").gameObject;
         rb.gravityScale = 12f;
     }
 
@@ -18,7 +20,13 @@ public class GroundSentry : enemyBase
 
     protected void FixedUpdate()
     {
-        if (isRecoiling || isDying || stunned) return;
+        if (isRecoiling || isDying || stunned) 
+        {
+            head.SetActive(false);
+            return; 
+        }
+
+        head.SetActive(true);
 
         if (alerted)
         {
