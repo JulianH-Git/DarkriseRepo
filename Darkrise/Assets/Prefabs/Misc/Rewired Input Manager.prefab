@@ -340,7 +340,7 @@ MonoBehaviour:
     - _id: 8
       _name: Use Ability
       _type: 1
-      _descriptiveName: Cast Spell
+      _descriptiveName: Use Ability
       _positiveDescriptiveName: 
       _negativeDescriptiveName: 
       _key: 
@@ -412,7 +412,7 @@ MonoBehaviour:
     - _id: 15
       _name: Swap Abilities
       _type: 1
-      _descriptiveName: Spell Swap
+      _descriptiveName: Swap Abilities
       _positiveDescriptiveName: 
       _negativeDescriptiveName: 
       _key: 
