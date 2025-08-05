@@ -84,6 +84,7 @@ public class SwitchTrigger : MonoBehaviour, IDataPersistence
         foreach (GameObject sprite in affectedGates)
         {
             if(playCutscene) { GetComponent<CutsceneTrigger>()?.StartCutscene(); }
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.gateOpen, this.transform.position);
             StartCoroutine(MoveGates(sprite, new Vector2(sprite.transform.localScale.x, 0)));
         }
         foreach (GameObject obj in affectedObjects)

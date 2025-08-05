@@ -30,7 +30,7 @@ public class AreaSoundMixer : MonoBehaviour
     {
         if (!isInLowerArea) 
         {
-            audio.volume = 0.415f;
+            audio.volume = 0.02f;
         }
         else 
         {
