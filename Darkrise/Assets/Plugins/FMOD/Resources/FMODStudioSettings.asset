@@ -237,7 +237,7 @@ MonoBehaviour:
   sourceProjectPath: ../../../Fmod/DarkriseVersion/Projects/DarkriseSound/DarkriseSound.fspro
   sourceBankPath: Assets/Audio/Banks
   sourceBankPathUnformatted: 
-  BankRefreshCooldown: -1
+  BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
   AutomaticEventLoading: 1
   BankLoadType: 0

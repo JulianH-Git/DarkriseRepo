@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class VolumeChangeTrigger : MonoBehaviour
 {
     [Header("Area")]
 
@@ -13,7 +13,7 @@ public class NewBehaviourScript : MonoBehaviour
         if (collider.tag.Equals("Player"))
         {
             AudioManager.instance.SetMusicArea(area);
-            AudioManager.instance.musicVolume = 1f;
+            AudioManager.instance.musicVolume = .3f;
         }
     }
 }
