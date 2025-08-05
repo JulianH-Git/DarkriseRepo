@@ -84,7 +84,7 @@ public class SwitchTrigger : MonoBehaviour, IDataPersistence
         foreach (GameObject sprite in affectedGates)
         {
             if(playCutscene) { GetComponent<CutsceneTrigger>()?.StartCutscene(); }
-            AudioManager.instance.PlayOneShot(FMODEvents.instance.gateOpen, this.transform.position);
+            
             StartCoroutine(MoveGates(sprite, new Vector2(sprite.transform.localScale.x, 0)));
         }
         foreach (GameObject obj in affectedObjects)
@@ -102,8 +102,9 @@ public class SwitchTrigger : MonoBehaviour, IDataPersistence
     private IEnumerator MoveGates(GameObject gate, Vector2 spotSize)
     {
         yield return new WaitForSeconds(1);
-
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.gateOpen, this.transform.position);
         Vector2 initialScale = gate.transform.localScale;
+
         float elapsedTime = 0f;
 
         while (elapsedTime < duration)
