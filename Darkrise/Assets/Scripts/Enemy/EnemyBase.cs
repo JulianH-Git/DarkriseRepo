@@ -23,7 +23,7 @@ public class enemyBase : MonoBehaviour
 
     [Header("Attack Settings")]
     [SerializeField] protected PlayerController player;
-    [SerializeField] protected float speed;
+    [SerializeField] public float speed;
     [SerializeField] protected float damage;
 
     protected float recoilTimer;
@@ -231,6 +231,14 @@ public class enemyBase : MonoBehaviour
         stunned = true;
         anim.SetBool("isStunned", true);
         Physics2D.IgnoreCollision(boxCollider[0], PlayerController.Instance.GetComponent<Collider2D>(), true);
+        if (this.GetComponent<GroundSentry>())
+        {
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.sentryHurt, this.transform.position);
+        }
+        else if (this.GetComponent<FootSolider>())
+        {
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.soldierHurt, this.transform.position);
+        }
     }
 
     protected virtual void StunnedCountdown()
