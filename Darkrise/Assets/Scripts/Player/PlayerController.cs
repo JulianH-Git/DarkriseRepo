@@ -1153,6 +1153,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         if (!DebugMode)
         {
             Health -= Mathf.RoundToInt(_damage);
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.playerHurt, this.transform.position);
             StartCoroutine(StopTakingDamage());
         }
         else if (Health! <= 0)
