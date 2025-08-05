@@ -93,7 +93,8 @@ public class SwitchTrigger : MonoBehaviour, IDataPersistence
         }
         if (playCutscene) 
         { 
-            AudioManager.instance.PlayOneShot(FMODEvents.instance.pullLever, this.transform.position); 
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.pullLever, this.transform.position);
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.gateOpen, this.transform.position);
         }
         this.GetComponent<SpriteRenderer>().flipY = true;
     }
@@ -102,7 +103,6 @@ public class SwitchTrigger : MonoBehaviour, IDataPersistence
     private IEnumerator MoveGates(GameObject gate, Vector2 spotSize)
     {
         yield return new WaitForSeconds(1);
-        AudioManager.instance.PlayOneShot(FMODEvents.instance.gateOpen, this.transform.position);
         Vector2 initialScale = gate.transform.localScale;
 
         float elapsedTime = 0f;

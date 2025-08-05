@@ -13,7 +13,6 @@ public class VolumeChangeTrigger : MonoBehaviour
         if (collider.tag.Equals("Player"))
         {
             AudioManager.instance.SetMusicArea(area);
-            AudioManager.instance.musicVolume = .3f;
         }
     }
 }

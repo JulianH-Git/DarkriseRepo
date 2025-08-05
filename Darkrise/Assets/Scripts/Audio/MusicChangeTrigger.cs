@@ -13,7 +13,6 @@ public class NewBehaviourScript : MonoBehaviour
         if (collider.tag.Equals("Player"))
         {
             AudioManager.instance.SetMusicArea(area);
-            AudioManager.instance.musicVolume = 1f;
         }
     }
 }
