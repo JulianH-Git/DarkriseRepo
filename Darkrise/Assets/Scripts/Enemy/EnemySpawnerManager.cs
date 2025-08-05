@@ -14,6 +14,7 @@ public class EnemySpawnerManager : MonoBehaviour
     [SerializeField] float respawnTimer;
     [SerializeField] Vector2 enemySpawnOffset;
     [SerializeField] float patrolRadius;
+    [SerializeField] float speed;
     [SerializeField] bool isFacingRight = true;
     GameObject spawnedEnemyRef;
     enemyBase spawnedEnemyRefMethods;
@@ -38,6 +39,10 @@ public class EnemySpawnerManager : MonoBehaviour
         if(patrolRadius != 0)
         {
             spawnedEnemyRefMethods.patrolDistance = patrolRadius;
+        }
+        if (speed != 0)
+        {
+            spawnedEnemyRefMethods.speed = speed;
         }
     }
 

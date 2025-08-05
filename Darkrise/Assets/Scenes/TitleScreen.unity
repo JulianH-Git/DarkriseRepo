@@ -415,7 +415,7 @@ MonoBehaviour:
     m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 448142796}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnDown: {fileID: 782165717}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 1891628230}
   m_Transition: 1
@@ -4584,7 +4584,7 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
+    m_SelectOnUp: {fileID: 37546252}
     m_SelectOnDown: {fileID: 2109457062}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 1891628230}
@@ -6981,6 +6981,13 @@ MonoBehaviour:
       Data3: -1421490248
       Data4: 762602638
     Path: event:/SFX/Interactables/UseStatue
+  <gateOpen>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!1 &1215196789
 GameObject:
   m_ObjectHideFlags: 0
@@ -10270,7 +10277,7 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
+    m_SelectOnUp: {fileID: 2011874615}
     m_SelectOnDown: {fileID: 854623409}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
@@ -10426,7 +10433,7 @@ MonoBehaviour:
     m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 1645734360}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnDown: {fileID: 1993582732}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1

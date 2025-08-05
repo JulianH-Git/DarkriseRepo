@@ -70,7 +70,7 @@ public class StartCutsceneOnEnter : MonoBehaviour, IDataPersistence
             }
             else
             {
-                Debug.Log(cutsceneNumber);
+                //Debug.Log(cutsceneNumber);
                 GetComponent<ActivateCutsceneObjects>().StartActivate();
             }
         }
