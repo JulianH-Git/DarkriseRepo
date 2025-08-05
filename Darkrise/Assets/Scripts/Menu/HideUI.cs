@@ -7,8 +7,12 @@ public class HideUI : MonoBehaviour
 {
     SpriteRenderer[] UIElements;
     Image[] imageElements;
-    float alpha = 0.3f;
+    float alpha = 1f;
+    const float FADEALPHA = 0.3f;
     [SerializeField] string[] tags;
+    [SerializeField] BoxCollider2D lightUIBox;
+    bool fadeOut;
+    bool fadeIn;
     void Start()
     {
         UIElements = GetComponentsInChildren<SpriteRenderer>(true);
@@ -18,7 +22,32 @@ public class HideUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(fadeOut && alpha > FADEALPHA)
+        {
+            alpha -= 0.05f;
+            ChangeAlpha(alpha);
+        }
+
+        if(fadeIn && alpha < 1f)
+        {
+            alpha += 0.05f;
+            ChangeAlpha(alpha);
+        }
+
+        if(PlayerController.Instance.currentAttackType == PlayerController.AttackType.Light)
+        {
+            if(lightUIBox.isActiveAndEnabled == false)
+            {
+                lightUIBox.enabled = true;
+            }
+        }
+        else
+        {
+            if (lightUIBox.isActiveAndEnabled == true)
+            {
+                lightUIBox.enabled = false;
+            }
+        }
     }
 
 
@@ -26,22 +55,13 @@ public class HideUI : MonoBehaviour
     {
         for (int i = 0; i < tags.Length; i++)
         {
-            if(collision.CompareTag(tags[i]))
+            if (collision.CompareTag(tags[i]))
             {
-                foreach (SpriteRenderer element in UIElements)
-                {
-                    element.color = new Color(element.color.r, element.color.g, element.color.b, alpha);
-                }
-
-                foreach (Image element in imageElements)
-                {
-                    element.color = new Color(element.color.r, element.color.g, element.color.b, alpha);
-                }
+                fadeOut = true;
+                fadeIn = false;
                 return;
             }
-            
         }
-
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -50,18 +70,24 @@ public class HideUI : MonoBehaviour
         {
             if (collision.CompareTag(tags[i]))
             {
-                foreach (SpriteRenderer element in UIElements)
-                {
-                    element.color = new Color(element.color.r, element.color.g, element.color.b, 1.0f);
-                }
-
-                foreach (Image element in imageElements)
-                {
-                    element.color = new Color(element.color.r, element.color.g, element.color.b, 1.0f);
-                }
+                fadeOut = false;
+                fadeIn = true;
                 return;
             }
             
+        }
+    }
+
+    void ChangeAlpha(float newAlpha)
+    {
+        foreach (SpriteRenderer element in UIElements)
+        {
+            element.color = new Color(element.color.r, element.color.g, element.color.b, newAlpha);
+        }
+
+        foreach (Image element in imageElements)
+        {
+            element.color = new Color(element.color.r, element.color.g, element.color.b, newAlpha);
         }
     }
 }
