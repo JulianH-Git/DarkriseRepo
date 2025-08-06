@@ -24,7 +24,14 @@ public class Teleporter : InteractTrigger
     {
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         playerController.CanMove = false;
-
+        if (teleportPoint.name.Equals("Safe_ElevatorA")) //this gets the name of the door you ENTER and plays footsteps down
+        {
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.powerSelect, this.transform.position);
+        }
+        else if (teleportPoint.name.Equals("Safe_ElevatorA2"))//this gets the name of the door you ENTER and plays footsteps up
+        {
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.dash, this.transform.position);
+        }
         yield return StartCoroutine(Fade(0.0f, 1.0f));
 
         yield return new WaitForSeconds(0.3f);
