@@ -48,7 +48,7 @@ public class RemoteFlashbang : MonoBehaviour
         // check if detonated
         if (Detonated || currentLifetime >= maxLifeTime)
         {
-            StartCoroutine(ActivateFlashbang());
+            ActivateFlashbang();
         }
     }
 
@@ -70,7 +70,7 @@ public class RemoteFlashbang : MonoBehaviour
         Gizmos.DrawWireCube(areaOfEffectTransform.transform.position, areaOfEffect);
     }
 
-    IEnumerator ActivateFlashbang()
+    void ActivateFlashbang()
     {
         rb.gravityScale = 0.0f;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
@@ -84,10 +84,6 @@ public class RemoteFlashbang : MonoBehaviour
         }
         // and check for tech and disable it
         CheckForTech(areaOfEffectTransform.transform, areaOfEffect);
-        yield return new WaitForSeconds(0.25f);
-        // then destroy myself
-        Destroy(gameObject);
-
     }
 
     List<Collider2D> CheckForEnemies(Transform _roomTransform, Vector2 _roomArea)
@@ -158,5 +154,11 @@ public class RemoteFlashbang : MonoBehaviour
             transform.localScale.y,
             transform.localScale.z
         );
+    }
+
+    public void OnExplodeComplete()
+    {
+        // then destroy myself
+        Destroy(gameObject);
     }
 }
