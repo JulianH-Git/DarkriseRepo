@@ -6,6 +6,7 @@ public class Teleporter : InteractTrigger
 {
     [SerializeField] protected GameObject teleportPoint;
     [SerializeField] private SpriteRenderer fade;
+    [SerializeField] bool goingUp; // true = going up, false = going down
     private float fadeSpeed = 2f;
     private PlayerController playerController;
 
@@ -24,11 +25,11 @@ public class Teleporter : InteractTrigger
     {
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         playerController.CanMove = false;
-        if (teleportPoint.name.Equals("Safe_ElevatorA")) //this gets the name of the door you ENTER and plays footsteps down
+        if (goingUp) // sound that plays when going up
         {
             AudioManager.instance.PlayOneShot(FMODEvents.instance.powerSelect, this.transform.position);
         }
-        else if (teleportPoint.name.Equals("Safe_ElevatorA2"))//this gets the name of the door you ENTER and plays footsteps up
+        else // sound that plays when going down
         {
             AudioManager.instance.PlayOneShot(FMODEvents.instance.dash, this.transform.position);
         }
