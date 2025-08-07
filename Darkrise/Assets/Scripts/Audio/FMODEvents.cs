@@ -75,6 +75,10 @@ public class FMODEvents : MonoBehaviour
 
     [field: SerializeField] public EventReference gateOpen { get; private set; }
 
+    [field: SerializeField] public EventReference goingUp { get; private set; }
+
+    [field: SerializeField] public EventReference goingDown { get; private set; }
+
 
     public static FMODEvents instance { get;private set; }
 

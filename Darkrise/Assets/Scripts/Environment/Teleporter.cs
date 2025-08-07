@@ -27,11 +27,11 @@ public class Teleporter : InteractTrigger
         playerController.CanMove = false;
         if (goingUp) // sound that plays when going up
         {
-            AudioManager.instance.PlayOneShot(FMODEvents.instance.powerSelect, this.transform.position);
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.goingUp, this.transform.position);
         }
         else // sound that plays when going down
         {
-            AudioManager.instance.PlayOneShot(FMODEvents.instance.dash, this.transform.position);
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.goingDown, this.transform.position);
         }
         yield return StartCoroutine(Fade(0.0f, 1.0f));
 
