@@ -53,11 +53,11 @@ public class StandardBreakerSwitch : InteractTrigger, IDataPersistence
             ActivateCutscene(false);
             FlipAffectedSprites();
 
-            CutsceneTrigger cutsceneTrigger = GetComponent<CutsceneTrigger>();
+            /*CutsceneTrigger cutsceneTrigger = GetComponent<CutsceneTrigger>();
             if (cutsceneTrigger != null)
             {
                 cutsceneTrigger.StartCutscene();
-            }
+            }*/
         }
     }
 

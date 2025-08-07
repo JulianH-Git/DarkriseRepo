@@ -73,7 +73,7 @@ public class LaserReciever : MonoBehaviour, IDataPersistence
             if(obj.GetComponent<DarkRoom>() != null) { obj.SetActive(false); }
             else { StartCoroutine(MoveGates(obj, new Vector2(obj.transform.localScale.x, 0))); }
         }
-
+        /*
         if (!cutsceneTriggered)
         {
             cutsceneTriggered = true;
@@ -83,6 +83,7 @@ public class LaserReciever : MonoBehaviour, IDataPersistence
                 cutsceneTrigger.StartCutscene();
             }
         }
+        */
     }
 
     private IEnumerator MoveGates(GameObject gate, Vector2 spotSize)
