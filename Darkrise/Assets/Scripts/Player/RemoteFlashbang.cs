@@ -48,7 +48,7 @@ public class RemoteFlashbang : MonoBehaviour
         // check if detonated
         if (Detonated || currentLifetime >= maxLifeTime)
         {
-            StartCoroutine(ActivateFlashbang());
+            ActivateFlashbang();
         }
     }
 
@@ -60,7 +60,7 @@ public class RemoteFlashbang : MonoBehaviour
             rb.velocity = new Vector2(0.0f, rb.velocity.y);
         }
         currentLifetime += Time.deltaTime;
-        if(_explodeParticles != null) { _explodeParticles.transform.position = transform.position; }
+        if (_explodeParticles != null) { _explodeParticles.transform.position = transform.position; }
 
     }
 
@@ -70,7 +70,7 @@ public class RemoteFlashbang : MonoBehaviour
         Gizmos.DrawWireCube(areaOfEffectTransform.transform.position, areaOfEffect);
     }
 
-    IEnumerator ActivateFlashbang()
+    void ActivateFlashbang()
     {
         rb.gravityScale = 0.0f;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
@@ -84,10 +84,6 @@ public class RemoteFlashbang : MonoBehaviour
         }
         // and check for tech and disable it
         CheckForTech(areaOfEffectTransform.transform, areaOfEffect);
-        yield return new WaitForSeconds(0.25f);
-        // then destroy myself
-        Destroy(gameObject);
-
     }
 
     List<Collider2D> CheckForEnemies(Transform _roomTransform, Vector2 _roomArea)
@@ -109,7 +105,7 @@ public class RemoteFlashbang : MonoBehaviour
     {
         foreach (Collider2D obj in enemies)
         {
-            obj.GetComponent<enemyBase>().EnemyHit(999f,transform.position,0.1f,false);
+            obj.GetComponent<enemyBase>().EnemyHit(999f, transform.position, 0.1f, false);
         }
     }
 
@@ -130,7 +126,7 @@ public class RemoteFlashbang : MonoBehaviour
             }
         }
 
-        foreach(Collider2D obj in techInRange)
+        foreach (Collider2D obj in techInRange)
         {
             if (obj.GetComponent<StandardBreakerSwitch>() != null)
             {
@@ -144,7 +140,7 @@ public class RemoteFlashbang : MonoBehaviour
             {
                 obj.GetComponent<Alarm>().flashbanged = true;
             }
-            if(obj.GetComponent<FuseBox>() != null)
+            if (obj.GetComponent<FuseBox>() != null)
             {
                 obj.GetComponent<FuseBox>().flashbanged = true;
             }
@@ -158,5 +154,11 @@ public class RemoteFlashbang : MonoBehaviour
             transform.localScale.y,
             transform.localScale.z
         );
+    }
+
+    public void OnExplodeComplete()
+    {
+        // then destroy myself
+        Destroy(gameObject);
     }
 }

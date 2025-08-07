@@ -8,7 +8,7 @@ public class HideUI : MonoBehaviour
     float alpha = 1f;
     [SerializeField] string[] tags;
     [SerializeField] BoxCollider2D lightUIBox;
-    const float FADEALPHA = 0.3f;
+    const float FADEALPHA = 0.2f;
     bool fadeOut;
     bool fadeIn;
     void Start()

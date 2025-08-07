@@ -6,6 +6,7 @@ public class Teleporter : InteractTrigger
 {
     [SerializeField] protected GameObject teleportPoint;
     [SerializeField] private SpriteRenderer fade;
+    [SerializeField] bool goingUp; // true = going up, false = going down
     private float fadeSpeed = 2f;
     private PlayerController playerController;
 
@@ -20,11 +21,18 @@ public class Teleporter : InteractTrigger
         }
     }
 
-    private IEnumerator TeleportSequence() 
+    private IEnumerator TeleportSequence()
     {
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         playerController.CanMove = false;
-
+        if (goingUp) // sound that plays when going up
+        {
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.powerSelect, this.transform.position);
+        }
+        else // sound that plays when going down
+        {
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.dash, this.transform.position);
+        }
         yield return StartCoroutine(Fade(0.0f, 1.0f));
 
         yield return new WaitForSeconds(0.3f);
