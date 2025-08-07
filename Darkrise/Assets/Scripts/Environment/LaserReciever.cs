@@ -17,6 +17,7 @@ public class LaserReciever : MonoBehaviour, IDataPersistence
     SpriteRenderer sr;
     bool powered = false;
     bool active = true;
+    bool cutsceneTriggered = false;
     [SerializeField] private string id;
     [ContextMenu("Generate new GUID")]
 
@@ -70,7 +71,17 @@ public class LaserReciever : MonoBehaviour, IDataPersistence
         foreach (GameObject obj in objectsToPower)
         {
             if(obj.GetComponent<DarkRoom>() != null) { obj.SetActive(false); }
-            else { StartCoroutine(MoveGates(obj, new Vector2(obj.transform.localScale.x, 0))); } 
+            else { StartCoroutine(MoveGates(obj, new Vector2(obj.transform.localScale.x, 0))); }
+        }
+
+        if (!cutsceneTriggered)
+        {
+            cutsceneTriggered = true;
+            CutsceneTrigger cutsceneTrigger = GetComponent<CutsceneTrigger>();
+            if (cutsceneTrigger != null)
+            {
+                cutsceneTrigger.StartCutscene();
+            }
         }
     }
 

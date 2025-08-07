@@ -34,6 +34,12 @@ public class ForcedEncounterBreakerSwitch : InteractTrigger
             {
                 deactivated = true;
                 animator.SetBool("turnedOff", true);
+
+                CutsceneTrigger cutsceneTrigger = GetComponent<CutsceneTrigger>();
+                if (cutsceneTrigger != null)
+                {
+                    cutsceneTrigger.StartCutscene();
+                }
             }
         }
     }
