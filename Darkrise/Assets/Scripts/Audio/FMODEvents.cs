@@ -79,7 +79,9 @@ public class FMODEvents : MonoBehaviour
 
     [field: SerializeField] public EventReference goingDown { get; private set; }
 
+    [field: Header("Cutscene SFX")]
 
+    [field: SerializeField] public EventReference giantLaser { get; private set; }
     public static FMODEvents instance { get;private set; }
 
     private void Awake()
