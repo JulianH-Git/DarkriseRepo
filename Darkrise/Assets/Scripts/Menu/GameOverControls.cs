@@ -40,6 +40,9 @@ public class GameOverControls : MonoBehaviour
         if (alpha >= 1f && !runOnce)
         {
             runOnce = true;
+            player.controllers.maps.SetMapsEnabled(true, "Gameplay");
+            player.controllers.maps.SetMapsEnabled(true, "Default");
+            player.controllers.maps.SetMapsEnabled(false, "UI");
             DataPersistenceManager.Instance.LoadGame();
             SceneManager.LoadSceneAsync("DemoLevel");
         }
