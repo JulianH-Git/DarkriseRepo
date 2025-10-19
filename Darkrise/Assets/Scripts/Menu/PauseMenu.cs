@@ -155,9 +155,19 @@ public class PauseMenu : MonoBehaviour
                    player.controllers.maps.GetButtonMapsWithAction(ControllerType.Keyboard, "Jump", false, keyboardActionID);
                    keyboardActionID.ForEach(m => m.enabled = true);
 
-                   player.controllers.maps.SetMapsEnabled(true, "Gameplay");
-                   player.controllers.maps.SetMapsEnabled(true, "Default");
-                   player.controllers.maps.SetMapsEnabled(false, "UI");
+                   if(menuName == "TitleScreen")
+                   {
+                       player.controllers.maps.SetMapsEnabled(false, "Gameplay");
+                       player.controllers.maps.SetMapsEnabled(false, "Default");
+                       player.controllers.maps.SetMapsEnabled(true, "UI");
+                   }
+                   else
+                   {
+                       player.controllers.maps.SetMapsEnabled(true, "Gameplay");
+                       player.controllers.maps.SetMapsEnabled(true, "Default");
+                       player.controllers.maps.SetMapsEnabled(false, "UI");
+                   }
+
 
 
                    Debug.Log($"Loading {menuName}...");

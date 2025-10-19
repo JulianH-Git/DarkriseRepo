@@ -24,6 +24,7 @@ public class FootSolider : enemyBase
     [Header("Foot Soldier Detection Settings")]
     [SerializeField] public Transform detectionRangeTransform;
     [SerializeField] public Vector2 detectionRangeArea;
+    [SerializeField]  GameObject head;
 
     bool chaseOnce = false;
     protected override void Awake()
@@ -45,7 +46,11 @@ public class FootSolider : enemyBase
 
     protected void FixedUpdate()
     {
-        if (isRecoiling || stunned || isDying) return;
+        if (isRecoiling || stunned || isDying)
+        {
+            head.SetActive(false);
+            return;
+        }
         Collider2D playerInRange = PlayerCheck();
         switch (behavior)
         {

@@ -4,7 +4,7 @@ public class DarkRoom : MonoBehaviour
 {
     [SerializeField] float timeTillDamage;
     [SerializeField] int damage;
-    float damageTimer;
+    [SerializeField] float damageTimer;
     [SerializeField] bool darkOrLight; // false is dark room, true is light room
     [SerializeField] FuseBox fb;
     PlayerController controller;
@@ -23,7 +23,8 @@ public class DarkRoom : MonoBehaviour
                 case false:
                     if (controller.currentAttackType == PlayerController.AttackType.Light
                         && controller.BubbleUp == false
-                        && !controller.pState.safeFromRoomwide)
+                        && !controller.pState.safeFromRoomwide
+                        && !controller.pState.hiding)
                     {
                         damageTimer += Time.deltaTime;
 
@@ -40,28 +41,19 @@ public class DarkRoom : MonoBehaviour
                     break;
                 case true:
                     if (controller.currentAttackType == PlayerController.AttackType.Dark
-                        && !controller.pState.safeFromRoomwide)
+                        && !controller.pState.safeFromRoomwide
+                        && !controller.pState.hiding)
                     {
                         damageTimer += Time.deltaTime;
 
-                        if (controller.pState.hiding)
+                        if (damageTimer >= (timeTillDamage))
                         {
-                            if (damageTimer >= (timeTillDamage * 2))
-                            {
-                                controller.TakeDamage(damage);
-                                damageTimer = 0;
-                            }
+                            controller.TakeDamage(damage);
+                            damageTimer = 0;
                         }
-                        else
-                        {
-                            if (damageTimer >= (timeTillDamage))
-                            {
-                                controller.TakeDamage(damage);
-                                damageTimer = 0;
-                            }
-                        }
+
                     }
-                    else if (controller.currentAttackType == PlayerController.AttackType.Neutral && !controller.pState.safeFromRoomwide)
+                    else if (controller.currentAttackType == PlayerController.AttackType.Neutral && !controller.pState.safeFromRoomwide && !controller.pState.hiding)
                     {
                         damageTimer += Time.deltaTime;
 
@@ -80,6 +72,14 @@ public class DarkRoom : MonoBehaviour
 
         }
 
+    }
+
+    protected void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player") && !collision.isTrigger)
+        {
+            damageTimer = 0;
+        }
     }
 
     void Update()
